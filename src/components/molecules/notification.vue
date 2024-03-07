@@ -1,0 +1,89 @@
+<template>
+  <div x-data="{ isOpen: true }" class="relative flex justify-center">
+    <button
+      class="mx-auto transform rounded-md bg-blue-600 px-6 py-2 capitalize tracking-wide text-white transition-colors duration-300 hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
+    >
+      Open Modal
+    </button>
+
+    <div
+      x-show="isOpen"
+      x-transition:enter="transition duration-300 ease-out"
+      x-transition:enter-start="translate-y-4 opacity-0 sm:translate-y-0 sm:scale-95"
+      x-transition:enter-end="translate-y-0 opacity-100 sm:scale-100"
+      x-transition:leave="transition duration-150 ease-in"
+      x-transition:leave-start="translate-y-0 opacity-100 sm:scale-100"
+      x-transition:leave-end="translate-y-4 opacity-0 sm:translate-y-0 sm:scale-95"
+      class="fixed inset-0 z-10 overflow-y-auto"
+      aria-labelledby="modal-title"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div
+        class="flex min-h-screen items-end justify-center px-4 pb-20 pt-4 text-center sm:block sm:p-0"
+      >
+        <span
+          class="hidden sm:inline-block sm:h-screen sm:align-middle"
+          aria-hidden="true"
+          >&#8203;</span
+        >
+
+        <div
+          class="relative inline-block transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left align-bottom shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-md sm:p-6 sm:align-middle dark:bg-gray-900"
+        >
+          <div>
+            <img
+              class="h-48 w-full rounded-md object-cover"
+              src="https://images.unsplash.com/photo-1579226905180-636b76d96082?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+              alt=""
+            />
+
+            <div class="mt-4 text-center">
+              <h3
+                class="font-medium capitalize leading-6 text-gray-800 dark:text-white"
+                id="modal-title"
+              >
+                Welcome to your dashboard
+              </h3>
+
+              <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                Aspernatur dolorum aliquam ea, ratione deleniti porro officia?
+                Explicabo maiores suscipit.
+              </p>
+            </div>
+          </div>
+
+          <div class="mt-4 flex items-center justify-center">
+            <button
+              class="mx-1.5 h-2 w-2 rounded-full bg-blue-500 focus:outline-none"
+            ></button>
+            <button
+              class="mx-1.5 h-2 w-2 rounded-full bg-blue-100 focus:outline-none dark:bg-gray-700"
+            ></button>
+            <button
+              class="mx-1.5 h-2 w-2 rounded-full bg-blue-100 focus:outline-none dark:bg-gray-700"
+            ></button>
+            <button
+              lass="w-2 h-2 focus:outline-none mx-1.5 bg-blue-100 dark:bg-gray-700 rounded-full "
+            ></button>
+          </div>
+
+          <div class="mt-5 sm:-mx-2 sm:flex sm:items-center">
+            <button
+              class="w-full transform rounded-md border border-gray-200 px-4 py-2 text-sm font-medium capitalize tracking-wide text-gray-700 transition-colors duration-300 hover:bg-gray-100 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-40 sm:mx-2 sm:w-1/2 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800"
+            >
+              Skip
+            </button>
+
+            <button
+              class="mt-4 w-full transform rounded-md bg-blue-600 px-4 py-2 text-sm font-medium capitalize tracking-wide text-white transition-colors duration-300 hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 sm:mx-2 sm:mt-0 sm:w-1/2"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

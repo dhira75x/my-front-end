@@ -1,0 +1,201 @@
+<template>
+  <div class="flex min-h-screen items-center bg-gray-50">
+    <div class="mx-auto h-full max-w-4xl flex-1 rounded-lg bg-white shadow-xl">
+      <div class="flex flex-col md:flex-row">
+        <div class="h-32 md:h-auto md:w-1/2">
+          <img class="h-full w-full object-cover" src="../assets/login.jpeg" alt="img" />
+        </div>
+        <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
+          <form @submit.prevent="register">
+            <div class="w-full">
+              <div class="flex justify-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  x="0px"
+                  y="0px"
+                  width="100"
+                  height="100"
+                  viewBox="0 0 48 48"
+                >
+                  <path
+                    fill="#40826D"
+                    d="M27.5,34c1.9,0,3.5,1.6,3.5,3.5S29.4,41,27.5,41S24,39.4,24,37.5S25.6,34,27.5,34z M12.5,34c1.9,0,3.5,1.6,3.5,3.5S14.4,41,12.5,41S9,39.4,9,37.5S10.6,34,12.5,34z M0,6c5.3,5,11.5,7.1,22.8,7.1s25.2-0.6,25.2,3c0,1.8-1.9,3.5-5.3,6.5C39.4,25.6,33,31,33,31c0-1.5,9.1-9.3,9.1-11.7c0-3.2-13.1-2.7-19-2.8C13,16.3,4.7,14.9,0,6z"
+                  ></path>
+                </svg>
+              </div>
+              <h1 class="mb-4 text-center text-2xl font-bold text-lime-900">Sign up</h1>
+
+              <div>
+                <label class="block text-sm"> Phone Number </label>
+                <input
+                  type="phone"
+                  class="w-full rounded-md border px-4 py-2 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                  v-model="registerForm.phone"
+                  placeholder="Enter Your Phone Number"
+                  autocomplete="phone"
+                  required
+                  autofocus
+                />
+              </div>
+              <div class="mt-4">
+                <label class="block text-sm"> Email </label>
+                <input
+                  type="email"
+                  class="w-full rounded-md border px-4 py-2 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                  v-model="registerForm.email"
+                  placeholder="Email Address"
+                  autocomplete="username"
+                  required
+                />
+              </div>
+              <label class="mt-4 block text-sm"> Password </label>
+              <div class="relative mt-2 flex items-center">
+                <button
+                  class="absolute right-0 focus:outline-none rtl:left-0 rtl:right-auto"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    class="mx-4 h-6 w-6 text-gray-400 transition-colors duration-300 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400"
+                  >
+                    <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                    <path
+                      fill-rule="evenodd"
+                      d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </button>
+
+                <input
+                  class="w-full rounded-md border px-4 py-2 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                  v-model="registerForm.password"
+                  placeholder="Password"
+                  type="password"
+                  required
+                  autocomplete="new-password"
+                />
+              </div>
+                <button
+                  class="focus:shadow-outline-blue my-4 mt-4 block w-full rounded-lg border border-transparent bg-lime-700 px-4 py-2 text-center text-sm font-medium leading-5 text-white transition-colors duration-150 hover:bg-lime-700 focus:outline-none active:bg-lime-600"
+                  :disabled="registerForm.processing"
+                  @click="$router.push({ name: 'landing' })"
+                >
+                  Register
+                </button>
+
+              <div class="mt-4 text-center">
+                <p class="text-sm">
+                  Already have an account yet?
+                  <router-link to="/" class="mx-2 text-lime-700 hover:underline">
+                    Log In.</router-link
+                  >
+                </p>
+              </div>
+              <div>
+                <Label for="terms">
+                  <div class="flex items-center">
+                    <Checkbox
+                      name="terms"
+                      id="terms"
+                      v-model:checked="registerForm.terms"
+                    />
+
+                    <div class="ml-2">
+                      I agree to the
+                      <a
+                        target="_blank"
+                        href="#"
+                        class="text-sm text-lime-700 underline hover:text-lime-900"
+                      >
+                        Terms of Service
+                      </a>
+                      and
+                      <a
+                        target="_blank"
+                        href="#"
+                        class="text-sm text-lime-700 underline hover:text-lime-900"
+                      >
+                        Privacy Policy
+                      </a>
+                    </div>
+                  </div>
+                </Label>
+              </div>
+              <hr class="my-8" />
+              <div class="flex items-center justify-center gap-4">
+                <button
+                  class="flex w-full items-center justify-center rounded-lg border border-gray-300 px-4 py-2 text-sm text-gray-700 text-white hover:border-gray-500 focus:border-gray-500"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    class="mr-2 h-4 w-4"
+                    viewBox="0 0 48 48"
+                  >
+                    <defs>
+                      <path
+                        id="a"
+                        d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"
+                      />
+                    </defs>
+                    <clipPath id="b">
+                      <use xlink:href="#a" overflow="visible" />
+                    </clipPath>
+                    <path clip-path="url(#b)" fill="#FBBC05" d="M0 37V11l17 13z" />
+                    <path
+                      clip-path="url(#b)"
+                      fill="#EA4335"
+                      d="M0 11l17 13 7-6.1L48 14V0H0z"
+                    />
+                    <path
+                      clip-path="url(#b)"
+                      fill="#34A853"
+                      d="M0 37l30-23 7.9 1L48 0v48H0z"
+                    />
+                    <path
+                      clip-path="url(#b)"
+                      fill="#4285F4"
+                      d="M48 48L17 24l-4-3 35-10z"
+                    /></svg
+                  >Google
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { ref } from "vue";
+import { reactive } from "vue";
+import Checkbox from "../components/atoms/Box/Checkbox.vue";
+import Label from "../components/atoms/Label.vue";
+
+const registerForm = reactive({
+  phone: "",
+  email: "",
+  password: "",
+  terms: false,
+  processing: false,
+});
+
+const register = () => {
+  // Implement your registration logic here
+  // You can access form fields using registerForm.name, registerForm.email, etc.
+  // You can set processing to true while the registration is in progress.
+  // After completing the registration, set processing back to false.
+};
+
+// You can also use ref for individual variables if needed
+const someRefVariable = ref("some value");
+
+// Export variables and functions you want to use in the template
+{
+  registerForm, register, someRefVariable;
+}
+</script>
