@@ -2,15 +2,9 @@
 <template>
   <div class="mx-auto mt-8 max-w-3xl pb-8">
     <h1 class="mb-4 text-3xl font-semibold">Shopping Cart</h1>
-    <div v-if="cartItems.length === 0" class="text-gray-600">
-      Your cart is empty.
-    </div>
+    <div v-if="cartItems.length === 0" class="text-gray-600">Your cart is empty.</div>
     <div v-else>
-      <div
-        v-for="item in cartItems"
-        :key="item.id"
-        class="mb-4 rounded border p-4"
-      >
+      <div v-for="item in cartItems" :key="item.id" class="mb-4 rounded border p-4">
         <h2 class="mb-2 text-xl font-semibold">{{ item.name }}</h2>
         <p class="text-gray-600">{{ item.description }}</p>
         <p class="mt-2 text-lg font-bold">{{ item.price }}</p>
@@ -29,7 +23,7 @@
         >
           Empty Cart
         </button>
-        <router-link to="/views/checkout">
+        <router-link :to="{ name: 'checkout' }">
           <button
             @click="checkout"
             class="rounded-md bg-lime-800 px-4 py-2 text-white hover:bg-lime-600"

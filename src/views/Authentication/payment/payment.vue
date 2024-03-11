@@ -23,12 +23,16 @@
             <select
               class="mr-6 inline-block w-full rounded-md border border-gray-500 px-3 py-2 tracking-widest text-gray-600"
             >
-              <option>Month</option>
+              <option disabled value="">Month</option>
+              <option v-for="month in months" :key="month" :value="month">
+                {{ month }}
+              </option>
             </select>
             <select
               class="inline-block w-full rounded-md border border-gray-500 px-3 py-2 tracking-widest text-gray-600"
             >
-              <option>Year</option>
+              <option disabled value="">Year</option>
+              <option v-for="year in years" :key="year" :value="year">{{ year }}</option>
             </select>
           </div>
         </div>
@@ -46,7 +50,7 @@
       <div>
         <button
           @click="finishPayment"
-          class="text-ceenter w-full rounded-md bg-lime-800 px-4 py-3 font-semibold text-white shadow-md"
+          class="text-center w-full rounded-md bg-lime-800 px-4 py-3 font-semibold text-white shadow-md"
         >
           Confirm payment
         </button>
@@ -60,7 +64,27 @@ import { defineProps } from "vue";
 
 const props = defineProps(["total"]);
 
+const selectedMonth = ref("");
+const selectedYear = ref("");
+
 const finishPayment = () => {
   emit("change-parent");
 };
+
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+const currentYear = new Date().getFullYear();
+const years = Array.from({ length: 20 }, (_, index) => currentYear + index);
 </script>

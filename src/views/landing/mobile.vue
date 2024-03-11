@@ -1,8 +1,6 @@
 <template>
-  <section class="bg-white dark:bg-gray-900">
-    <div
-      class="container mx-auto flex flex-col items-center px-4 py-12 xl:flex-row"
-    >
+  <section class="bg-lime-950 dark:bg-lime-950">
+    <div class="container mx-auto flex flex-col items-center px-4 py-12 xl:flex-row">
       <div class="flex justify-center xl:w-1/2">
         <img
           class="h-80 w-80 flex-shrink-0 rounded-full object-cover sm:h-[28rem] sm:w-[28rem]"
@@ -11,9 +9,7 @@
         />
       </div>
 
-      <div
-        class="mt-6 flex flex-col items-center xl:mt-0 xl:w-1/2 xl:items-start"
-      >
+      <div class="mt-6 flex flex-col items-center xl:mt-0 xl:w-1/2 xl:items-start">
         <h2
           class="text-2xl font-semibold tracking-tight text-gray-800 xl:text-3xl dark:text-white"
         >
@@ -21,16 +17,15 @@
         </h2>
 
         <p class="mt-4 block max-w-2xl text-gray-500 dark:text-gray-300">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut corporis
-          esse dolorum, illum, consectetur earum provident alias dolore omnis
-          quis tempore voluptatum excepturi ea numquam? Aperiam fugiat
-          consequuntur nostrum odio.
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut corporis esse
+          dolorum, illum, consectetur earum provident alias dolore omnis quis tempore
+          voluptatum excepturi ea numquam? Aperiam fugiat consequuntur nostrum odio.
         </p>
 
         <div class="mt-6 sm:-mx-2">
           <a
             href="#"
-            class="inline-flex w-full items-center justify-center overflow-hidden rounded-lg bg-gray-900 px-4 py-2.5 text-sm text-white shadow transition-colors duration-300 hover:bg-gray-700 focus:ring focus:ring-gray-300 focus:ring-opacity-80 sm:mx-2 sm:w-auto dark:bg-gray-800 dark:hover:bg-gray-700"
+            class="inline-flex w-full items-center justify-center overflow-hidden rounded-lg bg-lime-950 px-4 py-2.5 text-sm text-white shadow transition-colors duration-300 hover:bg-lime-900 focus:ring focus:ring-gray-300 focus:ring-opacity-80 sm:mx-2 sm:w-auto dark:bg-lime-950 dark:hover:bg-lime-900"
           >
             <svg
               class="mx-2 h-5 w-5 fill-current"
