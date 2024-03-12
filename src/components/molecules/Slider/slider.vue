@@ -1,7 +1,7 @@
 <template>
-  <Swiper :slides-per-view="6" :space-between="20" class="mySwiper mt-3">
+  <Swiper :slides-per-view="6" :space-between="20" loop class="mySwiper mt-3">
     <SwiperSlide v-for="(product, index) in products" :key="index">
-      <img :src="product.image" alt="Product" class="h-56" />
+      <img :src="product.image" alt="Product" class="h-64 cursor-pointer" />
     </SwiperSlide>
   </Swiper>
 </template>
