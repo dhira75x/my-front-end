@@ -15,7 +15,7 @@
         />
         <h3 class="text-lg font-semibold">{{ product.name }}</h3>
         <p class="text-gray-600">{{ product.description }}</p>
-        <p class="mt-2 text-primary">{{ product.price }}</p>
+        <p class="text-primary mt-2">{{ product.price }}</p>
         <div class="mx-2 items-center justify-center">
           <button
             @click="addToCart(product)"

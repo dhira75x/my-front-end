@@ -1,6 +1,20 @@
 <template>
   <div class="container mx-auto p-4">
-    <h2 class="mb-4 text-3xl font-semibold">Executive Roles</h2>
+    <div class="my-3 grid grid-cols-3 space-x-3">
+      <Card
+        v-for="(card, index) in summary"
+        :key="index"
+        :figure="card.figure"
+        :title="card.title"
+        :bgColor="card.bgColor"
+        :textColor="card.textColor"
+        :body="card.body"
+        heigh="h-48"
+        width="w-80"
+        :border="card.border"
+        :borderColor="card.borderColor"
+      />
+    </div>
 
     <!-- Search and Filter Bar -->
     <div class="mb-4 flex items-center justify-end space-x-4">
@@ -110,7 +124,6 @@
 <script setup>
 import { ref, computed } from "vue";
 
-// Sample data, replace this with your actual executive roles data
 const executives = ref([
   { id: 1, name: "Executive 1", role: "Role A" },
   { id: 2, name: "Executive 2", role: "Role B" },
@@ -122,7 +135,7 @@ const searchQuery = ref("");
 const filteredExecutives = ref([]);
 
 // Pagination
-const pageSize = 5; // Adjust the number of items per page
+const pageSize = 5;
 const currentPage = ref(1);
 
 const paginatedExecutives = computed(() => {
@@ -131,29 +144,24 @@ const paginatedExecutives = computed(() => {
   return filteredExecutives.value.slice(startIndex, endIndex);
 });
 
-const totalPages = computed(() =>
-  Math.ceil(filteredExecutives.value.length / pageSize)
-);
+const totalPages = computed(() => Math.ceil(filteredExecutives.value.length / pageSize));
 
 const filterRoles = () => {
   filteredExecutives.value = executives.value.filter((executive) =>
     executive.role.toLowerCase().includes(searchQuery.value.toLowerCase())
   );
-  currentPage.value = 1; // Reset to the first page when filtering
+  currentPage.value = 1;
 };
 
 const editExecutive = (executiveId) => {
-  // Implement your edit logic here
   console.log(`Editing executive with ID: ${executiveId}`);
 };
 
 const deleteExecutive = (executiveId) => {
-  // Implement your delete logic here
   console.log(`Deleting executive with ID: ${executiveId}`);
 };
 
 const changePassword = (executiveId) => {
-  // Implement your change password logic here
   console.log(`Changing password for executive with ID: ${executiveId}`);
 };
 
@@ -164,6 +172,19 @@ const goToPage = (direction) => {
     currentPage.value++;
   }
 };
+
+const summaryCardsData = () => {
+  return [
+    {
+      figure: 0,
+      bgColor: "bg-[#2affc9]",
+      textColor: "text-white",
+      title: "Total Executive",
+      body: "Overall executive team members",
+    },
+  ];
+};
+const summary = ref(summaryCardsData());
 </script>
 
 <style scoped>

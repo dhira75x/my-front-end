@@ -1,14 +1,20 @@
 <template>
   <nav class="bg-lime-950 text-white p-4 flex justify-between items-center">
     <div class="flex items-center">
-      <img src="../../../assets/logo-1.png" alt="Logo" class="h-12 w-12 mr-4" />
+      <img
+        src="../../../assets/basket.png"
+        alt="Logo"
+        class="w-20 h-20 mr-4 bg-transparent"
+      />
       <a href="/" class="mr-4 hover:text-gray-300">Home</a>
-      <div class="relative group">
-        <button class="mr-4 hover:text-gray-300">Categories</button>
-        <div class="absolute hidden group-hover:block bg-gray-700 p-4">
-          <a href="#" class="block hover:text-gray-300">Category 1</a>
-          <a href="#" class="block hover:text-gray-300">Category 2</a>
-          <!-- Add more categories as needed -->
+      <div class="flex items-center">
+        <div class="relative group" @click="toggleCategoryDropdown">
+          <button class="hover:text-gray-300">Categories</button>
+          <div v-if="showCategory" class="absolute bg-gray-700 p-4" style="z-index: 100">
+            <button class="block hover:text-gray-300">Winery & Bar</button>
+            <button class="block hover:text-gray-300">Electronic & Gadget</button>
+            <button class="block hover:text-gray-300">Grocery</button>
+          </div>
         </div>
       </div>
     </div>
@@ -84,11 +90,16 @@
 import { ref } from "vue";
 
 const showLoginDropdown = ref(false);
+const showCategory = ref(false);
 const showRegisterDropdown = ref(false);
 
 const toggleLoginDropdown = () => {
   showLoginDropdown.value = !showLoginDropdown.value;
   if (showRegisterDropdown.value) showRegisterDropdown.value = false;
+};
+const toggleCategoryDropdown = () => {
+  showCategory.value = !showCategory.value;
+  if (showCategory.value) showCategory.value = false;
 };
 
 const toggleRegisterDropdown = () => {

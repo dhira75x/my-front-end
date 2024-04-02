@@ -121,16 +121,16 @@ const staffRoles = ref([
 const showCreateForm = ref(false);
 
 const editStaffRole = (staffRoleId) => {
-  // Implement your edit logic here
+  
   console.log(`Editing staff role with ID: ${staffRoleId}`);
 };
 
 const deleteStaffRole = (staffRoleId) => {
-  // Implement your delete logic here
+ 
   console.log(`Deleting staff role with ID: ${staffRoleId}`);
 };
 </script>
 
 <style scoped>
-/* Add any additional styling here */
+
 </style>
