@@ -22,7 +22,7 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { useCartStore } from "@/stores/cartStore.js";
+import { useCartStore } from "@/stores/cartStore";
 import { useRouter } from "vue-router";
 import gallantryImage from "@/assets/gallantry.jpg";
 import redLabelImage from "@/assets/redlabel.jpg";

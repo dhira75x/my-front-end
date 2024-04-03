@@ -1,4 +1,21 @@
-<script setup></script>
+<script setup>
+import { useCartStore } from "@/stores/cartStore";
+
+const cartStore = useCartStore();
+
+const subtotal = computed(() => {
+  return cartStore.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+});
+
+const shippingTaxRate = 0.1;
+const shippingTax = computed(() => {
+  return subtotal.value * shippingTaxRate;
+});
+
+const total = computed(() => {
+  return subtotal.value + shippingTax.value;
+});
+</script>
 <template>
   <div class="container mx-auto p-12">
     <div class="mx-auto flex w-full flex-col px-0 md:flex-row">
@@ -126,73 +143,51 @@
         <div class="pt-12 md:pt-0 2xl:ps-4">
           <h2 class="text-xl font-bold text-lime-800">Order Summary</h2>
           <div class="mt-8">
-            <div class="flex flex-col space-y-4">
-              <div class="flex space-x-4">
-                <div>
-                  <img
-                    src="https://source.unsplash.com/user/erondu/1600x900"
-                    alt="image"
-                    class="w-60"
-                  />
-                </div>
-                <div>
-                  <h2 class="text-xl font-bold text-lime-800">Title</h2>
-                  <p class="text-sm text-lime-800">Lorem ipsum dolor sit amet, tet</p>
-                  <span class="text-red-600">Price</span> $20
-                </div>
-                <div class="cursor-pointer">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
-                </div>
+            <div
+              v-for="(item, index) in cartStore.cartItems"
+              :key="index"
+              class="flex space-x-4"
+            >
+              <div>
+                <img :src="item.image" alt="image" class="w-60" />
               </div>
-              <div class="flex space-x-4">
-                <div>
-                  <img
-                    src="https://source.unsplash.com/collection/190727/1600x900"
-                    alt="image"
-                    class="w-60"
+              <div>
+                <h2 class="text-xl font-bold text-lime-800">
+                  {{ item.title }}
+                </h2>
+                <p class="text-sm text-lime-800">{{ item.description }}</p>
+                <span class="text-red-600">Price</span> ₦{{ item.price }}
+              </div>
+              <div class="cursor-pointer">
+                <!-- You can also add a method to remove an item from the cart -->
+                <svg
+                  @click="removeItem(index)"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
                   />
-                </div>
-                <div>
-                  <h2 class="text-xl font-bold text-lime-800">Title</h2>
-                  <p class="text-sm text-lime-800">Lorem ipsum dolor sit amet, tet</p>
-                  <span class="text-red-600">Price</span> $20
-                </div>
-                <div class="cursor-pointer">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
-                </div>
+                </svg>
               </div>
             </div>
           </div>
           <div class="mt-4 flex p-4">
-            <h2 class="text-xl font-bold text-lime-800">ITEMS 2</h2>
+            <h2 class="text-xl font-bold text-lime-800">
+              ITEMS {{ cartStore.cartItems.length }}
+            </h2>
           </div>
-          <div
+          <div class="subtotal">Subtotal: ₦{{ subtotal.toFixed(2) }}</div>
+          <div class="shipping-tax">Shipping Tax: ₦{{ shippingTax.toFixed(2) }}</div>
+          <div class="total">Total: ₦{{ total.toFixed(2) }}</div>
+
+          <!-- <div
             class="text-heading flex w-full items-center border-b border-gray-300 py-4 text-sm font-semibold text-lime-700 last:border-b-0 last:pb-0 last:text-base lg:px-3 lg:py-5"
           >
             Subtotal<span class="ml-2">$40.00</span>
@@ -206,7 +201,7 @@
             class="text-heading flex w-full items-center border-b border-gray-300 py-4 text-sm font-semibold text-lime-700 last:border-b-0 last:pb-0 last:text-base lg:px-3 lg:py-5"
           >
             Total<span class="ml-2">$50.00</span>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

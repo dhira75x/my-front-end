@@ -2,10 +2,11 @@
   <div>
     <Bar />
     <Product class="mt-10" />
+    <Slider class="mt-14" />
     <Search class="mt-4" />
     <Product_2 class="mt-8" />
     <Mobile class="mt-6" />
-    <Slider class="mt-6" />
+    <Slider_2 class="mt-6" />
     <Product_3 class="mt-8" />
     <Call class="mt-6" />
     <Tab />
@@ -15,6 +16,7 @@
 <script setup>
 import Bar from "../Slider/bar.vue";
 import Slider from "./slider.vue";
+import Slider_2 from "./slider_2.vue";
 import Tab from "./tab.vue";
 import Mobile from "../../../views/mobile.vue";
 import Call from "../call.vue";

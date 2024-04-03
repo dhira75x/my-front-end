@@ -31,43 +31,87 @@
 <script setup>
 import { ref } from "vue";
 
-import gameImage from "@/assets/game.png";
-import headphoneImage from "@/assets/headphone.png";
-import lensImage from "@/assets/lens.png";
-import colorImage from "@/assets/color.png";
+import heinkenImage from "@/assets/heinken.jpg";
+import hennesyImage from "@/assets/hennesy.jpg";
+import jamesonImage from "@/assets/jameson.jpg";
+import jackImage from "@/assets/jack.jpg";
+import kginImage from "@/assets/k-gin.jpg";
+import glenImage from "@/assets/glen.jpg";
+import moetImage from "@/assets/moet.jpg";
+import absoluteImage from "@/assets/absolute.jpg";
+
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+
+
 
 const featuredProducts = ref([
   {
     id: 1,
-    name: "Phantom Edge Gaming Pad",
-    description: "Elevate your gaming experience with the Phantom Edge Gaming Pad. ",
-    price: " ₦69000.99",
-    image: gameImage,
+    name: "Heineken Beer",
+    description: "Heineken is a harmonious blend of pure water, premium malts. ",
+    price: " ₦9000.99",
+    image: heinkenImage,
   },
   {
     id: 2,
-    name: "SonicBliss Wireless Headphone",
-    description: "Where cutting-edge technology meets impeccable sound quality.",
-    price: " ₦2900.99",
-    image: headphoneImage,
+    name: "Hennessy Beer",
+    description: " Crafted for those who appreciate the finer things in life.",
+    price: " ₦69000.99",
+    image: hennesyImage,
   },
   {
     id: 3,
-    name: "CrystalClear Pro Lens",
-    description: "Introducing our latest innovation in photography.",
-    price: " ₦1900.00",
-    image: lensImage,
+    name: "Jack Daniel's Tennessee Whiskey",
+    description:
+      "Unravel the legend in every sip and discover why Jack Daniel's remains a symbol.",
+    price: " ₦30000.00",
+    image: jackImage,
   },
   {
     id: 4,
-    name: "Product 4",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    price: "₦999.99",
-    image: colorImage,
+    name: "Moët & Chandon",
+    description: "A prestigious champagne that shows the grandeur of French winemaking.",
+    price: "₦99999.99",
+    image: moetImage,
+  },
+  {
+    id: 5,
+    name: "Jameson Irish Whiskey",
+    description:
+      "Experience the spirit of Ireland with every sip of Jameson Irish Whiskey.",
+    price: "₦43599.99",
+    image: jamesonImage,
+  },
+  {
+    id: 6,
+    name: "Glenfiddich Single Malt Scotch Whisky",
+    description: "The purest Robbie Dhu spring water and aged in the finest oak barrels.",
+    price: "₦50000.99",
+    image: glenImage,
+  },
+  {
+    id: 7,
+    name: "Harmony Korean Gin",
+    description: "Exquisite journey through the heart of Korea’s lush landscapes.",
+    price: "₦100000.99",
+    image: kginImage,
+  },
+  {
+    id: 8,
+    name: "Absolute Vodka",
+    description: "it's a declaration of excellence and tradition.",
+    price: "₦18099.99",
+    image: absoluteImage,
   },
 ]);
 
+const cartItems = ref([]);
+
 const addToCart = (product) => {
-  console.log("Product added to cart:", product);
+  cartItems.value.push(product);
+  router.push({ name: "cart" });
 };
 </script>

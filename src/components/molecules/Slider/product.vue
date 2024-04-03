@@ -18,7 +18,7 @@
         <p class="mt-2 text-primary">{{ product.price }}</p>
         <div class="mx-2 items-center justify-center">
           <button
-            @click="addToCart(product)"
+            @click="handleAddToCart(product)"
             class="mx-4 mt-4 items-center rounded-full bg-lime-800 px-4 py-2 text-white"
           >
             Add to Cart
@@ -34,7 +34,16 @@ import { ref } from "vue";
 import gameImage from "@/assets/game.png";
 import headphoneImage from "@/assets/headphone.png";
 import lensImage from "@/assets/lens.png";
-import colorImage from "@/assets/color.png";
+import speakerImage from "@/assets/speaker.jpg";
+import samsungImage from "@/assets/samsung.jpg";
+import iphoneImage from "@/assets/iphone.jpg";
+import iwatchImage from "@/assets/iwatch.jpg";
+import cameraImage from "@/assets/camera.jpg";
+import { useCartStore } from "@/stores/cartStore";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+const cartStore = useCartStore();
 
 const featuredProducts = ref([
   {
@@ -60,14 +69,45 @@ const featuredProducts = ref([
   },
   {
     id: 4,
-    name: "Product 4",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    price: "₦999.99",
-    image: colorImage,
+    name: " SonicWave 360",
+    description: "A compact yet powerful speaker designed to bring your music to life.",
+    price: "₦2999.99",
+    image: speakerImage,
+  },
+  {
+    id: 5,
+    name: " Apple Phone",
+    description: "The new Apple iPhone: where elegance meets intelligence.",
+    price: "₦289999.99",
+    image: iphoneImage,
+  },
+  {
+    id: 6,
+    name: " Apple Wrist-Watch",
+    description: "Experience the perfect blend of technology and style.",
+    price: "₦20900.99",
+    image: iwatchImage,
+  },
+  {
+    id: 7,
+    name: " Samsung Galaxy S7 Edge",
+    description: "Elevate your smartphone experience with the Samsung Galaxy S7 Edge.",
+    price: "₦250000.00",
+    image: samsungImage,
+  },
+  {
+    id: 8,
+    name: "Canon EOS Rebel T8i",
+    description: "Capture your world through the lens of the Canon EOS Rebel T8i.",
+    price: "₦450000.00",
+    image: cameraImage,
   },
 ]);
 
-const addToCart = (product) => {
-  console.log("Product added to cart:", product);
+const cartItems = ref([]);
+
+const handleAddToCart = (product) => {
+  cartStore.addToCart(product);
+  router.push({ name: "cart" });
 };
 </script>

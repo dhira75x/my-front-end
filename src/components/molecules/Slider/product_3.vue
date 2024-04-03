@@ -31,43 +31,82 @@
 <script setup>
 import { ref } from "vue";
 
-import gameImage from "@/assets/game.png";
-import headphoneImage from "@/assets/headphone.png";
-import lensImage from "@/assets/lens.png";
-import colorImage from "@/assets/color.png";
+import danoneImage from "@/assets/danone.jpg";
+import delightImage from "@/assets/delight.jpg";
+import fritzImage from "@/assets/fritz.jpg";
+import homeImage from "@/assets/homemade.jpg";
+import icecreamBarImage from "@/assets/icecream-bar.jpg";
+import icecreamImage from "@/assets/icecream-parlour.jpg";
+import nobiloImage from "@/assets/nobilo.jpg";
+import regalImage from "@/assets/regal.jpg";
+
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const featuredProducts = ref([
   {
     id: 1,
-    name: "Phantom Edge Gaming Pad",
-    description: "Elevate your gaming experience with the Phantom Edge Gaming Pad. ",
-    price: " ₦69000.99",
-    image: gameImage,
+    name: "Danone Yoghurt",
+    description: "A harmonious blend of rich taste and smooth texture. ",
+    price: " ₦3000.99",
+    image: danoneImage,
   },
   {
     id: 2,
-    name: "SonicBliss Wireless Headphone",
-    description: "Where cutting-edge technology meets impeccable sound quality.",
+    name: " Delight Iced Coffee",
+    description: "Infused with just the right touch of sweetness.",
     price: " ₦2900.99",
-    image: headphoneImage,
+    image: delightImage,
   },
   {
     id: 3,
-    name: "CrystalClear Pro Lens",
-    description: "Introducing our latest innovation in photography.",
-    price: " ₦1900.00",
-    image: lensImage,
+    name: " Nobilo White Wine",
+    description: "This wine is a celebration of purity and balance.",
+    price: " ₦48000.00",
+    image: nobiloImage,
   },
   {
     id: 4,
-    name: "Product 4",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    name: "HomeMade Fresh Farm Yoghurt",
+    description: "The epitome of natural goodness and wholesome nutrition.",
+    price: "₦2999.99",
+    image: homeImage,
+  },
+  {
+    id: 5,
+    name: "Fritz Bottle Water",
+    description: "Each bottle of Fritz Water is a testament of our commitment.",
+    price: "₦134.99",
+    image: fritzImage,
+  },
+  {
+    id: 6,
+    name: "Ice Cream Bar",
+    description: "Classic Ice Cream Bar is the perfect treat to satisfy your cravings.",
     price: "₦999.99",
-    image: colorImage,
+    image: icecreamBarImage,
+  },
+  {
+    id: 7,
+    name: "Ice Lab",
+    description: "Ice cream parlour filled with colorful flavours",
+    price: "₦500 - ₦3500",
+    image: icecreamImage,
+  },
+  {
+    id: 8,
+    name: "Chivas Regal",
+    description: "Is an emblem of elegance and refinement in the world of Scotch whisky.",
+    price: "₦90000.00",
+    image: regalImage,
   },
 ]);
 
+const cartItems = ref([]);
+
 const addToCart = (product) => {
-  console.log("Product added to cart:", product);
+  cartItems.value.push(product);
+  router.push({ name: "cart" });
 };
 </script>
