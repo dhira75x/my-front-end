@@ -73,6 +73,37 @@ const router = createRouter({
         import("../components/pages/order/order-confirmation.vue"),
     },
     {
+      path: "/categories",
+      name: "categories",
+      component: () => import("../components/pages/category/Category.vue"),
+    },
+    {
+      path: "/electronics",
+      name: "electronics",
+      component: () => import("../components/pages/category/Electronics.vue"),
+    },
+    {
+      path: "/beauty",
+      name: "beauty",
+      component: () => import("../components/pages/category/Beauty.vue"),
+    },
+    {
+      path: "/fashion",
+      name: "fashion",
+      component: () => import("../components/pages/category/Fashion.vue"),
+    },
+    {
+      path: "/grocery-drinks",
+      name: "grocery-drinks",
+      component: () =>
+        import("../components/pages/category/GrocreiesDrinks.vue"),
+    },
+    {
+      path: "/home-kitchen",
+      name: "home-kitchen",
+      component: () => import("../components/pages/category/HomeKitchen.vue"),
+    },
+    {
       path: "/product/:id",
       name: "product",
       component: () => import("../components/pages/Product/product.vue"),
