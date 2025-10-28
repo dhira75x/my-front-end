@@ -3,11 +3,7 @@
     :class="isCard ? '' : 'lg:h-screen'"
     class="row-gap-12 lg:col-gap-10 container mx-auto grid grid-cols-1 p-6 lg:grid-cols-10 lg:pt-12"
   >
-    <Payment
-      @handle-card="handleCard"
-      @change-parent="handleAlert"
-      :total="total"
-    />
+    <Payment @handle-card="handleCard" @change-parent="handleAlert" :total="total" />
     <Summary :items="items" />
     <Alert
       :visible="alertVisible"
@@ -69,6 +65,6 @@ const handleCard = () => {
 };
 
 onMounted(() => {
-  getTotal(items.value); // Access the ref value using .value
+  getTotal(items.value);
 });
 </script>

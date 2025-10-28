@@ -1,18 +1,17 @@
-import { fileURLToPath, URL } from 'node:url'
-
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import nightwatchPlugin from 'vite-plugin-nightwatch'
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
+import path from "path";
+import nightwatchPlugin from "vite-plugin-nightwatch";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    vue(),
-    nightwatchPlugin(),
-  ],
+  plugins: [vue(), nightwatchPlugin()],
+  server: {
+    port: 5178,
+  },
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    }
-  }
-})
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
+});

@@ -1,209 +1,366 @@
-<script setup>
-import { useCartStore } from "@/stores/cartStore";
-
-const cartStore = useCartStore();
-
-const subtotal = computed(() => {
-  return cartStore.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-});
-
-const shippingTaxRate = 0.1;
-const shippingTax = computed(() => {
-  return subtotal.value * shippingTaxRate;
-});
-
-const total = computed(() => {
-  return subtotal.value + shippingTax.value;
-});
-</script>
+<!-- Checkout.vue -->
 <template>
-  <div class="container mx-auto p-12">
-    <div class="mx-auto flex w-full flex-col px-0 md:flex-row">
-      <div class="flex flex-col md:w-full">
-        <h2 class="text-heading mb-4 font-bold text-lime-900 md:text-xl">
-          Shipping Address
-        </h2>
-        <form class="mx-auto w-full justify-center" method="post">
-          <div class="">
-            <div class="space-x-0 lg:flex lg:space-x-4">
-              <div class="w-full lg:w-1/2">
-                <label
-                  for="firstName"
-                  class="mb-3 block text-sm font-semibold text-lime-700"
-                  >First Name</label
-                >
-                <input
-                  name="firstName"
-                  type="text"
-                  placeholder="First Name"
-                  class="w-full rounded border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-blue-600 lg:text-sm"
-                />
+  <div class="min-h-screen py-8 bg-gray-50">
+    <div class="container px-4 mx-auto">
+      <h1 class="mb-8 text-3xl font-bold text-gray-800">Checkout</h1>
+
+      <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+        <!-- Checkout Form -->
+        <div class="lg:col-span-2">
+          <!-- Progress Steps -->
+          <div class="mb-8">
+            <div class="flex items-center">
+              <div class="flex items-center text-lime-600">
+                <div class="flex items-center justify-center w-8 h-8 text-white bg-lime-600 rounded-full">1</div>
+                <span class="ml-2 font-medium">Information</span>
               </div>
-              <div class="w-full lg:w-1/2">
-                <label
-                  for="firstName"
-                  class="mb-3 block text-sm font-semibold text-lime-700"
-                  >Last Name</label
-                >
-                <input
-                  name="Last Name"
-                  type="text"
-                  placeholder="Last Name"
-                  class="w-full rounded border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-blue-600 lg:text-sm"
-                />
+              <div class="ml-4 h-1 flex-1 bg-lime-600"></div>
+              <div class="flex items-center ml-4 text-gray-500">
+                <div class="flex items-center justify-center w-8 h-8 text-white bg-gray-300 rounded-full">2</div>
+                <span class="ml-2 font-medium">Shipping</span>
+              </div>
+              <div class="ml-4 h-1 flex-1 bg-gray-300"></div>
+              <div class="flex items-center ml-4 text-gray-500">
+                <div class="flex items-center justify-center w-8 h-8 text-white bg-gray-300 rounded-full">3</div>
+                <span class="ml-2 font-medium">Payment</span>
               </div>
             </div>
-            <div class="mt-4">
-              <div class="w-full">
-                <label for="Email" class="mb-3 block text-sm font-semibold text-lime-700"
-                  >Email</label
-                >
-                <input
-                  name="Last Name"
-                  type="text"
-                  placeholder="Email"
-                  class="w-full rounded border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-blue-600 lg:text-sm"
-                />
-              </div>
-            </div>
-            <div class="mt-4">
-              <div class="w-full">
-                <label
-                  for="Address"
-                  class="mb-3 block text-sm font-semibold text-lime-700"
-                  >Address</label
-                >
-                <textarea
-                  class="w-full rounded border border-gray-300 px-4 py-3 text-xs focus:outline-none focus:ring-1 focus:ring-blue-600 lg:text-sm"
-                  name="Address"
-                  cols="20"
-                  rows="4"
-                  placeholder="Address"
-                ></textarea>
-              </div>
-            </div>
-            <div class="space-x-0 lg:flex lg:space-x-4">
-              <div class="w-full lg:w-1/2">
-                <label for="city" class="mb-3 block text-sm font-semibold text-lime-700"
-                  >City</label
-                >
-                <input
-                  name="city"
-                  type="text"
-                  placeholder="City"
-                  class="w-full rounded border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-blue-600 lg:text-sm"
-                />
-              </div>
-              <div class="w-full lg:w-1/2">
-                <label
-                  for="postcode"
-                  class="mb-3 block text-sm font-semibold text-lime-700"
-                >
-                  Postcode</label
-                >
-                <input
-                  name="postcode"
-                  type="text"
-                  placeholder="Post Code"
-                  class="w-full rounded border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-blue-600 lg:text-sm"
-                />
-              </div>
-            </div>
-            <div class="mt-4 flex items-center">
-              <label class="text-heading group flex items-center text-sm">
-                <input
-                  type="checkbox"
-                  class="h-5 w-5 rounded border border-gray-300 text-lime-600 focus:outline-none focus:ring-1"
-                />
-                <span class="ml-2">Save this information for next time</span></label
+          </div>
+
+          <!-- Contact Information -->
+          <div class="p-6 mb-6 bg-white rounded-lg shadow-md">
+            <h2 class="mb-4 text-lg font-semibold text-gray-800">Contact Information</h2>
+            <div class="mb-4">
+              <label for="email" class="block mb-2 text-sm font-medium text-gray-700">Email</label>
+              <input 
+                type="email" 
+                id="email" 
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500" 
+                placeholder="you@example.com"
               >
             </div>
-            <div class="relative pt-3 xl:pt-6">
-              <label for="note" class="mb-3 block text-sm font-semibold text-lime-600">
-                Notes (Optional)</label
-              ><textarea
-                name="note"
-                class="flex w-full items-center rounded border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
-                rows="4"
-                placeholder="Notes for delivery"
-              ></textarea>
-            </div>
-
-            <div class="mt-4">
-              <router-link :to="{ name: 'transaction' }">
-                <button class="w-full bg-lime-800 px-6 py-2 text-white hover:bg-lime-500">
-                  Process
-                </button>
-              </router-link>
+            <div class="flex items-center">
+              <input type="checkbox" id="newsletter" class="w-4 h-4 text-lime-600 border-gray-300 rounded focus:ring-lime-500">
+              <label for="newsletter" class="ml-2 text-sm text-gray-600">Keep me up to date on news and exclusive offers</label>
             </div>
           </div>
-        </form>
-      </div>
-      <div class="ml-0 flex w-full flex-col lg:ml-12 lg:w-2/5">
-        <div class="pt-12 md:pt-0 2xl:ps-4">
-          <h2 class="text-xl font-bold text-lime-800">Order Summary</h2>
-          <div class="mt-8">
-            <div
-              v-for="(item, index) in cartStore.cartItems"
-              :key="index"
-              class="flex space-x-4"
-            >
+
+          <!-- Shipping Address -->
+          <div class="p-6 mb-6 bg-white rounded-lg shadow-md">
+            <h2 class="mb-4 text-lg font-semibold text-gray-800">Shipping Address</h2>
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
               <div>
-                <img :src="item.image" alt="image" class="w-60" />
-              </div>
-              <div>
-                <h2 class="text-xl font-bold text-lime-800">
-                  {{ item.title }}
-                </h2>
-                <p class="text-sm text-lime-800">{{ item.description }}</p>
-                <span class="text-red-600">Price</span> ₦{{ item.price }}
-              </div>
-              <div class="cursor-pointer">
-                <!-- You can also add a method to remove an item from the cart -->
-                <svg
-                  @click="removeItem(index)"
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+                <label for="firstName" class="block mb-2 text-sm font-medium text-gray-700">First Name</label>
+                <input 
+                  type="text" 
+                  id="firstName" 
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500" 
+                  placeholder="John"
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
+              </div>
+              <div>
+                <label for="lastName" class="block mb-2 text-sm font-medium text-gray-700">Last Name</label>
+                <input 
+                  type="text" 
+                  id="lastName" 
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500" 
+                  placeholder="Doe"
+                >
+              </div>
+              <div class="md:col-span-2">
+                <label for="address" class="block mb-2 text-sm font-medium text-gray-700">Address</label>
+                <input 
+                  type="text" 
+                  id="address" 
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500" 
+                  placeholder="123 Main St"
+                >
+              </div>
+              <div>
+                <label for="city" class="block mb-2 text-sm font-medium text-gray-700">City</label>
+                <input 
+                  type="text" 
+                  id="city" 
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500" 
+                  placeholder="Lagos"
+                >
+              </div>
+              <div>
+                <label for="state" class="block mb-2 text-sm font-medium text-gray-700">State</label>
+                <select 
+                  id="state" 
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500"
+                >
+                  <option value="">Select a state</option>
+                  <option value="lagos">Lagos</option>
+                  <option value="abuja">Abuja</option>
+                  <option value="rivers">Rivers</option>
+                  <option value="kano">Kano</option>
+                </select>
+              </div>
+              <div>
+                <label for="zip" class="block mb-2 text-sm font-medium text-gray-700">ZIP Code</label>
+                <input 
+                  type="text" 
+                  id="zip" 
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500" 
+                  placeholder="100001"
+                >
+              </div>
+              <div>
+                <label for="phone" class="block mb-2 text-sm font-medium text-gray-700">Phone</label>
+                <input 
+                  type="tel" 
+                  id="phone" 
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500" 
+                  placeholder="+234 123 456 7890"
+                >
+              </div>
+            </div>
+            <div class="mt-4">
+              <input type="checkbox" id="saveAddress" class="w-4 h-4 text-lime-600 border-gray-300 rounded focus:ring-lime-500">
+              <label for="saveAddress" class="ml-2 text-sm text-gray-600">Save this information for next time</label>
+            </div>
+          </div>
+
+          <!-- Shipping Method -->
+          <div class="p-6 mb-6 bg-white rounded-lg shadow-md">
+            <h2 class="mb-4 text-lg font-semibold text-gray-800">Shipping Method</h2>
+            <div class="space-y-3">
+              <div class="flex items-center p-4 border border-gray-300 rounded-lg">
+                <input type="radio" id="standard" name="shipping" class="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500" checked>
+                <label for="standard" class="flex items-center justify-between flex-1 ml-3">
+                  <div>
+                    <div class="font-medium text-gray-800">Standard Delivery</div>
+                    <div class="text-sm text-gray-500">5-7 business days</div>
+                  </div>
+                  <div class="font-medium text-gray-800">₦2,000.00</div>
+                </label>
+              </div>
+              <div class="flex items-center p-4 border border-gray-300 rounded-lg">
+                <input type="radio" id="express" name="shipping" class="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500">
+                <label for="express" class="flex items-center justify-between flex-1 ml-3">
+                  <div>
+                    <div class="font-medium text-gray-800">Express Delivery</div>
+                    <div class="text-sm text-gray-500">2-3 business days</div>
+                  </div>
+                  <div class="font-medium text-gray-800">₦5,000.00</div>
+                </label>
+              </div>
+              <div class="flex items-center p-4 border border-gray-300 rounded-lg">
+                <input type="radio" id="overnight" name="shipping" class="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500">
+                <label for="overnight" class="flex items-center justify-between flex-1 ml-3">
+                  <div>
+                    <div class="font-medium text-gray-800">Overnight Delivery</div>
+                    <div class="text-sm text-gray-500">Next business day</div>
+                  </div>
+                  <div class="font-medium text-gray-800">₦10,000.00</div>
+                </label>
               </div>
             </div>
           </div>
-          <div class="mt-4 flex p-4">
-            <h2 class="text-xl font-bold text-lime-800">
-              ITEMS {{ cartStore.cartItems.length }}
-            </h2>
-          </div>
-          <div class="subtotal">Subtotal: ₦{{ subtotal.toFixed(2) }}</div>
-          <div class="shipping-tax">Shipping Tax: ₦{{ shippingTax.toFixed(2) }}</div>
-          <div class="total">Total: ₦{{ total.toFixed(2) }}</div>
 
-          <!-- <div
-            class="text-heading flex w-full items-center border-b border-gray-300 py-4 text-sm font-semibold text-lime-700 last:border-b-0 last:pb-0 last:text-base lg:px-3 lg:py-5"
-          >
-            Subtotal<span class="ml-2">$40.00</span>
+          <!-- Payment Method -->
+          <div class="p-6 bg-white rounded-lg shadow-md">
+            <h2 class="mb-4 text-lg font-semibold text-gray-800">Payment Method</h2>
+            <div class="space-y-3">
+              <div class="flex items-center p-4 border border-gray-300 rounded-lg">
+                <input type="radio" id="card" name="payment" class="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500" checked>
+                <label for="card" class="flex items-center flex-1 ml-3">
+                  <svg class="w-6 h-6 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                  </svg>
+                  <span class="font-medium text-gray-800">Credit/Debit Card</span>
+                </label>
+              </div>
+              <div class="flex items-center p-4 border border-gray-300 rounded-lg">
+                <input type="radio" id="bank" name="payment" class="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500">
+                <label for="bank" class="flex items-center flex-1 ml-3">
+                  <svg class="w-6 h-6 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                  </svg>
+                  <span class="font-medium text-gray-800">Bank Transfer</span>
+                </label>
+              </div>
+              <div class="flex items-center p-4 border border-gray-300 rounded-lg">
+                <input type="radio" id="cash" name="payment" class="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500">
+                <label for="cash" class="flex items-center flex-1 ml-3">
+                  <svg class="w-6 h-6 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                  </svg>
+                  <span class="font-medium text-gray-800">Cash on Delivery</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Card Details (shown when card payment is selected) -->
+            <div class="mt-6 p-4 bg-gray-50 rounded-lg">
+              <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                <div class="md:col-span-2">
+                  <label for="cardNumber" class="block mb-2 text-sm font-medium text-gray-700">Card Number</label>
+                  <input 
+                    type="text" 
+                    id="cardNumber" 
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500" 
+                    placeholder="1234 5678 9012 3456"
+                  >
+                </div>
+                <div>
+                  <label for="expiry" class="block mb-2 text-sm font-medium text-gray-700">Expiry Date</label>
+                  <input 
+                    type="text" 
+                    id="expiry" 
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500" 
+                    placeholder="MM/YY"
+                  >
+                </div>
+                <div>
+                  <label for="cvv" class="block mb-2 text-sm font-medium text-gray-700">CVV</label>
+                  <input 
+                    type="text" 
+                    id="cvv" 
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500" 
+                    placeholder="123"
+                  >
+                </div>
+                <div class="md:col-span-2">
+                  <label for="nameOnCard" class="block mb-2 text-sm font-medium text-gray-700">Name on Card</label>
+                  <input 
+                    type="text" 
+                    id="nameOnCard" 
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500" 
+                    placeholder="John Doe"
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-6">
+              <button 
+                @click="placeOrder" 
+                class="w-full py-3 font-semibold text-white transition-colors bg-lime-600 rounded-lg hover:bg-lime-700"
+              >
+                Place Order
+              </button>
+            </div>
           </div>
-          <div
-            class="text-heading flex w-full items-center border-b border-gray-300 py-4 text-sm font-semibold text-lime-700 last:border-b-0 last:pb-0 last:text-base lg:px-3 lg:py-5"
-          >
-            Shipping Tax<span class="ml-2">$10</span>
+        </div>
+
+        <!-- Order Summary -->
+        <div>
+          <div class="p-6 bg-white rounded-lg shadow-md">
+            <h2 class="mb-4 text-lg font-semibold text-gray-800">Order Summary</h2>
+            
+            <div class="space-y-4">
+              <div v-for="item in cartItems" :key="item.id" class="flex">
+                <div class="flex-shrink-0 w-16 h-16 overflow-hidden bg-gray-200 rounded-md">
+                  <img :src="item.image" alt="" class="object-cover w-full h-full">
+                </div>
+                <div class="flex-1 ml-4">
+                  <h3 class="text-sm font-medium text-gray-800">{{ item.name }}</h3>
+                  <p class="text-sm text-gray-500">Qty: {{ item.quantity }}</p>
+                </div>
+                <div class="text-sm font-medium text-gray-800">{{ item.price }}</div>
+              </div>
+            </div>
+
+            <div class="mt-6 space-y-3">
+              <div class="flex justify-between text-sm text-gray-600">
+                <span>Subtotal</span>
+                <span>₦{{ subtotal }}</span>
+              </div>
+              <div class="flex justify-between text-sm text-gray-600">
+                <span>Shipping</span>
+                <span>₦{{ shipping }}</span>
+              </div>
+              <div class="flex justify-between text-sm text-gray-600">
+                <span>Tax</span>
+                <span>₦{{ tax }}</span>
+              </div>
+              <div class="pt-3 mt-3 border-t border-gray-200">
+                <div class="flex justify-between text-lg font-semibold text-gray-800">
+                  <span>Total</span>
+                  <span>₦{{ total }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-6">
+              <div class="flex items-center p-4 bg-lime-50 rounded-lg">
+                <svg class="w-5 h-5 text-lime-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span class="ml-2 text-sm text-lime-700">Free shipping on orders over ₦50,000</span>
+              </div>
+            </div>
           </div>
-          <div
-            class="text-heading flex w-full items-center border-b border-gray-300 py-4 text-sm font-semibold text-lime-700 last:border-b-0 last:pb-0 last:text-base lg:px-3 lg:py-5"
-          >
-            Total<span class="ml-2">$50.00</span>
-          </div> -->
+
+          <div class="mt-6 p-6 bg-white rounded-lg shadow-md">
+            <h3 class="mb-4 text-lg font-semibold text-gray-800">Have a promo code?</h3>
+            <div class="flex">
+              <input 
+                type="text" 
+                class="flex-1 px-4 py-2 border border-gray-300 rounded-l-lg focus:ring-lime-500 focus:border-lime-500" 
+                placeholder="Enter promo code"
+              >
+              <button class="px-4 py-2 font-medium text-white bg-lime-600 rounded-r-lg hover:bg-lime-700">
+                Apply
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<script setup>
+import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+// Mock cart data - in a real app, this would come from a cart store
+const cartItems = ref([
+  {
+    id: 1,
+    name: 'Wireless Headphones',
+    price: '₦79,000.00',
+    quantity: 1,
+    image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'
+  },
+  {
+    id: 2,
+    name: 'Smart Watch',
+    price: '₦129,999.00',
+    quantity: 1,
+    image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'
+  }
+]);
+
+// Calculate order totals
+const subtotal = computed(() => {
+  return cartItems.value.reduce((total, item) => {
+    return total + parseFloat(item.price.replace('₦', '').replace(',', ''));
+  }, 0).toFixed(2);
+});
+
+const shipping = computed(() => {
+  return subtotal.value > 50000 ? '0.00' : '2000.00';
+});
+
+const tax = computed(() => {
+  return (parseFloat(subtotal.value) * 0.075).toFixed(2); // 7.5% VAT
+});
+
+const total = computed(() => {
+  return (parseFloat(subtotal.value) + parseFloat(shipping.value) + parseFloat(tax.value)).toFixed(2);
+});
+
+const placeOrder = () => {
+  // In a real app, this would process the order
+  console.log('Placing order...');
+  alert('Order placed successfully!');
+  router.push('/order-confirmation');
+};
+</script>

@@ -20,6 +20,12 @@ export const useUserStore = defineStore('userStore', {
         return r.toLowerCase() == role.toLowerCase()
       })
     },
+    login(token, role, names, id) {
+      this.token = token;
+      this.isAuthenticated = true;
+      this.user = { role, names, id};
+      this.userRole = role;
+    },
     logout() {
       this.isAuthenticated = false
       this.isAdmin = false 

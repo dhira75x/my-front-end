@@ -41,7 +41,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
 import { useCartStore } from "@/stores/cartStore.js";
 
@@ -55,8 +55,21 @@ const removeFromCart = (productToRemove) => {
   );
 };
 
+const subtotal = computed(() => {
+  return cartStore.cartItems.reduce(
+    (acc, item) => acc + item.price * (item.quantity || 1),
+    0
+  );
+});
+
+const shippingTax = 1500;
+
+const total = computed(() => {
+  return subtotal.value + shippingTax;
+});
+
 const emptyCart = () => {
-  cartItems.value = [];
+  cartStore.cartItems = [];
 };
 
 const checkout = () => {

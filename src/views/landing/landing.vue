@@ -1,708 +1,904 @@
 <template>
-  <section class="p-10">
-    <div>
-      <!-- Header Section -->
-      <header class="bg-gray-900 p-4 text-white">
-        <div class="container mx-auto">
-          <p class="mt-2 justify-center text-center">
-            Discover the best products online!
-          </p>
-
-          <div class="mr-10 flex flex-row-reverse gap-4">
-            <button
-              class="h-[51px] w-[121px] rounded-md border-lime-950 pb-3.5 pl-7 pr-7 pt-3.5 text-black"
-              type="dropdown"
-            >
-              <router-link
-                to="/help-page"
-                class="rounded bg-lime-800 px-4 py-2 text-white hover:bg-lime-900"
-                >Login</router-link
+  <section class="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
+    <!-- Enhanced Header -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+      <div class="container px-4 py-3 mx-auto">
+        <div class="flex items-center justify-between">
+          <!-- Logo -->
+          <div class="flex items-center space-x-2">
+            <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-r from-lime-50 to-green-50">
+              <!-- <span class="text-xl font-bold text-white">O</span> -->
+              <img src="@/assets/ovo.svg" alt="OvoMarket Logo" class="w-6 h-6"/>
+            </div>
+            <span class="text-xl font-bold text-gray-800">OvoMarket</span>
+          </div>
+          
+          <!-- Navigation -->
+          <nav class="hidden space-x-8 md:flex">
+            <a href="/" class="font-medium text-gray-600 transition-colors hover:text-lime-600">Home</a>
+            <a href="#" class="font-medium text-gray-600 transition-colors hover:text-lime-600">Categories</a>
+            <a href="#" class="font-medium text-gray-600 transition-colors hover:text-lime-600">Deals</a>
+            <a href="#" class="font-medium text-gray-600 transition-colors hover:text-lime-600">About</a>
+          </nav>
+          
+          <!-- Search Bar -->
+          <div class="items-center hidden w-64 px-4 py-2 bg-gray-100 rounded-full md:flex">
+            <svg class="w-5 h-5 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+            <input type="text" placeholder="Search products..." class="w-full bg-transparent focus:outline-none">
+          </div>
+          
+          <!-- User Actions -->
+          <div class="flex items-center space-x-4">
+            <!-- Cart Button with Dropdown -->
+            <div class="relative" ref="cartContainer">
+              <button 
+                @click="toggleCart" 
+                class="relative p-2 text-gray-600 transition-colors hover:text-lime-600"
               >
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+                <span class="absolute top-0 right-0 flex items-center justify-center w-5 h-5 text-xs text-white rounded-full bg-lime-500">{{ cartItems.length }}</span>
+              </button>
+              
+              <!-- Cart Dropdown -->
+              <div 
+                v-if="showCart" 
+                class="absolute right-0 z-50 mt-2 bg-white rounded-md shadow-lg w-80"
+              >
+                <div class="p-4 border-b">
+                  <h3 class="font-semibold text-gray-800">Your Cart</h3>
+                </div>
+                <div class="overflow-y-auto max-h-60">
+                  <div v-if="cartItems.length === 0" class="p-4 text-center text-gray-500">
+                    Your cart is empty
+                  </div>
+                  <div v-else>
+                    <div v-for="item in cartItems" :key="item.id" class="flex items-center p-4 border-b">
+                      <img :src="item.image" alt="" class="object-cover w-16 h-16 rounded">
+                      <div class="flex-1 ml-3">
+                        <h4 class="text-sm font-medium text-gray-800">{{ item.name }}</h4>
+                        <p class="text-sm text-gray-600">{{ item.price }}</p>
+                      </div>
+                      <button @click="removeFromCart(item.id)" class="text-gray-400 hover:text-red-500">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="p-4">
+                  <div class="flex justify-between mb-3">
+                    <span class="font-medium text-gray-800">Total:</span>
+                    <span class="font-semibold text-lime-600">₦{{ cartTotal }}</span>
+                  </div>
+                  <button class="w-full py-2 font-medium text-white transition-colors rounded-lg bg-lime-500 hover:bg-lime-600">
+                    Checkout
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Login/Register Dropdown -->
+            <div class="relative" ref="dropdownContainer">
+              <button 
+                @click="toggleDropdown" 
+                class="flex items-center px-4 py-2 space-x-1 text-white transition-opacity rounded-full bg-gradient-to-r from-lime-500 to-green-500 hover:opacity-90"
+              >
+                <span>Account</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              
+              <div 
+                v-if="showDropdown" 
+                class="absolute right-0 z-50 w-48 py-1 mt-2 bg-white rounded-md shadow-lg"
+              >
+                <router-link to="/help-page" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Login</router-link>
+                <router-link :to="{ name: 'user-reg' }" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Register as User</router-link>
+                <router-link :to="{ name: 'vendor-reg' }" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Register as Vendor</router-link>
+                <router-link :to="{ name: 'dispatch-reg' }" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Register as Dispatch</router-link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative py-16 text-white md:py-24 bg-gradient-to-r from-lime-600 to-green-900">
+      <div class="container px-4 mx-auto">
+        <div class="flex flex-col items-center md:flex-row">
+          <div class="mb-10 md:w-1/2 md:mb-0">
+            <h1 class="mb-4 text-4xl font-bold md:text-5xl">Discover Amazing Products</h1>
+            <p class="mb-8 text-xl opacity-90">Find everything you need at unbeatable prices</p>
+            <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
+              <button class="px-6 py-3 font-semibold transition-colors bg-white rounded-full text-lime-600 hover:bg-gray-100">
+                Shop Now
+              </button>
+              <button class="px-6 py-3 font-semibold text-white transition-colors bg-transparent border-2 border-white rounded-full hover:bg-white hover:text-lime-600">
+                Learn More
+              </button>
+            </div>
+          </div>
+          <div class="flex justify-center md:w-1/2">
+            <div class="relative">
+              <div class="flex items-center justify-center w-64 h-64 bg-white rounded-full md:w-80 md:h-80 bg-opacity-20">
+                <div class="flex items-center justify-center w-56 h-56 bg-white rounded-full md:w-72 md:h-72 bg-opacity-30">
+                  <div class="w-48 h-48 overflow-hidden bg-white shadow-xl md:w-64 md:h-64 rounded-xl">
+                    <img src="https://images.unsplash.com/photo-1602880329034-f2fe899a5cfd?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Products" class="object-cover w-full h-full">
+                  </div>
+                </div>
+              </div>
+              <div class="absolute px-4 py-2 font-bold text-gray-800 bg-yellow-400 rounded-full shadow-lg -top-4 -right-4">
+                New Arrivals
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Decorative Elements -->
+      <div class="absolute bottom-0 left-0 w-full h-16 bg-gray-50 rounded-t-3xl"></div>
+    </section>
+
+    <!-- Product Carousel Section -->
+    <section class="py-12 bg-white">
+      <div class="container px-4 mx-auto">
+        <div class="flex items-center justify-between mb-8">
+          <h2 class="text-3xl font-bold text-gray-800">Featured Products</h2>
+          <div class="flex space-x-2">
+            <button @click="prevSlide" class="p-2 bg-gray-200 rounded-full hover:bg-gray-300">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+              </svg>
             </button>
-            <div class="flex flex-row">
-                <div class="relative inline-block text-left">
-                    <button class="h-[51px] w-[121px] rounded-md border-lime-950 pb-3.5 pl-7 pr-7 pt-3.5 text-black">Register</button>
-                  <div
-                    class="absolute right-0 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                    role="menu"
-                    aria-orientation="vertical"
-                    aria-labelledby="menu-button"
-                    tabindex="-1"
-                  >
-                    <div class="py-1" role="none">
-                      
-                      <router-link :to="{ name: 'registration' }">
-                      <a
-                        href="#"
-                        class="block border-b border-gray-200 px-4 py-2 text-sm text-gray-700"
-                        role="menuitem"
-                        tabindex="-1"
-                        id="menu-item-0"
-                        >User</a
-                      >
-                    </router-link>
-                    <router-link :to="{ name: 'vendor-reg' }">
-                      <a
-                        href="#"
-                        class="block px-4 py-2 text-sm text-gray-700"
-                        role="menuitem"
-                        tabindex="-1"
-                        id="menu-item-1"
-                        >Vendor</a
-                      >
-                      </router-link>
-                      <router-link :to="{ name: 'register' }">
-                      <a
-                        href="#"
-                        class="block px-4 py-2 text-sm text-gray-700"
-                        role="menuitem"
-                        tabindex="-1"
-                        id="menu-item-1"
-                        >Dispatch</a
-                      >
-                      </router-link>
+            <button @click="nextSlide" class="p-2 bg-gray-200 rounded-full hover:bg-gray-300">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+        
+        <div class="relative overflow-hidden">
+          <div 
+            class="flex transition-transform duration-500 ease-in-out" 
+            :style="{ transform: `translateX(-${currentSlide * 100}%)` }"
+          >
+            <div 
+              v-for="product in carouselProducts" 
+              :key="product.id" 
+              class="flex-shrink-0 w-full"
+            >
+              <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                <div v-for="item in getSlideProducts(product.id)" :key="item.id" class="overflow-hidden transition-shadow bg-white shadow-md rounded-xl hover:shadow-xl"
+                 @click="viewProduct(product.id)"
+                >
+                  <div class="relative">
+                    <img :src="item.image" alt="Product Image" class="object-cover w-full h-48">
+                    <button class="absolute p-2 bg-white rounded-full shadow-md top-3 right-3 hover:bg-gray-100">
+                      <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                      </svg>
+                    </button>
+                    <div v-if="item.isNew" class="absolute px-2 py-1 text-xs font-bold text-white rounded top-3 left-3 bg-lime-500">
+                      NEW
+                    </div>
+                  </div>
+                  <div class="p-5">
+                    <h3 class="mb-1 text-lg font-semibold text-gray-800">{{ item.name }}</h3>
+                    <p class="mb-3 text-sm text-gray-600">{{ item.description }}</p>
+                    <div class="flex items-center justify-between">
+                      <span class="font-bold text-lime-600">{{ item.price }}</span>
+                      <button @click="addToCart(item)" class="p-2 text-white transition-colors rounded-full bg-lime-500 hover:bg-lime-600">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                      </button>
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+          
+          <!-- Carousel Indicators -->
+          <div class="flex justify-center mt-6 space-x-2">
+            <button 
+              v-for="(_, index) in carouselProducts" 
+              :key="index" 
+              @click="goToSlide(index)"
+              class="w-3 h-3 rounded-full" 
+              :class="currentSlide === index ? 'bg-lime-500' : 'bg-gray-300'"
+            ></button>
           </div>
         </div>
-      </header>
-      <!-- <Carousel /> -->
-      <section class="my-12 w-full bg-white dark:bg-gray-900">
-        <div class="container mx-auto px-6 py-10">
-          <h1
-            class="mx-auto h-2 w-40 rounded-lg bg-gray-200 dark:bg-gray-700"
-          ></h1>
+      </div>
+    </section>
 
-          <p
-            class="mx-auto mt-6 h-2 w-64 rounded-lg bg-gray-200 dark:bg-gray-700"
-          ></p>
-          <p
-            class="mx-auto mt-4 h-2 w-48 rounded-lg bg-gray-200 dark:bg-gray-700"
-          ></p>
-
-          <div
-            class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 xl:mt-16 xl:grid-cols-4"
-          >
-            <div class="flex flex-col items-center p-8">
-              <p
-                class="h-32 w-32 cursor-pointer rounded-full bg-gray-200 ring-4 ring-gray-300 dark:bg-gray-700 dark:ring-gray-600"
-              >
-                <img
-                  src="../../assets/20220215_130451.jpg"
-                  alt=""
-                  class="h-32 w-32 rounded-full ring-4"
-                />
-              </p>
-              <h1
-                class="mx-auto mt-6 h-2 w-40 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></h1>
-
-              <p
-                class="mx-auto mt-4 h-2 w-32 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></p>
-
-              <p
-                class="mx-auto mr-5 mt-4 h-2 w-40 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></p>
+    <!-- Categories Section -->
+    <section class="py-12 bg-white">
+      <div class="container px-4 mx-auto">
+        <h2 class="mb-12 text-3xl font-bold text-center text-gray-800">Shop by Category</h2>
+        
+        <div class="grid grid-cols-2 gap-6 md:grid-cols-4">
+          <div class="p-6 text-center transition-shadow cursor-pointer bg-gray-50 rounded-xl hover:shadow-lg">
+            <div class="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-lime-100">
+              <svg class="w-8 h-8 text-lime-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+              </svg>
             </div>
-
-            <div class="flex flex-col items-center p-8">
-              <p
-                class="h-32 w-32 cursor-pointer rounded-full bg-gray-200 ring-4 ring-gray-300 dark:bg-gray-700 dark:ring-gray-600"
-              >
-                <img
-                  src="../../assets/20220215_130451.jpg"
-                  alt=""
-                  class="h-32 w-32 rounded-full ring-4"
-                />
-              </p>
-              <h1
-                class="mx-auto mt-6 h-2 w-40 cursor-pointer rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></h1>
-
-              <p
-                class="mx-auto mt-4 h-2 w-32 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></p>
-
-              <p
-                class="mx-auto mr-5 mt-4 h-2 w-40 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></p>
+            <h3 class="font-semibold text-gray-800">Electronics</h3>
+          </div>
+          
+          <div class="p-6 text-center transition-shadow cursor-pointer bg-gray-50 rounded-xl hover:shadow-lg">
+            <div class="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-lime-100">
+              <svg class="w-8 h-8 text-lime-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+              </svg>
             </div>
-
-            <div class="flex flex-col items-center p-8">
-              <p
-                class="h-32 w-32 cursor-pointer rounded-full bg-gray-200 ring-4 ring-gray-300 dark:bg-gray-700 dark:ring-gray-600"
-              >
-                <img
-                  src="../../assets/20210717_152948.jpg"
-                  alt=""
-                  class="h-32 w-32 rounded-full ring-4"
-                />
-              </p>
-              <h1
-                class="mx-auto mt-6 h-2 w-40 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></h1>
-
-              <p
-                class="mx-auto mt-4 h-2 w-32 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></p>
-
-              <p
-                class="mx-auto mr-5 mt-4 h-2 w-40 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></p>
+            <h3 class="font-semibold text-gray-800">Fashion</h3>
+          </div>
+          
+          <div class="p-6 text-center transition-shadow cursor-pointer bg-gray-50 rounded-xl hover:shadow-lg">
+            <div class="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-lime-100">
+              <svg class="w-8 h-8 text-lime-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z"></path>
+              </svg>
             </div>
-
-            <div class="flex flex-col items-center p-8">
-              <p
-                class="h-32 w-32 cursor-pointer rounded-full bg-gray-200 ring-4 ring-gray-300 dark:bg-gray-700 dark:ring-gray-600"
-              >
-                <img
-                  src="../../assets/20220113_182450.jpg"
-                  alt=""
-                  class="h-32 w-32 rounded-full ring-4"
-                />
-              </p>
-              <h1
-                class="mx-auto mt-6 h-2 w-40 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></h1>
-
-              <p
-                class="mx-auto mt-4 h-2 w-32 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></p>
-
-              <p
-                class="mx-auto mr-5 mt-4 h-2 w-40 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></p>
+            <h3 class="font-semibold text-gray-800">Home & Kitchen</h3>
+          </div>
+          
+          <div class="p-6 text-center transition-shadow cursor-pointer bg-gray-50 rounded-xl hover:shadow-lg">
+            <div class="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-lime-100">
+              <svg class="w-8 h-8 text-lime-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+              </svg>
             </div>
-
-            <div class="flex flex-col items-center p-8">
-              <p
-                class="h-32 w-32 cursor-pointer rounded-full bg-gray-200 ring-4 ring-gray-300 dark:bg-gray-700 dark:ring-gray-600"
-              >
-                <img
-                  src="../../assets/20210323_091909.jpg"
-                  alt=""
-                  class="h-32 w-32 rounded-full ring-4"
-                />
-              </p>
-              <h1
-                class="mx-auto mt-6 h-2 w-40 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></h1>
-
-              <p
-                class="mx-auto mt-4 h-2 w-32 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></p>
-
-              <p
-                class="mx-auto mr-5 mt-4 h-2 w-40 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></p>
-            </div>
-
-            <div class="flex flex-col items-center p-8">
-              <p
-                class="h-32 w-32 cursor-pointer rounded-full bg-gray-200 ring-4 ring-gray-300 dark:bg-gray-700 dark:ring-gray-600"
-              >
-                <img
-                  src="../../assets/20210621_143343.jpg"
-                  alt=""
-                  class="h-32 w-32 rounded-full ring-4"
-                />
-              </p>
-              <h1
-                class="mx-auto mt-6 h-2 w-40 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></h1>
-
-              <p
-                class="mx-auto mt-4 h-2 w-32 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></p>
-
-              <p
-                class="mx-auto mr-5 mt-4 h-2 w-40 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></p>
-            </div>
-
-            <div class="flex flex-col items-center p-8">
-              <p
-                class="h-32 w-32 cursor-pointer rounded-full bg-gray-200 ring-4 ring-gray-300 dark:bg-gray-700 dark:ring-gray-600"
-              >
-                <img
-                  src="../../assets/20220215_130451.jpg"
-                  alt=""
-                  class="h-32 w-32 rounded-full ring-4"
-                />
-              </p>
-              <h1
-                class="mx-auto mt-6 h-2 w-40 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></h1>
-
-              <p
-                class="mx-auto mt-4 h-2 w-32 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></p>
-
-              <p
-                class="mx-auto mr-5 mt-4 h-2 w-40 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></p>
-            </div>
-
-            <div class="flex flex-col items-center p-8">
-              <p
-                class="h-32 w-32 cursor-pointer rounded-full bg-gray-200 ring-4 ring-gray-300 dark:bg-gray-700 dark:ring-gray-600"
-                @click="showProductModal = !showProductModal"
-              >
-                <img
-                  src="../../assets/20210323_091909.jpg"
-                  alt=""
-                  class="h-32 w-32 rounded-full ring-4"
-                />
-              </p>
-              <h1
-                class="mx-auto mt-6 h-2 w-40 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></h1>
-
-              <p
-                class="mx-auto mt-4 h-2 w-32 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></p>
-
-              <p
-                class="mx-auto mr-5 mt-4 h-2 w-40 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></p>
-            </div>
-            <AppModal
-              v-if="showProductModal"
-              @click="showProductModal = !showProductModal"
-            >
-              <template #modal-content>
-                <Product />
-              </template>
-            </AppModal>
+            <h3 class="font-semibold text-gray-800">Beauty</h3>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Featured Products Section -->
-      <section class="container mx-auto mt-8">
-        <h2 class="mb-4 text-2xl font-semibold">Featured Products</h2>
-        <div
-          class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+    <!-- Featured Products Section -->
+    <section class="py-16 bg-gray-50">
+      <div class="container px-4 mx-auto">
+        <div class="flex items-center justify-between mb-12">
+          <h2 class="text-3xl font-bold text-gray-800">Trending Now</h2>
+          <router-link to="#" class="flex items-center font-semibold text-lime-600 hover:text-lime-700">
+            View All
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </router-link>
+        </div>
+        
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          <!-- Product Card -->
+          <div v-for="product in featuredProducts" :key="product.id" class="overflow-hidden transition-shadow bg-white shadow-md rounded-xl hover:shadow-xl"
+            @click="viewProduct(product.id)"
         >
-          <!-- Product Card (Repeat as needed) -->
-          <div
-            v-for="product in featuredProducts"
-            :key="product.id"
-            class="bg-white p-4 shadow-md"
+          <div class="relative">
+            <img :src="product.image" alt="Product Image" class="object-cover w-full h-48">
+            <button class="absolute p-2 bg-white rounded-full shadow-md top-3 right-3 hover:bg-gray-100" @click.stop>
+              <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+              </svg>
+            </button>
+            <div v-if="product.isNew" class="absolute px-2 py-1 text-xs font-bold text-white rounded top-3 left-3 bg-lime-500">
+              NEW
+            </div>
+            </div>
+            <div class="p-5">
+              <h3 class="mb-1 text-lg font-semibold text-gray-800">{{ product.name }}</h3>
+              <p class="mb-3 text-sm text-gray-600">{{ product.description }}</p>
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-lime-600">{{ product.price }}</span>
+                <button @click="addToCart(product)" class="p-2 text-white transition-colors rounded-full bg-lime-500 hover:bg-lime-600">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Special Offer Section -->
+    <section class="py-16 text-white bg-gradient-to-r from-lime-600 to-green-900">
+      <div class="container px-4 mx-auto">
+        <div class="flex flex-col items-center md:flex-row">
+          <div class="mb-10 md:w-2/3 md:mb-0">
+            <h2 class="mb-4 text-3xl font-bold md:text-4xl">Summer Sale is On!</h2>
+            <p class="mb-6 text-xl opacity-90">Get up to 50% off on selected items. Limited time offer.</p>
+            <div class="flex items-center mb-6 space-x-4">
+              <div class="text-center">
+                <div class="text-3xl font-bold">12</div>
+                <div class="text-sm opacity-80">Days</div>
+              </div>
+              <div class="text-3xl">:</div>
+              <div class="text-center">
+                <div class="text-3xl font-bold">08</div>
+                <div class="text-sm opacity-80">Hours</div>
+              </div>
+              <div class="text-3xl">:</div>
+              <div class="text-center">
+                <div class="text-3xl font-bold">34</div>
+                <div class="text-sm opacity-80">Minutes</div>
+              </div>
+              <div class="text-3xl">:</div>
+              <div class="text-center">
+                <div class="text-3xl font-bold">52</div>
+                <div class="text-sm opacity-80">Seconds</div>
+              </div>
+            </div>
+            <button class="px-6 py-3 font-semibold transition-colors bg-white rounded-full text-lime-600 hover:bg-gray-100">
+              Shop Now
+            </button>
+          </div>
+          <div class="flex justify-center md:w-1/3">
+            <div class="relative">
+              <div class="flex items-center justify-center w-48 h-48 bg-white rounded-full bg-opacity-20">
+                <div class="flex items-center justify-center w-40 h-40 bg-white rounded-full bg-opacity-30">
+                  <div class="w-32 h-32 overflow-hidden bg-white shadow-xl rounded-xl">
+                    <img src="https://images.unsplash.com/photo-1602880329034-f2fe899a5cfd?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Products" class="object-cover w-full h-full">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+     <section class="py-16 bg-gray-50">
+      <div class="container px-4 mx-auto">
+        <div class="flex items-center justify-between mb-12">
+          <h2 class="text-3xl font-bold text-gray-800">Hot Deals</h2>
+          <router-link to="#" class="flex items-center font-semibold text-lime-600 hover:text-lime-700">
+            View All
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </router-link>
+        </div>
+        
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          <!-- Product Card -->
+          <div v-for="product in hotProducts" :key="product.id" class="overflow-hidden transition-shadow bg-white shadow-md rounded-xl hover:shadow-xl"
+           @click="viewProduct(product.id)"
           >
-            <img
-              :src="product.image"
-              alt="Product Image"
-              class="mb-4 h-40 w-full object-cover"
-            />
-            <h3 class="text-lg font-semibold">{{ product.name }}</h3>
-            <p class="text-gray-600">{{ product.description }}</p>
-            <p class="mt-2 text-primary">{{ product.price }}</p>
-            <div class="mx-2 items-center justify-center">
-              <button
-                @click="addToCart(product)"
-                class="mx-4 mt-4 items-center rounded-full bg-lime-800 px-4 py-2 text-white"
-              >
-                Add to Cart
+            <div class="relative">
+              <img :src="product.image" alt="Product Image" class="object-cover w-full h-48">
+              <button class="absolute p-2 bg-white rounded-full shadow-md top-3 right-3 hover:bg-gray-100">
+                <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                </svg>
               </button>
+              <div v-if="product.isNew" class="absolute px-2 py-1 text-xs font-bold text-white rounded top-3 left-3 bg-lime-500">
+                NEW
+              </div>
+            </div>
+            <div class="p-5">
+              <h3 class="mb-1 text-lg font-semibold text-gray-800">{{ product.name }}</h3>
+              <p class="mb-3 text-sm text-gray-600">{{ product.description }}</p>
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-lime-600">{{ product.price }}</span>
+                <button @click="addToCart(product)" class="p-2 text-white transition-colors rounded-full bg-lime-500 hover:bg-lime-600">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="my-10 bg-white dark:bg-gray-900">
-        <div class="container mx-auto px-6 py-10">
-          <h1 class="mx-auto h-2 w-48 rounded-lg bg-gray-200 dark:bg-gray-700">
-            Buy at Affordable Prices
-          </h1>
-
-          <p
-            class="mx-auto mt-4 h-2 w-64 rounded-lg bg-gray-200 dark:bg-gray-700"
-          >
-            Shopping to Your Heart's Content
-          </p>
-          <p
-            class="mx-auto mt-4 h-2 w-64 rounded-lg bg-gray-200 sm:w-80 dark:bg-gray-700"
-          ></p>
-
-          <div
-            class="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:mt-12 xl:grid-cols-4 xl:gap-12"
-          >
-            <div class="w-full">
-              <div class="h-64 w-full rounded-lg bg-gray-300 dark:bg-gray-600">
-                <img
-                  src="../../assets/20210323_091909.jpg"
-                  alt=""
-                  class="h-64 w-full rounded-lg"
-                />
+    <!-- Testimonials Section -->
+    <section class="py-16 bg-white">
+      <div class="container px-4 mx-auto">
+        <h2 class="mb-12 text-3xl font-bold text-center text-gray-800">What Our Customers Say</h2>
+        
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+          <div class="p-6 bg-gray-50 rounded-xl">
+            <div class="flex items-center mb-4">
+              <div class="flex items-center justify-center w-12 h-12 mr-4 font-bold rounded-full bg-lime-200 text-lime-800">
+                JD
               </div>
-
-              <h1
-                class="mt-4 h-2 w-56 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></h1>
-              <p
-                class="mt-4 h-2 w-24 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></p>
+              <div>
+                <h3 class="font-semibold text-gray-800">John Doe</h3>
+                <div class="flex text-yellow-400">
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                  </svg>
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                  </svg>
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                  </svg>
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                  </svg>
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                  </svg>
+                </div>
+              </div>
             </div>
-
-            <div class="w-full">
-              <div class="h-64 w-full rounded-lg bg-gray-300 dark:bg-gray-600">
-                <img
-                  src="../../assets/20210323_091909.jpg"
-                  alt=""
-                  class="h-64 w-full rounded-lg"
-                />
+            <p class="text-gray-600">"I've been shopping with OvoMarket for over a year now. The quality of products is exceptional and delivery is always on time."</p>
+          </div>
+          
+          <div class="p-6 bg-gray-50 rounded-xl">
+            <div class="flex items-center mb-4">
+              <div class="flex items-center justify-center w-12 h-12 mr-4 font-bold rounded-full bg-lime-200 text-lime-800">
+                SM
               </div>
-
-              <h1
-                class="mt-4 h-2 w-56 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></h1>
-              <p
-                class="mt-4 h-2 w-24 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></p>
+              <div>
+                <h3 class="font-semibold text-gray-800">Sarah Miller</h3>
+                <div class="flex text-yellow-400">
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                  </svg>
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                  </svg>
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                  </svg>
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                  </svg>
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                  </svg>
+                </div>
+              </div>
             </div>
-
-            <div class="w-full">
-              <div class="h-64 w-full rounded-lg bg-gray-300 dark:bg-gray-600">
-                <img
-                  src="../../assets/20210323_091909.jpg"
-                  alt=""
-                  class="h-64 w-full rounded-lg"
-                />
+            <p class="text-gray-600">"The customer service is outstanding! They helped me with a return and made the process so smooth. Highly recommend!"</p>
+          </div>
+          
+          <div class="p-6 bg-gray-50 rounded-xl">
+            <div class="flex items-center mb-4">
+              <div class="flex items-center justify-center w-12 h-12 mr-4 font-bold rounded-full bg-lime-200 text-lime-800">
+                RJ
               </div>
-
-              <h1
-                class="mt-4 h-2 w-56 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></h1>
-              <p
-                class="mt-4 h-2 w-24 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></p>
+              <div>
+                <h3 class="font-semibold text-gray-800">Robert Johnson</h3>
+                <div class="flex text-yellow-400">
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                  </svg>
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                  </svg>
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                  </svg>
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                  </svg>
+                  <svg class="w-4 h-4 text-gray-300" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                  </svg>
+                </div>
+              </div>
             </div>
+            <p class="text-gray-600">"Great prices and fast shipping. I've found unique items here that I couldn't find anywhere else. Will definitely shop again."</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-            <div class="w-full">
-              <div class="h-64 w-full rounded-lg bg-gray-300 dark:bg-gray-600">
-                <img
-                  src="../../assets/20210323_091909.jpg"
-                  alt=""
-                  class="h-64 w-full rounded-lg"
-                />
-              </div>
-
-              <h1
-                class="mt-4 h-2 w-56 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></h1>
-              <p
-                class="mt-4 h-2 w-24 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></p>
+    <!-- App Download Section -->
+    <section class="py-16 bg-gray-50">
+      <div class="container px-4 mx-auto">
+        <div class="flex flex-col items-center md:flex-row">
+          <div class="mb-10 md:w-1/2 md:mb-0">
+            <h2 class="mb-4 text-3xl font-bold text-gray-800">Download Our App</h2>
+            <p class="mb-6 text-gray-600">Shop on the go with our mobile app. Get exclusive app-only deals and features.</p>
+            <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
+              <a href="#" class="flex items-center px-4 py-3 text-white transition-colors bg-black rounded-lg hover:bg-gray-800">
+                <svg class="w-8 h-8 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+                </svg>
+                <div>
+                  <div class="text-xs">Download on the</div>
+                  <div class="text-lg font-semibold">App Store</div>
+                </div>
+              </a>
+              
+              <a href="#" class="flex items-center px-4 py-3 text-white transition-colors bg-black rounded-lg hover:bg-gray-800">
+                <svg class="w-8 h-8 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                </svg>
+                <div>
+                  <div class="text-xs">Get it on</div>
+                  <div class="text-lg font-semibold">Google Play</div>
+                </div>
+              </a>
             </div>
-
-            <div class="w-full">
-              <div class="h-64 w-full rounded-lg bg-gray-300 dark:bg-gray-600">
-                <img
-                  src="../../assets/20210323_091909.jpg"
-                  alt=""
-                  class="h-64 w-full rounded-lg"
-                />
+          </div>
+          <div class="flex justify-center md:w-1/2">
+            <div class="relative">
+              <div class="flex items-center justify-center w-64 h-64 overflow-hidden bg-gray-200 shadow-xl rounded-3xl">
+                <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="App Preview" class="object-cover w-full h-full">
               </div>
-
-              <h1
-                class="mt-4 h-2 w-56 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></h1>
-              <p
-                class="mt-4 h-2 w-24 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></p>
-            </div>
-
-            <div class="w-full">
-              <div class="h-64 w-full rounded-lg bg-gray-300 dark:bg-gray-600">
-                <img
-                  src="../../assets/20210717_152948.jpg"
-                  alt=""
-                  class="h-64 w-full rounded-lg"
-                />
+              <div class="absolute w-48 p-4 bg-white shadow-lg -bottom-6 -right-6 rounded-xl">
+                <div class="flex items-center mb-2">
+                  <div class="flex items-center justify-center w-8 h-8 mr-2 font-bold text-white rounded-full bg-lime-500">
+                    O
+                  </div>
+                  <div>
+                    <div class="text-sm font-semibold">OvoMarket</div>
+                    <div class="text-xs text-gray-500">Shopping App</div>
+                  </div>
+                </div>
+                <div class="flex">
+                  <div class="mr-1 text-yellow-400">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                    </svg>
+                  </div>
+                  <div class="text-xs">4.8 (2.3K reviews)</div>
+                </div>
               </div>
-
-              <h1
-                class="mt-4 h-2 w-56 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></h1>
-              <p
-                class="mt-4 h-2 w-24 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></p>
-            </div>
-
-            <div class="w-full">
-              <div class="h-64 w-full rounded-lg bg-gray-300 dark:bg-gray-600">
-                <img
-                  src="../../assets/20210323_091909.jpg"
-                  alt=""
-                  class="h-64 w-full rounded-lg"
-                />
-              </div>
-
-              <h1
-                class="mt-4 h-2 w-56 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></h1>
-              <p
-                class="mt-4 h-2 w-24 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></p>
-            </div>
-
-            <div class="w-full">
-              <div class="h-64 w-full rounded-lg bg-gray-300 dark:bg-gray-600">
-                <img
-                  src="../../assets/20210717_152948.jpg"
-                  alt=""
-                  class="h-64 w-full rounded-lg"
-                />
-              </div>
-
-              <h1
-                class="mt-4 h-2 w-56 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></h1>
-              <p
-                class="mt-4 h-2 w-24 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></p>
-            </div>
-
-            <div class="w-full">
-              <div class="h-64 w-full rounded-lg bg-gray-300 dark:bg-gray-600">
-                <img
-                  src="../../assets/20210621_143231.jpg"
-                  alt=""
-                  class="h-64 w-full rounded-lg"
-                />
-              </div>
-
-              <h1 class="mt-4 h-2 w-56 rounded-lg bg-gray-200 dark:bg-gray-700">
-                SNEAKERS UNISEX
-              </h1>
-              <p class="mt-4 h-2 w-24 rounded-lg bg-gray-200 dark:bg-gray-700">
-                #30,000
-              </p>
-            </div>
-
-            <div class="w-full">
-              <div class="h-64 w-full rounded-lg bg-gray-300 dark:bg-gray-600">
-                <img
-                  src="../../assets/20210323_091909.jpg"
-                  alt=""
-                  class="h-64 w-full rounded-lg"
-                />
-              </div>
-
-              <h1
-                class="mt-4 h-2 w-56 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></h1>
-              <p
-                class="mt-4 h-2 w-24 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></p>
-            </div>
-
-            <div class="w-full">
-              <div class="h-64 w-full rounded-lg bg-gray-300 dark:bg-gray-600">
-                <img
-                  src="../../assets/20210323_091909.jpg"
-                  alt=""
-                  class="h-64 w-full rounded-lg"
-                />
-              </div>
-
-              <h1
-                class="mt-4 h-2 w-56 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></h1>
-              <p
-                class="mt-4 h-2 w-24 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></p>
-            </div>
-
-            <div class="w-full">
-              <div class="h-64 w-full rounded-lg bg-gray-300 dark:bg-gray-600">
-                <img
-                  src="../../assets/20210323_091909.jpg"
-                  alt=""
-                  class="h-64 w-full rounded-lg"
-                />
-              </div>
-
-              <h1
-                class="mt-4 h-2 w-56 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></h1>
-              <p
-                class="mt-4 h-2 w-24 rounded-lg bg-gray-200 dark:bg-gray-700"
-              ></p>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Call to Action Section -->
-      <section class="my-4 bg-lime-800 p-8 text-white">
-        <div class="container mx-auto text-center">
-          <h2 class="mb-4 text-2xl font-semibold">Shop Now!</h2>
-          <p class="mb-4">Discover amazing deals on your favorite products.</p>
-          <button
-            @click="scrollToProducts"
-            class="rounded-full bg-white px-6 py-2 text-primary"
-          >
-            Explore Products
-          </button>
-        </div>
-      </section>
-
-      <section
-        class="container mx-auto flex flex-col items-center bg-white p-5 xl:flex-row dark:bg-gray-900"
-      >
-        <div class="flex justify-center xl:w-1/2">
-          <img
-            class="h-80 w-80 flex-shrink-0 rounded-full object-cover sm:h-[28rem] sm:w-[28rem]"
-            src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80"
-            alt=""
-          />
-        </div>
-
-        <div
-          class="mt-6 flex flex-col items-center xl:mt-0 xl:w-1/2 xl:items-start"
-        >
-          <h2
-            class="text-2xl font-semibold tracking-tight text-gray-800 xl:text-3xl dark:text-white"
-          >
-            Download our free mobile app
-          </h2>
-
-          <p class="mt-4 block max-w-2xl text-gray-500 dark:text-gray-300">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut
-            corporis esse dolorum, illum, consectetur earum provident alias
-            dolore omnis quis tempore voluptatum excepturi ea numquam? Aperiam
-            fugiat consequuntur nostrum odio.
-          </p>
-
-          <div class="mt-6 sm:-mx-2">
-            <a
-              href="#"
-              class="inline-flex w-full items-center justify-center overflow-hidden rounded-lg bg-gray-900 px-4 py-2.5 text-sm text-white shadow transition-colors duration-300 hover:bg-gray-700 focus:ring focus:ring-gray-300 focus:ring-opacity-80 sm:mx-2 sm:w-auto dark:bg-gray-800 dark:hover:bg-gray-700"
-            >
-              <svg
-                class="mx-2 h-5 w-5 fill-current"
-                xmlns:xlink="http://www.w3.org/1999/xlink"
-                x="0px"
-                y="0px"
-                viewBox="0 0 512 512"
-                xml:space="preserve"
-              >
-                <!-- SVG Path for App Store -->
-              </svg>
-              <span class="mx-2"> Get it on the App Store </span>
-            </a>
-
-            <a
-              href="#"
-              class="mt-4 inline-flex w-full items-center justify-center overflow-hidden rounded-lg bg-blue-600 px-4 py-2.5 text-sm text-white shadow transition-colors duration-300 hover:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80 sm:mx-2 sm:mt-0 sm:w-auto"
-            >
-              <svg
-                class="mx-2 h-5 w-5 fill-current"
-                viewBox="-28 0 512 512.00075"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <!-- SVG Path for Google Play -->
-              </svg>
-              <span class="mx-2"> Get it on Google Play </span>
-            </a>
+    <!-- Footer -->
+    <footer class="pt-16 pb-8 text-white bg-gray-900">
+      <div class="container px-4 mx-auto">
+        <div class="grid grid-cols-1 gap-8 mb-12 md:grid-cols-2 lg:grid-cols-4">
+          <div>
+            <div class="flex items-center mb-4 space-x-2">
+              <div class="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-r from-lime-500 to-green-500">
+                <span class="font-bold text-white">O</span>
+              </div>
+              <span class="text-xl font-bold">OvoMarket</span>
+            </div>
+            <p class="mb-4 text-gray-400">Discover the best products online at unbeatable prices. Your satisfaction is our priority.</p>
+            <div class="flex space-x-4">
+              <a href="#" class="text-gray-400 hover:text-white">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
+                </svg>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-white">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"/>
+                </svg>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-white">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"/>
+                </svg>
+              </a>
+            </div>
           </div>
-        </div>
-      </section>
-
-      <!-- Footer Section -->
-      <footer class="mt-6 bg-lime-800 p-4 py-6 text-white">
-        <div class="container mx-auto flex justify-between text-center">
-          <div class="flex space-x-10">
-            <button
-              class="focus:shadow-outline-lime my-3 mt-4 block w-full rounded-lg border border-transparent bg-lime-700 px-4 py-2 text-center text-sm font-medium leading-5 text-white transition-colors duration-150 hover:bg-lime-700 focus:outline-none active:bg-lime-600"
-            >
-              <router-link :to="{ name: 'help-page' }">Help </router-link>
-            </button>
-
-            <button
-              div
-              class="focus:shadow-outline-lime my-3 mt-4 block w-full rounded-lg border border-transparent bg-lime-700 px-4 py-2 text-center text-sm font-medium leading-5 text-white transition-colors duration-150 hover:bg-lime-700 focus:outline-none active:bg-lime-600"
-            >
-              Frequently Asked Questions
-            </button>
-            <button
-              class="focus:shadow-outline-lime my-3 mt-4 block w-full rounded-lg border border-transparent bg-lime-700 px-4 py-2 text-center text-sm font-medium leading-5 text-white transition-colors duration-150 hover:bg-lime-700 focus:outline-none active:bg-lime-600"
-            >
-              Track Your Products
-            </button>
+          
+          <div>
+            <h3 class="mb-4 text-lg font-semibold">Quick Links</h3>
+            <ul class="space-y-2">
+              <li><router-link to="#" class="text-gray-400 hover:text-white">Home</router-link></li>
+              <li><router-link to="#" class="text-gray-400 hover:text-white">Categories</router-link></li>
+              <li><router-link to="#" class="text-gray-400 hover:text-white">Deals</router-link></li>
+              <li><router-link to="#" class="text-gray-400 hover:text-white">About Us</router-link></li>
+              <li><router-link to="#" class="text-gray-400 hover:text-white">Contact Us</router-link></li>
+            </ul>
           </div>
-
-          <!-- Additional content or columns can be added here -->
-
-          <div class="flex flex-row gap-4">
+          
+          <div>
+            <h3 class="mb-4 text-lg font-semibold">Customer Service</h3>
+            <ul class="space-y-2">
+              <li><router-link to="/help-page" class="text-gray-400 hover:text-white">Help Center</router-link></li>
+              <li><router-link to="/track-order" class="text-gray-400 hover:text-white">Track Your Order</router-link></li>
+              <li><router-link to="/faqs" class="text-gray-400 hover:text-white">FAQs</router-link></li>
+              <li><router-link to="/return-policy" class="text-gray-400 hover:text-white">Return Policy</router-link></li>
+              <li><router-link to="/privacy-policy" class="text-gray-400 hover:text-white">Privacy Policy</router-link></li>
+            </ul>
+          </div>
+          
+          <div>
             <h3 class="mb-4 text-lg font-semibold">Contact Us</h3>
-            <p>Email: ovomarket@ovomarket.ng</p>
-            <p>Phone: +234 *** **** ***</p>
+            <ul class="space-y-2 text-gray-400">
+              <li class="flex items-start">
+                <svg class="w-5 h-5 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                </svg>
+                +234 123 456 7890
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+                support@ovomarket.ng
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+                123 Shopping Street, Lagos, Nigeria
+              </li>
+            </ul>
           </div>
         </div>
-        <div class="flex flex-row items-center justify-center">
+        
+        <div class="pt-8 mt-8 text-center text-gray-500 border-t border-gray-800">
           <p>&copy; 2024 Ovo Market. All rights reserved.</p>
         </div>
-      </footer>
-    </div>
+      </div>
+    </footer>
   </section>
 </template>
 
 <script setup>
-import Product from "../../components/pages/Product/product.vue";
-import Carousel from "./carousel.vue";
-import AppModal from "../../components/atoms/AppModal.vue";
-import { ref } from "vue";
-const showProductModal = ref(false);
+import { ref, computed, onMounted, onUnmounted } from "vue";
+import { useRouter } from "vue-router";
 
-const featuredProducts = ref([
-  {
-    id: 1,
-    name: "Product 1",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    price: "$19.99",
-    image: "https://placekitten.com/300/200",
-  },
-  {
-    id: 2,
-    name: "Product 2",
-    description: "Sed do eiusmod tempor incididunt ut labore et dolore aliqua.",
-    price: "$29.99",
-    image: "https://placekitten.com/300/201",
-  },
-  {
-    id: 3,
-    name: "Product 3",
-    description: "Sed do eiusmod tempor incididunt ut labore et dolore aliqua.",
-    price: "$29.99",
-    image: "https://placekitten.com/300/201",
-  },
-  {
-    id: 4,
-    name: "Product 4",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    price: "$19.99",
-    image: "https://placekitten.com/300/200",
-  },
-  // Add more products as needed
-]);
+
+
+const router = useRouter();
+
+// Dropdown functionality
+const showDropdown = ref(false);
+const dropdownContainer = ref(null);
+
+const toggleDropdown = () => {
+  showDropdown.value = !showDropdown.value;
+};
+
+const closeDropdown = (event) => {
+  if (showDropdown.value && dropdownContainer.value && !dropdownContainer.value.contains(event.target)) {
+    showDropdown.value = false;
+  }
+};
+
+// Cart functionality
+const showCart = ref(false);
+const cartContainer = ref(null);
+const cartItems = ref([]);
+
+const toggleCart = () => {
+  showCart.value = !showCart.value;
+};
+
+const closeCart = (event) => {
+  if (showCart.value && cartContainer.value && !cartContainer.value.contains(event.target)) {
+    showCart.value = false;
+  }
+};
+
+const viewProduct = (productId) => {
+  router.push(`/product/${productId}`);
+};
 
 const addToCart = (product) => {
-  // Add logic to handle adding the product to the cart
+  cartItems.value.push(product);
   console.log("Product added to cart:", product);
 };
 
-const scrollToProducts = () => {
-  // Add logic to scroll to the products section
-  document
-    .getElementById("featured-products-section")
-    .scrollIntoView({ behavior: "smooth" });
+const removeFromCart = (productId) => {
+  cartItems.value = cartItems.value.filter(item => item.id !== productId);
 };
-</script>
 
-<style></style>
+const cartTotal = computed(() => {
+  return cartItems.value.reduce((total, item) => {
+    return total + parseFloat(item.price.replace('₦', '').replace(',', ''));
+  }, 0).toFixed(2);
+});
+
+// Carousel functionality
+const currentSlide = ref(0);
+
+const nextSlide = () => {
+  currentSlide.value = (currentSlide.value + 1) % carouselProducts.value.length;
+};
+
+const prevSlide = () => {
+  currentSlide.value = (currentSlide.value - 1 + carouselProducts.value.length) % carouselProducts.value.length;
+};
+
+const goToSlide = (index) => {
+  currentSlide.value = index;
+};
+
+const getSlideProducts = (slideId) => {
+  const startIndex = (slideId - 1) * 4;
+  const endIndex = startIndex + 4;
+  return allCarouselProducts.value.slice(startIndex, endIndex);
+};
+
+// Product data
+const featuredProducts = ref([
+  {
+    id: 1,
+    name: "Wireless Headphones",
+    description: "Premium sound quality",
+    price: "₦79,000.00",
+    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+    isNew: true
+  },
+  {
+    id: 2,
+    name: "Smart Watch",
+    description: "Track your fitness",
+    price: "₦129,999.00",
+    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+    isNew: false
+  },
+  {
+    id: 3,
+    name: "Running Shoes",
+    description: "Comfortable and durable",
+    price: "₦18,999.00",
+    image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+    isNew: true
+  },
+  {
+    id: 4,
+    name: "Backpack",
+    description: "Perfect for travel",
+    price: "₦19,900.00",
+    image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+    isNew: false
+  }
+]);
+
+const hotProducts = ref([
+  {
+    id: 1,
+    name: "Regal Wine",
+    description: "Premium brandy wine",
+    price: "₦79,000.00",
+    image: "https://images.unsplash.com/photo-1560474847-929b9d1b4f41?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+    isNew: true
+  },
+  {
+    id: 2,
+    name: "Hennesy",
+    description: "Premium cognac",
+    price: "₦129,999.00",
+    image: "https://images.unsplash.com/photo-1607834837845-292c04910753?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+    isNew: false
+  },
+  {
+    id: 3,
+    name: "Camera Lens",
+    description: "Sharp and clear images",
+    price: "₦189,999.00",
+    image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+    isNew: true
+  },
+  {
+    id: 4,
+    name: "Basket",
+    description: "Perfect for travel",
+    price: "₦19,900.00",
+    image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+    isNew: false
+  }
+]);
+
+// Carousel products
+const allCarouselProducts = ref([
+  {
+    id: 1,
+    name: "Wireless Headphones",
+    description: "Premium sound quality",
+    price: "₦79,000.00",
+    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+    isNew: true
+  },
+  {
+    id: 2,
+    name: "Smart Watch",
+    description: "Track your fitness",
+    price: "₦129,999.00",
+    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+    isNew: false
+  },
+  {
+    id: 3,
+    name: "Running Shoes",
+    description: "Comfortable and durable",
+    price: "₦18,999.00",
+    image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+    isNew: true
+  },
+  {
+    id: 4,
+    name: "Backpack",
+    description: "Perfect for travel",
+    price: "₦19,900.00",
+    image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+    isNew: false
+  },
+  {
+    id: 5,
+    name: "Laptop",
+    description: "High performance",
+    price: "₦450,000.00",
+    image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+    isNew: true
+  },
+  {
+    id: 6,
+    name: "Sunglasses",
+    description: "Stylish protection",
+    price: "₦12,500.00",
+    image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+    isNew: false
+  },
+  {
+    id: 7,
+    name: "Smartphone",
+    description: "Latest technology",
+    price: "₦250,000.00",
+    image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+    isNew: true
+  },
+  {
+    id: 8,
+    name: "Perfume",
+    description: "Luxury fragrance",
+    price: "₦35,000.00",
+    image: "https://images.unsplash.com/photo-1523294587484-bae6cc821bf5?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+    isNew: false
+  }
+]);
+
+const carouselProducts = computed(() => {
+  // Group products into slides of 4
+  const slides = [];
+  for (let i = 0; i < allCarouselProducts.value.length; i += 4) {
+    slides.push({
+      id: Math.floor(i / 4) + 1,
+      products: allCarouselProducts.value.slice(i, i + 4)
+    });
+  }
+  return slides;
+});
+
+// Auto-play carousel
+let autoplayInterval;
+
+const startAutoplay = () => {
+  autoplayInterval = setInterval(() => {
+    nextSlide();
+  }, 5000);
+};
+
+const stopAutoplay = () => {
+  clearInterval(autoplayInterval);
+};
+
+onMounted(() => {
+  // For dropdown
+  document.addEventListener('click', closeDropdown);
+  // For cart
+  document.addEventListener('click', closeCart);
+  // For carousel
+  startAutoplay();
+});
+
+onUnmounted(() => {
+  document.removeEventListener('click', closeDropdown);
+  document.removeEventListener('click', closeCart);
+  stopAutoplay();
+});
+</script>

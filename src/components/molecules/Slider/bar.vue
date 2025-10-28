@@ -81,7 +81,6 @@
           ></path>
         </svg>
       </div>
-      <!-- <img src="../../../assets/svgviewer-output.svg" alt="Cart" class="" /> -->
     </div>
   </nav>
 </template>
@@ -95,11 +94,11 @@ const showRegisterDropdown = ref(false);
 
 const toggleLoginDropdown = () => {
   showLoginDropdown.value = !showLoginDropdown.value;
-  if (showRegisterDropdown.value) showRegisterDropdown.value = false;
+  if (showCategory.value) showCategory.value = false;
 };
 const toggleCategoryDropdown = () => {
   showCategory.value = !showCategory.value;
-  if (showCategory.value) showCategory.value = false;
+  if (showLoginDropdown.value) showLoginDropdown.value = false;
 };
 
 const toggleRegisterDropdown = () => {

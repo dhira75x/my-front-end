@@ -1,9 +1,7 @@
 <template>
   <footer class="bg-white dark:bg-gray-900">
     <div class="container mx-auto px-6 py-12">
-      <div
-        class="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4"
-      >
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4">
         <div class="sm:col-span-2">
           <h1
             class="max-w-lg text-xl font-semibold tracking-tight text-gray-800 xl:text-2xl dark:text-white"
@@ -11,9 +9,7 @@
             Subscribe our newsletter to get update.
           </h1>
 
-          <div
-            class="mx-auto mt-6 flex flex-col space-y-3 md:flex-row md:space-y-0"
-          >
+          <div class="mx-auto mt-6 flex flex-col space-y-3 md:flex-row md:space-y-0">
             <input
               id="email"
               type="text"

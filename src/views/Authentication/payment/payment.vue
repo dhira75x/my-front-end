@@ -55,6 +55,11 @@
           Confirm payment
         </button>
       </div>
+      <div class="payment-gateways flex justify-center space-x-4 mb-4 my-6">
+        <img src="@/assets/paystack-seeklogo.svg" alt="Paystack" class="h-12" />
+        <img src="@/assets/flutterwave-seeklogo.svg" alt="Flutterwave" class="h-12" />
+        <img src="@/assets/stripe-seeklogo.svg" alt="Stripe" class="h-6" />
+      </div>
     </div>
   </div>
 </template>

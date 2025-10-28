@@ -16,20 +16,18 @@
         <!-- Col -->
         <div class="w-full rounded-lg bg-white p-5 lg:w-1/2 lg:rounded-l-none">
           <div class="mb-4 px-8 text-center">
-            <h3 class="mb-2 pt-4 text-2xl text-lime-900">
-              Forgot Your Password?
-            </h3>
+            <h3 class="mb-2 pt-4 text-2xl text-lime-900">Forgot Your Password?</h3>
             <p class="mb-4 text-sm text-lime-900">
-              We get it, stuff happens. Just enter your email address below and
-              we'll send you a link to reset your password!
+              We get it, stuff happens. Just enter your email address below and we'll send
+              you a link to reset your password!
             </p>
           </div>
-          <form class="mb-4 rounded bg-white px-8 pb-8 pt-6">
+          <form
+            @submit.prevent="resetPassword"
+            class="mb-4 rounded bg-white px-8 pb-8 pt-6"
+          >
             <div class="mb-4">
-              <label
-                class="mb-2 block text-sm font-bold text-gray-700"
-                for="email"
-              >
+              <label class="mb-2 block text-sm font-bold text-gray-700" for="email">
                 Email
               </label>
               <input
@@ -42,7 +40,8 @@
             <div class="mb-6 text-center">
               <button
                 class="focus:shadow-outline w-full rounded-full bg-lime-700 px-4 py-2 font-bold text-white hover:bg-lime-900 focus:outline-none"
-                type="button"
+                type="submit"
+                id="resetButton"
               >
                 Reset Password
               </button>
@@ -70,3 +69,40 @@
     </div>
   </div>
 </template>
+
+<script setup>
+import { ref, defineProps } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const reset = ref({
+  email: "",
+});
+
+// const resetPassword = async () => {
+//   if (!reset.value.email) {
+//     alert("Please enter an email address.");
+//     return;
+//   }
+
+//   try {
+//     const response = await passwordApi.get("", {
+//       params: {
+//         email: reset.value.email,
+//       },
+//     });
+
+//     console.log(response.data);
+
+//     const token = response.data.token;
+//     router.push({ path: "/reset-password", query: { token: token } });
+//   } catch (error) {
+//     console.error(error);
+//     alert("Failed to send reset link.");
+//   }
+// };
+function resetPassword() {
+  router.push({ name: "reset-password" });
+}
+</script>
