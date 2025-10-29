@@ -24,10 +24,12 @@
 
           <!-- Navigation -->
           <nav class="hidden space-x-8 md:flex">
-            <a href="/" class="font-medium text-gray-600 transition-colors hover:text-lime-600">Home</a>
-            <a href="/categories" class="font-medium text-gray-600 transition-colors hover:text-lime-600">Categories</a>
-            <a href="/deals" class="font-medium text-gray-600 transition-colors hover:text-lime-600">Deals</a>
-            <a href="/about" class="font-medium text-gray-600 transition-colors hover:text-lime-600">About</a>
+           <ul class="flex space-x-8">
+            <li @click="$router.push({ name: 'landing' })" class="font-medium text-gray-600 transition-colors hover:text-lime-600 cursor-pointer">Home</li>
+             <li @click="$router.push({ name: 'categories' })" class="font-medium text-gray-600 transition-colors hover:text-lime-600 cursor-pointer">Categories</li>
+             <li @click="$router.push({ name: 'deals' })" class="font-medium text-gray-600 transition-colors hover:text-lime-600 cursor-pointer">Deals</li>
+             <li @click="$router.push({ name: 'about' })" class="font-medium text-gray-600 transition-colors hover:text-lime-600 cursor-pointer">About</li>
+           </ul>
           </nav>
 
           
