@@ -21,14 +21,39 @@ const router = createRouter({
       component: () => import("../components/pages/helpPage.vue"),
     },
     {
-      path: "/faq",
+      path: "/faqs",
       name: "faq",
       component: () => import("../components/pages/faq.vue"),
+    },
+    {
+      path: "/track-order",
+      name: "track-order",
+      component: () => import("../components/pages/track/tracking.vue"),
+    },
+    {
+      path: "/deals",
+      name: "deals",
+      component: () => import("../components/pages/Deals.vue"),
+    },
+    {
+      path: "/return-policy",
+      name: "return-policy",
+      component: () => import("../components/pages/ReturnPolicy.vue"),
+    },
+    {
+      path: "/privacy-policy",
+      name: "privacy-policy",
+      component: () => import("../components/pages/PrivacyPolicy.vue"),
     },
     {
       path: "/contact",
       name: "contact",
       component: () => import("../components/molecules/contact.vue"),
+    },
+    {
+      path: "/about",
+      name: "about",
+      component: () => import("../views/AboutView.vue"),
     },
     {
       path: "/dispatch-login",
@@ -93,8 +118,8 @@ const router = createRouter({
       component: () => import("../components/pages/category/Fashion.vue"),
     },
     {
-      path: "/grocery-drinks",
-      name: "grocery-drinks",
+      path: "/groceries-drinks",
+      name: "groceries-drinks",
       component: () =>
         import("../components/pages/category/GrocreiesDrinks.vue"),
     },
@@ -102,6 +127,52 @@ const router = createRouter({
       path: "/home-kitchen",
       name: "home-kitchen",
       component: () => import("../components/pages/category/HomeKitchen.vue"),
+    },
+    {
+      path: "/sports-outdoors",
+      name: "sports-outdoors",
+      component: () => import("../components/pages/category/Sports.vue"),
+    },
+    {
+      path: "/books-media",
+      name: "books-media",
+      component: () => import("../components/pages/category/BooksMedia.vue"),
+    },
+    {
+      path: "/toys-games",
+      name: "toys-games",
+      component: () => import("../components/pages/category/ToysGames.vue"),
+    },
+    {
+      path: "/automotive",
+      name: "automotive",
+      component: () => import("../components/pages/category/Automotive.vue"),
+    },
+    {
+      path: "/health-wellness",
+      name: "health-wellness",
+      component: () => import("../components/pages/category/Wellness.vue"),
+    },
+    {
+      path: "/pet-supplies",
+      name: "pet-supplies",
+      component: () => import("../components/pages/category/PetSupplies.vue"),
+    },
+    {
+      path: "/office-supplies",
+      name: "office-supplies",
+      component: () =>
+        import("../components/pages/category/OfficeSupplies.vue"),
+    },
+    {
+      path: "/baby-products",
+      name: "baby-products",
+      component: () => import("../components/pages/category/BabyProduct.vue"),
+    },
+    {
+      path: "/jewelry-accessories",
+      name: "jewelry-accessories",
+      component: () => import("../components/pages/category/Jewelry.vue"),
     },
     {
       path: "/product/:id",

@@ -12,14 +12,6 @@
             <span class="text-xl font-bold text-gray-800">OvoMarket</span>
           </div>
 
-          <!-- Navigation -->
-          <nav class="hidden space-x-8 md:flex">
-            <a href="/" class="font-medium text-gray-600 transition-colors hover:text-lime-600">Home</a>
-            <a href="/categories" class="font-medium text-gray-600 transition-colors hover:text-lime-600">Categories</a>
-            <a href="#" class="font-medium text-gray-600 transition-colors hover:text-lime-600">Deals</a>
-            <a href="#" class="font-medium text-gray-600 transition-colors hover:text-lime-600">About</a>
-          </nav>
-
           <!-- Search Bar -->
           <div class="items-center hidden w-64 px-4 py-2 bg-gray-100 rounded-full md:flex">
             <svg class="w-5 h-5 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -29,6 +21,16 @@
             </svg>
             <input type="text" placeholder="Search products..." class="w-full bg-transparent focus:outline-none">
           </div>
+
+          <!-- Navigation -->
+          <nav class="hidden space-x-8 md:flex">
+            <a href="/" class="font-medium text-gray-600 transition-colors hover:text-lime-600">Home</a>
+            <a href="/categories" class="font-medium text-gray-600 transition-colors hover:text-lime-600">Categories</a>
+            <a href="/deals" class="font-medium text-gray-600 transition-colors hover:text-lime-600">Deals</a>
+            <a href="/about" class="font-medium text-gray-600 transition-colors hover:text-lime-600">About</a>
+          </nav>
+
+          
 
           <!-- User Actions -->
           <div class="flex items-center space-x-4">

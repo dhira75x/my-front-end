@@ -1,171 +1,315 @@
 <template>
-  <section
-    class="min-h-screen bg-cover"
-    style="
-      background-image: url('https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80');
-    "
-  >
-    <div class="flex min-h-screen flex-col bg-black/60">
-      <div class="container mx-auto flex flex-1 flex-col px-6 py-12">
-        <div class="flex-1 lg:-mx-6 lg:flex lg:items-center">
-          <div class="text-white lg:mx-6 lg:w-1/2">
-            <h1 class="text-2xl font-semibold capitalize lg:text-3xl">
-              Ultimate design solution
+  <app-layout>
+    <template v-slot:main-content>
+      <div class="relative min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+        <!-- Decorative elements -->
+        <div class="absolute inset-0 overflow-hidden">
+          <div class="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-lime-100 opacity-50 blur-3xl"></div>
+          <div class="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-green-100 opacity-50 blur-3xl"></div>
+        </div>
+        
+        <div class="relative max-w-6xl mx-auto">
+          <!-- Header -->
+          <div class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">
+              Contact <span class="text-transparent bg-clip-text bg-gradient-to-r from-lime-600 to-green-800">Our Team</span>
             </h1>
-
-            <p class="mt-6 max-w-xl">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Voluptatem quo aliquid molestiae hic incidunt beatae placeat
-              accusantium! Alias ex quisquam ab tempora. Ratione autem
-              doloremque ducimus numquam doloribus, error sed.
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+              Have questions or need assistance? We're here to help and typically respond within 24 hours.
             </p>
+          </div>
 
-            <button
-              class="mt-6 transform rounded-md bg-blue-600 px-8 py-3 text-sm font-medium capitalize tracking-wide text-white transition-colors duration-300 hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-400 focus:ring-opacity-50"
-            >
-              get in touch
-            </button>
+          <div class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col lg:flex-row">
+            <!-- Left Panel -->
+            <div class="w-full lg:w-2/5 bg-gradient-to-br from-lime-600 to-green-900 p-8 md:p-12 flex flex-col justify-between relative overflow-hidden">
+              <!-- Decorative pattern -->
+              <div class="absolute inset-0 opacity-10">
+                <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <pattern id="pattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                      <circle cx="20" cy="20" r="1" fill="white" />
+                    </pattern>
+                  </defs>
+                  <rect width="100%" height="100%" fill="url(#pattern)" />
+                </svg>
+              </div>
+              
+              <div class="relative z-10">
+                <div class="flex items-center space-x-3 mb-10">
+                  <img src="@/assets/ovo.svg" alt="Ovo Market Support Page" class="h-10" />
+                </div>
 
-            <div class="mt-6 md:mt-8">
-              <h3 class="text-gray-300">Follow us</h3>
+                <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                  We're Here to Help
+                </h1>
+                <p class="text-lime-100 mb-10">
+                  Our dedicated support team is ready to assist you with any questions or concerns you may have.
+                </p>
 
-              <div class="-mx-1.5 mt-4 flex">
-                <a
-                  class="mx-1.5 transform text-white transition-colors duration-300 hover:text-blue-500"
-                  href="#"
-                >
-                  <svg
-                    class="h-10 w-10 fill-current"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
+                <div class="space-y-6">
+                  <div class="flex items-center space-x-4 p-3 bg-white/10 backdrop-blur-sm rounded-xl">
+                    <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
+                      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 class="text-white font-medium">Secure & Private</h3>
+                      <p class="text-lime-100 text-sm">Your information is protected</p>
+                    </div>
+                  </div>
+                  
+                  <div class="flex items-center space-x-4 p-3 bg-white/10 backdrop-blur-sm rounded-xl">
+                    <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
+                      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 class="text-white font-medium">Quick Response</h3>
+                      <p class="text-lime-100 text-sm">We reply within 24 hours</p>
+                    </div>
+                  </div>
+                  
+                  <div class="flex items-center space-x-4 p-3 bg-white/10 backdrop-blur-sm rounded-xl">
+                    <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
+                      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 class="text-white font-medium">Expert Support</h3>
+                      <p class="text-lime-100 text-sm">Knowledgeable team members</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-12 text-lime-200 text-sm">
+                © {{ new Date().getFullYear() }} Ovo Market Support. All rights reserved.
+              </div>
+            </div>
+
+            <!-- Right Panel -->
+            <div class="w-full lg:w-3/5 p-8 md:p-12">
+              <div class="max-w-md mx-auto">
+                <!-- Contact Form -->
+                <form @submit.prevent="submitForm" class="space-y-6">
+                  <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">
+                      Full Name
+                    </label>
+                    <div class="relative">
+                      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                        </svg>
+                      </div>
+                      <input
+                        type="text"
+                        id="name"
+                        v-model="form.name"
+                        class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lime-500 focus:border-lime-500 transition-all"
+                        placeholder="John Doe"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
+                      Email Address
+                    </label>
+                    <div class="relative">
+                      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                          <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                        </svg>
+                      </div>
+                      <input
+                        type="email"
+                        id="email"
+                        v-model="form.email"
+                        class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lime-500 focus:border-lime-500 transition-all"
+                        placeholder="john@example.com"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">
+                      Subject
+                    </label>
+                    <div class="relative">
+                      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                        </svg>
+                      </div>
+                      <input
+                        type="text"
+                        id="subject"
+                        v-model="form.subject"
+                        class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lime-500 focus:border-lime-500 transition-all"
+                        placeholder="How can we help?"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label for="message" class="block text-sm font-medium text-gray-700 mb-1">
+                      Your Message
+                    </label>
+                    <textarea
+                      id="message"
+                      v-model="form.message"
+                      rows="4"
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lime-500 focus:border-lime-500 transition-all"
+                      placeholder="Please describe your question or issue in detail..."
+                      required
+                    ></textarea>
+                  </div>
+
+                  <button
+                    type="submit"
+                    :disabled="isSubmitting"
+                    class="w-full bg-gradient-to-r from-lime-600 to-green-700 text-white py-3 px-4 rounded-lg font-medium hover:from-lime-700 hover:to-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500 disabled:opacity-70 transition-all transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
                   >
-                    <path
-                      d="M18.6668 6.67334C18.0002 7.00001 17.3468 7.13268 16.6668 7.33334C15.9195 6.49001 14.8115 6.44334 13.7468 6.84201C12.6822 7.24068 11.9848 8.21534 12.0002 9.33334V10C9.83683 10.0553 7.91016 9.07001 6.66683 7.33334C6.66683 7.33334 3.87883 12.2887 9.3335 14.6667C8.0855 15.498 6.84083 16.0587 5.3335 16C7.53883 17.202 9.94216 17.6153 12.0228 17.0113C14.4095 16.318 16.3708 14.5293 17.1235 11.85C17.348 11.0351 17.4595 10.1932 17.4548 9.34801C17.4535 9.18201 18.4615 7.50001 18.6668 6.67268V6.67334Z"
-                    />
-                  </svg>
-                </a>
+                    <span v-if="isSubmitting" class="flex items-center justify-center">
+                      <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Sending...
+                    </span>
+                    <span v-else>Send Message</span>
+                  </button>
+                </form>
 
-                <a
-                  class="mx-1.5 transform text-white transition-colors duration-300 hover:text-blue-500"
-                  href="#"
-                >
-                  <svg
-                    class="h-8 w-8"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M15.2 8.80005C16.4731 8.80005 17.694 9.30576 18.5941 10.2059C19.4943 11.1061 20 12.327 20 13.6V19.2H16.8V13.6C16.8 13.1757 16.6315 12.7687 16.3314 12.4687C16.0313 12.1686 15.6244 12 15.2 12C14.7757 12 14.3687 12.1686 14.0687 12.4687C13.7686 12.7687 13.6 13.1757 13.6 13.6V19.2H10.4V13.6C10.4 12.327 10.9057 11.1061 11.8059 10.2059C12.7061 9.30576 13.927 8.80005 15.2 8.80005Z"
-                      fill="currentColor"
-                    />
-                    <path
-                      d="M7.2 9.6001H4V19.2001H7.2V9.6001Z"
-                      fill="currentColor"
-                    />
-                    <path
-                      d="M5.6 7.2C6.48366 7.2 7.2 6.48366 7.2 5.6C7.2 4.71634 6.48366 4 5.6 4C4.71634 4 4 4.71634 4 5.6C4 6.48366 4.71634 7.2 5.6 7.2Z"
-                      fill="currentColor"
-                    />
+                <!-- Success Message -->
+                <div v-if="formSubmitted" class="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-start">
+                  <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
-                </a>
-
-                <a
-                  class="mx-1.5 transform text-white transition-colors duration-300 hover:text-blue-500"
-                  href="#"
-                >
-                  <svg
-                    class="h-8 w-8"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M7 10.2222V13.7778H9.66667V20H13.2222V13.7778H15.8889L16.7778 10.2222H13.2222V8.44444C13.2222 8.2087 13.3159 7.9826 13.4826 7.81591C13.6493 7.64921 13.8754 7.55556 14.1111 7.55556H16.7778V4H14.1111C12.9324 4 11.8019 4.46825 10.9684 5.30175C10.1349 6.13524 9.66667 7.2657 9.66667 8.44444V10.2222H7Z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </a>
-
-                <a
-                  class="mx-1.5 transform text-white transition-colors duration-300 hover:text-blue-500"
-                  href="#"
-                >
-                  <svg
-                    class="h-8 w-8"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M11.9294 7.72275C9.65868 7.72275 7.82715 9.55428 7.82715 11.825C7.82715 14.0956 9.65868 15.9271 11.9294 15.9271C14.2 15.9271 16.0316 14.0956 16.0316 11.825C16.0316 9.55428 14.2 7.72275 11.9294 7.72275ZM11.9294 14.4919C10.462 14.4919 9.26239 13.2959 9.26239 11.825C9.26239 10.354 10.4584 9.15799 11.9294 9.15799C13.4003 9.15799 14.5963 10.354 14.5963 11.825C14.5963 13.2959 13.3967 14.4919 11.9294 14.4919ZM17.1562 7.55495C17.1562 8.08692 16.7277 8.51178 16.1994 8.51178C15.6674 8.51178 15.2425 8.08335 15.2425 7.55495C15.2425 7.02656 15.671 6.59813 16.1994 6.59813C16.7277 6.59813 17.1562 7.02656 17.1562 7.55495ZM19.8731 8.52606C19.8124 7.24434 19.5197 6.10901 18.5807 5.17361C17.6453 4.23821 16.51 3.94545 15.2282 3.88118C13.9073 3.80621 9.94787 3.80621 8.62689 3.88118C7.34874 3.94188 6.21341 4.23464 5.27444 5.17004C4.33547 6.10544 4.04628 7.24077 3.98201 8.52249C3.90704 9.84347 3.90704 13.8029 3.98201 15.1238C4.04271 16.4056 4.33547 17.5409 5.27444 18.4763C6.21341 19.4117 7.34517 19.7045 8.62689 19.7687C9.94787 19.8437 13.9073 19.8437 15.2282 19.7687C16.51 19.708 17.6453 19.4153 18.5807 18.4763C19.5161 17.5409 19.8089 16.4056 19.8731 15.1238C19.9481 13.8029 19.9481 9.84704 19.8731 8.52606ZM18.1665 16.5412C17.8881 17.241 17.349 17.7801 16.6456 18.0621C15.5924 18.4799 13.0932 18.3835 11.9294 18.3835C10.7655 18.3835 8.26272 18.4763 7.21307 18.0621C6.51331 17.7837 5.9742 17.2446 5.69215 16.5412C5.27444 15.488 5.37083 12.9888 5.37083 11.825C5.37083 10.6611 5.27801 8.15832 5.69215 7.10867C5.97063 6.40891 6.50974 5.8698 7.21307 5.58775C8.26629 5.17004 10.7655 5.26643 11.9294 5.26643C13.0932 5.26643 15.596 5.17361 16.6456 5.58775C17.3454 5.86623 17.8845 6.40534 18.1665 7.10867C18.5843 8.16189 18.4879 10.6611 18.4879 11.825C18.4879 12.9888 18.5843 15.4916 18.1665 16.5412Z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </a>
+                  <p class="text-green-800">
+                    Thank you! Your message has been sent successfully. We'll get back to you soon.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-
-          <div class="mt-8 lg:mx-6 lg:w-1/2">
-            <div
-              class="mx-auto w-full overflow-hidden rounded-xl bg-white px-8 py-10 shadow-2xl lg:max-w-xl dark:bg-gray-900"
-            >
-              <h1 class="text-xl font-medium text-gray-700 dark:text-gray-200">
-                Contact form
-              </h1>
-
-              <p class="mt-2 text-gray-500 dark:text-gray-400">
-                Ask us everything and we would love to hear from you
-              </p>
-
-              <form class="mt-6">
-                <div class="flex-1">
-                  <label
-                    class="mb-2 block text-sm text-gray-600 dark:text-gray-200"
-                    >Full Name</label
-                  >
-                  <input
-                    type="text"
-                    placeholder="John Doe"
-                    class="mt-2 block w-full rounded-md border border-gray-200 bg-white px-5 py-3 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300"
-                  />
+          
+          <!-- Contact Information Section -->
+          <div class="mt-16 pt-8 border-t border-gray-200">
+            <h2 class="text-2xl font-bold text-gray-800 mb-8 text-center">Other Ways to Reach Us</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <!-- Phone Support -->
+              <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                <div class="flex items-center mb-4">
+                  <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-lime-100 flex items-center justify-center">
+                    <PhoneIcon class="h-6 w-6 text-lime-600" />
+                  </div>
+                  <h3 class="ml-4 text-lg font-medium text-gray-800">Phone Support</h3>
                 </div>
+                <p class="text-gray-600 mb-2">+1 (555) 123-4567</p>
+                <p class="text-sm text-gray-500">Mon-Fri 9AM-5PM EST</p>
+              </div>
 
-                <div class="mt-6 flex-1">
-                  <label
-                    class="mb-2 block text-sm text-gray-600 dark:text-gray-200"
-                    >Email address</label
-                  >
-                  <input
-                    type="email"
-                    placeholder="johndoe@example.com"
-                    class="mt-2 block w-full rounded-md border border-gray-200 bg-white px-5 py-3 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300"
-                  />
+              <!-- Email Support -->
+              <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                <div class="flex items-center mb-4">
+                  <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-lime-100 flex items-center justify-center">
+                    <EnvelopeIcon class="h-6 w-6 text-lime-600" />
+                  </div>
+                  <h3 class="ml-4 text-lg font-medium text-gray-800">Email Support</h3>
                 </div>
+                <p class="text-gray-600 mb-2">support@ovomarket.com</p>
+                <p class="text-sm text-gray-500">We respond within 24 hours</p>
+              </div>
 
-                <div class="mt-6 w-full">
-                  <label
-                    class="mb-2 block text-sm text-gray-600 dark:text-gray-200"
-                    >Message</label
-                  >
-                  <textarea
-                    class="mt-2 block h-32 w-full rounded-md border border-gray-200 bg-white px-5 py-3 text-gray-700 placeholder-gray-400 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 md:h-48 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300"
-                    placeholder="Message"
-                  ></textarea>
+              <!-- Visit Our Office -->
+              <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                <div class="flex items-center mb-4">
+                  <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-lime-100 flex items-center justify-center">
+                    <MapPinIcon class="h-6 w-6 text-lime-600" />
+                  </div>
+                  <h3 class="ml-4 text-lg font-medium text-gray-800">Visit Our Office</h3>
                 </div>
+                <p class="text-gray-600 mb-1">123 Commerce Street</p>
+                <p class="text-gray-600">New York, NY 10001</p>
+              </div>
+            </div>
 
-                <button
-                  class="mt-6 w-full transform rounded-md bg-blue-600 px-6 py-3 text-sm font-medium capitalize tracking-wide text-white transition-colors duration-300 hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-400 focus:ring-opacity-50"
-                >
-                  get in touch
-                </button>
-              </form>
+            <!-- Business Hours -->
+            <div class="mt-12 bg-white p-6 rounded-xl shadow-md max-w-md mx-auto">
+              <h3 class="text-lg font-medium text-gray-800 mb-4 text-center">Business Hours</h3>
+              <div class="space-y-3">
+                <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                  <span class="text-gray-600">Monday - Friday</span>
+                  <span class="font-medium text-gray-800">24hrs</span>
+                </div>
+                <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                  <span class="text-gray-600">Saturday</span>
+                  <span class="font-medium text-gray-800">24hrs</span>
+                </div>
+                <div class="flex justify-between items-center py-2">
+                  <span class="text-gray-600">Sunday</span>
+                  <span class="font-medium text-gray-800">24hrs</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </template>
+  </app-layout>
 </template>
+
+<script setup>
+import { ref } from 'vue';
+import AppLayout from '@/layouts/applayout.vue';
+import { 
+  PhoneIcon, 
+  EnvelopeIcon, 
+  MapPinIcon,
+  CheckCircleIcon 
+} from '@heroicons/vue/24/outline';
+
+const form = ref({
+  name: '',
+  email: '',
+  subject: '',
+  message: ''
+});
+
+const isSubmitting = ref(false);
+const formSubmitted = ref(false);
+
+const submitForm = async () => {
+  isSubmitting.value = true;
+  
+  // Simulate API call
+  await new Promise(resolve => setTimeout(resolve, 1500));
+  
+  console.log('Form submitted:', form.value);
+  isSubmitting.value = false;
+  formSubmitted.value = true;
+  
+  // Reset form
+  form.value = {
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  };
+  
+  // Hide success message after 5 seconds
+  setTimeout(() => {
+    formSubmitted.value = false;
+  }, 5000);
+};
+</script>

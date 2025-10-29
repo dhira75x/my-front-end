@@ -1,4 +1,6 @@
 <template>
+  <app-layout>
+    <template v-slot:main-content>
   <BaseCategoryPage
     category-title="Home & Kitchen"
     category-description="Transform your home with our wide range of kitchen appliances and home decor."
@@ -6,11 +8,14 @@
     :sub-categories="subCategories"
     :brands="brands"
   />
+  </template>
+  </app-layout>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import BaseCategoryPage from './BaseCategoryPage.vue';
+import AppLayout from '@/layouts/applayout.vue';
 
 // Home & Kitchen products
 const products = ref([

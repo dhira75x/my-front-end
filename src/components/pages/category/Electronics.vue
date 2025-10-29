@@ -1,4 +1,6 @@
 <template>
+  <app-layout>
+    <template v-slot:main-content>
   <BaseCategoryPage
     category-title="Electronics"
     category-description="Discover the latest gadgets and electronics at unbeatable prices."
@@ -6,11 +8,14 @@
     :sub-categories="subCategories"
     :brands="brands"
   />
+  </template>
+  </app-layout>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import BaseCategoryPage from './BaseCategoryPage.vue';
+import AppLayout from '@/layouts/applayout.vue';
 
 // Electronics products
 const products = ref([

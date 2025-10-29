@@ -1,6 +1,7 @@
 <!-- AllCategories.vue -->
 <template>
-     <Header/>
+  <app-layout>
+    <template v-slot:main-content>
   <div class="min-h-screen py-8 bg-gray-50">
  
     <div class="container px-4 mx-auto">
@@ -553,8 +554,10 @@
       </div>
     </div>
   </div>
+  </template>
+  </app-layout>
 </template>
 
 <script setup>
-import Header from '@/components/molecules/Header/Header.vue';
+import AppLayout from '@/layouts/applayout.vue';
 </script>

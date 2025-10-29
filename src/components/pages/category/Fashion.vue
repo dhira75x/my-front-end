@@ -1,4 +1,6 @@
 <template>
+  <app-layout>
+    <template v-slot:main-content>
   <BaseCategoryPage
     category-title="Fashion"
     category-description="Discover the latest trends in fashion for men, women, and children."
@@ -6,11 +8,14 @@
     :sub-categories="subCategories"
     :brands="brands"
   />
+  </template>
+  </app-layout>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import BaseCategoryPage from './BaseCategoryPage.vue';
+import AppLayout from '@/layouts/applayout.vue';
 
 // Fashion products
 const products = ref([

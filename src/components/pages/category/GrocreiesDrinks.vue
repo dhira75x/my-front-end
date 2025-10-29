@@ -1,5 +1,6 @@
-<!-- GroceriesDrinksCategory.vue -->
 <template>
+  <app-layout>
+    <template v-slot:main-content>
   <BaseCategoryPage
     category-title="Groceries & Drinks"
     category-description="Fresh groceries and a wide selection of beverages for your daily needs."
@@ -7,11 +8,14 @@
     :sub-categories="subCategories"
     :brands="brands"
   />
+  </template>
+  </app-layout>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import BaseCategoryPage from './BaseCategoryPage.vue';
+import AppLayout from '@/layouts/applayout.vue';
 
 // Groceries & Drinks products
 const products = ref([
