@@ -4,7 +4,7 @@
     <Header/>
    
 
-    <!-- Hero Section -->
+    <!-- Hero Section with Image Carousel -->
     <section class="relative py-16 text-white md:py-24 bg-gradient-to-r from-lime-600 to-green-900">
       <div class="container px-4 mx-auto">
         <div class="flex flex-col items-center md:flex-row">
@@ -28,10 +28,51 @@
                 class="flex items-center justify-center w-64 h-64 bg-white rounded-full md:w-80 md:h-80 bg-opacity-20">
                 <div
                   class="flex items-center justify-center w-56 h-56 bg-white rounded-full md:w-72 md:h-72 bg-opacity-30">
-                  <div class="w-48 h-48 overflow-hidden bg-white shadow-xl md:w-64 md:h-64 rounded-xl">
-                    <img
-                      src="https://images.unsplash.com/photo-1602880329034-f2fe899a5cfd?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
-                      alt="Products" class="object-cover w-full h-full">
+                  <div class="relative w-48 h-48 overflow-hidden bg-white shadow-xl md:w-64 md:h-64 rounded-xl">
+                    <!-- Image Carousel -->
+                    <div class="relative w-full h-full overflow-hidden">
+                      <div 
+                        class="flex transition-transform duration-500 ease-in-out h-full"
+                        :style="{ transform: `translateX(-${currentHeroSlide * 100}%)` }"
+                      >
+                        <div v-for="(image, index) in heroImages" :key="index" class="flex-shrink-0 w-full h-full">
+                          <img
+                            :src="image.url"
+                            :alt="image.alt"
+                            class="object-cover w-full h-full"
+                          />
+                        </div>
+                      </div>
+                      
+                      <!-- Carousel Navigation -->
+                      <button 
+                        @click="prevHeroSlide"
+                        class="absolute left-2 top-1/2 transform -translate-y-1/2 p-2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75 transition-all"
+                      >
+                        <svg class="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                      </button>
+                      <button 
+                        @click="nextHeroSlide"
+                        class="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75 transition-all"
+                      >
+                        <svg class="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                      </button>
+                      
+                      <!-- Carousel Indicators -->
+                      <div class="absolute bottom-3 left-0 right-0 flex justify-center space-x-2">
+                        <button 
+                          v-for="(_, index) in heroImages" 
+                          :key="index" 
+                          @click="goToHeroSlide(index)"
+                          class="w-2 h-2 rounded-full transition-all"
+                          :class="currentHeroSlide === index ? 'bg-white w-6' : 'bg-white bg-opacity-50'"
+                        ></button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -259,7 +300,7 @@
     </section>
 
     <!-- Special Offer Section -->
-    <section class="py-16 text-white bg-gradient-to-r from-lime-600 to-green-900">
+     <section class="py-16 text-white bg-gradient-to-r from-lime-600 to-green-900">
       <div class="container px-4 mx-auto">
         <div class="flex flex-col items-center md:flex-row">
           <div class="mb-10 md:w-2/3 md:mb-0">
@@ -293,14 +334,61 @@
           </div>
           <div class="flex justify-center md:w-1/3">
             <div class="relative">
-              <div class="flex items-center justify-center w-48 h-48 bg-white rounded-full bg-opacity-20">
-                <div class="flex items-center justify-center w-40 h-40 bg-white rounded-full bg-opacity-30">
-                  <div class="w-32 h-32 overflow-hidden bg-white shadow-xl rounded-xl">
-                    <img
-                      src="https://images.unsplash.com/photo-1602880329034-f2fe899a5cfd?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
-                      alt="Products" class="object-cover w-full h-full">
+              <div
+                class="flex items-center justify-center w-64 h-64 bg-white rounded-full md:w-80 md:h-80 bg-opacity-20">
+                <div
+                  class="flex items-center justify-center w-56 h-56 bg-white rounded-full md:w-72 md:h-72 bg-opacity-30">
+                  <div class="relative w-48 h-48 overflow-hidden bg-white shadow-xl md:w-64 md:h-64 rounded-xl">
+                    <!-- Summer Sale Image Carousel -->
+                    <div class="relative w-full h-full overflow-hidden">
+                      <div 
+                        class="flex transition-transform duration-500 ease-in-out h-full"
+                        :style="{ transform: `translateX(-${currentSummerSlide * 100}%)` }"
+                      >
+                        <div v-for="(image, index) in summerImages" :key="index" class="flex-shrink-0 w-full h-full">
+                          <img
+                            :src="image.url"
+                            :alt="image.alt"
+                            class="object-cover w-full h-full"
+                          />
+                        </div>
+                      </div>
+                      
+                      <!-- Carousel Navigation -->
+                      <button 
+                        @click="prevSummerSlide"
+                        class="absolute left-1 top-1/2 transform -translate-y-1/2 p-1.5 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75 transition-all"
+                      >
+                        <svg class="w-4 h-4 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                      </button>
+                      <button 
+                        @click="nextSummerSlide"
+                        class="absolute right-1 top-1/2 transform -translate-y-1/2 p-1.5 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75 transition-all"
+                      >
+                        <svg class="w-4 h-4 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                      </button>
+                      
+                      <!-- Carousel Indicators -->
+                      <div class="absolute bottom-2 left-0 right-0 flex justify-center space-x-1">
+                        <button 
+                          v-for="(_, index) in summerImages" 
+                          :key="index" 
+                          @click="goToSummerSlide(index)"
+                          class="w-1.5 h-1.5 rounded-full transition-all"
+                          :class="currentSummerSlide === index ? 'bg-white w-4' : 'bg-white bg-opacity-50'"
+                        ></button>
+                      </div>
+                    </div>
                   </div>
                 </div>
+              </div>
+              <div
+                class="absolute px-3 py-1.5 font-bold text-gray-800 bg-yellow-400 rounded-full shadow-lg -top-4 -right-4 text-sm">
+                50% OFF
               </div>
             </div>
           </div>
@@ -557,7 +645,6 @@ import { useRouter } from "vue-router";
 import Header from "@/components/molecules/Header/Header.vue";
 import Footer from "@/components/molecules/Footer/footer.vue";
 
-
 const router = useRouter();
 
 // Dropdown functionality
@@ -608,7 +695,79 @@ const cartTotal = computed(() => {
   }, 0).toFixed(2);
 });
 
-// Carousel functionality
+// Hero carousel functionality
+const currentHeroSlide = ref(0);
+const heroImages = ref([
+  {
+    url: "/smart_phone.png",
+    alt: "Electronics"
+  },
+  {
+    url: "/clothes.png",
+    alt: "Fashion"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+    alt: "Home & Kitchen"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1556228720-195a672e8a03?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+    alt: "Beauty"
+  }
+]);
+
+const nextHeroSlide = () => {
+  currentHeroSlide.value = (currentHeroSlide.value + 1) % heroImages.value.length;
+};
+
+const prevHeroSlide = () => {
+  currentHeroSlide.value = (currentHeroSlide.value - 1 + heroImages.value.length) % heroImages.value.length;
+};
+
+const goToHeroSlide = (index) => {
+  currentHeroSlide.value = index;
+};
+
+
+
+// Summer sale carousel functionality
+const currentSummerSlide = ref(0);
+const summerImages = ref([
+  {
+    url: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+    alt: "Summer Fashion"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1544816155-12df9643f363?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+    alt: "Summer Electronics"
+  },
+  {
+    url: "/sneakers_sales.png",
+    alt: "Summer Accessories"
+  },
+  {
+    url: "/canon.png",
+    alt: "Summer Sports"
+  }
+]);
+
+const nextSummerSlide = () => {
+  currentSummerSlide.value = (currentSummerSlide.value + 1) % summerImages.value.length;
+};
+
+const prevSummerSlide = () => {
+  currentSummerSlide.value = (currentSummerSlide.value - 1 + summerImages.value.length) % summerImages.value.length;
+};
+
+const goToSummerSlide = (index) => {
+  currentSummerSlide.value = index;
+};
+
+
+
+
+
+// Product carousel functionality
 const currentSlide = ref(0);
 
 const nextSlide = () => {
@@ -671,15 +830,15 @@ const hotProducts = ref([
     name: "Regal Wine",
     description: "Premium brandy wine",
     price: "₦79,000.00",
-    image: "https://images.unsplash.com/photo-1560474847-929b9d1b4f41?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+    image: "/regal.jpg",
     isNew: true
   },
   {
     id: 2,
-    name: "Hennesy",
+    name: "Gallantry",
     description: "Premium cognac",
     price: "₦129,999.00",
-    image: "https://images.unsplash.com/photo-1607834837845-292c04910753?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+    image: "/gallantry.jpg",
     isNew: false
   },
   {
@@ -687,7 +846,7 @@ const hotProducts = ref([
     name: "Camera Lens",
     description: "Sharp and clear images",
     price: "₦189,999.00",
-    image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+    image: "/lens-max.png",
     isNew: true
   },
   {
@@ -763,7 +922,7 @@ const allCarouselProducts = ref([
     name: "Perfume",
     description: "Luxury fragrance",
     price: "₦35,000.00",
-    image: "https://images.unsplash.com/photo-1523294587484-bae6cc821bf5?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+    image: "/perfume.webp",
     isNew: false
   }
 ]);
@@ -780,17 +939,28 @@ const carouselProducts = computed(() => {
   return slides;
 });
 
-// Auto-play carousel
-let autoplayInterval;
+// Auto-play carousels
+let heroAutoplayInterval;
+let productAutoplayInterval;
 
-const startAutoplay = () => {
-  autoplayInterval = setInterval(() => {
+const startHeroAutoplay = () => {
+  heroAutoplayInterval = setInterval(() => {
+    nextHeroSlide();
+  }, 5000);
+};
+
+const stopHeroAutoplay = () => {
+  clearInterval(heroAutoplayInterval);
+};
+
+const startProductAutoplay = () => {
+  productAutoplayInterval = setInterval(() => {
     nextSlide();
   }, 5000);
 };
 
-const stopAutoplay = () => {
-  clearInterval(autoplayInterval);
+const stopProductAutoplay = () => {
+  clearInterval(productAutoplayInterval);
 };
 
 onMounted(() => {
@@ -798,13 +968,16 @@ onMounted(() => {
   document.addEventListener('click', closeDropdown);
   // For cart
   document.addEventListener('click', closeCart);
-  // For carousel
-  startAutoplay();
+  // For hero carousel
+  startHeroAutoplay();
+  // For product carousel
+  startProductAutoplay();
 });
 
 onUnmounted(() => {
   document.removeEventListener('click', closeDropdown);
   document.removeEventListener('click', closeCart);
-  stopAutoplay();
+  stopHeroAutoplay();
+  stopProductAutoplay();
 });
 </script>
