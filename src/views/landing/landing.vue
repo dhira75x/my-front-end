@@ -93,7 +93,7 @@
     <section class="py-12 bg-white">
       <div class="container px-4 mx-auto">
         <div class="flex items-center justify-between mb-8">
-          <h2 class="text-3xl font-bold text-gray-800">Featured Products</h2>
+          <h2 class="text-3xl font-bold text-gray-800">Trending Now</h2>
           <div class="flex space-x-2">
             <button @click="prevSlide" class="p-2 bg-gray-200 rounded-full hover:bg-gray-300">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -249,7 +249,7 @@
     <section class="py-16 bg-gray-50">
       <div class="container px-4 mx-auto">
         <div class="flex items-center justify-between mb-12">
-          <h2 class="text-3xl font-bold text-gray-800">Trending Now</h2>
+          <h2 class="text-3xl font-bold text-gray-800">Featured Products</h2>
           <router-link to="#" class="flex items-center font-semibold text-lime-600 hover:text-lime-700">
             View All
             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
