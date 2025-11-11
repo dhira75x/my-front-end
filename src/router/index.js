@@ -98,6 +98,11 @@ const router = createRouter({
         import("../components/pages/order/order-confirmation.vue"),
     },
     {
+      path: "/account/orders/:id",
+      name: "order-confirmation",
+      component: () => import("../components/pages/order/order-details.vue"),
+    },
+    {
       path: "/categories",
       name: "categories",
       component: () => import("../components/pages/category/Category.vue"),

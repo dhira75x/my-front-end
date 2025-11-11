@@ -172,7 +172,7 @@
             Continue Shopping
           </router-link>
           <router-link 
-            to="/account/orders" 
+            to="/account/orders/:id" 
             class="flex items-center justify-center px-6 py-3 font-semibold text-gray-800 transition-colors bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
           >
             View Order Details

@@ -44,13 +44,14 @@
                     <li>Name and contact information (email, phone number, shipping address)</li>
                     <li>Payment information (processed securely through our payment partners)</li>
                     <li>Account credentials (username, password)</li>
+                    <li>Location data: only where required for delivery/vendor matching.</li>
                   </ul>
                 </div>
                 <div>
                   <h3 class="font-medium text-gray-900 mb-2">Automatically Collected Information</h3>
                   <p class="text-gray-600">When you visit our website, we automatically collect:</p>
                   <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                    <li>IP address and browser information</li>
+                    <li>Usage data: IP address, browser type, mobile device info, interaction logs.</li>
                     <li>Device information and operating system</li>
                     <li>Pages visited and time spent on our site</li>
                     <li>Referring websites and search terms</li>
@@ -189,7 +190,7 @@
                 <h2 class="ml-4 text-xl font-bold text-gray-900">Changes to This Policy</h2>
               </div>
               <div class="ml-14">
-                <p class="text-gray-600">We may update this privacy policy from time to time to reflect changes in our practices or for operational, legal, or regulatory reasons. The updated policy will be effective when posted on our website.</p>
+                <p class="text-gray-600">We may update this privacy policy from time to time to reflect changes in our practices or for operational, legal, or regulatory reasons. The updated policy will be effective when posted on our website, and We will notify you of significant changes via mail.</p>
                 <p class="text-gray-600 mt-2">We encourage you to review this policy periodically for the latest information on our privacy practices.</p>
               </div>
             </div>
@@ -203,10 +204,10 @@
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
               <a 
-                href="mailto:privacy@ovomarket.com" 
+                href="mailto:privacy@ovomarket.ng" 
                 class="bg-white text-lime-700 px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-all"
               >
-                privacy@ovomarket.com
+                privacy@ovomarket.ng
               </a>
               <router-link 
                 to="/contact"

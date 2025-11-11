@@ -84,7 +84,7 @@
               <p class="text-sm">
                 Don't have an account yet?
                 <router-link
-                  to="/registration"
+                  to="/user-reg"
                   class="mx-2 text-lime-700 hover:underline"
                 >
                   Register.</router-link

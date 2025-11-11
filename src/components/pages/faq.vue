@@ -125,56 +125,75 @@ const categories = ref([
   { id: 'returns', name: 'Returns & Refunds' },
   { id: 'products', name: 'Products' },
   { id: 'account', name: 'Account' },
+  { id: 'payment', name: 'Payments' },
 ]);
 
 const faqs = ref([
   {
     id: 1,
+    question: 'What is Ovo Market?',
+    answer: 'Ovo Market is a marketplace platform that connects consumers with local vendors. You browse products and services via our website/app, choose a vendor, pay, and receive delivery or service from that vendor..',
+    category: 'orders'
+  },
+  {
+    id: 2,
+    question: 'How do I place an order?',
+    answer: 'You select the item, confirm the vendor, proceed to checkout, choose payment method, then wait for confirmation and delivery',
+    category: 'orders'
+  },
+  {
+    id: 3,
     question: 'How long does shipping take?',
     answer: 'Standard shipping typically takes 3-5 business days. Express shipping options are available at checkout for 1-2 business day delivery.',
     category: 'orders'
   },
   {
-    id: 2,
+    id: 4,
     question: 'What is your return policy?',
-    answer: 'We offer a 30-day return policy for most items. Products must be in original condition with tags attached. Some exclusions apply for personalized items.',
+    answer: 'We offer a 7-days return policy for most items. Products must unused, in original condition and packaging, unless the product is defective or the vendor failed to meet the required purpose.',
     category: 'returns'
   },
   {
-    id: 3,
-    question: 'How do I track my order?',
-    answer: 'Once your order ships, you\'ll receive a tracking number via email. You can also track your order by logging into your account and viewing your order history.',
-    category: 'orders'
-  },
-  {
-    id: 4,
-    question: 'Do you offer international shipping?',
-    answer: 'Yes, we ship to over 50 countries worldwide. International shipping rates and delivery times vary by destination.',
-    category: 'orders'
-  },
-  {
     id: 5,
+    question: 'How do I track my order?',
+    answer: 'After payment and confirmation, you will receive an order status update via email/SMS/app. You may also log into your account to monitor status and estimated delivery time.',
+    category: 'orders'
+  },
+  {
+    id: 6,
+    question: 'What if the vendor fails to deliver on time?',
+    answer: 'If the agreed delivery time is not met and no acceptable explanation is offered, you may contact our customer support. We will assess whether a refund, vendor replacement or other remedy is applicable.',
+    category: 'orders'
+  },
+  {
+    id: 7,
     question: 'How can I reset my password?',
     answer: 'Click on "Forgot Password" on the login page and enter your email address. You\'ll receive instructions to reset your password.',
     category: 'account'
   },
   {
-    id: 6,
-    question: 'Are your products authentic?',
-    answer: 'Absolutely! We only sell authentic products directly from manufacturers or authorized distributors.',
+    id: 8,
+    question: 'What if the product is defective or not as described?',
+    answer: 'If the product is defective, damaged, or fails to perform for the stated purpose, you may request a return or refund. The vendor or Ovo Market will assess and decide accordingly.',
     category: 'products'
   },
   {
-    id: 7,
+    id: 9,
     question: 'What payment methods do you accept?',
-    answer: 'We accept all major credit cards, PayPal, Apple Pay, Google Pay, and select buy-now-pay-later services.',
-    category: 'orders'
+    answer: 'We accept [list accepted methods: e.g., bank transfers, card payments, mobile payments]. Payment must clear before order fulfillment begins.',
+    category: 'payment'
   },
   {
-    id: 8,
+    id: 10,
     question: 'How do I cancel an order?',
     answer: 'You can cancel an order within 1 hour of placement by contacting our support team. After that time, we begin processing your order immediately.',
     category: 'orders'
+  },
+  {
+    id: 11,
+    question: 'Are vendors individually responsible for their listings?',
+    answer: 'Yes. Each vendor is responsible for accuracy of their product/service description, pricing, availability, and fulfilment. Ovo Market acts as a facilitator of the marketplace.',
+    category: 'products'
   }
 ]);
 

@@ -88,7 +88,7 @@
               <div class="mt-4 text-center">
                 <p class="text-sm">
                   Already have an account yet?
-                  <router-link to="/" class="mx-2 text-lime-700 hover:underline">
+                  <router-link to="/user-login" class="mx-2 text-lime-700 hover:underline">
                     Log In.</router-link
                   >
                 </p>
@@ -102,7 +102,7 @@
                       v-model:checked="registerForm.terms"
                     />
 
-                    <div class="ml-2">
+                    <div class="ml-2 text-gray-500">
                       I agree to the
                       <a
                         target="_blank"
@@ -114,7 +114,7 @@
                       and
                       <a
                         target="_blank"
-                        href="#"
+                        href="/privacy-policy"
                         class="text-sm text-lime-700 underline hover:text-lime-900"
                       >
                         Privacy Policy

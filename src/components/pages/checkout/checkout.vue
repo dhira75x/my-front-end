@@ -35,6 +35,7 @@
               <input 
                 type="email" 
                 id="email" 
+                v-model="customerInfo.email"
                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500" 
                 placeholder="you@example.com"
               >
@@ -54,6 +55,7 @@
                 <input 
                   type="text" 
                   id="firstName" 
+                  v-model="customerInfo.firstName"
                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500" 
                   placeholder="John"
                 >
@@ -63,6 +65,7 @@
                 <input 
                   type="text" 
                   id="lastName" 
+                  v-model="customerInfo.lastName"
                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500" 
                   placeholder="Doe"
                 >
@@ -72,6 +75,7 @@
                 <input 
                   type="text" 
                   id="address" 
+                  v-model="customerInfo.address"
                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500" 
                   placeholder="123 Main St"
                 >
@@ -81,6 +85,7 @@
                 <input 
                   type="text" 
                   id="city" 
+                  v-model="customerInfo.city"
                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500" 
                   placeholder="Lagos"
                 >
@@ -89,6 +94,7 @@
                 <label for="state" class="block mb-2 text-sm font-medium text-gray-700">State</label>
                 <select 
                   id="state" 
+                  v-model="customerInfo.state"
                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500"
                 >
                   <option value="">Select a state</option>
@@ -103,6 +109,7 @@
                 <input 
                   type="text" 
                   id="zip" 
+                  v-model="customerInfo.zip"
                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500" 
                   placeholder="100001"
                 >
@@ -112,6 +119,7 @@
                 <input 
                   type="tel" 
                   id="phone" 
+                  v-model="customerInfo.phone"
                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500" 
                   placeholder="+234 123 456 7890"
                 >
@@ -128,7 +136,7 @@
             <h2 class="mb-4 text-lg font-semibold text-gray-800">Shipping Method</h2>
             <div class="space-y-3">
               <div class="flex items-center p-4 border border-gray-300 rounded-lg">
-                <input type="radio" id="standard" name="shipping" class="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500" checked>
+                <input type="radio" id="standard" name="shipping" v-model="shippingMethod" value="standard" class="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500" checked>
                 <label for="standard" class="flex items-center justify-between flex-1 ml-3">
                   <div>
                     <div class="font-medium text-gray-800">Standard Delivery</div>
@@ -138,7 +146,7 @@
                 </label>
               </div>
               <div class="flex items-center p-4 border border-gray-300 rounded-lg">
-                <input type="radio" id="express" name="shipping" class="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500">
+                <input type="radio" id="express" name="shipping" v-model="shippingMethod" value="express" class="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500">
                 <label for="express" class="flex items-center justify-between flex-1 ml-3">
                   <div>
                     <div class="font-medium text-gray-800">Express Delivery</div>
@@ -148,7 +156,7 @@
                 </label>
               </div>
               <div class="flex items-center p-4 border border-gray-300 rounded-lg">
-                <input type="radio" id="overnight" name="shipping" class="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500">
+                <input type="radio" id="overnight" name="shipping" v-model="shippingMethod" value="overnight" class="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500">
                 <label for="overnight" class="flex items-center justify-between flex-1 ml-3">
                   <div>
                     <div class="font-medium text-gray-800">Overnight Delivery</div>
@@ -165,25 +173,29 @@
             <h2 class="mb-4 text-lg font-semibold text-gray-800">Payment Method</h2>
             <div class="space-y-3">
               <div class="flex items-center p-4 border border-gray-300 rounded-lg">
-                <input type="radio" id="card" name="payment" class="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500" checked>
-                <label for="card" class="flex items-center flex-1 ml-3">
-                  <svg class="w-6 h-6 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
-                  </svg>
-                  <span class="font-medium text-gray-800">Credit/Debit Card</span>
+                <input type="radio" id="paystack" name="payment" v-model="selectedPayment" value="paystack" class="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500" checked>
+                <label for="paystack" class="flex items-center flex-1 ml-3">
+                  <div class="flex items-center">
+                    <div class="w-8 h-8 rounded bg-blue-500 flex items-center justify-center mr-2">
+                      <span class="text-white font-bold text-xs">PS</span>
+                    </div>
+                    <span class="font-medium text-gray-800">Paystack</span>
+                  </div>
                 </label>
               </div>
               <div class="flex items-center p-4 border border-gray-300 rounded-lg">
-                <input type="radio" id="bank" name="payment" class="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500">
-                <label for="bank" class="flex items-center flex-1 ml-3">
-                  <svg class="w-6 h-6 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-                  </svg>
-                  <span class="font-medium text-gray-800">Bank Transfer</span>
+                <input type="radio" id="flutterwave" name="payment" v-model="selectedPayment" value="flutterwave" class="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500">
+                <label for="flutterwave" class="flex items-center flex-1 ml-3">
+                  <div class="flex items-center">
+                    <div class="w-8 h-8 rounded bg-teal-500 flex items-center justify-center mr-2">
+                      <span class="text-white font-bold text-xs">FW</span>
+                    </div>
+                    <span class="font-medium text-gray-800">Flutterwave</span>
+                  </div>
                 </label>
               </div>
               <div class="flex items-center p-4 border border-gray-300 rounded-lg">
-                <input type="radio" id="cash" name="payment" class="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500">
+                <input type="radio" id="cash" name="payment" v-model="selectedPayment" value="cash" class="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500">
                 <label for="cash" class="flex items-center flex-1 ml-3">
                   <svg class="w-6 h-6 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
@@ -193,54 +205,29 @@
               </div>
             </div>
 
-            <!-- Card Details (shown when card payment is selected) -->
+            <!-- Payment Information -->
             <div class="mt-6 p-4 bg-gray-50 rounded-lg">
-              <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                <div class="md:col-span-2">
-                  <label for="cardNumber" class="block mb-2 text-sm font-medium text-gray-700">Card Number</label>
-                  <input 
-                    type="text" 
-                    id="cardNumber" 
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500" 
-                    placeholder="1234 5678 9012 3456"
-                  >
-                </div>
-                <div>
-                  <label for="expiry" class="block mb-2 text-sm font-medium text-gray-700">Expiry Date</label>
-                  <input 
-                    type="text" 
-                    id="expiry" 
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500" 
-                    placeholder="MM/YY"
-                  >
-                </div>
-                <div>
-                  <label for="cvv" class="block mb-2 text-sm font-medium text-gray-700">CVV</label>
-                  <input 
-                    type="text" 
-                    id="cvv" 
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500" 
-                    placeholder="123"
-                  >
-                </div>
-                <div class="md:col-span-2">
-                  <label for="nameOnCard" class="block mb-2 text-sm font-medium text-gray-700">Name on Card</label>
-                  <input 
-                    type="text" 
-                    id="nameOnCard" 
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500" 
-                    placeholder="John Doe"
-                  >
-                </div>
-              </div>
+              <p class="text-sm text-gray-600">
+                <span v-if="selectedPayment === 'paystack'">
+                  You will be redirected to Paystack to complete your payment securely.
+                </span>
+                <span v-else-if="selectedPayment === 'flutterwave'">
+                  You will be redirected to Flutterwave to complete your payment securely.
+                </span>
+                <span v-else>
+                  Pay with cash when your order is delivered.
+                </span>
+              </p>
             </div>
 
             <div class="mt-6">
               <button 
                 @click="placeOrder" 
-                class="w-full py-3 font-semibold text-white transition-colors bg-lime-600 rounded-lg hover:bg-lime-700"
+                :disabled="isProcessing"
+                class="w-full py-3 font-semibold text-white transition-colors bg-lime-600 rounded-lg hover:bg-lime-700 disabled:opacity-50"
               >
-                Place Order
+                <span v-if="isProcessing">Processing...</span>
+                <span v-else>Place Order</span>
               </button>
             </div>
           </div>
@@ -300,10 +287,14 @@
             <div class="flex">
               <input 
                 type="text" 
+                v-model="promoCode"
                 class="flex-1 px-4 py-2 border border-gray-300 rounded-l-lg focus:ring-lime-500 focus:border-lime-500" 
                 placeholder="Enter promo code"
               >
-              <button class="px-4 py-2 font-medium text-white bg-lime-600 rounded-r-lg hover:bg-lime-700">
+              <button 
+                @click="applyPromoCode"
+                class="px-4 py-2 font-medium text-white bg-lime-600 rounded-r-lg hover:bg-lime-700"
+              >
                 Apply
               </button>
             </div>
@@ -315,10 +306,28 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
+
+// Customer information
+const customerInfo = ref({
+  email: '',
+  firstName: '',
+  lastName: '',
+  address: '',
+  city: '',
+  state: '',
+  zip: '',
+  phone: ''
+});
+
+// Payment and shipping
+const selectedPayment = ref('paystack');
+const shippingMethod = ref('standard');
+const promoCode = ref('');
+const isProcessing = ref(false);
 
 // Mock cart data - in a real app, this would come from a cart store
 const cartItems = ref([
@@ -346,7 +355,13 @@ const subtotal = computed(() => {
 });
 
 const shipping = computed(() => {
-  return subtotal.value > 50000 ? '0.00' : '2000.00';
+  if (subtotal.value > 50000) return '0.00';
+  
+  switch (shippingMethod.value) {
+    case 'express': return '5000.00';
+    case 'overnight': return '10000.00';
+    default: return '2000.00';
+  }
 });
 
 const tax = computed(() => {
@@ -357,10 +372,153 @@ const total = computed(() => {
   return (parseFloat(subtotal.value) + parseFloat(shipping.value) + parseFloat(tax.value)).toFixed(2);
 });
 
-const placeOrder = () => {
-  // In a real app, this would process the order
-  console.log('Placing order...');
-  alert('Order placed successfully!');
-  router.push('/order-confirmation');
+// Generate a unique reference for transactions
+const generateReference = () => {
+  return `TX-${Date.now()}-${Math.floor(Math.random() * 1000000)}`;
 };
+
+// Initialize Paystack payment
+const initializePaystack = () => {
+  const handler = PaystackPop.setup({
+    key: 'pk_test_xxxxxxxxxxxxxxxxxxxxxxxx', // Replace with your Paystack public key
+    email: customerInfo.value.email,
+    amount: parseFloat(total.value) * 100, // Paystack expects amount in kobo
+    currency: 'NGN',
+    ref: generateReference(),
+    metadata: {
+      custom_fields: [
+        {
+          display_name: "Customer Name",
+          variable_name: "customer_name",
+          value: `${customerInfo.value.firstName} ${customerInfo.value.lastName}`
+        },
+        {
+          display_name: "Phone Number",
+          variable_name: "phone_number",
+          value: customerInfo.value.phone
+        }
+      ]
+    },
+    callback: function(response) {
+      // Payment successful
+      console.log('Paystack payment successful:', response);
+      completeOrder(response.reference, 'paystack');
+    },
+    onClose: function() {
+      // User closed payment modal
+      isProcessing.value = false;
+      console.log('Payment closed');
+    }
+  });
+  
+  handler.openIframe();
+};
+
+// Initialize Flutterwave payment
+const initializeFlutterwave = () => {
+  FlutterwaveCheckout({
+    public_key: 'FLWPUBK_TEST-xxxxxxxxxxxxxxxxxxxxxxxx-X', // Replace with your Flutterwave public key
+    tx_ref: generateReference(),
+    amount: parseFloat(total.value),
+    currency: 'NGN',
+    payment_options: 'card, banktransfer, ussd',
+    customer: {
+      email: customerInfo.value.email,
+      phone_number: customerInfo.value.phone,
+      name: `${customerInfo.value.firstName} ${customerInfo.value.lastName}`
+    },
+    customizations: {
+      title: 'Ovo Market Payment',
+      description: 'Payment for items in cart',
+      logo: 'https://your-logo-url.com/logo.png'
+    },
+    callback: function(response) {
+      // Payment successful
+      console.log('Flutterwave payment successful:', response);
+      completeOrder(response.tx_ref, 'flutterwave');
+    },
+    onclose: function() {
+      // User closed payment modal
+      isProcessing.value = false;
+      console.log('Payment closed');
+    }
+  });
+};
+
+// Complete the order after successful payment
+const completeOrder = (reference, paymentMethod) => {
+  // In a real app, you would send this data to your backend
+  const orderData = {
+    reference,
+    paymentMethod,
+    customer: customerInfo.value,
+    items: cartItems.value,
+    shipping: shippingMethod.value,
+    subtotal: subtotal.value,
+    shippingCost: shipping.value,
+    tax: tax.value,
+    total: total.value
+  };
+  
+  console.log('Order data:', orderData);
+  
+  // Simulate API call
+  setTimeout(() => {
+    isProcessing.value = false;
+    alert('Order placed successfully!');
+    router.push('/order-confirmation');
+  }, 1500);
+};
+
+// Apply promo code
+const applyPromoCode = () => {
+  if (!promoCode.value) return;
+  
+  // In a real app, you would validate the promo code with your backend
+  console.log('Applying promo code:', promoCode.value);
+  alert(`Promo code "${promoCode.value}" applied successfully!`);
+  promoCode.value = '';
+};
+
+// Place order
+const placeOrder = () => {
+  // Validate form
+  if (!customerInfo.value.email || !customerInfo.value.firstName || !customerInfo.value.lastName || 
+      !customerInfo.value.address || !customerInfo.value.city || !customerInfo.value.state || 
+      !customerInfo.value.zip || !customerInfo.value.phone) {
+    alert('Please fill in all required fields');
+    return;
+  }
+  
+  isProcessing.value = true;
+  
+  // Process payment based on selected method
+  if (selectedPayment.value === 'paystack') {
+    initializePaystack();
+  } else if (selectedPayment.value === 'flutterwave') {
+    initializeFlutterwave();
+  } else if (selectedPayment.value === 'cash') {
+    // For cash on delivery, complete order without payment
+    completeOrder(generateReference(), 'cash');
+  }
+};
+
+// Load payment scripts
+onMounted(() => {
+  // Load Paystack script
+  const paystackScript = document.createElement('script');
+  paystackScript.src = 'https://js.paystack.co/v1/inline.js';
+  paystackScript.onload = () => {
+    console.log('Paystack script loaded');
+  };
+  document.head.appendChild(paystackScript);
+  
+  // Load Flutterwave script
+  const flutterwaveScript = document.createElement('script');
+  flutterwaveScript.src = 'https://checkout.flutterwave.com/v3.js';
+  flutterwaveScript.onload = () => {
+    console.log('Flutterwave script loaded');
+  };
+  document.head.appendChild(flutterwaveScript);
+});
 </script>
