@@ -46,6 +46,11 @@ const router = createRouter({
       component: () => import("../components/pages/PrivacyPolicy.vue"),
     },
     {
+      path: "/refund",
+      name: "refund",
+      component: () => import("../components/pages/refund/refund.vue"),
+    },
+    {
       path: "/contact",
       name: "contact",
       component: () => import("../components/molecules/contact.vue"),

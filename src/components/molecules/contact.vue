@@ -1,16 +1,16 @@
 <template>
   <app-layout>
     <template v-slot:main-content>
-      <div class="relative min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+      <div class="relative min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8 animate__animated animate__fadeIn">
         <!-- Decorative elements -->
         <div class="absolute inset-0 overflow-hidden">
-          <div class="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-lime-100 opacity-50 blur-3xl"></div>
-          <div class="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-green-100 opacity-50 blur-3xl"></div>
+          <div class="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-lime-100 opacity-50 blur-3xl blob-1"></div>
+          <div class="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-green-100 opacity-50 blur-3xl blob-2"></div>
         </div>
         
         <div class="relative max-w-6xl mx-auto">
           <!-- Header -->
-          <div class="text-center mb-16">
+          <div class="text-center mb-16 animate__animated animate__fadeInDown">
             <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">
               Contact <span class="text-transparent bg-clip-text bg-gradient-to-r from-lime-600 to-green-800">Our Team</span>
             </h1>
@@ -19,7 +19,7 @@
             </p>
           </div>
 
-          <div class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col lg:flex-row">
+          <div class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col lg:flex-row animate__animated animate__fadeIn">
             <!-- Left Panel -->
             <div class="w-full lg:w-2/5 bg-gradient-to-br from-lime-600 to-green-900 p-8 md:p-12 flex flex-col justify-between relative overflow-hidden">
               <!-- Decorative pattern -->
@@ -47,7 +47,7 @@
                 </p>
 
                 <div class="space-y-6">
-                  <div class="flex items-center space-x-4 p-3 bg-white/10 backdrop-blur-sm rounded-xl">
+                  <div class="flex items-center space-x-4 p-3 bg-white/10 backdrop-blur-sm rounded-xl transition-transform duration-200 hover:scale-105">
                     <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
                       <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
@@ -59,7 +59,7 @@
                     </div>
                   </div>
                   
-                  <div class="flex items-center space-x-4 p-3 bg-white/10 backdrop-blur-sm rounded-xl">
+                  <div class="flex items-center space-x-4 p-3 bg-white/10 backdrop-blur-sm rounded-xl transition-transform duration-200 hover:scale-105">
                     <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
                       <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -71,7 +71,7 @@
                     </div>
                   </div>
                   
-                  <div class="flex items-center space-x-4 p-3 bg-white/10 backdrop-blur-sm rounded-xl">
+                  <div class="flex items-center space-x-4 p-3 bg-white/10 backdrop-blur-sm rounded-xl transition-transform duration-200 hover:scale-105">
                     <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
                       <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
@@ -91,7 +91,7 @@
             </div>
 
             <!-- Right Panel -->
-            <div class="w-full lg:w-3/5 p-8 md:p-12">
+            <div class="w-full lg:w-3/5 p-8 md:p-12 animate__animated animate__fadeInUp">
               <div class="max-w-md mx-auto">
                 <!-- Contact Form -->
                 <form @submit.prevent="submitForm" class="space-y-6">
@@ -190,7 +190,7 @@
                 </form>
 
                 <!-- Success Message -->
-                <div v-if="formSubmitted" class="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-start">
+                <div v-if="formSubmitted" class="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-start animate__animated animate__fadeIn">
                   <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
@@ -208,7 +208,7 @@
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
               <!-- Phone Support -->
-              <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+              <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow transition-transform duration-200 hover:scale-105 animate__animated animate__fadeInUp">
                 <div class="flex items-center mb-4">
                   <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-lime-100 flex items-center justify-center">
                     <PhoneIcon class="h-6 w-6 text-lime-600" />
@@ -220,7 +220,7 @@
               </div>
 
               <!-- Email Support -->
-              <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+              <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow transition-transform duration-200 hover:scale-105 animate__animated animate__fadeInUp">
                 <div class="flex items-center mb-4">
                   <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-lime-100 flex items-center justify-center">
                     <EnvelopeIcon class="h-6 w-6 text-lime-600" />
@@ -232,7 +232,7 @@
               </div>
 
               <!-- Visit Our Office -->
-              <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+              <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow transition-transform duration-200 hover:scale-105 animate__animated animate__fadeInUp">
                 <div class="flex items-center mb-4">
                   <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-lime-100 flex items-center justify-center">
                     <MapPinIcon class="h-6 w-6 text-lime-600" />
@@ -245,7 +245,7 @@
             </div>
 
             <!-- Business Hours -->
-            <div class="mt-12 bg-white p-6 rounded-xl shadow-md max-w-md mx-auto">
+            <div class="mt-12 bg-white p-6 rounded-xl shadow-md max-w-md mx-auto animate__animated animate__fadeIn">
               <h3 class="text-lg font-medium text-gray-800 mb-4 text-center">Business Hours</h3>
               <div class="space-y-3">
                 <div class="flex justify-between items-center py-2 border-b border-gray-100">
@@ -313,3 +313,22 @@ const submitForm = async () => {
   }, 5000);
 };
 </script>
+
+<style scoped>
+.blob-1 { animation: floatBlob1 12s ease-in-out infinite; }
+.blob-2 { animation: floatBlob2 14s ease-in-out infinite; }
+@keyframes floatBlob1 {
+  0% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(8px, -6px) scale(1.03); }
+  50% { transform: translate(0, 0) scale(1.06); }
+  75% { transform: translate(-8px, 6px) scale(1.03); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+@keyframes floatBlob2 {
+  0% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(-6px, 8px) scale(1.02); }
+  50% { transform: translate(0, 0) scale(1.04); }
+  75% { transform: translate(6px, -8px) scale(1.02); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+</style>

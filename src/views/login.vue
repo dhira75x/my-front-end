@@ -1,5 +1,5 @@
 <template>
-  <div class="flex min-h-screen items-center bg-gray-50">
+  <div class="flex min-h-screen items-center bg-gray-50 animate__animated animate__fadeIn">
     <div class="mx-auto h-full max-w-4xl flex-1 rounded-lg bg-white shadow-xl">
       <div class="flex flex-col md:flex-row">
         <div class="h-32 md:h-auto md:w-1/2">
@@ -26,7 +26,7 @@
                 ></path>
               </svg>
             </div>
-            <h1 class="my-2 mb-4 text-center text-2xl font-bold text-lime-900">
+            <h1 class="my-2 mb-4 text-center text-2xl font-bold text-deepsaffron animate__animated animate__fadeInDown">
               Login to Your Account
             </h1>
             <div class="my-2">
@@ -68,24 +68,22 @@
             <p class="mt-4">
               <router-link
                 to="/forgot-password"
-                class="text-sm text-lime-700 hover:underline"
+                class="text-sm text-deepsaffron hover:underline"
                 >Forgot your password?</router-link
               >
             </p>
-            <router-link to="/landing">
-              <button
-                @click="login"
-                class="focus:shadow-outline-lime my-3 mt-4 block w-full rounded-lg border border-transparent bg-lime-700 px-4 py-2 text-center text-sm font-medium leading-5 text-white transition-colors duration-150 hover:bg-lime-700 focus:outline-none active:bg-lime-600"
-              >
-                Log in
-              </button>
-            </router-link>
+            <button
+              @click="login"
+              class="my-3 mt-4 block w-full rounded-lg border border-transparent bg-deepsaffron px-4 py-2 text-center text-sm font-medium leading-5 text-white transition duration-150 hover:bg-deepsaffron focus:outline-none active:bg-deepsaffron hover:scale-105 focus:ring-2 focus:ring-deepsaffron"
+            >
+              Log in
+            </button>
             <div class="mt-4 text-center">
               <p class="text-sm">
                 Don't have an account yet?
                 <router-link
                   to="/user-reg"
-                  class="mx-2 text-lime-700 hover:underline"
+                  class="mx-2 text-deepsaffron hover:underline"
                 >
                   Register.</router-link
                 >
@@ -174,8 +172,6 @@ const password = ref("");
 const router = useRouter();
 
 const login = () => {
-  // Implement your login logic here
-  // For now, let's navigate to the dashboard page
-  router.push("/views/landing");
+  router.push({ name: "landing" });
 };
 </script>

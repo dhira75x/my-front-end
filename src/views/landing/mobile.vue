@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-lime-950 dark:bg-lime-950">
+  <section class="bg-deepforest dark:bg-deepforest">
     <div class="container mx-auto flex flex-col items-center px-4 py-12 xl:flex-row">
       <div class="flex justify-center xl:w-1/2">
         <img
@@ -25,7 +25,7 @@
         <div class="mt-6 sm:-mx-2">
           <a
             href="#"
-            class="inline-flex w-full items-center justify-center overflow-hidden rounded-lg bg-lime-950 px-4 py-2.5 text-sm text-white shadow transition-colors duration-300 hover:bg-lime-900 focus:ring focus:ring-gray-300 focus:ring-opacity-80 sm:mx-2 sm:w-auto dark:bg-lime-950 dark:hover:bg-lime-900"
+            class="inline-flex w-full items-center justify-center overflow-hidden rounded-lg bg-deepforest px-4 py-2.5 text-sm text-white shadow transition-colors duration-300 hover:bg-deepforest focus:ring focus:ring-gray-300 focus:ring-opacity-80 sm:mx-2 sm:w-auto dark:bg-deepforest dark:hover:bg-deepforest"
           >
             <svg
               class="mx-2 h-5 w-5 fill-current"

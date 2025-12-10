@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen py-8 bg-gray-50">
+  <div class="min-h-screen py-8 bg-gray-50 animate__animated animate__fadeIn">
     <div class="container px-4 mx-auto">
       <!-- Category Header -->
       <div class="mb-8">
@@ -10,7 +10,7 @@
       <div class="flex flex-col gap-8 lg:flex-row">
         <!-- Filters Sidebar -->
         <div class="w-full lg:w-64 flex-shrink-0">
-          <div class="p-6 bg-white rounded-lg shadow-md">
+          <div class="p-6 bg-white rounded-lg shadow-md animate__animated animate__fadeIn">
             <h2 class="mb-4 text-lg font-semibold text-gray-800">Filters</h2>
             
             <!-- Search Filter -->
@@ -158,7 +158,7 @@
           <!-- Reset Filters Button -->
           <button 
             @click="resetFilters"
-            class="w-full py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200"
+            class="w-full py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-transform duration-200 hover:scale-105 focus:ring-2 focus:ring-gray-300"
           >
             Reset Filters
           </button>
@@ -216,7 +216,7 @@
           <div 
             v-for="product in sortedProducts" 
             :key="product.id" 
-            class="overflow-hidden transition-shadow bg-white rounded-lg shadow-md hover:shadow-lg cursor-pointer"
+            class="overflow-hidden transition-shadow bg-white rounded-lg shadow-md hover:shadow-lg cursor-pointer transition-transform duration-300 hover:-translate-y-1 animate__animated animate__fadeInUp"
             @click="viewProduct(product.id)"
             :class="viewMode === 'list' ? 'flex' : ''"
           >
@@ -264,7 +264,7 @@
                   <span class="font-bold text-lime-600">{{ product.price }}</span>
                   <span v-if="product.originalPrice" class="ml-2 text-sm text-gray-500 line-through">{{ product.originalPrice }}</span>
                 </div>
-                <button @click.stop="addToCart(product)" class="p-2 text-white transition-colors rounded-full bg-lime-500 hover:bg-lime-600">
+                <button @click.stop="addToCart(product)" class="p-2 text-white transition rounded-full bg-lime-500 hover:bg-lime-600 duration-200 hover:scale-105 focus:ring-2 focus:ring-lime-400">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                   </svg>

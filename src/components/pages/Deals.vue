@@ -1,16 +1,16 @@
 <template>
   <app-layout>
     <template v-slot:main-content>
-      <div class="relative min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+      <div class="relative min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8 animate__animated animate__fadeIn">
         <!-- Decorative elements -->
         <div class="absolute inset-0 overflow-hidden">
-          <div class="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-lime-100 opacity-50 blur-3xl"></div>
-          <div class="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-green-100 opacity-50 blur-3xl"></div>
+          <div class="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-lime-100 opacity-50 blur-3xl blob-1"></div>
+          <div class="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-green-100 opacity-50 blur-3xl blob-2"></div>
         </div>
         
         <div class="relative max-w-6xl mx-auto">
           <!-- Header -->
-          <div class="text-center mb-16">
+          <div class="text-center mb-16 animate__animated animate__fadeInDown">
             <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">
               Hot <span class="text-transparent bg-clip-text bg-gradient-to-r from-lime-600 to-green-800">Deals</span>
             </h1>
@@ -20,13 +20,13 @@
           </div>
 
           <!-- Deals Categories -->
-          <div class="flex flex-wrap justify-center gap-4 mb-12">
+          <div class="flex flex-wrap justify-center gap-4 mb-12 animate__animated animate__fadeInUp">
             <button 
               v-for="category in categories" 
               :key="category.id"
               @click="selectedCategory = category.id"
               :class="[
-                'px-6 py-2 rounded-full font-medium transition-all',
+                'px-6 py-2 rounded-full font-medium transition-all transition-transform duration-200 hover:scale-105 focus:ring-2 focus:ring-lime-500',
                 selectedCategory === category.id 
                   ? 'bg-gradient-to-r from-lime-600 to-green-700 text-white shadow-lg' 
                   : 'bg-white text-gray-700 hover:bg-gray-100 shadow'
@@ -41,7 +41,7 @@
             <div 
               v-for="deal in filteredDeals" 
               :key="deal.id"
-              class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow"
+              class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow animate__animated animate__fadeInUp transition-transform duration-300 hover:-translate-y-1"
             >
               <div class="relative">
                 <img :src="deal.image" :alt="deal.title" class="w-full h-48 object-cover">
@@ -57,7 +57,7 @@
                     <span class="text-lg font-bold text-gray-900">${{ deal.price }}</span>
                     <span class="text-sm text-gray-500 line-through ml-2">${{ deal.originalPrice }}</span>
                   </div>
-                  <button class="bg-gradient-to-r from-lime-600 to-green-700 text-white px-4 py-2 rounded-lg hover:from-lime-700 hover:to-green-800 transition-all">
+                  <button class="bg-gradient-to-r from-lime-600 to-green-700 text-white px-4 py-2 rounded-lg hover:from-lime-700 hover:to-green-800 transition-all transition-transform duration-200 hover:scale-105 focus:ring-2 focus:ring-lime-500">
                     Shop Now
                   </button>
                 </div>
@@ -72,7 +72,7 @@
           </div>
 
           <!-- Special Banner -->
-          <div class="bg-gradient-to-r from-lime-600 to-green-800 rounded-2xl p-8 md:p-12 text-white text-center mb-16">
+          <div class="bg-gradient-to-r from-lime-600 to-green-800 rounded-2xl p-8 md:p-12 text-white text-center mb-16 animate__animated animate__fadeInUp">
             <h2 class="text-2xl md:text-3xl font-bold mb-4">Exclusive VIP Deal</h2>
             <p class="text-lime-100 mb-6 max-w-2xl mx-auto">
               Sign up for our newsletter and get an additional 10% off your next purchase!
@@ -83,7 +83,7 @@
                 placeholder="Enter your email" 
                 class="flex-grow px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-white"
               >
-              <button class="bg-white text-lime-700 px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-all">
+              <button class="bg-white text-lime-700 px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-all transition-transform duration-200 hover:scale-105 focus:ring-2 focus:ring-white/60">
                 Subscribe
               </button>
             </div>
@@ -93,7 +93,7 @@
           <div>
             <h2 class="text-2xl font-bold text-gray-900 mb-6">Recently Viewed Deals</h2>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div v-for="item in recentlyViewed" :key="item.id" class="bg-white rounded-lg shadow p-4 hover:shadow-md transition-shadow">
+              <div v-for="item in recentlyViewed" :key="item.id" class="bg-white rounded-lg shadow p-4 hover:shadow-md transition-shadow animate__animated animate__fadeInUp transition-transform duration-200 hover:-translate-y-0.5">
                 <img :src="item.image" :alt="item.title" class="w-full h-24 object-cover rounded mb-3">
                 <h3 class="text-sm font-medium text-gray-900 truncate">{{ item.title }}</h3>
                 <p class="text-sm font-bold text-lime-600">${{ item.price }}</p>
@@ -222,3 +222,22 @@ const filteredDeals = computed(() => {
   return deals.value.filter(deal => deal.category === selectedCategory.value);
 });
 </script>
+
+<style scoped>
+.blob-1 { animation: floatBlob1 12s ease-in-out infinite; }
+.blob-2 { animation: floatBlob2 14s ease-in-out infinite; }
+@keyframes floatBlob1 {
+  0% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(8px, -6px) scale(1.03); }
+  50% { transform: translate(0, 0) scale(1.06); }
+  75% { transform: translate(-8px, 6px) scale(1.03); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+@keyframes floatBlob2 {
+  0% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(-6px, 8px) scale(1.02); }
+  50% { transform: translate(0, 0) scale(1.04); }
+  75% { transform: translate(6px, -8px) scale(1.02); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+</style>

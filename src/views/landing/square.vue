@@ -5,7 +5,7 @@ a<template>
    
 
     <!-- Hero Section with Image Carousel -->
-    <section class="relative py-16 text-white md:py-24 bg-gradient-to-r from-lime-600 to-green-900">
+    <section class="relative py-16 text-white md:py-24 bg-gradient-to-r from-deepsaffron to-deepforest">
       <div class="container px-4 mx-auto">
         <div class="flex flex-col items-center md:flex-row">
           <div class="mb-10 md:w-1/2 md:mb-0">
@@ -13,11 +13,11 @@ a<template>
             <p class="mb-8 text-xl opacity-90">Find everything you need at unbeatable prices</p>
             <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
               <button
-                class="px-6 py-3 font-semibold transition-colors bg-white rounded-full text-lime-600 hover:bg-gray-100">
+                class="px-6 py-3 font-semibold transition-colors bg-white rounded-full text-deepsaffron hover:bg-gray-100">
                 Shop Now
               </button>
               <button
-                class="px-6 py-3 font-semibold text-white transition-colors bg-transparent border-2 border-white rounded-full hover:bg-white hover:text-lime-600">
+                class="px-6 py-3 font-semibold text-white transition-colors bg-transparent border-2 border-white rounded-full hover:bg-white hover:text-deepsaffron">
                 Learn More
               </button>
             </div>
@@ -129,7 +129,7 @@ a<template>
                       </svg>
                     </button>
                     <div v-if="item.isNew"
-                      class="absolute px-2 py-1 text-xs font-bold text-white rounded top-3 left-3 bg-lime-500">
+                      class="absolute px-2 py-1 text-xs font-bold text-white rounded top-3 left-3 bg-deepsaffron">
                       NEW
                     </div>
                   </div>
@@ -137,9 +137,9 @@ a<template>
                     <h3 class="mb-1 text-lg font-semibold text-gray-800">{{ item.name }}</h3>
                     <p class="mb-3 text-sm text-gray-600">{{ item.description }}</p>
                     <div class="flex items-center justify-between">
-                      <span class="font-bold text-lime-600">{{ item.price }}</span>
+                      <span class="font-bold text-deepsaffron">{{ item.price }}</span>
                       <button @click="addToCart(item)"
-                        class="p-2 text-white transition-colors rounded-full bg-lime-500 hover:bg-lime-600">
+                        class="p-2 text-white transition-colors rounded-full bg-deepsaffron hover:bg-deepsaffron">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                           xmlns="http://www.w3.org/2000/svg">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -156,7 +156,7 @@ a<template>
           <!-- Carousel Indicators -->
           <div class="flex justify-center mt-6 space-x-2">
             <button v-for="(_, index) in carouselProducts" :key="index" @click="goToSlide(index)"
-              class="w-3 h-3 rounded-full" :class="currentSlide === index ? 'bg-lime-500' : 'bg-gray-300'"></button>
+              class="w-3 h-3 rounded-full" :class="currentSlide === index ? 'bg-deepsaffron' : 'bg-gray-300'"></button>
           </div>
         </div>
       </div>
@@ -168,7 +168,7 @@ a<template>
 
         <div class="flex items-center justify-between mb-12">
           <h2 class="text-3xl font-bold text-center text-gray-800">Shop by Category</h2>
-          <router-link to="/categories" class="flex items-center font-semibold text-lime-600 hover:text-lime-700">
+          <router-link to="/categories" class="flex items-center font-semibold text-deepsaffron hover:text-deepsaffron">
             View All Categories
             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg">
@@ -180,8 +180,8 @@ a<template>
         <div class="grid grid-cols-2 gap-6 md:grid-cols-5">
           <div class="p-6 text-center transition-shadow cursor-pointer bg-gray-50 rounded-xl hover:shadow-lg"
             @click="$router.push({ name: 'electronics' })">
-            <div class="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-lime-100">
-              <svg class="w-8 h-8 text-lime-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            <div class="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-deepsaffron/10">
+              <svg class="w-8 h-8 text-deepsaffron" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
@@ -192,8 +192,8 @@ a<template>
 
           <div class="p-6 text-center transition-shadow cursor-pointer bg-gray-50 rounded-xl hover:shadow-lg"
             @click="$router.push({ name: 'fashion' })">
-            <div class="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-lime-100">
-              <svg class="w-8 h-8 text-lime-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            <div class="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-deepsaffron/10">
+              <svg class="w-8 h-8 text-deepsaffron" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01">
@@ -205,8 +205,8 @@ a<template>
 
           <div class="p-6 text-center transition-shadow cursor-pointer bg-gray-50 rounded-xl hover:shadow-lg"
             @click="$router.push({ name: 'home-kitchen' })">
-            <div class="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-lime-100">
-              <svg class="w-8 h-8 text-lime-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            <div class="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-deepsaffron/10">
+              <svg class="w-8 h-8 text-deepsaffron" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z">
@@ -218,8 +218,8 @@ a<template>
 
           <div class="p-6 text-center transition-shadow cursor-pointer bg-gray-50 rounded-xl hover:shadow-lg"
             @click="$router.push({ name: 'beauty' })">
-            <div class="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-lime-100">
-              <svg class="w-8 h-8 text-lime-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            <div class="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-deepsaffron/10">
+              <svg class="w-8 h-8 text-deepsaffron" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
@@ -231,8 +231,8 @@ a<template>
 
           <div class="p-6 text-center transition-shadow cursor-pointer bg-gray-50 rounded-xl hover:shadow-lg"
             @click="$router.push({ name: 'grocery-drinks' })">
-            <div class="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-lime-100">
-              <svg class="w-8 h-8 text-lime-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            <div class="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-deepsaffron/10">
+              <svg class="w-8 h-8 text-deepsaffron" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
@@ -250,7 +250,7 @@ a<template>
       <div class="container px-4 mx-auto">
         <div class="flex items-center justify-between mb-12">
           <h2 class="text-3xl font-bold text-gray-800">Trending Now</h2>
-          <router-link to="#" class="flex items-center font-semibold text-lime-600 hover:text-lime-700">
+          <router-link to="#" class="flex items-center font-semibold text-deepsaffron hover:text-deepsaffron">
             View All
             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg">
@@ -275,7 +275,7 @@ a<template>
                 </svg>
               </button>
               <div v-if="product.isNew"
-                class="absolute px-2 py-1 text-xs font-bold text-white rounded top-3 left-3 bg-lime-500">
+                class="absolute px-2 py-1 text-xs font-bold text-white rounded top-3 left-3 bg-deepsaffron">
                 NEW
               </div>
             </div>
@@ -283,9 +283,9 @@ a<template>
               <h3 class="mb-1 text-lg font-semibold text-gray-800">{{ product.name }}</h3>
               <p class="mb-3 text-sm text-gray-600">{{ product.description }}</p>
               <div class="flex items-center justify-between">
-                <span class="font-bold text-lime-600">{{ product.price }}</span>
+                <span class="font-bold text-deepsaffron">{{ product.price }}</span>
                 <button @click="addToCart(product)"
-                  class="p-2 text-white transition-colors rounded-full bg-lime-500 hover:bg-lime-600">
+                  class="p-2 text-white transition-colors rounded-full bg-deepsaffron hover:bg-deepsaffron">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -300,7 +300,7 @@ a<template>
     </section>
 
     <!-- Special Offer Section with Image Carousel -->
-    <section class="py-16 text-white bg-gradient-to-r from-lime-600 to-green-900">
+    <section class="py-16 text-white bg-gradient-to-r from-deepsaffron to-deepforest">
       <div class="container px-4 mx-auto">
         <div class="flex flex-col items-center md:flex-row">
           <div class="mb-10 md:w-2/3 md:mb-0">
@@ -328,7 +328,7 @@ a<template>
               </div>
             </div>
             <button
-              class="px-6 py-3 font-semibold transition-colors bg-white rounded-full text-lime-600 hover:bg-gray-100">
+              class="px-6 py-3 font-semibold transition-colors bg-white rounded-full text-deepsaffron hover:bg-gray-100">
               Shop Now
             </button>
           </div>

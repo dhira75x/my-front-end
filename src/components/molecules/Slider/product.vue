@@ -1,12 +1,12 @@
 <template>
-  <section class="container mx-auto mt-8">
+  <section class="container mx-auto mt-8 animate__animated animate__fadeIn">
     <h2 class="mb-4 text-2xl font-semibold">Featured Products</h2>
     <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       <!-- Product Card (Repeat as needed) -->
       <div
         v-for="product in featuredProducts"
         :key="product.id"
-        class="bg-white p-4 shadow-md"
+        class="bg-white p-4 shadow-md rounded-lg transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg animate__animated animate__fadeInUp"
       >
         <img
           :src="product.image"
@@ -19,7 +19,7 @@
         <div class="mx-2 items-center justify-center">
           <button
             @click="handleAddToCart(product)"
-            class="mx-4 mt-4 items-center rounded-full bg-lime-800 px-4 py-2 text-white"
+            class="mx-4 mt-4 items-center rounded-full bg-lime-800 px-4 py-2 text-white transition-transform duration-200 hover:scale-105 focus:ring-2 focus:ring-lime-500"
           >
             Add to Cart
           </button>

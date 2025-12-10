@@ -352,7 +352,7 @@ const resetPassword = async () => {
 
     console.log("Password reset successful");
     toast.success("Password successfully reset.");
-    router.push("/login");
+    router.push("/user-login");
   } catch (error) {
     console.error("Error resetting password:", error);
     if (error.response && error.response.data && error.response.data.message) {

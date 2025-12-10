@@ -23,7 +23,7 @@
                   ></path>
                 </svg>
               </div>
-              <h1 class="mb-4 text-center text-2xl font-bold text-lime-900">Sign up</h1>
+              <h1 class="mb-4 text-center text-2xl font-bold text-deepsaffron">Sign up</h1>
 
               <div>
                 <label class="block text-sm"> Phone Number </label>
@@ -78,7 +78,7 @@
                 />
               </div>
                 <button
-                  class="focus:shadow-outline-blue my-4 mt-4 block w-full rounded-lg border border-transparent bg-lime-700 px-4 py-2 text-center text-sm font-medium leading-5 text-white transition-colors duration-150 hover:bg-lime-700 focus:outline-none active:bg-lime-600"
+                  class="focus:shadow-outline-blue my-4 mt-4 block w-full rounded-lg border border-transparent bg-deepsaffron px-4 py-2 text-center text-sm font-medium leading-5 text-white transition-colors duration-150 hover:bg-deepsaffron focus:outline-none active:bg-deepsaffron"
                   :disabled="registerForm.processing"
                   @click="$router.push({ name: 'landing' })"
                 >
@@ -88,7 +88,7 @@
               <div class="mt-4 text-center">
                 <p class="text-sm">
                   Already have an account yet?
-                  <router-link to="/user-login" class="mx-2 text-lime-700 hover:underline">
+                  <router-link to="/user-login" class="mx-2 text-deepsaffron hover:underline">
                     Log In.</router-link
                   >
                 </p>
@@ -107,7 +107,7 @@
                       <a
                         target="_blank"
                         href="#"
-                        class="text-sm text-lime-700 underline hover:text-lime-900"
+                        class="text-sm text-deepsaffron underline hover:text-deepsaffron"
                       >
                         Terms of Service
                       </a>
@@ -115,7 +115,7 @@
                       <a
                         target="_blank"
                         href="/privacy-policy"
-                        class="text-sm text-lime-700 underline hover:text-lime-900"
+                        class="text-sm text-deepsaffron underline hover:text-deepsaffron"
                       >
                         Privacy Policy
                       </a>
