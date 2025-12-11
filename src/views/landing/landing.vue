@@ -4,88 +4,45 @@
     <Header/>
    
 
-    <!-- Hero Section with Image Carousel -->
+    <!-- Hero Section Full-Width Carousel -->
     <section class="relative py-16 text-white md:py-24 bg-gradient-to-r from-deepsaffron to-deepforest animate__animated animate__fadeIn">
-      <div class="container px-4 mx-auto">
-        <div class="flex flex-col items-center md:flex-row">
-          <div class="mb-10 md:w-1/2 md:mb-0">
-            <h1 class="mb-4 text-4xl font-bold md:text-5xl">Discover Amazing Products</h1>
-            <p class="mb-8 text-xl opacity-90">Find everything you need at unbeatable prices</p>
-            <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
-              <button
-                class="px-6 py-3 font-semibold transition bg-white rounded-full text-deepsaffron hover:bg-gray-100 duration-300 hover:scale-105 focus:ring-2 focus:ring-white/60">
-                Shop Now
-              </button>
-              <button
-                class="px-6 py-3 font-semibold text-white transition bg-transparent border-2 border-white rounded-full hover:bg-white hover:text-deepsaffron duration-300 hover:scale-105 focus:ring-2 focus:ring-white/60">
-                Learn More
-              </button>
-            </div>
-          </div>
-          <div class="flex justify-center md:w-1/2">
-            <div class="relative">
-              <div
-                class="flex items-center justify-center w-64 h-64 bg-white rounded-full md:w-80 md:h-80 bg-opacity-20 outer-ring">
-                <div
-                  class="flex items-center justify-center w-56 h-56 bg-white rounded-full md:w-72 md:h-72 bg-opacity-30 inner-ring">
-                  <div class="relative w-48 h-48 overflow-hidden bg-white shadow-xl md:w-64 md:h-64 rounded-xl">
-                    <!-- Image Carousel -->
-                    <div class="relative w-full h-full overflow-hidden">
-                      <div 
-                        class="flex h-full transition-transform duration-500 ease-in-out"
-                        :style="{ transform: `translateX(-${currentHeroSlide * 100}%)` }"
-                      >
-                        <div v-for="(image, index) in heroImages" :key="index" class="flex-shrink-0 w-full h-full">
-                          <img
-                            :src="image.url"
-                            :alt="image.alt"
-                            class="object-cover w-full h-full"
-                          />
-                        </div>
-                      </div>
-                      
-                      <!-- Carousel Navigation -->
-                      <button 
-                        @click="prevHeroSlide"
-                        class="absolute p-2 transition-all transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full left-2 top-1/2 hover:bg-opacity-75"
-                      >
-                        <svg class="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                        </svg>
-                      </button>
-                      <button 
-                        @click="nextHeroSlide"
-                        class="absolute p-2 transition-all transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full right-2 top-1/2 hover:bg-opacity-75"
-                      >
-                        <svg class="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                      </button>
-                      
-                      <!-- Carousel Indicators -->
-                      <div class="absolute left-0 right-0 flex justify-center space-x-2 bottom-3">
-                        <button 
-                          v-for="(_, index) in heroImages" 
-                          :key="index" 
-                          @click="goToHeroSlide(index)"
-                          class="w-2 h-2 transition-all rounded-full"
-                          :class="currentHeroSlide === index ? 'bg-white w-6' : 'bg-white bg-opacity-50'"
-                        ></button>
+      <div class="container px-4 mx-auto relative overflow-hidden">
+        <div class="flex transition-transform duration-500 ease-in-out" :style="{ transform: `translateX(-${currentHeroSlide * 100}%)` }">
+          <div v-for="(slide, index) in heroSlides" :key="index" class="flex-shrink-0 w-full">
+            <div class="flex flex-col items-center md:flex-row">
+              <div class="mb-10 md:w-1/2 md:mb-0">
+                <h1 class="mb-4 text-4xl font-bold md:text-5xl">{{ slide.title }}</h1>
+                <p class="mb-8 text-xl opacity-90">{{ slide.description }}</p>
+                <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
+                  <button class="px-6 py-3 font-semibold transition bg-white rounded-full text-deepsaffron hover:bg-gray-100 duration-300 hover:scale-105 focus:ring-2 focus:ring-white/60">{{ slide.primaryCta }}</button>
+                  <button class="px-6 py-3 font-semibold text-white transition bg-transparent border-2 border-white rounded-full hover:bg-white hover:text-deepsaffron duration-300 hover:scale-105 focus:ring-2 focus:ring-white/60">{{ slide.secondaryCta }}</button>
+                </div>
+              </div>
+              <div class="flex justify-center md:w-1/2">
+                <div class="relative">
+                  <div class="flex items-center justify-center w-64 h-64 bg-white rounded-full md:w-80 md:h-80 bg-opacity-20 outer-ring">
+                    <div class="flex items-center justify-center w-56 h-56 bg-white rounded-full md:w-72 md:h-72 bg-opacity-30 inner-ring">
+                      <div class="relative w-48 h-48 overflow-hidden bg-white shadow-xl md:w-64 md:h-64 rounded-xl">
+                        <img :src="slide.image.url" :alt="slide.image.alt" class="object-cover w-full h-full" />
                       </div>
                     </div>
                   </div>
+                  <div class="absolute px-4 py-2 font-bold text-gray-800 bg-yellow-400 rounded-full shadow-lg -top-4 -right-4">New Arrivals</div>
                 </div>
-              </div>
-              <div
-                class="absolute px-4 py-2 font-bold text-gray-800 bg-yellow-400 rounded-full shadow-lg -top-4 -right-4">
-                New Arrivals
               </div>
             </div>
           </div>
         </div>
+        <button @click="prevHeroSlide" class="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75">
+          <svg class="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        </button>
+        <button @click="nextHeroSlide" class="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75">
+          <svg class="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </button>
+        <div class="flex justify-center mt-6 space-x-2">
+          <button v-for="(_, i) in heroSlides" :key="i" @click="goToHeroSlide(i)" class="w-3 h-3 rounded-full" :class="currentHeroSlide === i ? 'bg-white' : 'bg-white/50'"></button>
+        </div>
       </div>
-
-      <!-- Decorative Elements -->
       <div class="absolute bottom-0 left-0 w-full h-16 bg-gray-50 rounded-t-3xl"></div>
     </section>
 
@@ -299,99 +256,64 @@
       </div>
     </section>
 
-    <!-- Special Offer Section -->
-     <section class="py-16 text-white bg-gradient-to-r from-deepsaffron to-deepforest">
-      <div class="container px-4 mx-auto">
-        <div class="flex flex-col items-center md:flex-row">
-          <div class="mb-10 md:w-2/3 md:mb-0">
-            <h2 class="mb-4 text-3xl font-bold md:text-4xl">Summer Sale is On!</h2>
-            <p class="mb-6 text-xl opacity-90">Get up to 50% off on selected items. Limited time offer.</p>
-            <div class="flex items-center mb-6 space-x-4">
-              <div class="text-center">
-                <div class="text-3xl font-bold">12</div>
-                <div class="text-sm opacity-80">Days</div>
+    <!-- Special Offer Section Full-Width Carousel -->
+    <section class="py-16 text-white bg-gradient-to-r from-deepsaffron to-deepforest">
+      <div class="container px-4 mx-auto relative overflow-hidden">
+        <div class="flex transition-transform duration-500 ease-in-out" :style="{ transform: `translateX(-${currentSummerSlide * 100}%)` }">
+          <div v-for="(slide, index) in summerSlides" :key="index" class="flex-shrink-0 w-full">
+            <div class="flex flex-col items-center md:flex-row">
+              <div class="mb-10 md:w-2/3 md:mb-0">
+                <h2 class="mb-4 text-3xl font-bold md:text-4xl">{{ slide.title }}</h2>
+                <p class="mb-6 text-xl opacity-90">{{ slide.description }}</p>
+                <div class="flex items-center mb-6 space-x-4">
+                  <div class="text-center">
+                    <div class="text-3xl font-bold">12</div>
+                    <div class="text-sm opacity-80">Days</div>
+                  </div>
+                  <div class="text-3xl">:</div>
+                  <div class="text-center">
+                    <div class="text-3xl font-bold">08</div>
+                    <div class="text-sm opacity-80">Hours</div>
+                  </div>
+                  <div class="text-3xl">:</div>
+                  <div class="text-center">
+                    <div class="text-3xl font-bold">34</div>
+                    <div class="text-sm opacity-80">Minutes</div>
+                  </div>
+                  <div class="text-3xl">:</div>
+                  <div class="text-center">
+                    <div class="text-3xl font-bold">52</div>
+                    <div class="text-sm opacity-80">Seconds</div>
+                  </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                  <button class="px-6 py-3 font-semibold transition-colors bg-white rounded-full text-deepsaffron hover:bg-gray-100">{{ slide.primaryCta }}</button>
+                  <button class="px-6 py-3 font-semibold transition bg-transparent border-2 border-white rounded-full hover:bg-white hover:text-deepsaffron">{{ slide.secondaryCta }}</button>
+                </div>
               </div>
-              <div class="text-3xl">:</div>
-              <div class="text-center">
-                <div class="text-3xl font-bold">08</div>
-                <div class="text-sm opacity-80">Hours</div>
-              </div>
-              <div class="text-3xl">:</div>
-              <div class="text-center">
-                <div class="text-3xl font-bold">34</div>
-                <div class="text-sm opacity-80">Minutes</div>
-              </div>
-              <div class="text-3xl">:</div>
-              <div class="text-center">
-                <div class="text-3xl font-bold">52</div>
-                <div class="text-sm opacity-80">Seconds</div>
-              </div>
-            </div>
-            <button
-              class="px-6 py-3 font-semibold transition-colors bg-white rounded-full text-deepsaffron hover:bg-gray-100">
-              Shop Now
-            </button>
-          </div>
-          <div class="flex justify-center md:w-1/3">
-            <div class="relative">
-              <div
-                class="flex items-center justify-center w-64 h-64 bg-white rounded-full md:w-80 md:h-80 bg-opacity-20 outer-ring">
-                <div
-                  class="flex items-center justify-center w-56 h-56 bg-white rounded-full md:w-72 md:h-72 bg-opacity-30 inner-ring">
-                  <div class="relative w-48 h-48 overflow-hidden bg-white shadow-xl md:w-64 md:h-64 rounded-xl">
-                    <!-- Summer Sale Image Carousel -->
-                    <div class="relative w-full h-full overflow-hidden">
-                      <div 
-                        class="flex h-full transition-transform duration-500 ease-in-out"
-                        :style="{ transform: `translateX(-${currentSummerSlide * 100}%)` }"
-                      >
-                        <div v-for="(image, index) in summerImages" :key="index" class="flex-shrink-0 w-full h-full">
-                          <img
-                            :src="image.url"
-                            :alt="image.alt"
-                            class="object-cover w-full h-full"
-                          />
-                        </div>
-                      </div>
-                      
-                      <!-- Carousel Navigation -->
-                      <button 
-                        @click="prevSummerSlide"
-                        class="absolute left-1 top-1/2 transform -translate-y-1/2 p-1.5 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75 transition-all"
-                      >
-                        <svg class="w-4 h-4 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                        </svg>
-                      </button>
-                      <button 
-                        @click="nextSummerSlide"
-                        class="absolute right-1 top-1/2 transform -translate-y-1/2 p-1.5 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75 transition-all"
-                      >
-                        <svg class="w-4 h-4 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                      </button>
-                      
-                      <!-- Carousel Indicators -->
-                      <div class="absolute left-0 right-0 flex justify-center space-x-1 bottom-2">
-                        <button 
-                          v-for="(_, index) in summerImages" 
-                          :key="index" 
-                          @click="goToSummerSlide(index)"
-                          class="w-1.5 h-1.5 rounded-full transition-all"
-                          :class="currentSummerSlide === index ? 'bg-white w-4' : 'bg-white bg-opacity-50'"
-                        ></button>
+              <div class="flex justify-center md:w-1/3">
+                <div class="relative">
+                  <div class="flex items-center justify-center w-64 h-64 bg-white rounded-full md:w-80 md:h-80 bg-opacity-20 outer-ring">
+                    <div class="flex items-center justify-center w-56 h-56 bg-white rounded-full md:w-72 md:h-72 bg-opacity-30 inner-ring">
+                      <div class="relative w-48 h-48 overflow-hidden bg-white shadow-xl md:w-64 md:h-64 rounded-xl">
+                        <img :src="slide.image.url" :alt="slide.image.alt" class="object-cover w-full h-full" />
                       </div>
                     </div>
                   </div>
+                  <div class="absolute px-3 py-1.5 font-bold text-gray-800 bg-yellow-400 rounded-full shadow-lg -top-4 -right-4 text-sm">50% OFF</div>
                 </div>
-              </div>
-              <div
-                class="absolute px-3 py-1.5 font-bold text-gray-800 bg-yellow-400 rounded-full shadow-lg -top-4 -right-4 text-sm">
-                50% OFF
               </div>
             </div>
           </div>
+        </div>
+        <button @click="prevSummerSlide" class="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75">
+          <svg class="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        </button>
+        <button @click="nextSummerSlide" class="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75">
+          <svg class="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </button>
+        <div class="flex justify-center mt-6 space-x-2">
+          <button v-for="(_, i) in summerSlides" :key="i" @click="goToSummerSlide(i)" class="w-3 h-3 rounded-full" :class="currentSummerSlide === i ? 'bg-white' : 'bg-white/50'"></button>
         </div>
       </div>
     </section>
@@ -695,33 +617,51 @@ const cartTotal = computed(() => {
   }, 0).toFixed(2);
 });
 
-// Hero carousel functionality
 const currentHeroSlide = ref(0);
-const heroImages = ref([
+const heroSlides = ref([
   {
-    url: "/smart_phone.png",
-    alt: "Electronics"
+    title: "Discover Amazing Products",
+    description: "Find everything you need at unbeatable prices",
+    primaryCta: "Shop Now",
+    secondaryCta: "Learn More",
+    image: { url: "/smart_phone.png", alt: "Electronics" }
   },
   {
-    url: "/clothes.png",
-    alt: "Fashion"
+    title: "Refresh Your Style",
+    description: "New season outfits and accessories",
+    primaryCta: "Shop Now",
+    secondaryCta: "Learn More",
+    image: { url: "/clothes.png", alt: "Fashion" }
   },
   {
-    url: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-    alt: "Home & Kitchen"
+    title: "Upgrade Your Home",
+    description: "Top picks for kitchen and living",
+    primaryCta: "Shop Now",
+    secondaryCta: "Learn More",
+    image: { url: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80", alt: "Home & Kitchen" }
   },
   {
-    url: "https://images.unsplash.com/photo-1556228720-195a672e8a03?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-    alt: "Beauty"
+    title: "Beauty Essentials",
+    description: "Care, glow and fragrance",
+    primaryCta: "Shop Now",
+    secondaryCta: "Learn More",
+    image: { url: "https://images.unsplash.com/photo-1556228720-195a672e8a03?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80", alt: "Beauty" }
+  },
+  {
+    title: "Tech For Everyday",
+    description: "Smart gadgets that simplify life",
+    primaryCta: "Shop Now",
+    secondaryCta: "Learn More",
+    image: { url: "/canon.png", alt: "Electronics" }
   }
 ]);
 
 const nextHeroSlide = () => {
-  currentHeroSlide.value = (currentHeroSlide.value + 1) % heroImages.value.length;
+  currentHeroSlide.value = (currentHeroSlide.value + 1) % heroSlides.value.length;
 };
 
 const prevHeroSlide = () => {
-  currentHeroSlide.value = (currentHeroSlide.value - 1 + heroImages.value.length) % heroImages.value.length;
+  currentHeroSlide.value = (currentHeroSlide.value - 1 + heroSlides.value.length) % heroSlides.value.length;
 };
 
 const goToHeroSlide = (index) => {
@@ -732,31 +672,43 @@ const goToHeroSlide = (index) => {
 
 // Summer sale carousel functionality
 const currentSummerSlide = ref(0);
-const summerImages = ref([
+const summerSlides = ref([
   {
-    url: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-    alt: "Summer Fashion"
+    title: "Summer Sale is On!",
+    description: "Get up to 50% off on selected items. Limited time offer.",
+    primaryCta: "Shop Now",
+    secondaryCta: "Learn More",
+    image: { url: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80", alt: "Summer Fashion" }
   },
   {
-    url: "https://images.unsplash.com/photo-1544816155-12df9643f363?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-    alt: "Summer Electronics"
+    title: "Summer Electronics Deals",
+    description: "Save big on laptops, phones and accessories this summer.",
+    primaryCta: "Shop Now",
+    secondaryCta: "Learn More",
+    image: { url: "https://images.unsplash.com/photo-1544816155-12df9643f363?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80", alt: "Summer Electronics" }
   },
   {
-    url: "/sneakers_sales.png",
-    alt: "Summer Accessories"
+    title: "Beach Essentials",
+    description: "Must-have items for your summer vacation.",
+    primaryCta: "Shop Now",
+    secondaryCta: "Learn More",
+    image: { url: "/sneakers_sales.png", alt: "Summer Accessories" }
   },
   {
-    url: "/canon.png",
-    alt: "Summer Sports"
+    title: "Outdoor Gear Sale",
+    description: "Get ready for adventure with our summer gear deals.",
+    primaryCta: "Shop Now",
+    secondaryCta: "Learn More",
+    image: { url: "/canon.png", alt: "Summer Sports" }
   }
 ]);
 
 const nextSummerSlide = () => {
-  currentSummerSlide.value = (currentSummerSlide.value + 1) % summerImages.value.length;
+  currentSummerSlide.value = (currentSummerSlide.value + 1) % summerSlides.value.length;
 };
 
 const prevSummerSlide = () => {
-  currentSummerSlide.value = (currentSummerSlide.value - 1 + summerImages.value.length) % summerImages.value.length;
+  currentSummerSlide.value = (currentSummerSlide.value - 1 + summerSlides.value.length) % summerSlides.value.length;
 };
 
 const goToSummerSlide = (index) => {
