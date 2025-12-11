@@ -166,12 +166,22 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { useUserStore } from "@/stores/userStore.js";
 
 const email = ref("");
 const password = ref("");
 const router = useRouter();
+const userStore = useUserStore();
+
+const deriveName = (emailValue) => {
+  if (!emailValue) return "User";
+  const namePart = emailValue.split("@")[0];
+  return namePart.charAt(0).toUpperCase() + namePart.slice(1);
+};
 
 const login = () => {
+  const names = deriveName(email.value);
+  userStore.login("mock-token", "USER", names, Date.now().toString());
   router.push({ name: "landing" });
 };
 </script>

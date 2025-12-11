@@ -90,26 +90,33 @@
               </div>
             </div>
 
-            <!-- Login/Register Dropdown -->
+            <!-- Account / Auth Dropdown -->
             <div class="relative" ref="dropdownContainer">
               <button @click="toggleDropdown"
                 class="flex items-center px-4 py-2 space-x-1 text-white transition-opacity rounded-full bg-gradient-to-r from-lime-500 to-green-500 hover:opacity-90">
-                <span>Account</span>
+                <span v-if="userStore.isAuthenticated">Hi, {{ userStore.user?.names }}</span>
+                <span v-else>Account</span>
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
               </button>
 
-              <div v-if="showDropdown" class="absolute right-0 z-50 w-48 py-1 mt-2 bg-white rounded-md shadow-lg">
-                <router-link to="/user-login"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Login</router-link>
-                <router-link :to="{ name: 'user-reg' }"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Register as User</router-link>
-                <router-link :to="{ name: 'vendor-reg' }"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Register as Vendor</router-link>
-                <router-link :to="{ name: 'dispatch-reg' }"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Register as Dispatch</router-link>
+              <div v-if="showDropdown" class="absolute right-0 z-50 w-56 py-1 mt-2 bg-white rounded-md shadow-lg">
+                <template v-if="userStore.isAuthenticated">
+                  <div class="px-4 py-2 text-sm text-gray-700">Signed in as <span class="font-semibold">{{ userStore.user?.names }}</span></div>
+                  <button @click="logout" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</button>
+                </template>
+                <template v-else>
+                  <router-link to="/user-login"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Login</router-link>
+                  <router-link :to="{ name: 'user-reg' }"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Register as User</router-link>
+                  <router-link :to="{ name: 'vendor-reg' }"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Register as Vendor</router-link>
+                  <router-link :to="{ name: 'dispatch-reg' }"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Register as Dispatch</router-link>
+                </template>
               </div>
             </div>
           </div>
@@ -121,10 +128,12 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from "vue";
 import { useRouter } from "vue-router";
+import { useUserStore } from "@/stores/userStore.js";
 
 
 
 const router = useRouter();
+const userStore = useUserStore();
 
 // Dropdown functionality
 const showDropdown = ref(false);
@@ -138,6 +147,11 @@ const closeDropdown = (event) => {
   if (showDropdown.value && dropdownContainer.value && !dropdownContainer.value.contains(event.target)) {
     showDropdown.value = false;
   }
+};
+
+const logout = () => {
+  userStore.logout();
+  showDropdown.value = false;
 };
 
 // Cart functionality

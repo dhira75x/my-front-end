@@ -78,9 +78,9 @@
                 />
               </div>
                 <button
+                  type="submit"
                   class="focus:shadow-outline-blue my-4 mt-4 block w-full rounded-lg border border-transparent bg-deepsaffron px-4 py-2 text-center text-sm font-medium leading-5 text-white transition-colors duration-150 hover:bg-deepsaffron focus:outline-none active:bg-deepsaffron"
                   :disabled="registerForm.processing"
-                  @click="$router.push({ name: 'landing' })"
                 >
                   Register
                 </button>
@@ -175,6 +175,8 @@ import { ref } from "vue";
 import { reactive } from "vue";
 import Checkbox from "../components/atoms/Box/Checkbox.vue";
 import Label from "../components/atoms/Label.vue";
+import { useRouter } from "vue-router";
+import { useUserStore } from "@/stores/userStore.js";
 
 const registerForm = reactive({
   phone: "",
@@ -184,11 +186,21 @@ const registerForm = reactive({
   processing: false,
 });
 
+const router = useRouter();
+const userStore = useUserStore();
+
+const deriveName = (emailValue) => {
+  if (!emailValue) return registerForm.phone || "User";
+  const namePart = emailValue.split("@")[0];
+  return namePart.charAt(0).toUpperCase() + namePart.slice(1);
+};
+
 const register = () => {
-  // Implement your registration logic here
-  // You can access form fields using registerForm.name, registerForm.email, etc.
-  // You can set processing to true while the registration is in progress.
-  // After completing the registration, set processing back to false.
+  registerForm.processing = true;
+  const names = deriveName(registerForm.email);
+  userStore.login("mock-token", "USER", names, Date.now().toString());
+  registerForm.processing = false;
+  router.push({ name: "landing" });
 };
 
 // You can also use ref for individual variables if needed
