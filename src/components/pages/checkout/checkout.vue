@@ -380,9 +380,9 @@ const generateReference = () => {
 // Initialize Paystack payment
 const initializePaystack = () => {
   const handler = PaystackPop.setup({
-    key: 'pk_test_xxxxxxxxxxxxxxxxxxxxxxxx', // Replace with your Paystack public key
+    key: import.meta.env.VITE_PAYSTACK_PUBLIC_KEY,
     email: customerInfo.value.email,
-    amount: parseFloat(total.value) * 100, // Paystack expects amount in kobo
+    amount: parseFloat(total.value) * 100,
     currency: 'NGN',
     ref: generateReference(),
     metadata: {

@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/api/withdrawals'; // Adjust this URL to where your backend is hosted
+const API_URL = 'http://localhost:3000/api/withdrawals';
 
 export default {
   async getWithdrawals(paginationOptions) {

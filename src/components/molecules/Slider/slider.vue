@@ -24,7 +24,7 @@
 import { ref, onMounted } from "vue";
 import { useCartStore } from "@/stores/cartStore.js";
 import { useRouter } from "vue-router";
-import gallantryImage from "@/assets/gallantry.jpg";
+import gallantryImage from "/gallantry.jpg";
 import redLabelImage from "@/assets/redlabel.jpg";
 import coronaImage from "@/assets/corona.jpg";
 import carlsImage from "@/assets/carls.jpg";

@@ -32,7 +32,7 @@
                     <!-- Image Carousel -->
                     <div class="relative w-full h-full overflow-hidden">
                       <div 
-                        class="flex transition-transform duration-500 ease-in-out h-full"
+                        class="flex h-full transition-transform duration-500 ease-in-out"
                         :style="{ transform: `translateX(-${currentHeroSlide * 100}%)` }"
                       >
                         <div v-for="(image, index) in heroImages" :key="index" class="flex-shrink-0 w-full h-full">
@@ -47,7 +47,7 @@
                       <!-- Carousel Navigation -->
                       <button 
                         @click="prevHeroSlide"
-                        class="absolute left-2 top-1/2 transform -translate-y-1/2 p-2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75 transition-all"
+                        class="absolute p-2 transition-all transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full left-2 top-1/2 hover:bg-opacity-75"
                       >
                         <svg class="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
@@ -55,7 +55,7 @@
                       </button>
                       <button 
                         @click="nextHeroSlide"
-                        class="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75 transition-all"
+                        class="absolute p-2 transition-all transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full right-2 top-1/2 hover:bg-opacity-75"
                       >
                         <svg class="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -63,12 +63,12 @@
                       </button>
                       
                       <!-- Carousel Indicators -->
-                      <div class="absolute bottom-3 left-0 right-0 flex justify-center space-x-2">
+                      <div class="absolute left-0 right-0 flex justify-center space-x-2 bottom-3">
                         <button 
                           v-for="(_, index) in heroImages" 
                           :key="index" 
                           @click="goToHeroSlide(index)"
-                          class="w-2 h-2 rounded-full transition-all"
+                          class="w-2 h-2 transition-all rounded-full"
                           :class="currentHeroSlide === index ? 'bg-white w-6' : 'bg-white bg-opacity-50'"
                         ></button>
                       </div>
@@ -342,7 +342,7 @@
                     <!-- Summer Sale Image Carousel -->
                     <div class="relative w-full h-full overflow-hidden">
                       <div 
-                        class="flex transition-transform duration-500 ease-in-out h-full"
+                        class="flex h-full transition-transform duration-500 ease-in-out"
                         :style="{ transform: `translateX(-${currentSummerSlide * 100}%)` }"
                       >
                         <div v-for="(image, index) in summerImages" :key="index" class="flex-shrink-0 w-full h-full">
@@ -373,7 +373,7 @@
                       </button>
                       
                       <!-- Carousel Indicators -->
-                      <div class="absolute bottom-2 left-0 right-0 flex justify-center space-x-1">
+                      <div class="absolute left-0 right-0 flex justify-center space-x-1 bottom-2">
                         <button 
                           v-for="(_, index) in summerImages" 
                           :key="index" 

@@ -210,65 +210,128 @@
           </div>
         </div>
 
-        <!-- Products Grid/List View -->
-        <div v-if="filteredProducts.length > 0" :class="viewMode === 'grid' ? 'grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3' : 'space-y-6'">
-          <!-- Product Card/Grid Item -->
-          <div 
-            v-for="product in sortedProducts" 
-            :key="product.id" 
-            class="overflow-hidden transition-shadow bg-white rounded-lg shadow-md hover:shadow-lg cursor-pointer transition-transform duration-300 hover:-translate-y-1 animate__animated animate__fadeInUp"
-            @click="viewProduct(product.id)"
-            :class="viewMode === 'list' ? 'flex' : ''"
-          >
-            <div :class="viewMode === 'list' ? 'w-1/3 flex-shrink-0' : ''">
-              <div class="relative">
-                <img :src="product.image" alt="Product Image" class="object-cover w-full h-48">
-                <button class="absolute p-2 bg-white rounded-full shadow-md top-3 right-3 hover:bg-gray-100" @click.stop>
-                  <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                  </svg>
-                </button>
-                <div v-if="product.isNew" class="absolute px-2 py-1 text-xs font-bold text-white rounded top-3 left-3 bg-lime-500">
-                  NEW
-                </div>
-                <div v-if="product.onSale" class="absolute px-2 py-1 text-xs font-bold text-white rounded top-12 left-3 bg-red-500">
-                  SALE
+        <!-- Products View -->
+        <div v-if="filteredProducts.length > 0">
+          <div v-if="viewMode === 'grid'" class="relative overflow-hidden">
+            <div class="flex transition duration-500 ease-in-out" :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
+              <div v-for="(slide, sIdx) in slides" :key="sIdx" class="flex-shrink-0 w-full">
+                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                  <div 
+                    v-for="product in slide" 
+                    :key="product.id" 
+                    class="overflow-hidden transition bg-white rounded-lg shadow-md hover:shadow-lg cursor-pointer duration-300 hover:-translate-y-1 animate__animated animate__fadeInUp"
+                    @click="viewProduct(product.id)"
+                  >
+                    <div>
+                      <div class="relative">
+                        <img :src="product.image" alt="Product Image" class="object-cover w-full h-48">
+                        <button class="absolute p-2 bg-white rounded-full shadow-md top-3 right-3 hover:bg-gray-100" @click.stop>
+                          <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                          </svg>
+                        </button>
+                        <div v-if="product.isNew" class="absolute px-2 py-1 text-xs font-bold text-white rounded top-3 left-3 bg-lime-500">NEW</div>
+                        <div v-if="product.onSale" class="absolute px-2 py-1 text-xs font-bold text-white rounded top-12 left-3 bg-red-500">SALE</div>
+                      </div>
+                    </div>
+                    <div class="p-4">
+                      <div class="flex items-center mb-1">
+                        <div class="flex text-yellow-400">
+                          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                          </svg>
+                          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                          </svg>
+                          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                          </svg>
+                          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                          </svg>
+                          <svg class="w-4 h-4 text-gray-300" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                          </svg>
+                        </div>
+                        <span class="ml-1 text-xs text-gray-500">({product.reviews})</span>
+                      </div>
+                      <h3 class="mb-1 text-lg font-semibold text-gray-800">{{ product.name }}</h3>
+                      <p class="mb-3 text-sm text-gray-600">{{ product.description }}</p>
+                      <div class="flex items-center justify-between">
+                        <div>
+                          <span class="font-bold text-lime-600">{{ product.price }}</span>
+                          <span v-if="product.originalPrice" class="ml-2 text-sm text-gray-500 line-through">{{ product.originalPrice }}</span>
+                        </div>
+                        <button @click.stop="addToCart(product)" class="p-2 text-white transition rounded-full bg-lime-500 hover:bg-lime-600 duration-200 hover:scale-105 focus:ring-2 focus:ring-lime-400">
+                          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="p-4" :class="viewMode === 'list' ? 'flex-1' : ''">
-              <div class="flex items-center mb-1">
-                <div class="flex text-yellow-400">
-                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                  </svg>
-                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                  </svg>
-                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                  </svg>
-                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                  </svg>
-                  <svg class="w-4 h-4 text-gray-300" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                  </svg>
+            <div class="flex justify-center mt-6 space-x-2">
+              <button v-for="(_, index) in slides" :key="index" @click="goTo(index)" class="w-3 h-3 rounded-full" :class="currentSlide === index ? 'bg-lime-600' : 'bg-gray-300'"></button>
+            </div>
+            <button @click="prev" class="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-white bg-opacity-60 rounded-full hover:bg-opacity-90">◀</button>
+            <button @click="next" class="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-white bg-opacity-60 rounded-full hover:bg-opacity-90">▶</button>
+          </div>
+          <div v-else class="space-y-6">
+            <div 
+              v-for="product in sortedProducts" 
+              :key="product.id" 
+              class="overflow-hidden transition bg-white rounded-lg shadow-md hover:shadow-lg cursor-pointer duration-300 hover:-translate-y-1 animate__animated animate__fadeInUp flex"
+              @click="viewProduct(product.id)"
+            >
+              <div class="w-1/3 flex-shrink-0">
+                <div class="relative">
+                  <img :src="product.image" alt="Product Image" class="object-cover w-full h-48">
+                  <button class="absolute p-2 bg-white rounded-full shadow-md top-3 right-3 hover:bg-gray-100" @click.stop>
+                    <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                    </svg>
+                  </button>
+                  <div v-if="product.isNew" class="absolute px-2 py-1 text-xs font-bold text-white rounded top-3 left-3 bg-lime-500">NEW</div>
+                  <div v-if="product.onSale" class="absolute px-2 py-1 text-xs font-bold text-white rounded top-12 left-3 bg-red-500">SALE</div>
                 </div>
-                <span class="ml-1 text-xs text-gray-500">({product.reviews})</span>
               </div>
-              <h3 class="mb-1 text-lg font-semibold text-gray-800">{{ product.name }}</h3>
-              <p class="mb-3 text-sm text-gray-600">{{ product.description }}</p>
-              <div class="flex items-center justify-between">
-                <div>
-                  <span class="font-bold text-lime-600">{{ product.price }}</span>
-                  <span v-if="product.originalPrice" class="ml-2 text-sm text-gray-500 line-through">{{ product.originalPrice }}</span>
+              <div class="p-4 flex-1">
+                <div class="flex items-center mb-1">
+                  <div class="flex text-yellow-400">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                    </svg>
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                    </svg>
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                    </svg>
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                    </svg>
+                    <svg class="w-4 h-4 text-gray-300" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                    </svg>
+                  </div>
+                  <span class="ml-1 text-xs text-gray-500">({product.reviews})</span>
                 </div>
-                <button @click.stop="addToCart(product)" class="p-2 text-white transition rounded-full bg-lime-500 hover:bg-lime-600 duration-200 hover:scale-105 focus:ring-2 focus:ring-lime-400">
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                  </svg>
-                </button>
+                <h3 class="mb-1 text-lg font-semibold text-gray-800">{{ product.name }}</h3>
+                <p class="mb-3 text-sm text-gray-600">{{ product.description }}</p>
+                <div class="flex items-center justify-between">
+                  <div>
+                    <span class="font-bold text-lime-600">{{ product.price }}</span>
+                    <span v-if="product.originalPrice" class="ml-2 text-sm text-gray-500 line-through">{{ product.originalPrice }}</span>
+                  </div>
+                  <button @click.stop="addToCart(product)" class="p-2 text-white transition rounded-full bg-lime-500 hover:bg-lime-600 duration-200 hover:scale-105 focus:ring-2 focus:ring-lime-400">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                    </svg>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -439,6 +502,29 @@ const sortedProducts = computed(() => {
       return products;
   }
 });
+
+const currentSlide = ref(0);
+const perSlide = ref(3);
+const slides = computed(() => {
+  const out = [];
+  const list = [...sortedProducts.value];
+  for (let i = 0; i < list.length; i += perSlide.value) {
+    out.push(list.slice(i, i + perSlide.value));
+  }
+  return out;
+});
+const next = () => {
+  if (slides.value.length === 0) return;
+  currentSlide.value = (currentSlide.value + 1) % slides.value.length;
+};
+const prev = () => {
+  if (slides.value.length === 0) return;
+  currentSlide.value = (currentSlide.value - 1 + slides.value.length) % slides.value.length;
+};
+const goTo = (idx) => {
+  if (slides.value.length === 0) return;
+  currentSlide.value = idx;
+};
 
 // Reset all filters
 const resetFilters = () => {
