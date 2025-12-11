@@ -300,7 +300,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="absolute px-3 py-1.5 font-bold text-gray-800 bg-yellow-400 rounded-full shadow-lg -top-4 -right-4 text-sm">50% OFF</div>
+                  <div class="absolute px-3 py-1.5 font-bold text-gray-800 bg-yellow-400 rounded-full shadow-lg bottom-2 right-2 md:bottom-4 md:right-4 text-sm z-10">50% OFF</div>
                 </div>
               </div>
             </div>
@@ -889,6 +889,22 @@ const carouselProducts = computed(() => {
     });
   }
   return slides;
+});
+
+let heroAutoplay;
+let summerAutoplay;
+let productAutoplay;
+
+onMounted(() => {
+  heroAutoplay = setInterval(nextHeroSlide, 5000);
+  summerAutoplay = setInterval(nextSummerSlide, 5000);
+  productAutoplay = setInterval(nextSlide, 5000);
+});
+
+onUnmounted(() => {
+  clearInterval(heroAutoplay);
+  clearInterval(summerAutoplay);
+  clearInterval(productAutoplay);
 });
 
 // Auto-play carousels
