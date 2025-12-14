@@ -12,7 +12,7 @@
           <!-- Header -->
           <div class="text-center mb-16 animate__animated animate__fadeInDown">
             <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">
-              Hot <span class="text-transparent bg-clip-text bg-gradient-to-r from-lime-600 to-green-800">Deals</span>
+              Hot <span class="text-transparent bg-clip-text brand-gradient">Deals</span>
             </h1>
             <p class="text-lg text-gray-600 max-w-2xl mx-auto">
               Discover our latest offers and exclusive discounts. Limited time only!
@@ -26,9 +26,9 @@
               :key="category.id"
               @click="selectedCategory = category.id"
               :class="[
-                'px-6 py-2 rounded-full font-medium transition-all transition-transform duration-200 hover:scale-105 focus:ring-2 focus:ring-lime-500',
+                'px-6 py-2 rounded-full font-medium transition-all transition-transform duration-200 hover:scale-105 focus:ring-2 focus:ring-deepsaffron',
                 selectedCategory === category.id 
-                  ? 'bg-gradient-to-r from-lime-600 to-green-700 text-white shadow-lg' 
+                  ? 'brand-gradient text-white shadow-lg' 
                   : 'bg-white text-gray-700 hover:bg-gray-100 shadow'
               ]"
             >
@@ -57,7 +57,7 @@
                     <span class="text-lg font-bold text-gray-900">${{ deal.price }}</span>
                     <span class="text-sm text-gray-500 line-through ml-2">${{ deal.originalPrice }}</span>
                   </div>
-                  <button class="bg-gradient-to-r from-lime-600 to-green-700 text-white px-4 py-2 rounded-lg hover:from-lime-700 hover:to-green-800 transition-all transition-transform duration-200 hover:scale-105 focus:ring-2 focus:ring-lime-500">
+                  <button class="brand-gradient text-white px-4 py-2 rounded-lg transition-all transition-transform duration-200 hover:scale-105 focus:ring-2 focus:ring-deepsaffron">
                     Shop Now
                   </button>
                 </div>
@@ -72,9 +72,9 @@
           </div>
 
           <!-- Special Banner -->
-          <div class="bg-gradient-to-r from-lime-600 to-green-800 rounded-2xl p-8 md:p-12 text-white text-center mb-16 animate__animated animate__fadeInUp">
+          <div class="brand-gradient rounded-2xl p-8 md:p-12 text-white text-center mb-16 animate__animated animate__fadeInUp">
             <h2 class="text-2xl md:text-3xl font-bold mb-4">Exclusive VIP Deal</h2>
-            <p class="text-lime-100 mb-6 max-w-2xl mx-auto">
+            <p class="text-white/80 mb-6 max-w-2xl mx-auto">
               Sign up for our newsletter and get an additional 10% off your next purchase!
             </p>
             <div class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
@@ -83,7 +83,7 @@
                 placeholder="Enter your email" 
                 class="flex-grow px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-white"
               >
-              <button class="bg-white text-lime-700 px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-all transition-transform duration-200 hover:scale-105 focus:ring-2 focus:ring-white/60">
+              <button class="bg-white text-deepsaffron px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-all transition-transform duration-200 hover:scale-105 focus:ring-2 focus:ring-white/60">
                 Subscribe
               </button>
             </div>
@@ -96,7 +96,7 @@
               <div v-for="item in recentlyViewed" :key="item.id" class="bg-white rounded-lg shadow p-4 hover:shadow-md transition-shadow animate__animated animate__fadeInUp transition-transform duration-200 hover:-translate-y-0.5">
                 <img :src="item.image" :alt="item.title" class="w-full h-24 object-cover rounded mb-3">
                 <h3 class="text-sm font-medium text-gray-900 truncate">{{ item.title }}</h3>
-                <p class="text-sm font-bold text-lime-600">${{ item.price }}</p>
+                <p class="text-sm font-bold text-deepsaffron">${{ item.price }}</p>
               </div>
             </div>
           </div>

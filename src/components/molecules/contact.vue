@@ -262,6 +262,26 @@
                 </div>
               </div>
             </div>
+
+            <!-- Brand & QR -->
+            <div class="mt-12 bg-white p-6 rounded-xl shadow-md max-w-2xl mx-auto animate__animated animate__fadeIn">
+              <h3 class="text-lg font-medium text-gray-800 mb-4 text-center">Our Brand & Quick Access</h3>
+              <div class="flex items-center justify-center gap-8">
+                <!-- Logo + Wordmark -->
+                <div class="flex flex-col items-center">
+                  <div class="w-16 h-16 rounded-lg flex items-center justify-center brand-gradient shadow-sm">
+                    <img src="@/assets/ovo.svg" alt="OvoMarket Icon" class="w-10 h-10" />
+                  </div>
+                  <div class="mt-2 font-semibold text-transparent bg-clip-text brand-gradient">ovo market</div>
+                </div>
+
+                <!-- QR Code -->
+                <div class="flex flex-col items-center">
+                  <img :src="qrUrl" alt="Scan to visit OvoMarket" class="w-32 h-32 rounded-lg border border-gray-200 shadow-sm" />
+                  <div class="mt-2 text-xs text-gray-500">Scan to visit our store</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -270,7 +290,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import AppLayout from '@/layouts/applayout.vue';
 import { 
   PhoneIcon, 
@@ -312,6 +332,9 @@ const submitForm = async () => {
     formSubmitted.value = false;
   }, 5000);
 };
+
+// Dynamic QR to current site origin
+const qrUrl = computed(() => `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(window.location.origin)}`);
 </script>
 
 <style scoped>

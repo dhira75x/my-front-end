@@ -322,7 +322,7 @@
       <div class="container px-4 mx-auto">
         <div class="flex items-center justify-between mb-12">
           <h2 class="text-3xl font-bold text-gray-800">Hot Deals</h2>
-          <router-link to="#" class="flex items-center font-semibold text-lime-600 hover:text-lime-700">
+          <router-link to="#" class="flex items-center font-semibold text-transparent bg-clip-text brand-gradient">
             View All
             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg">
@@ -347,7 +347,7 @@
                 </svg>
               </button>
               <div v-if="product.isNew"
-                class="absolute px-2 py-1 text-xs font-bold text-white rounded top-3 left-3 bg-lime-500">
+                class="absolute px-2 py-1 text-xs font-bold text-white rounded top-3 left-3 bg-deepsaffron">
                 NEW
               </div>
             </div>
@@ -355,9 +355,9 @@
               <h3 class="mb-1 text-lg font-semibold text-gray-800">{{ product.name }}</h3>
               <p class="mb-3 text-sm text-gray-600">{{ product.description }}</p>
               <div class="flex items-center justify-between">
-                <span class="font-bold text-lime-600">{{ product.price }}</span>
+                <span class="font-bold text-deepsaffron">{{ product.price }}</span>
                 <button @click="addToCart(product)"
-                  class="p-2 text-white transition-colors rounded-full bg-lime-500 hover:bg-lime-600">
+                  class="p-2 text-white transition-colors rounded-full bg-deepsaffron hover:bg-deepsaffron">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -532,7 +532,7 @@
               <div class="absolute w-48 p-4 bg-white shadow-lg -bottom-6 -right-6 rounded-xl">
                 <div class="flex items-center mb-2">
                   <div
-                    class="flex items-center justify-center w-8 h-8 mr-2 font-bold text-white rounded-full bg-lime-500">
+                    class="flex items-center justify-center w-8 h-8 mr-2 font-bold text-white rounded-full bg-deepsaffron">
                     O
                   </div>
                   <div>

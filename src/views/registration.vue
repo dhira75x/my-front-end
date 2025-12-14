@@ -2,7 +2,7 @@
   <div class="flex min-h-screen items-center bg-gray-50">
     <div class="mx-auto h-full max-w-4xl flex-1 rounded-lg bg-white shadow-xl">
       <div class="flex flex-col md:flex-row">
-        <div class="h-32 md:h-auto md:w-1/2">
+        <div class="hidden md:block md:h-auto md:w-1/2">
           <img class="h-full w-full object-cover" src="../assets/login.jpeg" alt="img" />
         </div>
         <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">

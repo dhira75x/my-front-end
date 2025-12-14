@@ -1,6 +1,6 @@
 <script setup>
 import AppLayout from '@/layouts/applayout.vue';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { CheckIcon } from '@heroicons/vue/24/solid';
 
 const teamMembers = ref([
@@ -20,6 +20,8 @@ const teamMembers = ref([
     avatar: 'https://randomuser.me/api/portraits/women/68.jpg'
   }
 ]);
+
+const qrUrl = computed(() => `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(window.location.origin)}`);
 </script>
 
 <template>
@@ -93,10 +95,31 @@ const teamMembers = ref([
             </div>
           </div>
         </section>
+
+        <!-- Brand Assets -->
+        <section class="bg-white rounded-xl shadow-md p-8 animate__animated animate__fadeInUp">
+          <h2 class="text-2xl font-bold text-gray-800 mb-6">Brand & Quick Access</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div class="flex flex-col items-center justify-center p-6 rounded-xl shadow-sm border border-gray-100">
+              <div class="w-16 h-16 rounded-lg flex items-center justify-center brand-gradient">
+                <img src="@/assets/ovo.svg" alt="OvoMarket Icon" class="w-10 h-10" />
+              </div>
+              <div class="mt-3 text-sm text-gray-500">Primary icon</div>
+            </div>
+            <div class="flex flex-col items-center justify-center p-6 rounded-xl shadow-sm border border-gray-100">
+              <div class="text-2xl font-extrabold text-transparent bg-clip-text brand-gradient">ovo market</div>
+              <div class="mt-3 text-sm text-gray-500">Wordmark</div>
+            </div>
+            <div class="flex flex-col items-center justify-center p-6 rounded-xl shadow-sm border border-gray-100">
+              <img :src="qrUrl" alt="Scan to visit OvoMarket" class="w-32 h-32 rounded-lg border border-gray-200" />
+              <div class="mt-3 text-sm text-gray-500">Scan to visit our store</div>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   </div>
-  </template>
+    </template>
   </app-layout>
 </template>
 

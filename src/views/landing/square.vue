@@ -168,7 +168,7 @@ a<template>
 
         <div class="flex items-center justify-between mb-12">
           <h2 class="text-3xl font-bold text-center text-gray-800">Shop by Category</h2>
-          <router-link to="/categories" class="flex items-center font-semibold text-deepsaffron hover:text-deepsaffron">
+          <router-link to="/categories" class="flex items-center font-semibold text-transparent bg-clip-text brand-gradient">
             View All Categories
             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg">

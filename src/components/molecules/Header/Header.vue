@@ -1,15 +1,10 @@
 <template>
-     <header class="sticky top-0 z-50 bg-white shadow-md">
+    <header class="sticky top-0 z-50 bg-white shadow-md">
       <div class="container px-4 py-3 mx-auto">
         <div class="flex items-center justify-between">
           <!-- Logo -->
-          <div class="flex items-center space-x-2">
-            <div
-              class="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-r from-lime-50 to-green-50">
-              <!-- <span class="text-xl font-bold text-white">O</span> -->
-              <img src="@/assets/ovo.svg" alt="OvoMarket Logo" class="w-6 h-6" />
-            </div>
-            <span class="text-xl font-bold text-gray-800">OvoMarket</span>
+          <div class="flex items-center cursor-pointer" @click="$router.push({ name: 'landing' })">
+            <img src="@/components/icons/ovo logo.jpeg" alt="Ovo Market" class="h-8 md:h-10 w-auto" />
           </div>
 
           <!-- Search Bar -->
@@ -25,10 +20,10 @@
           <!-- Navigation -->
           <nav class="hidden space-x-8 md:flex">
            <ul class="flex space-x-8">
-            <li @click="$router.push({ name: 'landing' })" class="font-medium text-gray-600 transition-colors hover:text-lime-600 cursor-pointer">Home</li>
-             <li @click="$router.push({ name: 'categories' })" class="font-medium text-gray-600 transition-colors hover:text-lime-600 cursor-pointer">Categories</li>
-             <li @click="$router.push({ name: 'deals' })" class="font-medium text-gray-600 transition-colors hover:text-lime-600 cursor-pointer">Deals</li>
-             <li @click="$router.push({ name: 'about' })" class="font-medium text-gray-600 transition-colors hover:text-lime-600 cursor-pointer">About</li>
+            <li @click="$router.push({ name: 'landing' })" class="font-medium text-transparent bg-clip-text brand-gradient cursor-pointer">Home</li>
+             <li @click="$router.push({ name: 'categories' })" class="font-medium text-transparent bg-clip-text brand-gradient cursor-pointer">Categories</li>
+             <li @click="$router.push({ name: 'deals' })" class="font-medium text-transparent bg-clip-text brand-gradient cursor-pointer">Deals</li>
+             <li @click="$router.push({ name: 'about' })" class="font-medium text-transparent bg-clip-text brand-gradient cursor-pointer">About</li>
            </ul>
           </nav>
 
@@ -38,7 +33,7 @@
           <div class="flex items-center space-x-4">
             <!-- Cart Button with Dropdown -->
             <div class="relative" ref="cartContainer">
-              <button @click="toggleCart" class="relative p-2 text-gray-600 transition-colors hover:text-lime-600">
+              <button @click="toggleCart" class="relative p-2 text-gray-600 transition-colors hover:text-deepsaffron">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -46,7 +41,7 @@
                   </path>
                 </svg>
                 <span
-                  class="absolute top-0 right-0 flex items-center justify-center w-5 h-5 text-xs text-white rounded-full bg-lime-500">{{
+                  class="absolute top-0 right-0 flex items-center justify-center w-5 h-5 text-xs text-white rounded-full bg-deepsaffron">{{
                   cartItems.length }}</span>
               </button>
 
@@ -93,7 +88,7 @@
             <!-- Account / Auth Dropdown -->
             <div class="relative" ref="dropdownContainer">
               <button @click="toggleDropdown"
-                class="flex items-center px-4 py-2 space-x-1 text-white transition-opacity rounded-full bg-gradient-to-r from-lime-500 to-green-500 hover:opacity-90">
+                class="flex items-center px-4 py-2 space-x-1 text-white transition-opacity rounded-full brand-gradient hover:opacity-90">
                 <span v-if="userStore.isAuthenticated">Hi, {{ userStore.user?.names }}</span>
                 <span v-else>Account</span>
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -122,6 +117,30 @@
           </div>
         </div>
       </div>
+      <nav class="fixed bottom-0 inset-x-0 z-50 border-t border-gray-200 bg-white md:hidden">
+        <div class="grid grid-cols-5 text-xs">
+          <button class="flex flex-col items-center justify-center py-2" :class="currentRouteName === 'landing' ? 'text-deepsaffron' : 'text-gray-600'" @click="$router.push({ name: 'landing' })">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1"/></svg>
+            <span>Home</span>
+          </button>
+          <button class="flex flex-col items-center justify-center py-2" :class="currentRouteName === 'categories' ? 'text-deepsaffron' : 'text-gray-600'" @click="$router.push({ name: 'categories' })">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+            <span>Categories</span>
+          </button>
+          <button class="flex flex-col items-center justify-center py-2" :class="currentRouteName === 'deals' ? 'text-deepsaffron' : 'text-gray-600'" @click="$router.push({ name: 'deals' })">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h10M7 11h10M7 15h10"/></svg>
+            <span>Deals</span>
+          </button>
+          <button class="flex flex-col items-center justify-center py-2" :class="currentRouteName === 'cart' ? 'text-deepsaffron' : 'text-gray-600'" @click="$router.push({ name: 'cart' })">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+            <span>Cart</span>
+          </button>
+          <button class="flex flex-col items-center justify-center py-2" :class="currentRouteName === 'user-login' ? 'text-deepsaffron' : 'text-gray-600'" @click="userStore.isAuthenticated ? $router.push({ name: 'landing' }) : $router.push({ name: 'user-login' })">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A6 6 0 1118.879 6.196M15 11l-4 4m0 0l-4-4m4 4V7"/></svg>
+            <span>Account</span>
+          </button>
+        </div>
+      </nav>
     </header>
 </template>
 
@@ -153,6 +172,8 @@ const logout = () => {
   userStore.logout();
   showDropdown.value = false;
 };
+
+const currentRouteName = computed(() => router.currentRoute.value.name);
 
 // Cart functionality
 const showCart = ref(false);
