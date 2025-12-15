@@ -5,6 +5,7 @@ import Footer from "@/components/molecules/Footer/footer.vue";
 
 <template>
     <Header/>
+    <div class="h-1 brand-gradient"></div>
   <main class="flex items-start pb-24">
     <main class="w-full">
       <slot name="main-content" />

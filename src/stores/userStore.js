@@ -32,7 +32,7 @@ export const useUserStore = defineStore('userStore', {
       this.token = null
       this.user = null
       localStorage.removeItem('userStore')
-      router.push({ name: 'login' })
+      router.push({ name: 'user-login' })
     },
     checkRole() {
       if (

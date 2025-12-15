@@ -1,18 +1,18 @@
 <template>
   <app-layout>
     <template v-slot:main-content>
-      <div class="relative min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+      <div class="relative min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8 animate__animated animate__fadeIn">
         <!-- Decorative elements -->
         <div class="absolute inset-0 overflow-hidden">
-          <div class="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-lime-100 opacity-50 blur-3xl"></div>
-          <div class="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-green-100 opacity-50 blur-3xl"></div>
+          <div class="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-deepsaffron/10 opacity-50 blur-3xl blob-1"></div>
+          <div class="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-deepforest/10 opacity-50 blur-3xl blob-2"></div>
         </div>
         
         <div class="relative max-w-4xl mx-auto">
           <!-- Header -->
-          <div class="text-center mb-16">
+          <div class="text-center mb-16 animate__animated animate__fadeInDown">
             <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">
-              Privacy <span class="text-transparent bg-clip-text bg-gradient-to-r from-lime-600 to-green-800">Policy</span>
+              Privacy <span class="text-transparent bg-clip-text bg-gradient-to-r from-deepsaffron to-deepforest">Policy</span>
             </h1>
             <p class="text-lg text-gray-600 max-w-2xl mx-auto">
               Your privacy is important to us. This policy explains how we collect, use, and protect your information.
@@ -20,17 +20,17 @@
           </div>
 
           <!-- Last Updated -->
-          <div class="bg-white rounded-xl shadow-md p-6 mb-8 text-center">
+          <div class="bg-white rounded-xl shadow-md p-6 mb-8 text-center animate__animated animate__fadeIn">
             <p class="text-gray-600">Last updated: {{ lastUpdated }}</p>
           </div>
 
           <!-- Policy Sections -->
           <div class="space-y-8 mb-16">
             <!-- Information We Collect -->
-            <div class="bg-white rounded-xl shadow-md p-6 md:p-8">
+            <div class="bg-white rounded-xl shadow-md p-6 md:p-8 animate__animated animate__fadeInUp">
               <div class="flex items-start mb-4">
-                <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-lime-100 flex items-center justify-center">
-                  <svg class="w-6 h-6 text-lime-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-deepsaffron/10 flex items-center justify-center">
+                  <svg class="w-6 h-6 text-deepsaffron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
                   </svg>
                 </div>
@@ -71,10 +71,10 @@
             </div>
 
             <!-- How We Use Your Information -->
-            <div class="bg-white rounded-xl shadow-md p-6 md:p-8">
+            <div class="bg-white rounded-xl shadow-md p-6 md:p-8 animate__animated animate__fadeInUp">
               <div class="flex items-start mb-4">
-                <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-lime-100 flex items-center justify-center">
-                  <svg class="w-6 h-6 text-lime-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-deepsaffron/10 flex items-center justify-center">
+                  <svg class="w-6 h-6 text-deepsaffron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                   </svg>
                 </div>
@@ -95,10 +95,10 @@
             </div>
 
             <!-- Information Sharing -->
-            <div class="bg-white rounded-xl shadow-md p-6 md:p-8">
+            <div class="bg-white rounded-xl shadow-md p-6 md:p-8 animate__animated animate__fadeInUp">
               <div class="flex items-start mb-4">
-                <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-lime-100 flex items-center justify-center">
-                  <svg class="w-6 h-6 text-lime-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-deepsaffron/10 flex items-center justify-center">
+                  <svg class="w-6 h-6 text-deepsaffron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
                   </svg>
                 </div>
@@ -116,7 +116,7 @@
             </div>
 
             <!-- Data Security -->
-            <div class="bg-white rounded-xl shadow-md p-6 md:p-8">
+            <div class="bg-white rounded-xl shadow-md p-6 md:p-8 animate__animated animate__fadeInUp">
               <div class="flex items-start mb-4">
                 <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-lime-100 flex items-center justify-center">
                   <svg class="w-6 h-6 text-lime-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -139,7 +139,7 @@
             </div>
 
             <!-- Your Rights -->
-            <div class="bg-white rounded-xl shadow-md p-6 md:p-8">
+            <div class="bg-white rounded-xl shadow-md p-6 md:p-8 animate__animated animate__fadeInUp">
               <div class="flex items-start mb-4">
                 <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-lime-100 flex items-center justify-center">
                   <svg class="w-6 h-6 text-lime-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -197,7 +197,7 @@
           </div>
 
           <!-- Contact Information -->
-          <div class="bg-gradient-to-r from-lime-600 to-green-800 rounded-2xl p-8 text-white text-center">
+          <div class="bg-gradient-to-r from-lime-600 to-green-800 rounded-2xl p-8 text-white text-center animate__animated animate__fadeInUp">
             <h2 class="text-2xl font-bold mb-4">Questions About Our Privacy Policy?</h2>
             <p class="text-lime-100 mb-6 max-w-2xl mx-auto">
               If you have any questions or concerns about this privacy policy or our data practices, please contact us.
@@ -205,13 +205,13 @@
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
               <a 
                 href="mailto:privacy@ovomarket.ng" 
-                class="bg-white text-lime-700 px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-all"
+                class="bg-white text-lime-700 px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-all transition-transform duration-200 hover:scale-105 focus:ring-2 focus:ring-white/60"
               >
                 privacy@ovomarket.ng
               </a>
               <router-link 
                 to="/contact"
-                class="bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-bold hover:bg-white hover:text-lime-700 transition-all"
+                class="bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-bold hover:bg-white hover:text-lime-700 transition-all transition-transform duration-200 hover:scale-105 focus:ring-2 focus:ring-white/60"
               >
                 Contact Form
               </router-link>
@@ -233,3 +233,26 @@ const lastUpdated = ref(new Date().toLocaleDateString('en-US', {
   day: 'numeric' 
 }));
 </script>
+
+<style scoped>
+.blob-1 {
+  animation: floatBlob1 12s ease-in-out infinite;
+}
+.blob-2 {
+  animation: floatBlob2 14s ease-in-out infinite;
+}
+@keyframes floatBlob1 {
+  0% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(8px, -6px) scale(1.03); }
+  50% { transform: translate(0, 0) scale(1.06); }
+  75% { transform: translate(-8px, 6px) scale(1.03); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+@keyframes floatBlob2 {
+  0% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(-6px, 8px) scale(1.02); }
+  50% { transform: translate(0, 0) scale(1.04); }
+  75% { transform: translate(6px, -8px) scale(1.02); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+</style>

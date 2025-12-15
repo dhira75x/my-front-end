@@ -221,13 +221,13 @@
                     <template v-slot:title> Authentication </template>
                     <template v-slot:content>
                       <router-link
-                        to="/auth/login"
+                        to="/user-login"
                         class="block w-full rounded-md p-3 text-left hover:bg-gray-200 dark:hover:bg-gray-700"
                       >
                         Flagged Vendors
                       </router-link>
                       <router-link
-                        to="/auth/register"
+                        to="/user-reg"
                         class="block w-full rounded-md p-3 text-left hover:bg-gray-200 dark:hover:bg-gray-700"
                       >
                         Flagged Customers
@@ -253,7 +253,7 @@
             <template v-slot:title> Team Messenger </template>
             <template v-slot:content>
               <router-link
-                to="/auth/register"
+                to="/user-reg"
                 class="dark:hover:bg-gray-700text-gray-800 block w-full rounded-md p-3 text-left hover:bg-gray-200 dark:text-lime-700"
               >
                 View Team

@@ -49,19 +49,17 @@
             <hr class="mb-6 border-t" />
             <div class="text-center">
               <router-link
-                to="/views/registration"
+                to="/user-reg"
                 class="inline-block align-baseline text-sm text-lime-700 hover:text-lime-900"
               >
-                Create an Account!</router-link
-              >
+                Create an Account!</router-link>
             </div>
             <div class="text-center">
               <router-link
-                to="/"
+                to="/user-login"
                 class="inline-block align-baseline text-sm text-lime-700 hover:text-lime-900"
               >
-                Already have an account? Login!</router-link
-              >
+                Already have an account? Login!</router-link>
             </div>
           </form>
         </div>

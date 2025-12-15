@@ -3,7 +3,7 @@
   <div class="container mx-auto p-12">
     <div class="mx-auto flex w-full flex-col px-0 md:flex-row">
       <div class="flex flex-col md:w-full">
-        <h2 class="text-heading mb-4 font-bold text-lime-900 md:text-xl">
+        <h2 class="text-heading mb-4 font-bold text-deepsaffron md:text-xl">
           Shipping Address
         </h2>
         <form class="mx-auto w-full justify-center" method="post">
@@ -12,7 +12,7 @@
               <div class="w-full lg:w-1/2">
                 <label
                   for="firstName"
-                  class="mb-3 block text-sm font-semibold text-lime-700"
+                  class="mb-3 block text-sm font-semibold text-deepsaffron"
                   >First Name</label
                 >
                 <input
@@ -25,7 +25,7 @@
               <div class="w-full lg:w-1/2">
                 <label
                   for="firstName"
-                  class="mb-3 block text-sm font-semibold text-lime-700"
+                  class="mb-3 block text-sm font-semibold text-deepsaffron"
                   >Last Name</label
                 >
                 <input
@@ -40,7 +40,7 @@
               <div class="w-full">
                 <label
                   for="Email"
-                  class="mb-3 block text-sm font-semibold text-lime-700"
+                  class="mb-3 block text-sm font-semibold text-deepsaffron"
                   >Email</label
                 >
                 <input
@@ -55,7 +55,7 @@
               <div class="w-full">
                 <label
                   for="Address"
-                  class="mb-3 block text-sm font-semibold text-lime-700"
+                  class="mb-3 block text-sm font-semibold text-deepsaffron"
                   >Address</label
                 >
                 <textarea
@@ -100,7 +100,7 @@
               <label class="text-heading group flex items-center text-sm">
                 <input
                   type="checkbox"
-                  class="h-5 w-5 rounded border border-gray-300 text-lime-600 focus:outline-none focus:ring-1"
+                  class="h-5 w-5 rounded border border-gray-300 text-deepsaffron focus:outline-none focus:ring-1"
                 />
                 <span class="ml-2"
                   >Save this information for next time</span
@@ -110,7 +110,7 @@
             <div class="relative pt-3 xl:pt-6">
               <label
                 for="note"
-                class="mb-3 block text-sm font-semibold text-lime-600"
+                class="mb-3 block text-sm font-semibold text-deepsaffron"
               >
                 Notes (Optional)</label
               ><textarea
@@ -124,7 +124,7 @@
             <div class="mt-4">
               <router-link to="/transaction">
                 <button
-                  class="w-full bg-lime-800 px-6 py-2 text-white hover:bg-lime-500"
+                  class="w-full bg-deepsaffron px-6 py-2 text-white hover:bg-deepsaffron"
                 >
                   Process
                 </button>
@@ -135,7 +135,7 @@
       </div>
       <div class="ml-0 flex w-full flex-col lg:ml-12 lg:w-2/5">
         <div class="pt-12 md:pt-0 2xl:ps-4">
-          <h2 class="text-xl font-bold text-lime-800">Order Summary</h2>
+          <h2 class="text-xl font-bold text-deepsaffron">Order Summary</h2>
           <div class="mt-8">
             <div class="flex flex-col space-y-4">
               <div class="flex space-x-4">
@@ -147,8 +147,8 @@
                   />
                 </div>
                 <div>
-                  <h2 class="text-xl font-bold text-lime-800">Title</h2>
-                  <p class="text-sm text-lime-800">
+                  <h2 class="text-xl font-bold text-deepsaffron">Title</h2>
+                  <p class="text-sm text-deepsaffron">
                     Lorem ipsum dolor sit amet, tet
                   </p>
                   <span class="text-red-600">Price</span> $20
@@ -179,8 +179,8 @@
                   />
                 </div>
                 <div>
-                  <h2 class="text-xl font-bold text-lime-800">Title</h2>
-                  <p class="text-sm text-lime-800">
+                  <h2 class="text-xl font-bold text-deepsaffron">Title</h2>
+                  <p class="text-sm text-deepsaffron">
                     Lorem ipsum dolor sit amet, tet
                   </p>
                   <span class="text-red-600">Price</span> $20
@@ -205,20 +205,20 @@
             </div>
           </div>
           <div class="mt-4 flex p-4">
-            <h2 class="text-xl font-bold text-lime-800">ITEMS 2</h2>
+            <h2 class="text-xl font-bold text-deepsaffron">ITEMS 2</h2>
           </div>
           <div
-            class="text-heading flex w-full items-center border-b border-gray-300 py-4 text-sm font-semibold text-lime-700 last:border-b-0 last:pb-0 last:text-base lg:px-3 lg:py-5"
+            class="text-heading flex w-full items-center border-b border-gray-300 py-4 text-sm font-semibold text-deepsaffron last:border-b-0 last:pb-0 last:text-base lg:px-3 lg:py-5"
           >
             Subtotal<span class="ml-2">$40.00</span>
           </div>
           <div
-            class="text-heading flex w-full items-center border-b border-gray-300 py-4 text-sm font-semibold text-lime-700 last:border-b-0 last:pb-0 last:text-base lg:px-3 lg:py-5"
+            class="text-heading flex w-full items-center border-b border-gray-300 py-4 text-sm font-semibold text-deepsaffron last:border-b-0 last:pb-0 last:text-base lg:px-3 lg:py-5"
           >
             Shipping Tax<span class="ml-2">$10</span>
           </div>
           <div
-            class="text-heading flex w-full items-center border-b border-gray-300 py-4 text-sm font-semibold text-lime-700 last:border-b-0 last:pb-0 last:text-base lg:px-3 lg:py-5"
+            class="text-heading flex w-full items-center border-b border-gray-300 py-4 text-sm font-semibold text-deepsaffron last:border-b-0 last:pb-0 last:text-base lg:px-3 lg:py-5"
           >
             Total<span class="ml-2">$50.00</span>
           </div>

@@ -1,6 +1,6 @@
 <!-- Checkout.vue -->
 <template>
-  <div class="min-h-screen py-8 bg-gray-50">
+  <div class="min-h-screen py-8 bg-gray-50 animate__animated animate__fadeIn">
     <div class="container px-4 mx-auto">
       <h1 class="mb-8 text-3xl font-bold text-gray-800">Checkout</h1>
 
@@ -28,7 +28,7 @@
           </div>
 
           <!-- Contact Information -->
-          <div class="p-6 mb-6 bg-white rounded-lg shadow-md">
+          <div class="p-6 mb-6 bg-white rounded-lg shadow-md animate__animated animate__fadeIn">
             <h2 class="mb-4 text-lg font-semibold text-gray-800">Contact Information</h2>
             <div class="mb-4">
               <label for="email" class="block mb-2 text-sm font-medium text-gray-700">Email</label>
@@ -47,7 +47,7 @@
           </div>
 
           <!-- Shipping Address -->
-          <div class="p-6 mb-6 bg-white rounded-lg shadow-md">
+          <div class="p-6 mb-6 bg-white rounded-lg shadow-md animate__animated animate__fadeIn">
             <h2 class="mb-4 text-lg font-semibold text-gray-800">Shipping Address</h2>
             <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
               <div>
@@ -132,7 +132,7 @@
           </div>
 
           <!-- Shipping Method -->
-          <div class="p-6 mb-6 bg-white rounded-lg shadow-md">
+          <div class="p-6 mb-6 bg-white rounded-lg shadow-md animate__animated animate__fadeIn">
             <h2 class="mb-4 text-lg font-semibold text-gray-800">Shipping Method</h2>
             <div class="space-y-3">
               <div class="flex items-center p-4 border border-gray-300 rounded-lg">
@@ -293,7 +293,7 @@
               >
               <button 
                 @click="applyPromoCode"
-                class="px-4 py-2 font-medium text-white bg-lime-600 rounded-r-lg hover:bg-lime-700"
+                class="px-4 py-2 font-medium text-white bg-lime-600 rounded-r-lg hover:bg-lime-700 transition-transform duration-200 hover:scale-105 focus:ring-2 focus:ring-lime-500"
               >
                 Apply
               </button>

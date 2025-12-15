@@ -1,6 +1,6 @@
 <!-- card.vue -->
 <template>
-  <div class="help-card" :class="cardClass">
+  <div class="help-card animate__animated animate__fadeInUp" :class="cardClass">
     <div class="card-icon">{{ icon }}</div>
     <h3 class="card-title">{{ title }}</h3>
     <p class="card-description">{{ description }}</p>

@@ -1,7 +1,7 @@
 <template>
-  <div class="help-center">
+  <div class="help-center animate__animated animate__fadeIn">
     <!-- Header Section -->
-    <header class="header">
+    <header class="header animate__animated animate__fadeInDown">
       <div class="container">
         <h1 class="page-title">Help Center</h1>
         <p class="page-description">Find answers to your questions or get in touch with our support team</p>
@@ -39,7 +39,7 @@
     </div>
 
     <!-- Help Categories Section -->
-    <div class="categories-section">
+    <div class="categories-section animate__animated animate__fadeIn">
       <div class="container">
         <h2 class="section-title">Browse Help Categories</h2>
         
@@ -97,7 +97,7 @@
     </div>
 
     <!-- Additional Help Section -->
-    <div class="additional-help">
+    <div class="additional-help animate__animated animate__fadeIn">
       <div class="container">
         <div class="help-cards">
           <div class="help-card contact-card">

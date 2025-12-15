@@ -2,7 +2,7 @@
   <div class="flex min-h-screen items-center bg-gray-50">
     <div class="mx-auto h-full max-w-4xl flex-1 rounded-lg bg-white shadow-xl">
       <div class="flex flex-col md:flex-row">
-        <div class="h-32 md:h-auto md:w-1/2">
+        <div class="hidden md:block md:h-auto md:w-1/2">
           <img class="h-full w-full object-cover" src="../assets/login.jpeg" alt="img" />
         </div>
         <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
@@ -23,7 +23,7 @@
                   ></path>
                 </svg>
               </div>
-              <h1 class="mb-4 text-center text-2xl font-bold text-lime-900">Sign up</h1>
+              <h1 class="mb-4 text-center text-2xl font-bold text-deepsaffron">Sign up</h1>
 
               <div>
                 <label class="block text-sm"> Phone Number </label>
@@ -78,9 +78,9 @@
                 />
               </div>
                 <button
-                  class="focus:shadow-outline-blue my-4 mt-4 block w-full rounded-lg border border-transparent bg-lime-700 px-4 py-2 text-center text-sm font-medium leading-5 text-white transition-colors duration-150 hover:bg-lime-700 focus:outline-none active:bg-lime-600"
+                  type="submit"
+                  class="focus:shadow-outline-blue my-4 mt-4 block w-full rounded-lg border border-transparent bg-deepsaffron px-4 py-2 text-center text-sm font-medium leading-5 text-white transition-colors duration-150 hover:bg-deepsaffron focus:outline-none active:bg-deepsaffron"
                   :disabled="registerForm.processing"
-                  @click="$router.push({ name: 'landing' })"
                 >
                   Register
                 </button>
@@ -88,7 +88,7 @@
               <div class="mt-4 text-center">
                 <p class="text-sm">
                   Already have an account yet?
-                  <router-link to="/user-login" class="mx-2 text-lime-700 hover:underline">
+                  <router-link to="/user-login" class="mx-2 text-deepsaffron hover:underline">
                     Log In.</router-link
                   >
                 </p>
@@ -107,7 +107,7 @@
                       <a
                         target="_blank"
                         href="#"
-                        class="text-sm text-lime-700 underline hover:text-lime-900"
+                        class="text-sm text-deepsaffron underline hover:text-deepsaffron"
                       >
                         Terms of Service
                       </a>
@@ -115,7 +115,7 @@
                       <a
                         target="_blank"
                         href="/privacy-policy"
-                        class="text-sm text-lime-700 underline hover:text-lime-900"
+                        class="text-sm text-deepsaffron underline hover:text-deepsaffron"
                       >
                         Privacy Policy
                       </a>
@@ -175,6 +175,8 @@ import { ref } from "vue";
 import { reactive } from "vue";
 import Checkbox from "../components/atoms/Box/Checkbox.vue";
 import Label from "../components/atoms/Label.vue";
+import { useRouter } from "vue-router";
+import { useUserStore } from "@/stores/userStore.js";
 
 const registerForm = reactive({
   phone: "",
@@ -184,11 +186,21 @@ const registerForm = reactive({
   processing: false,
 });
 
+const router = useRouter();
+const userStore = useUserStore();
+
+const deriveName = (emailValue) => {
+  if (!emailValue) return registerForm.phone || "User";
+  const namePart = emailValue.split("@")[0];
+  return namePart.charAt(0).toUpperCase() + namePart.slice(1);
+};
+
 const register = () => {
-  // Implement your registration logic here
-  // You can access form fields using registerForm.name, registerForm.email, etc.
-  // You can set processing to true while the registration is in progress.
-  // After completing the registration, set processing back to false.
+  registerForm.processing = true;
+  const names = deriveName(registerForm.email);
+  userStore.login("mock-token", "USER", names, Date.now().toString());
+  registerForm.processing = false;
+  router.push({ name: "landing" });
 };
 
 // You can also use ref for individual variables if needed

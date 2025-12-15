@@ -1,11 +1,11 @@
 <template>
-  <section class="my-4 bg-lime-800 p-8 text-white">
+  <section class="my-4 bg-lime-800 p-8 text-white animate__animated animate__fadeIn">
     <div class="container mx-auto text-center">
       <h2 class="mb-4 text-2xl font-semibold">Shop Now!</h2>
       <p class="mb-4">Discover amazing deals on your favorite products.</p>
       <button
         @click="scrollToProducts"
-        class="rounded-full bg-white px-6 py-2 text-lime-900"
+        class="rounded-full bg-white px-6 py-2 text-lime-900 transition-transform duration-200 hover:scale-105 focus:ring-2 focus:ring-white/60"
       >
         Explore Products
       </button>

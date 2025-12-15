@@ -1,9 +1,18 @@
 <template>
-  <div class="flex min-h-screen items-center bg-gray-50">
+  <div class="flex min-h-screen items-center bg-gray-50 animate__animated animate__fadeIn">
     <div class="mx-auto h-full max-w-4xl flex-1 rounded-lg bg-white shadow-xl">
       <div class="flex flex-col md:flex-row">
+<<<<<<< HEAD
         <div class="h-32 md:h-auto md:w-1/2">
           <img class="h-full w-full object-cover" src="../assets/login.jpeg" alt="img" />
+=======
+        <div class="hidden md:block md:h-auto md:w-1/2">
+          <img
+            class="h-full w-full object-cover"
+            src="../assets/login.jpeg"
+            alt="img"
+          />
+>>>>>>> 16754e9bdd8f6d825c65b1dfea8a89e9c888a2b3
         </div>
         <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
           <div class="w-full">
@@ -22,7 +31,7 @@
                 ></path>
               </svg>
             </div>
-            <h1 class="my-2 mb-4 text-center text-2xl font-bold text-lime-900">
+            <h1 class="my-2 mb-4 text-center text-2xl font-bold text-deepsaffron animate__animated animate__fadeInDown">
               Login to Your Account
             </h1>
 
@@ -108,22 +117,35 @@
             <p class="mt-4">
               <router-link
                 to="/forgot-password"
-                class="text-sm text-lime-700 hover:underline"
+                class="text-sm text-deepsaffron hover:underline"
                 >Forgot your password?</router-link
               >
             </p>
             <button
               @click="login"
+<<<<<<< HEAD
               :disabled="isLoading"
               class="focus:shadow-outline-lime my-3 mt-4 block w-full rounded-lg border border-transparent bg-lime-700 px-4 py-2 text-center text-sm font-medium leading-5 text-white transition-colors duration-150 hover:bg-lime-700 focus:outline-none active:bg-lime-600 disabled:opacity-50"
             >
               <span v-if="isLoading">Logging in...</span>
               <span v-else>Log in</span>
+=======
+              class="my-3 mt-4 block w-full rounded-lg border border-transparent bg-deepsaffron px-4 py-2 text-center text-sm font-medium leading-5 text-white transition duration-150 hover:bg-deepsaffron focus:outline-none active:bg-deepsaffron hover:scale-105 focus:ring-2 focus:ring-deepsaffron"
+            >
+              Log in
+>>>>>>> 16754e9bdd8f6d825c65b1dfea8a89e9c888a2b3
             </button>
             <div class="mt-4 text-center">
               <p class="text-sm">
                 Don't have an account yet?
+<<<<<<< HEAD
                 <router-link to="/user-reg" class="mx-2 text-lime-700 hover:underline">
+=======
+                <router-link
+                  to="/user-reg"
+                  class="mx-2 text-deepsaffron hover:underline"
+                >
+>>>>>>> 16754e9bdd8f6d825c65b1dfea8a89e9c888a2b3
                   Register.</router-link
                 >
               </p>
@@ -201,11 +223,16 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+<<<<<<< HEAD
 import request from "../services/request"; // Adjust the path as needed
+=======
+import { useUserStore } from "@/stores/userStore.js";
+>>>>>>> 16754e9bdd8f6d825c65b1dfea8a89e9c888a2b3
 
 const email = ref("");
 const password = ref("");
 const router = useRouter();
+<<<<<<< HEAD
 const isLoading = ref(false);
 const errorMessage = ref("");
 const showPassword = ref(false);
@@ -264,5 +291,19 @@ const login = async () => {
   } finally {
     isLoading.value = false;
   }
+=======
+const userStore = useUserStore();
+
+const deriveName = (emailValue) => {
+  if (!emailValue) return "User";
+  const namePart = emailValue.split("@")[0];
+  return namePart.charAt(0).toUpperCase() + namePart.slice(1);
+};
+
+const login = () => {
+  const names = deriveName(email.value);
+  userStore.login("mock-token", "USER", names, Date.now().toString());
+  router.push({ name: "landing" });
+>>>>>>> 16754e9bdd8f6d825c65b1dfea8a89e9c888a2b3
 };
 </script>
