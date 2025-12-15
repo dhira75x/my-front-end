@@ -3,11 +3,7 @@
     <div class="mx-auto h-full max-w-4xl flex-1 rounded-lg bg-white shadow-xl">
       <div class="flex flex-col md:flex-row">
         <div class="h-32 md:h-auto md:w-1/2">
-          <img
-            class="h-full w-full object-cover"
-            src="../assets/login.jpeg"
-            alt="img"
-          />
+          <img class="h-full w-full object-cover" src="../assets/login.jpeg" alt="img" />
         </div>
         <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
           <div class="w-full">
@@ -29,6 +25,31 @@
             <h1 class="my-2 mb-4 text-center text-2xl font-bold text-lime-900">
               Login to Your Account
             </h1>
+
+            <!-- Error message display -->
+            <div v-if="errorMessage" class="mb-4 rounded-md bg-red-50 p-4">
+              <div class="flex">
+                <div class="flex-shrink-0">
+                  <svg
+                    class="h-5 w-5 text-red-400"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+                <div class="ml-3">
+                  <p class="text-sm text-red-700">
+                    {{ errorMessage }}
+                  </p>
+                </div>
+              </div>
+            </div>
+
             <div class="my-2">
               <label class="block text-sm"> Email </label>
               <input
@@ -41,9 +62,11 @@
             <label class="mt-4 block text-sm"> Password </label>
             <div class="relative mt-2 flex items-center">
               <button
+                @click="togglePasswordVisibility"
                 class="absolute right-0 focus:outline-none rtl:left-0 rtl:right-auto"
               >
                 <svg
+                  v-if="showPassword"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="currentColor"
@@ -56,13 +79,30 @@
                     clip-rule="evenodd"
                   />
                 </svg>
+                <svg
+                  v-else
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  class="mx-4 h-6 w-6 text-gray-400 transition-colors duration-300 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400"
+                >
+                  <path
+                    d="M3.53 2.47a.75.75 0 00-1.06 1.06l18 18a.75.75 0 101.06-1.06l-18-18zM22.676 12.553a11.249 11.249 0 01-2.631 4.31l-3.099-3.099a5.25 5.25 0 00-6.71-6.71L7.759 4.577a11.217 11.217 0 014.242-.827c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113z"
+                  />
+                  <path
+                    d="M15.75 12c0 .18-.013.357-.037.53l-4.244-4.243A3.75 3.75 0 0115.75 12zM12.53 15.713l-4.243-4.244a3.75 3.75 0 004.243 4.243z"
+                  />
+                  <path
+                    d="M6.75 12c0-.619.107-1.213.304-1.764l-3.1-3.1a11.25 11.25 0 00-2.633 4.31c-.12.362-.12.752 0 1.114 1.489 4.467 5.704 7.69 10.675 7.69 1.5 0 2.933-.294 4.242-.827l-3.1-3.1a5.25 5.25 0 01-6.71-6.71z"
+                  />
+                </svg>
               </button>
 
               <input
                 v-model="password"
+                :type="showPassword ? 'text' : 'password'"
                 class="w-full rounded-md border px-4 py-2 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
                 placeholder=""
-                type="password"
               />
             </div>
             <p class="mt-4">
@@ -72,21 +112,18 @@
                 >Forgot your password?</router-link
               >
             </p>
-            <router-link to="/landing">
-              <button
-                @click="login"
-                class="focus:shadow-outline-lime my-3 mt-4 block w-full rounded-lg border border-transparent bg-lime-700 px-4 py-2 text-center text-sm font-medium leading-5 text-white transition-colors duration-150 hover:bg-lime-700 focus:outline-none active:bg-lime-600"
-              >
-                Log in
-              </button>
-            </router-link>
+            <button
+              @click="login"
+              :disabled="isLoading"
+              class="focus:shadow-outline-lime my-3 mt-4 block w-full rounded-lg border border-transparent bg-lime-700 px-4 py-2 text-center text-sm font-medium leading-5 text-white transition-colors duration-150 hover:bg-lime-700 focus:outline-none active:bg-lime-600 disabled:opacity-50"
+            >
+              <span v-if="isLoading">Logging in...</span>
+              <span v-else>Log in</span>
+            </button>
             <div class="mt-4 text-center">
               <p class="text-sm">
                 Don't have an account yet?
-                <router-link
-                  to="/user-reg"
-                  class="mx-2 text-lime-700 hover:underline"
-                >
+                <router-link to="/user-reg" class="mx-2 text-lime-700 hover:underline">
                   Register.</router-link
                 >
               </p>
@@ -135,11 +172,7 @@
                   <clipPath id="b">
                     <use xlink:href="#a" overflow="visible" />
                   </clipPath>
-                  <path
-                    clip-path="url(#b)"
-                    fill="#FBBC05"
-                    d="M0 37V11l17 13z"
-                  />
+                  <path clip-path="url(#b)" fill="#FBBC05" d="M0 37V11l17 13z" />
                   <path
                     clip-path="url(#b)"
                     fill="#EA4335"
@@ -168,14 +201,68 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import request from "../services/request"; // Adjust the path as needed
 
 const email = ref("");
 const password = ref("");
 const router = useRouter();
+const isLoading = ref(false);
+const errorMessage = ref("");
+const showPassword = ref(false);
 
-const login = () => {
-  // Implement your login logic here
-  // For now, let's navigate to the dashboard page
-  router.push("/views/landing");
+const togglePasswordVisibility = () => {
+  showPassword.value = !showPassword.value;
+};
+
+const login = async () => {
+  // Reset error message
+  errorMessage.value = "";
+
+  // Basic validation
+  if (!email.value || !password.value) {
+    errorMessage.value = "Please enter both email and password";
+    return;
+  }
+
+  try {
+    isLoading.value = true;
+
+    // Make API request to login endpoint
+    const response = await request.post("/auth/login/users/", {
+      email: email.value,
+      password: password.value,
+    });
+
+    // Check if response is successful
+    if (response.data.status === "OK") {
+      // Store authentication token
+      localStorage.setItem("authToken", response.data.payload.key);
+
+      // Store user data if needed
+      localStorage.setItem("user", JSON.stringify(response.data.payload.user));
+
+      // Redirect to landing page
+      router.push("/landing");
+    } else {
+      // Handle API error
+      errorMessage.value = response.data.msg || "Login failed. Please try again.";
+    }
+  } catch (error) {
+    // Handle network or server errors
+    console.error("Login error:", error);
+
+    if (error.response) {
+      // Server responded with error status
+      errorMessage.value = error.response.data.msg || "Invalid credentials";
+    } else if (error.request) {
+      // Request made but no response received
+      errorMessage.value = "Network error. Please check your connection.";
+    } else {
+      // Something else happened
+      errorMessage.value = "An error occurred. Please try again.";
+    }
+  } finally {
+    isLoading.value = false;
+  }
 };
 </script>
