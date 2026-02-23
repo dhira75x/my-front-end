@@ -86,7 +86,7 @@
               id="phone"
               required
               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-deepsaffron focus:ring-deepsaffron p-2 border"
-              placeholder="+1 (555) 123-4567"
+              placeholder="+2348156894789"
             />
           </div>
           <div v-if="formMessage" :class="['text-center', formMessageClass]">
@@ -596,25 +596,46 @@
               <p class="mb-3 text-sm text-gray-600">{{ product.description }}</p>
               <div class="flex items-center justify-between">
                 <span class="font-bold text-deepsaffron">{{ product.price }}</span>
-                <button
-                  @click="addToCart(product)"
-                  class="p-2 text-white transition-colors rounded-full bg-deepsaffron hover:bg-deepsaffron"
-                >
-                  <svg
-                    class="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
+                <div class="flex space-x-2">
+                  <button
+                    @click="addToCart(product)"
+                    class="p-2 text-white transition-colors rounded-full bg-deepsaffron hover:bg-deepsaffron"
                   >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                    ></path>
-                  </svg>
-                </button>
+                    <svg
+                      class="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                      ></path>
+                    </svg>
+                  </button>
+                  <button
+                    @click="scheduleProduct(product.id)"
+                    class="p-2 text-white transition-colors rounded-full bg-blue-600 hover:bg-blue-700"
+                    title="Schedule Shopping"
+                  >
+                    <svg
+                      class="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      ></path>
+                    </svg>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -1056,6 +1077,25 @@
       </div>
     </section>
 
+    <section class="py-16 bg-white">
+      <div class="container px-4 mx-auto">
+        <div class="flex flex-col items-center text-center">
+          <h2 class="mb-4 text-3xl font-bold text-gray-800">
+            Can't Shop Now? Schedule It!
+          </h2>
+          <p class="mb-8 max-w-2xl text-gray-600">
+            Plan your shopping in advance and have your items delivered when it's most
+            convenient for you.
+          </p>
+          <button
+            @click="goToScheduleShopping"
+            class="px-6 py-3 font-semibold text-white transition-colors bg-deepsaffron rounded-lg hover:bg-opacity-90"
+          >
+            Schedule Your Shopping
+          </button>
+        </div>
+      </div>
+    </section>
     <!-- App Download Section -->
     <section class="py-16 bg-gray-50">
       <div class="container px-4 mx-auto">
@@ -1599,7 +1639,7 @@ const formMessage = ref("");
 const formMessageClass = ref("text-green-600");
 // Set your launch date here (YYYY, MM, DD, HH, MM, SS)
 const launchDate = new Date();
-launchDate.setDate(launchDate.getDate() + 30); // 30 days from now
+launchDate.setDate(launchDate.getDate() + 38); // 30 days from now
 let timerInterval;
 
 const updateCountdown = () => {
@@ -1624,48 +1664,116 @@ const closePopup = () => {
   showPopup.value = false;
 };
 
+const goToScheduleShopping = () => {
+  router.push("/schedule-shopping");
+};
+
 const submitForm = async () => {
   isSubmitting.value = true;
   formMessage.value = "";
 
   try {
     const scriptURL =
-      "https://script.google.com/macros/s/AKfycbzNe-iFbB1fD7C9Rih6mXfRCvkGLrcIMFL4Tuc40bnHv5pCJ6sHWp9a6E_pyaF4Jpw1yg/exec";
+      "https://script.google.com/macros/s/AKfycbzoivjjdrUrZ3grpWZup-pt51B4_05GNTIhz4h33OTIntORsczRjNeWNLr8MdAKq2zVJA/exec";
 
-    const response = await fetch(scriptURL, {
-      method: "POST",
-      body: JSON.stringify({
-        email: formData.value.email,
-        phone: formData.value.phone,
-        timestamp: new Date().toISOString(),
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    // Create a hidden form and submit it via iframe
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = scriptURL;
+    form.target = "hidden-iframe"; // Target the iframe
 
-    if (response.ok) {
-      formMessage.value = "Thank you! We will notify you when we launch.";
-      formMessageClass.value = "text-green-600";
+    // Add email field
+    const emailField = document.createElement("input");
+    emailField.type = "hidden";
+    emailField.name = "email";
+    emailField.value = formData.value.email;
+    form.appendChild(emailField);
 
-      // Reset form
-      formData.value = {
-        email: "",
-        phone: "",
-      };
+    // Add phone field
+    const phoneField = document.createElement("input");
+    phoneField.type = "hidden";
+    phoneField.name = "phone";
+    phoneField.value = formData.value.phone;
+    form.appendChild(phoneField);
 
-      // Close popup after successful submission
-      setTimeout(() => {
-        showPopup.value = false;
-      }, 2000);
-    } else {
-      throw new Error("Form submission failed");
+    // Add timestamp field
+    const timestampField = document.createElement("input");
+    timestampField.type = "hidden";
+    timestampField.name = "timestamp";
+    timestampField.value = new Date().toISOString();
+    form.appendChild(timestampField);
+
+    // Create or get the iframe
+    let iframe = document.getElementById("hidden-iframe");
+    if (!iframe) {
+      iframe = document.createElement("iframe");
+      iframe.id = "hidden-iframe";
+      iframe.name = "hidden-iframe";
+      iframe.style.display = "none";
+      document.body.appendChild(iframe);
     }
+
+    // Add a listener to detect when the form submission is complete
+    const handleMessage = (event) => {
+      // Check if the message is from our script
+      if (event.data && event.data.type === "form-submission") {
+        if (event.data.success) {
+          formMessage.value = "Thank you! We will notify you when we launch.";
+          formMessageClass.value = "text-green-600";
+
+          // Reset form
+          formData.value = {
+            email: "",
+            phone: "",
+          };
+
+          // Close popup after successful submission
+          setTimeout(() => {
+            showPopup.value = false;
+          }, 2000);
+        } else {
+          formMessage.value = "There was an error. Please try again later.";
+          formMessageClass.value = "text-red-600";
+        }
+
+        // Remove the event listener
+        window.removeEventListener("message", handleMessage);
+        isSubmitting.value = false;
+      }
+    };
+
+    window.addEventListener("message", handleMessage);
+
+    // Set a timeout in case we don't get a response
+    setTimeout(() => {
+      if (isSubmitting.value) {
+        formMessage.value = "Thank you! We will notify you when we launch.";
+        formMessageClass.value = "text-green-600";
+
+        // Reset form
+        formData.value = {
+          email: "",
+          phone: "",
+        };
+
+        // Close popup after successful submission
+        setTimeout(() => {
+          showPopup.value = false;
+        }, 2000);
+
+        isSubmitting.value = false;
+        window.removeEventListener("message", handleMessage);
+      }
+    }, 5000);
+
+    // Submit the form
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
   } catch (error) {
     console.error("Error submitting form:", error);
     formMessage.value = "There was an error. Please try again later.";
     formMessageClass.value = "text-red-600";
-  } finally {
     isSubmitting.value = false;
   }
 };

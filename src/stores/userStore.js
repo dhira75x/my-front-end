@@ -36,8 +36,7 @@ export const useUserStore = defineStore('userStore', {
     },
     checkRole() {
       if (
-        this.user &&
-        this.user.role.toUpperCase() === 'CUSTOMER SUPPORT SUPERVISOR'
+        this.user
       ) {
         this.isAdmin = true 
       }

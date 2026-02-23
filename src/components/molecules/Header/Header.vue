@@ -59,6 +59,12 @@
               Deals
             </li>
             <li
+              @click="$router.push({ name: 'schedule-shopping' })"
+              class="font-medium text-transparent bg-clip-text brand-gradient cursor-pointer"
+            >
+              Schedule Shopping
+            </li>
+            <li
               @click="$router.push({ name: 'about' })"
               class="font-medium text-transparent bg-clip-text brand-gradient cursor-pointer"
             >

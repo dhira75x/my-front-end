@@ -430,7 +430,7 @@ const initializeFlutterwave = () => {
     customizations: {
       title: 'Ovo Market Payment',
       description: 'Payment for items in cart',
-      logo: 'https://your-logo-url.com/logo.png'
+      logo: '@/assets/ovologo.png'
     },
     callback: function(response) {
       // Payment successful

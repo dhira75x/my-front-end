@@ -58,7 +58,7 @@
 
                     <div>
                         <label class="block mb-2 text-sm text-lime-950 dark:text-lime-600">Means of Identification</label>
-                        <select id="means" name="means" class="mt-1 w-full rounded-md border p-2">
+                        <select id="means" name="means" class="w-full p-2 mt-1 border rounded-md">
                           <option value="" selected disabled class="text-gray-400">Select a Means of Identification</option>
                           <option value="">National Identification Card</option>
                           <option value="">International Passport</option>
@@ -70,8 +70,8 @@
                         <label class="block mb-2 text-sm text-lime-950 dark:text-lime-600">Upload MOI</label>
                         <div class="max-w-sm">
                          <div class="relative z-0 mt-0.5 flex w-full -space-x-px">
-                        <input id="moifile" type="file" class="block w-full cursor-pointer appearance-none rounded-l-md border border-lime-100 bg-white px-3 py-2 text-sm transition focus:z-10 focus:border-lime-700 focus:outline-none focus:ring-1 focus:ring-lime-600 disabled:cursor-not-allowed disabled:bg-lime-100 disabled:opacity-75">
-                         <button type="submit" class="inline-flex w-auto cursor-pointer select-none appearance-none items-center justify-center space-x-1 rounded-r border border-lime-100 bg-lime-700 px-3 py-2 text-sm font-medium text-lime-950 transition hover:border-lime-500 hover:bg-lime-100 focus:z-10 focus:border-lime-500 focus:outline-none focus:ring-2 focus:ring-lime-500">Save</button>
+                        <input id="moifile" type="file" class="block w-full px-3 py-2 text-sm transition bg-white border appearance-none cursor-pointer rounded-l-md border-lime-100 focus:z-10 focus:border-lime-700 focus:outline-none focus:ring-1 focus:ring-lime-600 disabled:cursor-not-allowed disabled:bg-lime-100 disabled:opacity-75">
+                         <button type="submit" class="inline-flex items-center justify-center w-auto px-3 py-2 space-x-1 text-sm font-medium transition border rounded-r appearance-none cursor-pointer select-none border-lime-100 bg-lime-700 text-lime-950 hover:border-lime-500 hover:bg-lime-100 focus:z-10 focus:border-lime-500 focus:outline-none focus:ring-2 focus:ring-lime-500">Save</button>
                         </div>
                     </div>
                     </div>
@@ -88,8 +88,8 @@
                         <label class="block mb-2 text-sm text-lime-950 dark:text-lime-600">CAC Verification</label>
                         <div class="max-w-sm">
                          <div class="relative z-0 mt-0.5 flex w-full -space-x-px">
-                        <input id="cac" type="file" class="block w-full cursor-pointer appearance-none rounded-l-md border border-lime-100 bg-white px-3 py-2 text-sm transition focus:z-10 focus:border-lime-700 focus:outline-none focus:ring-1 focus:ring-lime-600 disabled:cursor-not-allowed disabled:bg-lime-100 disabled:opacity-75">
-                         <button type="submit" class="inline-flex w-auto cursor-pointer select-none appearance-none items-center justify-center space-x-1 rounded-r border border-lime-100 bg-lime-700 px-3 py-2 text-sm font-medium text-lime-950 transition hover:border-lime-500 hover:bg-lime-100 focus:z-10 focus:border-lime-500 focus:outline-none focus:ring-2 focus:ring-lime-500">Save</button>
+                        <input id="cac" type="file" class="block w-full px-3 py-2 text-sm transition bg-white border appearance-none cursor-pointer rounded-l-md border-lime-100 focus:z-10 focus:border-lime-700 focus:outline-none focus:ring-1 focus:ring-lime-600 disabled:cursor-not-allowed disabled:bg-lime-100 disabled:opacity-75">
+                         <button type="submit" class="inline-flex items-center justify-center w-auto px-3 py-2 space-x-1 text-sm font-medium transition border rounded-r appearance-none cursor-pointer select-none border-lime-100 bg-lime-700 text-lime-950 hover:border-lime-500 hover:bg-lime-100 focus:z-10 focus:border-lime-500 focus:outline-none focus:ring-2 focus:ring-lime-500">Save</button>
                         </div>
                     </div>
                     </div>
@@ -108,10 +108,18 @@
                         <label class="block mb-2 text-sm text-lime-950 dark:text-lime-600">Confirm password</label>
                         <input type="password" placeholder="Enter your password" class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-200 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                     </div>
-                   <router-link to="/pages/login">
+                     <div>
+                        <label class="block mb-2 text-sm text-lime-950 dark:text-lime-600">Vendor Type</label>
+                        <select id="means" name="means" class="w-full p-2 mt-1 border rounded-md">
+                          <option value="" selected disabled class="text-gray-400">Select a Vendor Type</option>
+                          <option value="">Merchant</option>
+                          <option value="">Dispatch</option>
+                       </select>
+                    </div>
+                   <router-link to="https://vendor-dashboard-seven-coral.vercel.app/">
                     <button
                         type="submit"
-                        class="flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform bg-lime-700 rounded-lg hover:bg-lime-600 focus:outline-none focus:ring focus:ring-lime-500 focus:ring-opacity-50">
+                        class="flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform rounded-lg bg-lime-700 hover:bg-lime-600 focus:outline-none focus:ring focus:ring-lime-500 focus:ring-opacity-50">
                         <span>Sign Up </span>
 
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 rtl:-scale-x-100" viewBox="0 0 20 20" fill="currentColor">
@@ -122,7 +130,7 @@
                     </button>
                 </router-link>
                 </form>
-                <div v-if="showAlert"  class="alert-modal flex w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
+                <div v-if="showAlert"  class="flex w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-md alert-modal dark:bg-gray-800">
     <div class="flex items-center justify-center w-12 bg-lime-600">
         <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
             <path d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z" />
