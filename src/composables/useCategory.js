@@ -33,7 +33,12 @@ export function useCategory(categoryName) {
             // Extract subcategories and brands from taxonomy
             const entry = taxonomyRes.payload.taxonomy.find(t => t.category === categoryName);
             if (entry) {
-                subCategories.value = entry.subcategories.map((name, i) => ({ id: i + 1, name }));
+                // Subcategories are now objects { name, code, specTemplate } — extract just the name for display
+                subCategories.value = entry.subcategories.map((sub, i) => ({
+                    id: i + 1,
+                    name: typeof sub === 'string' ? sub : sub.name,
+                }));
+                // Brands are still plain strings
                 brands.value = entry.brands.map((name, i) => ({ id: i + 1, name }));
             }
 
@@ -45,7 +50,7 @@ export function useCategory(categoryName) {
                 description: p.description,
                 price: `₦${Number(p.price).toLocaleString('en-NG', { minimumFractionDigits: 2 })}`,
                 image: p.img?.[0]?.imgData ?? 'https://via.placeholder.com/400x300?text=No+Image',
-                categoryId: p.subcategory ?? '',
+                categoryIds: p.subcategories ?? [],
                 brandId: p.brand ?? '',
                 rating: 0,
                 reviews: 0,

@@ -15,7 +15,7 @@
 
             <div class="mt-4">
               <label class="block text-lime-900">Password</label>
-              <input v-model="password" type="password" placeholder="Enter Password" minlength="6"
+              <input v-model="password" type="password" placeholder="Enter Password" minlength="4"
                 class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-lime-600 focus:bg-white focus:outline-none"
                 required />
             </div>

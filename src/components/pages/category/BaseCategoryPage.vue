@@ -34,15 +34,15 @@
             <div class="mb-6">
               <h3 class="mb-3 text-sm font-medium text-gray-700">Categories</h3>
               <div class="space-y-2">
-                <div v-for="subCategory in subCategories" :key="subCategory.id" class="flex items-center">
+                <div v-for="subCategory in subCategories" :key="subCategory.name" class="flex items-center">
                   <input 
                     type="checkbox" 
-                    :id="`category-${subCategory.id}`" 
-                    :value="subCategory.id"
+                    :id="`category-${subCategory.name}`" 
+                    :value="subCategory.name"
                     v-model="selectedCategories"
                     class="w-4 h-4 text-lime-600 border-gray-300 rounded focus:ring-lime-500"
                   >
-                  <label :for="`category-${subCategory.id}`" class="ml-2 text-sm text-gray-700">{{ subCategory.name }}</label>
+                  <label :for="`category-${subCategory.name}`" class="ml-2 text-sm text-gray-700">{{ subCategory.name }}</label>
                 </div>
               </div>
             </div>
@@ -256,7 +256,7 @@
                         <span class="ml-1 text-xs text-gray-500">({product.reviews})</span>
                       </div>
                       <h3 class="mb-1 text-lg font-semibold text-gray-800">{{ product.name }}</h3>
-                      <p class="mb-3 text-sm text-gray-600">{{ product.description }}</p>
+                      <p class="mb-3 text-sm text-gray-600">{{ product.description.slice(0, 100) + '...' }}</p>
                       <div class="flex items-center justify-between">
                         <div>
                           <span class="font-bold text-lime-600">{{ product.price }}</span>
@@ -443,7 +443,7 @@ const filteredProducts = computed(() => {
     }
     
     // Category filter
-    if (selectedCategories.value.length > 0 && !selectedCategories.value.includes(product.categoryId)) {
+    if (selectedCategories.value.length > 0 && !selectedCategories.value.every(category => product.categoryIds.includes(category))) {
       return false;
     }
     

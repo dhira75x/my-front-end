@@ -252,7 +252,7 @@
             <img :src="relatedProduct.image" alt="" class="object-cover w-full h-48">
             <div class="p-4">
               <h3 class="mb-1 font-semibold text-gray-800">{{ relatedProduct.name }}</h3>
-              <p class="text-sm text-gray-600">{{ relatedProduct.description }}</p>
+              <p class="text-sm text-gray-600">{{ relatedProduct.description.slice(0, 100) + '...' }}</p>
               <div class="flex items-center justify-between mt-3">
                 <span class="font-bold text-lime-600">{{ relatedProduct.price }}</span>
                 <button @click="viewProduct(relatedProduct.id)"
