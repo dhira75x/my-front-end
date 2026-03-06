@@ -9,16 +9,22 @@ import router from './router'
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+import { useUserStore } from './stores/userStore';
 
+const app = createApp(App);
+const pinia = createPinia();
+pinia.use(piniaPluginPersistedstate);
+app.use(pinia);
 
-const app = createApp(App)
-const pinia = createPinia()
+const userStore = useUserStore();
+try {
+    await userStore.checkAuth();
+} catch (error) {
+    console.error("Failed to check auth during initialization:", error);
+}
 
-pinia.use(piniaPluginPersistedstate)
-app.use(createPinia())
-app.use(router)
-app.use(pinia)
-app.use(PrimeVue, { ripple: true  })
-app.use(VueSweetalert2);
+app.use(router);
 
-app.mount('#app')
+app.mount("#app");
+const loader = document.getElementById("loading");
+if (loader) loader.remove();

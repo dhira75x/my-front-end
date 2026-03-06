@@ -75,14 +75,14 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { Auth } from "@/classes/auth.class";
+import { useUserStore } from "@/stores/userStore.js";
 
 const loginId = ref(""); // This maps to email in the Auth class
 const password = ref("");
 const isLoading = ref(false);
 
 const router = useRouter();
-const authService = new Auth();
+const userStore = useUserStore();
 
 const login = async () => {
   if (!loginId.value || !password.value) {
@@ -92,7 +92,7 @@ const login = async () => {
 
   try {
     isLoading.value = true;
-    const response = await authService.login(loginId.value, password.value);
+    const response = await userStore.login(loginId.value, password.value, 'merchants');
 
     if (response.status === "OK") {
       console.log("Login successful");

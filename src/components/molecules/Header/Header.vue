@@ -3,71 +3,41 @@
     <div class="container px-4 py-3 mx-auto">
       <div class="flex items-center justify-between">
         <!-- Logo -->
-        <div
-          class="flex items-center cursor-pointer"
-          @click="$router.push({ name: 'landing' })"
-        >
-          <img
-            src="@/components/icons/ovo logo.jpeg"
-            alt="Ovo Market"
-            class="h-8 md:h-10 w-auto"
-          />
+        <div class="flex items-center cursor-pointer" @click="$router.push({ name: 'landing' })">
+          <img src="@/components/icons/ovo logo.jpeg" alt="Ovo Market" class="h-8 md:h-10 w-auto" />
         </div>
 
         <!-- Search Bar -->
         <div class="items-center hidden w-64 px-4 py-2 bg-gray-100 rounded-full md:flex">
-          <svg
-            class="w-5 h-5 mr-2 text-gray-500"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            ></path>
+          <svg class="w-5 h-5 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
           </svg>
-          <input
-            type="text"
-            placeholder="Search products..."
-            class="w-full bg-transparent focus:outline-none"
-          />
+          <input type="text" placeholder="Search products..." class="w-full bg-transparent focus:outline-none" />
         </div>
 
         <!-- Navigation -->
         <nav class="hidden space-x-8 md:flex">
           <ul class="flex space-x-8">
-            <li
-              @click="$router.push({ name: 'landing' })"
-              class="font-medium text-transparent bg-clip-text brand-gradient cursor-pointer"
-            >
+            <li @click="$router.push({ name: 'landing' })"
+              class="font-medium text-transparent bg-clip-text brand-gradient cursor-pointer">
               Home
             </li>
-            <li
-              @click="$router.push({ name: 'categories' })"
-              class="font-medium text-transparent bg-clip-text brand-gradient cursor-pointer"
-            >
+            <li @click="$router.push({ name: 'categories' })"
+              class="font-medium text-transparent bg-clip-text brand-gradient cursor-pointer">
               Categories
             </li>
-            <li
-              @click="$router.push({ name: 'deals' })"
-              class="font-medium text-transparent bg-clip-text brand-gradient cursor-pointer"
-            >
+            <li @click="$router.push({ name: 'deals' })"
+              class="font-medium text-transparent bg-clip-text brand-gradient cursor-pointer">
               Deals
             </li>
-            <li
-              @click="$router.push({ name: 'schedule-shopping' })"
-              class="font-medium text-transparent bg-clip-text brand-gradient cursor-pointer"
-            >
+            <li @click="$router.push({ name: 'schedule-shopping' })"
+              class="font-medium text-transparent bg-clip-text brand-gradient cursor-pointer">
               Schedule Shopping
             </li>
-            <li
-              @click="$router.push({ name: 'about' })"
-              class="font-medium text-transparent bg-clip-text brand-gradient cursor-pointer"
-            >
+            <li @click="$router.push({ name: 'about' })"
+              class="font-medium text-transparent bg-clip-text brand-gradient cursor-pointer">
               About
             </li>
           </ul>
@@ -77,276 +47,136 @@
         <div class="flex items-center space-x-4">
           <!-- Cart Button with Dropdown -->
           <div class="relative" ref="cartContainer">
-            <button
-              @click="toggleCart"
-              class="relative p-2 text-gray-600 transition-colors hover:text-deepsaffron"
-            >
-              <svg
-                class="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                ></path>
+            <button @click="toggleCart" class="relative p-2 text-gray-600 transition-colors hover:text-deepsaffron">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+                </path>
               </svg>
               <span
-                class="absolute top-0 right-0 flex items-center justify-center w-5 h-5 text-xs text-white rounded-full bg-deepsaffron"
-                >{{ cartItems.length }}</span
-              >
+                class="absolute top-0 right-0 flex items-center justify-center w-5 h-5 text-xs text-white rounded-full bg-deepsaffron">{{
+                  cartStore.totalItems }}</span>
             </button>
 
             <!-- Cart Dropdown -->
-            <div
-              v-if="showCart"
-              class="absolute right-0 z-50 mt-2 bg-white rounded-md shadow-lg w-80"
-            >
+            <div v-if="showCart" class="absolute right-0 z-50 mt-2 bg-white rounded-md shadow-lg w-80">
               <div class="p-4 border-b">
                 <h3 class="font-semibold text-gray-800">Your Cart</h3>
               </div>
               <div class="overflow-y-auto max-h-60">
-                <div v-if="cartItems.length === 0" class="p-4 text-center text-gray-500">
+                <div v-if="cartStore.cartItems?.length === 0" class="p-4 text-center text-gray-500">
                   Your cart is empty
                 </div>
                 <div v-else>
-                  <div
-                    v-for="item in cartItems"
-                    :key="item.id"
-                    class="flex items-center p-4 border-b"
-                  >
-                    <img
-                      :src="item.image"
-                      alt=""
-                      class="object-cover w-16 h-16 rounded"
-                    />
+                  <div v-for="item in cartStore.cartItems" :key="item._id" class="flex items-center p-4 border-b">
+                    <img :src="item.productId?.img[0].imgData || '/placeholder.png'" alt=""
+                      class="object-cover w-16 h-16 rounded" />
                     <div class="flex-1 ml-3">
-                      <h4 class="text-sm font-medium text-gray-800">{{ item.name }}</h4>
-                      <p class="text-sm text-gray-600">{{ item.price }}</p>
+                      <h4 class="text-sm font-medium text-gray-800">{{ item.productId?.title }}</h4>
+                      <p class="text-sm text-gray-600">₦ {{ item.productId?.price }} x {{ item.count }}</p>
                     </div>
-                    <button
-                      @click="removeFromCart(item.id)"
-                      class="text-gray-400 hover:text-red-500"
-                    >
-                      <svg
-                        class="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                        ></path>
+                    <button @click="cartStore.removeFromCart(item.productId?._id)"
+                      class="text-gray-400 hover:text-red-500">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                        </path>
                       </svg>
                     </button>
                   </div>
                 </div>
               </div>
-              <div class="p-4">
-                <div class="flex justify-between mb-3">
-                  <span class="font-medium text-gray-800">Total:</span>
-                  <span class="font-semibold text-lime-600">₦{{ cartTotal }}</span>
-                </div>
-                <button
-                  class="w-full py-2 font-medium text-white transition-colors rounded-lg bg-lime-500 hover:bg-lime-600"
-                >
-                  Checkout
-                </button>
-              </div>
+              <button @click="$router.push({ name: 'checkout' }); showCart = false"
+                class="w-full py-2 font-medium text-white transition-colors rounded-lg bg-lime-500 hover:bg-lime-600">
+                Checkout
+              </button>
             </div>
           </div>
 
           <!-- Account / Auth Dropdown -->
           <div class="relative" ref="dropdownContainer">
-            <button
-              @click="toggleDropdown"
-              class="flex items-center px-4 py-2 space-x-1 text-white transition-opacity rounded-full brand-gradient hover:opacity-90"
-            >
-              <span v-if="userStore.isAuthenticated"
-                >Hi, {{ userStore.user?.names }}</span
-              >
+            <button @click="toggleDropdown"
+              class="flex items-center px-4 py-2 space-x-1 text-white transition-opacity rounded-full brand-gradient hover:opacity-90">
+              <span v-if="userStore.isAuthenticated">Hi, {{ userStore.user?.names }}</span>
               <span v-else>Account</span>
-              <svg
-                class="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19 9l-7 7-7-7"
-                ></path>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </button>
 
-            <div
-              v-if="showDropdown"
-              class="absolute right-0 z-50 w-56 py-1 mt-2 bg-white rounded-md shadow-lg"
-            >
+            <div v-if="showDropdown" class="absolute right-0 z-50 w-56 py-1 mt-2 bg-white rounded-md shadow-lg">
               <template v-if="userStore.isAuthenticated">
                 <div class="px-4 py-2 text-sm text-gray-700">
                   Signed in as
                   <span class="font-semibold">{{ userStore.user?.names }}</span>
                 </div>
-                <button
-                  @click="logout"
-                  class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                >
+                <button @click="logout"
+                  class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                   Logout
                 </button>
               </template>
               <template v-else>
-                <router-link
-                  to="/user-login"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >Login</router-link
-                >
-                <router-link
-                  :to="{ name: 'user-reg' }"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >Register as User</router-link
-                >
-                <router-link
-                  :to="{ name: 'vendor-reg' }"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >Register as Vendor</router-link
-                >
-                <router-link
-                  :to="{ name: 'dispatch-reg' }"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >Register as Dispatch</router-link
-                >
+                <router-link to="/user-login"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Login</router-link>
+                <router-link :to="{ name: 'user-reg' }"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Register as User</router-link>
+                <router-link :to="{ name: 'vendor-reg' }"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Register as Vendor</router-link>
+                <router-link :to="{ name: 'dispatch-reg' }"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Register as Dispatch</router-link>
               </template>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <nav
-      class="fixed bottom-0 inset-x-0 z-50 border-t border-gray-200 bg-white md:hidden"
-    >
+    <nav class="fixed bottom-0 inset-x-0 z-50 border-t border-gray-200 bg-white md:hidden">
       <div class="grid grid-cols-5 text-xs">
-        <button
-          class="flex flex-col items-center justify-center py-2"
+        <button class="flex flex-col items-center justify-center py-2"
           :class="currentRouteName === 'landing' ? 'text-deepsaffron' : 'text-gray-600'"
-          @click="$router.push({ name: 'landing' })"
-        >
-          <svg
-            class="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1"
-            />
+          @click="$router.push({ name: 'landing' })">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1" />
           </svg>
           <span>Home</span>
         </button>
-        <button
-          class="flex flex-col items-center justify-center py-2"
-          :class="
-            currentRouteName === 'categories' ? 'text-deepsaffron' : 'text-gray-600'
-          "
-          @click="$router.push({ name: 'categories' })"
-        >
-          <svg
-            class="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 10h16M4 14h16M4 18h16"
-            />
+        <button class="flex flex-col items-center justify-center py-2" :class="currentRouteName === 'categories' ? 'text-deepsaffron' : 'text-gray-600'
+          " @click="$router.push({ name: 'categories' })">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
           </svg>
           <span>Categories</span>
         </button>
-        <button
-          class="flex flex-col items-center justify-center py-2"
+        <button class="flex flex-col items-center justify-center py-2"
           :class="currentRouteName === 'deals' ? 'text-deepsaffron' : 'text-gray-600'"
-          @click="$router.push({ name: 'deals' })"
-        >
-          <svg
-            class="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M7 7h10M7 11h10M7 15h10"
-            />
+          @click="$router.push({ name: 'deals' })">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h10M7 11h10M7 15h10" />
           </svg>
           <span>Deals</span>
         </button>
-        <button
-          class="flex flex-col items-center justify-center py-2"
+        <button class="flex flex-col items-center justify-center py-2"
           :class="currentRouteName === 'cart' ? 'text-deepsaffron' : 'text-gray-600'"
-          @click="$router.push({ name: 'cart' })"
-        >
-          <svg
-            class="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-            />
+          @click="$router.push({ name: 'cart' })">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
           </svg>
           <span>Cart</span>
         </button>
-        <button
-          class="flex flex-col items-center justify-center py-2"
-          :class="
-            currentRouteName === 'user-login' ? 'text-deepsaffron' : 'text-gray-600'
-          "
-          @click="
+        <button class="flex flex-col items-center justify-center py-2" :class="currentRouteName === 'user-login' ? 'text-deepsaffron' : 'text-gray-600'
+          " @click="
             userStore.isAuthenticated
               ? $router.push({ name: 'landing' })
               : $router.push({ name: 'user-login' })
-          "
-        >
-          <svg
-            class="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M5.121 17.804A6 6 0 1118.879 6.196M15 11l-4 4m0 0l-4-4m4 4V7"
-            />
+            ">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M5.121 17.804A6 6 0 1118.879 6.196M15 11l-4 4m0 0l-4-4m4 4V7" />
           </svg>
           <span>Account</span>
         </button>
@@ -359,9 +189,11 @@
 import { ref, computed, onMounted, onUnmounted } from "vue";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/userStore.js";
+import { useCartStore } from "@/stores/cartStore.js";
 
 const router = useRouter();
 const userStore = useUserStore();
+const cartStore = useCartStore();
 
 // Dropdown functionality
 const showDropdown = ref(false);
@@ -391,42 +223,16 @@ const currentRouteName = computed(() => router.currentRoute.value.name);
 // Cart functionality
 const showCart = ref(false);
 const cartContainer = ref(null);
-const cartItems = ref([]);
 
 const toggleCart = () => {
   showCart.value = !showCart.value;
-};
-
-const closeCart = (event) => {
-  if (
-    showCart.value &&
-    cartContainer.value &&
-    !cartContainer.value.contains(event.target)
-  ) {
-    showCart.value = false;
-  }
 };
 
 const viewProduct = (productId) => {
   router.push(`/product/${productId}`);
 };
 
-const addToCart = (product) => {
-  cartItems.value.push(product);
-  console.log("Product added to cart:", product);
-};
 
-const removeFromCart = (productId) => {
-  cartItems.value = cartItems.value.filter((item) => item.id !== productId);
-};
-
-const cartTotal = computed(() => {
-  return cartItems.value
-    .reduce((total, item) => {
-      return total + parseFloat(item.price.replace("₦", "").replace(",", ""));
-    }, 0)
-    .toFixed(2);
-});
 
 // Carousel functionality
 const currentSlide = ref(0);
@@ -632,17 +438,30 @@ const stopAutoplay = () => {
 };
 
 onMounted(() => {
+  console.log("cartStore?.cartItems", cartStore?.cartItems);
   // For dropdown
   document.addEventListener("click", closeDropdown);
   // For cart
-  document.addEventListener("click", closeCart);
+  document.addEventListener("click", (event) => {
+    if (
+      showCart.value &&
+      cartContainer.value &&
+      !cartContainer.value.contains(event.target)
+    ) {
+      showCart.value = false;
+    }
+  });
+
+  // Initialize cart from backend
+  cartStore.initializeCart();
+
   // For carousel
   startAutoplay();
 });
 
 onUnmounted(() => {
   document.removeEventListener("click", closeDropdown);
-  document.removeEventListener("click", closeCart);
+  // document.removeEventListener("click", closeCart);
   stopAutoplay();
 });
 </script>

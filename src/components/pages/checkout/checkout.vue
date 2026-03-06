@@ -32,17 +32,15 @@
             <h2 class="mb-4 text-lg font-semibold text-gray-800">Contact Information</h2>
             <div class="mb-4">
               <label for="email" class="block mb-2 text-sm font-medium text-gray-700">Email</label>
-              <input 
-                type="email" 
-                id="email" 
-                v-model="customerInfo.email"
-                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500" 
-                placeholder="you@example.com"
-              >
+              <input type="email" id="email" v-model="customerInfo.email"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500"
+                placeholder="you@example.com">
             </div>
             <div class="flex items-center">
-              <input type="checkbox" id="newsletter" class="w-4 h-4 text-lime-600 border-gray-300 rounded focus:ring-lime-500">
-              <label for="newsletter" class="ml-2 text-sm text-gray-600">Keep me up to date on news and exclusive offers</label>
+              <input type="checkbox" id="newsletter"
+                class="w-4 h-4 text-lime-600 border-gray-300 rounded focus:ring-lime-500">
+              <label for="newsletter" class="ml-2 text-sm text-gray-600">Keep me up to date on news and exclusive
+                offers</label>
             </div>
           </div>
 
@@ -52,51 +50,32 @@
             <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
               <div>
                 <label for="firstName" class="block mb-2 text-sm font-medium text-gray-700">First Name</label>
-                <input 
-                  type="text" 
-                  id="firstName" 
-                  v-model="customerInfo.firstName"
-                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500" 
-                  placeholder="John"
-                >
+                <input type="text" id="firstName" v-model="customerInfo.firstName"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500"
+                  placeholder="John">
               </div>
               <div>
                 <label for="lastName" class="block mb-2 text-sm font-medium text-gray-700">Last Name</label>
-                <input 
-                  type="text" 
-                  id="lastName" 
-                  v-model="customerInfo.lastName"
-                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500" 
-                  placeholder="Doe"
-                >
+                <input type="text" id="lastName" v-model="customerInfo.lastName"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500"
+                  placeholder="Doe">
               </div>
               <div class="md:col-span-2">
                 <label for="address" class="block mb-2 text-sm font-medium text-gray-700">Address</label>
-                <input 
-                  type="text" 
-                  id="address" 
-                  v-model="customerInfo.address"
-                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500" 
-                  placeholder="123 Main St"
-                >
+                <input type="text" id="address" v-model="customerInfo.address"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500"
+                  placeholder="123 Main St">
               </div>
               <div>
                 <label for="city" class="block mb-2 text-sm font-medium text-gray-700">City</label>
-                <input 
-                  type="text" 
-                  id="city" 
-                  v-model="customerInfo.city"
-                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500" 
-                  placeholder="Lagos"
-                >
+                <input type="text" id="city" v-model="customerInfo.city"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500"
+                  placeholder="Lagos">
               </div>
               <div>
                 <label for="state" class="block mb-2 text-sm font-medium text-gray-700">State</label>
-                <select 
-                  id="state" 
-                  v-model="customerInfo.state"
-                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500"
-                >
+                <select id="state" v-model="customerInfo.state"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500">
                   <option value="">Select a state</option>
                   <option value="lagos">Lagos</option>
                   <option value="abuja">Abuja</option>
@@ -106,27 +85,20 @@
               </div>
               <div>
                 <label for="zip" class="block mb-2 text-sm font-medium text-gray-700">ZIP Code</label>
-                <input 
-                  type="text" 
-                  id="zip" 
-                  v-model="customerInfo.zip"
-                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500" 
-                  placeholder="100001"
-                >
+                <input type="text" id="zip" v-model="customerInfo.zip"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500"
+                  placeholder="100001">
               </div>
               <div>
                 <label for="phone" class="block mb-2 text-sm font-medium text-gray-700">Phone</label>
-                <input 
-                  type="tel" 
-                  id="phone" 
-                  v-model="customerInfo.phone"
-                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500" 
-                  placeholder="+234 123 456 7890"
-                >
+                <input type="tel" id="phone" v-model="customerInfo.phone"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-lime-500 focus:border-lime-500"
+                  placeholder="+234 123 456 7890">
               </div>
             </div>
             <div class="mt-4">
-              <input type="checkbox" id="saveAddress" class="w-4 h-4 text-lime-600 border-gray-300 rounded focus:ring-lime-500">
+              <input type="checkbox" id="saveAddress"
+                class="w-4 h-4 text-lime-600 border-gray-300 rounded focus:ring-lime-500">
               <label for="saveAddress" class="ml-2 text-sm text-gray-600">Save this information for next time</label>
             </div>
           </div>
@@ -136,7 +108,8 @@
             <h2 class="mb-4 text-lg font-semibold text-gray-800">Shipping Method</h2>
             <div class="space-y-3">
               <div class="flex items-center p-4 border border-gray-300 rounded-lg">
-                <input type="radio" id="standard" name="shipping" v-model="shippingMethod" value="standard" class="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500" checked>
+                <input type="radio" id="standard" name="shipping" v-model="shippingMethod" value="standard"
+                  class="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500" checked>
                 <label for="standard" class="flex items-center justify-between flex-1 ml-3">
                   <div>
                     <div class="font-medium text-gray-800">Standard Delivery</div>
@@ -146,7 +119,8 @@
                 </label>
               </div>
               <div class="flex items-center p-4 border border-gray-300 rounded-lg">
-                <input type="radio" id="express" name="shipping" v-model="shippingMethod" value="express" class="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500">
+                <input type="radio" id="express" name="shipping" v-model="shippingMethod" value="express"
+                  class="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500">
                 <label for="express" class="flex items-center justify-between flex-1 ml-3">
                   <div>
                     <div class="font-medium text-gray-800">Express Delivery</div>
@@ -156,7 +130,8 @@
                 </label>
               </div>
               <div class="flex items-center p-4 border border-gray-300 rounded-lg">
-                <input type="radio" id="overnight" name="shipping" v-model="shippingMethod" value="overnight" class="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500">
+                <input type="radio" id="overnight" name="shipping" v-model="shippingMethod" value="overnight"
+                  class="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500">
                 <label for="overnight" class="flex items-center justify-between flex-1 ml-3">
                   <div>
                     <div class="font-medium text-gray-800">Overnight Delivery</div>
@@ -173,7 +148,8 @@
             <h2 class="mb-4 text-lg font-semibold text-gray-800">Payment Method</h2>
             <div class="space-y-3">
               <div class="flex items-center p-4 border border-gray-300 rounded-lg">
-                <input type="radio" id="paystack" name="payment" v-model="selectedPayment" value="paystack" class="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500" checked>
+                <input type="radio" id="paystack" name="payment" v-model="selectedPayment" value="paystack"
+                  class="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500" checked>
                 <label for="paystack" class="flex items-center flex-1 ml-3">
                   <div class="flex items-center">
                     <div class="w-8 h-8 rounded bg-blue-500 flex items-center justify-center mr-2">
@@ -184,7 +160,8 @@
                 </label>
               </div>
               <div class="flex items-center p-4 border border-gray-300 rounded-lg">
-                <input type="radio" id="flutterwave" name="payment" v-model="selectedPayment" value="flutterwave" class="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500">
+                <input type="radio" id="flutterwave" name="payment" v-model="selectedPayment" value="flutterwave"
+                  class="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500">
                 <label for="flutterwave" class="flex items-center flex-1 ml-3">
                   <div class="flex items-center">
                     <div class="w-8 h-8 rounded bg-teal-500 flex items-center justify-center mr-2">
@@ -195,10 +172,14 @@
                 </label>
               </div>
               <div class="flex items-center p-4 border border-gray-300 rounded-lg">
-                <input type="radio" id="cash" name="payment" v-model="selectedPayment" value="cash" class="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500">
+                <input type="radio" id="cash" name="payment" v-model="selectedPayment" value="cash"
+                  class="w-4 h-4 text-lime-600 border-gray-300 focus:ring-lime-500">
                 <label for="cash" class="flex items-center flex-1 ml-3">
-                  <svg class="w-6 h-6 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                  <svg class="w-6 h-6 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z">
+                    </path>
                   </svg>
                   <span class="font-medium text-gray-800">Cash on Delivery</span>
                 </label>
@@ -221,11 +202,8 @@
             </div>
 
             <div class="mt-6">
-              <button 
-                @click="placeOrder" 
-                :disabled="isProcessing"
-                class="w-full py-3 font-semibold text-white transition-colors bg-lime-600 rounded-lg hover:bg-lime-700 disabled:opacity-50"
-              >
+              <button @click="placeOrder" :disabled="isProcessing"
+                class="w-full py-3 font-semibold text-white transition-colors bg-lime-600 rounded-lg hover:bg-lime-700 disabled:opacity-50">
                 <span v-if="isProcessing">Processing...</span>
                 <span v-else>Place Order</span>
               </button>
@@ -237,17 +215,19 @@
         <div>
           <div class="p-6 bg-white rounded-lg shadow-md">
             <h2 class="mb-4 text-lg font-semibold text-gray-800">Order Summary</h2>
-            
+
             <div class="space-y-4">
-              <div v-for="item in cartItems" :key="item.id" class="flex">
+              <div v-for="item in cartItems" :key="item._id" class="flex">
                 <div class="flex-shrink-0 w-16 h-16 overflow-hidden bg-gray-200 rounded-md">
-                  <img :src="item.image" alt="" class="object-cover w-full h-full">
+                  <img :src="item.productId?.img[0].imgData || '/placeholder.png'" alt=""
+                    class="object-cover w-full h-full">
                 </div>
                 <div class="flex-1 ml-4">
-                  <h3 class="text-sm font-medium text-gray-800">{{ item.name }}</h3>
-                  <p class="text-sm text-gray-500">Qty: {{ item.quantity }}</p>
+                  <h3 class="text-sm font-medium text-gray-800">{{ item.productId?.title }}</h3>
+                  <p class="text-sm text-gray-500">Qty: {{ item.count }}</p>
                 </div>
-                <div class="text-sm font-medium text-gray-800">{{ item.price }}</div>
+                <div class="text-sm font-medium text-gray-800">₦{{ Number(item.productId?.price).toLocaleString() }}
+                </div>
               </div>
             </div>
 
@@ -274,7 +254,8 @@
 
             <div class="mt-6">
               <div class="flex items-center p-4 bg-lime-50 rounded-lg">
-                <svg class="w-5 h-5 text-lime-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg class="w-5 h-5 text-lime-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
                 <span class="ml-2 text-sm text-lime-700">Free shipping on orders over ₦50,000</span>
@@ -285,16 +266,11 @@
           <div class="mt-6 p-6 bg-white rounded-lg shadow-md">
             <h3 class="mb-4 text-lg font-semibold text-gray-800">Have a promo code?</h3>
             <div class="flex">
-              <input 
-                type="text" 
-                v-model="promoCode"
-                class="flex-1 px-4 py-2 border border-gray-300 rounded-l-lg focus:ring-lime-500 focus:border-lime-500" 
-                placeholder="Enter promo code"
-              >
-              <button 
-                @click="applyPromoCode"
-                class="px-4 py-2 font-medium text-white bg-lime-600 rounded-r-lg hover:bg-lime-700 transition-transform duration-200 hover:scale-105 focus:ring-2 focus:ring-lime-500"
-              >
+              <input type="text" v-model="promoCode"
+                class="flex-1 px-4 py-2 border border-gray-300 rounded-l-lg focus:ring-lime-500 focus:border-lime-500"
+                placeholder="Enter promo code">
+              <button @click="applyPromoCode"
+                class="px-4 py-2 font-medium text-white bg-lime-600 rounded-r-lg hover:bg-lime-700 transition-transform duration-200 hover:scale-105 focus:ring-2 focus:ring-lime-500">
                 Apply
               </button>
             </div>
@@ -308,14 +284,20 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import { useCartStore } from '@/stores/cartStore.js';
+import { useUserStore } from '@/stores/userStore.js';
+import { Order } from '@/classes/order.class.js';
 
 const router = useRouter();
+const cartStore = useCartStore();
+const userStore = useUserStore();
+const orderService = new Order();
 
 // Customer information
 const customerInfo = ref({
-  email: '',
-  firstName: '',
-  lastName: '',
+  email: userStore.user?.email || '',
+  firstName: userStore.user?.names?.split(' ')[0] || '',
+  lastName: userStore.user?.names?.split(' ')[1] || '',
   address: '',
   city: '',
   state: '',
@@ -328,35 +310,18 @@ const selectedPayment = ref('paystack');
 const shippingMethod = ref('standard');
 const promoCode = ref('');
 const isProcessing = ref(false);
+const isPaystackLoaded = ref(false);
+const activeOrderId = ref(null);
 
-// Mock cart data - in a real app, this would come from a cart store
-const cartItems = ref([
-  {
-    id: 1,
-    name: 'Wireless Headphones',
-    price: '₦79,000.00',
-    quantity: 1,
-    image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'
-  },
-  {
-    id: 2,
-    name: 'Smart Watch',
-    price: '₦129,999.00',
-    quantity: 1,
-    image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'
-  }
-]);
+// Use data from cartStore
+const cartItems = computed(() => cartStore.cartItems);
 
 // Calculate order totals
-const subtotal = computed(() => {
-  return cartItems.value.reduce((total, item) => {
-    return total + parseFloat(item.price.replace('₦', '').replace(',', ''));
-  }, 0).toFixed(2);
-});
+const subtotal = computed(() => cartStore.cartTotal.toFixed(2));
 
 const shipping = computed(() => {
   if (subtotal.value > 50000) return '0.00';
-  
+
   switch (shippingMethod.value) {
     case 'express': return '5000.00';
     case 'overnight': return '10000.00';
@@ -377,47 +342,51 @@ const generateReference = () => {
   return `TX-${Date.now()}-${Math.floor(Math.random() * 1000000)}`;
 };
 
-// Initialize Paystack payment
-const initializePaystack = () => {
+// Pay with Paystack
+const payWithPaystack = (orderId) => {
+  if (typeof PaystackPop === 'undefined') {
+    alert('Paystack is still loading. Please try again in 5 seconds.');
+    isProcessing.value = false;
+    return;
+  }
+
   const handler = PaystackPop.setup({
     key: import.meta.env.VITE_PAYSTACK_PUBLIC_KEY,
     email: customerInfo.value.email,
-    amount: parseFloat(total.value) * 100,
+    amount: Math.round(parseFloat(total.value) * 100),
     currency: 'NGN',
-    ref: generateReference(),
+    ref: activeOrderId.value || generateReference(), // Use orderId as ref if possible
     metadata: {
       custom_fields: [
+        {
+          display_name: "Order ID",
+          variable_name: "order_id",
+          value: orderId
+        },
         {
           display_name: "Customer Name",
           variable_name: "customer_name",
           value: `${customerInfo.value.firstName} ${customerInfo.value.lastName}`
-        },
-        {
-          display_name: "Phone Number",
-          variable_name: "phone_number",
-          value: customerInfo.value.phone
         }
       ]
     },
-    callback: function(response) {
-      // Payment successful
+    callback: function (response) {
       console.log('Paystack payment successful:', response);
-      completeOrder(response.reference, 'paystack');
+      completeOrder(orderId, 'paystack', response.reference);
     },
-    onClose: function() {
-      // User closed payment modal
+    onClose: function () {
+      console.log('Paystack window closed');
       isProcessing.value = false;
-      console.log('Payment closed');
     }
   });
-  
+
   handler.openIframe();
 };
 
 // Initialize Flutterwave payment
-const initializeFlutterwave = () => {
+const initializeFlutterwave = (orderId) => {
   FlutterwaveCheckout({
-    public_key: 'FLWPUBK_TEST-xxxxxxxxxxxxxxxxxxxxxxxx-X', // Replace with your Flutterwave public key
+    public_key: import.meta.env.VITE_FLUTTERWAVE_PUBLIC_KEY || 'FLWPUBK_TEST-xxxxxxxxxxxxxxxxxxxxxxxx-X',
     tx_ref: generateReference(),
     amount: parseFloat(total.value),
     currency: 'NGN',
@@ -427,53 +396,38 @@ const initializeFlutterwave = () => {
       phone_number: customerInfo.value.phone,
       name: `${customerInfo.value.firstName} ${customerInfo.value.lastName}`
     },
-    customizations: {
-      title: 'Ovo Market Payment',
-      description: 'Payment for items in cart',
-      logo: '@/assets/ovologo.png'
-    },
-    callback: function(response) {
-      // Payment successful
+    callback: function (response) {
       console.log('Flutterwave payment successful:', response);
-      completeOrder(response.tx_ref, 'flutterwave');
+      completeOrder(orderId, 'flutterwave');
     },
-    onclose: function() {
-      // User closed payment modal
+    onclose: function () {
       isProcessing.value = false;
-      console.log('Payment closed');
     }
   });
 };
 
 // Complete the order after successful payment
-const completeOrder = (reference, paymentMethod) => {
-  // In a real app, you would send this data to your backend
-  const orderData = {
-    reference,
-    paymentMethod,
-    customer: customerInfo.value,
-    items: cartItems.value,
-    shipping: shippingMethod.value,
-    subtotal: subtotal.value,
-    shippingCost: shipping.value,
-    tax: tax.value,
-    total: total.value
-  };
-  
-  console.log('Order data:', orderData);
-  
-  // Simulate API call
-  setTimeout(() => {
+const completeOrder = async (orderId, paymentMethod, reference) => {
+  try {
+    const res = await orderService.completeOrder(orderId, reference);
+    if (res.status === 'OK') {
+      await cartStore.emptyCart();
+      router.push({ path: '/order-confirmation', query: { id: orderId } });
+    } else {
+      alert('Failed to confirm order: ' + res.msg);
+    }
+  } catch (err) {
+    console.error('Error completing order:', err);
+    alert('An error occurred while completing your order.');
+  } finally {
     isProcessing.value = false;
-    alert('Order placed successfully!');
-    router.push('/order-confirmation');
-  }, 1500);
+  }
 };
 
 // Apply promo code
 const applyPromoCode = () => {
   if (!promoCode.value) return;
-  
+
   // In a real app, you would validate the promo code with your backend
   console.log('Applying promo code:', promoCode.value);
   alert(`Promo code "${promoCode.value}" applied successfully!`);
@@ -481,38 +435,96 @@ const applyPromoCode = () => {
 };
 
 // Place order
-const placeOrder = () => {
+const placeOrder = async () => {
+  console.log('placeOrder function called');
+  console.log('Customer Info:', customerInfo.value);
+  console.log('Cart Items:', cartStore.cartItems);
   // Validate form
-  if (!customerInfo.value.email || !customerInfo.value.firstName || !customerInfo.value.lastName || 
-      !customerInfo.value.address || !customerInfo.value.city || !customerInfo.value.state || 
-      !customerInfo.value.zip || !customerInfo.value.phone) {
+  if (!customerInfo.value.email || !customerInfo.value.firstName || !customerInfo.value.lastName ||
+    !customerInfo.value.address || !customerInfo.value.city || !customerInfo.value.state ||
+    !customerInfo.value.zip || !customerInfo.value.phone) {
     alert('Please fill in all required fields');
     return;
   }
-  
+
+  if (cartStore.cartItems.length === 0) {
+    alert('Your cart is empty');
+    return;
+  }
+
   isProcessing.value = true;
-  
-  // Process payment based on selected method
-  if (selectedPayment.value === 'paystack') {
-    initializePaystack();
-  } else if (selectedPayment.value === 'flutterwave') {
-    initializeFlutterwave();
-  } else if (selectedPayment.value === 'cash') {
-    // For cash on delivery, complete order without payment
-    completeOrder(generateReference(), 'cash');
+
+  try {
+    // 0. Update user profile if Save Address is checked
+    const saveAddressCheckbox = document.getElementById('saveAddress');
+    if (saveAddressCheckbox && saveAddressCheckbox.checked) {
+      console.log('Saving address to profile...');
+      await userStore.updateProfile({
+        firstname: customerInfo.value.firstName,
+        lastname: customerInfo.value.lastName,
+        phone: customerInfo.value.phone,
+        shippingAddress: customerInfo.value.address,
+        city: customerInfo.value.city,
+        state: customerInfo.value.state,
+        zipCode: customerInfo.value.zip
+      });
+    }
+
+    // 1. Create order in backend
+    const items = cartStore.cartItems.map(item => ({
+      id: item.productId._id,
+      count: item.count
+    }));
+
+    const shippingAddress = {
+      address: customerInfo.value.address,
+      city: customerInfo.value.city,
+      state: customerInfo.value.state,
+      zipCode: customerInfo.value.zip
+    };
+
+    const orderRes = await orderService.createOrder(
+      userStore.user._id,
+      items,
+      shippingAddress,
+      shippingMethod.value,
+      selectedPayment.value
+    );
+
+    if (orderRes.status !== 'OK') {
+      throw new Error(orderRes.msg || 'Failed to create order');
+    }
+
+    const orderId = orderRes.payload._id;
+    activeOrderId.value = orderId;
+
+    // 2. Process payment
+    if (selectedPayment.value === 'paystack') {
+      payWithPaystack(orderId);
+    } else if (selectedPayment.value === 'flutterwave') {
+      initializeFlutterwave(orderId);
+    } else if (selectedPayment.value === 'cash') {
+      completeOrder(orderId, 'cash');
+    }
+  } catch (err) {
+    console.error('Order placement error:', err);
+    alert('Error placing order: ' + err.message);
+    isProcessing.value = false;
   }
 };
 
 // Load payment scripts
 onMounted(() => {
+  cartStore.initializeCart();
   // Load Paystack script
   const paystackScript = document.createElement('script');
   paystackScript.src = 'https://js.paystack.co/v1/inline.js';
   paystackScript.onload = () => {
     console.log('Paystack script loaded');
+    isPaystackLoaded.value = true;
   };
   document.head.appendChild(paystackScript);
-  
+
   // Load Flutterwave script
   const flutterwaveScript = document.createElement('script');
   flutterwaveScript.src = 'https://checkout.flutterwave.com/v3.js';

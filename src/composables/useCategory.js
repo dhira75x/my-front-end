@@ -57,6 +57,7 @@ export function useCategory(categoryName) {
                 onSale: false,
                 freeShipping: false,
                 dateAdded: p.createdAt,
+                stock: p.stock || 0,
             }));
         } catch (err) {
             console.error(`[useCategory] Failed to load "${categoryName}":`, err);
