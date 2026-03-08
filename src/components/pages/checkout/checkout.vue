@@ -293,7 +293,7 @@ const cartStore = useCartStore();
 const userStore = useUserStore();
 const orderService = new Order();
 
-// Customer information
+
 const customerInfo = ref({
   email: userStore.user?.email || '',
   firstName: userStore.user?.names?.split(' ')[0] || '',

@@ -1,31 +1,10 @@
 <template>
-  <section
-    class="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 animate__animated animate__fadeIn"
-  >
-    <div
-      v-if="showPopup"
-      class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70"
-    >
-      <div
-        class="relative w-full max-w-md rounded-lg bg-white p-8 shadow-2xl animate__animated animate__zoomIn"
-      >
-        <button
-          @click="closePopup"
-          class="absolute right-4 top-4 text-gray-500 hover:text-gray-700"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
+  <section class="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 animate__animated animate__fadeIn">
+    <div v-if="showPopup" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70">
+      <div class="relative w-full max-w-md rounded-lg bg-white p-8 shadow-2xl animate__animated animate__zoomIn">
+        <button @click="closePopup" class="absolute right-4 top-4 text-gray-500 hover:text-gray-700">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
         <h2 class="mb-4 text-center text-3xl font-bold text-deepsaffron">Coming Soon!</h2>
@@ -64,40 +43,23 @@
 
         <form @submit.prevent="submitForm" class="space-y-4">
           <div>
-            <label for="email" class="block text-sm font-medium text-gray-700"
-              >Email</label
-            >
-            <input
-              v-model="formData.email"
-              type="email"
-              id="email"
-              required
+            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+            <input v-model="formData.email" type="email" id="email" required
               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-deepsaffron focus:ring-deepsaffron p-2 border"
-              placeholder="your.email@example.com"
-            />
+              placeholder="your.email@example.com" />
           </div>
           <div>
-            <label for="phone" class="block text-sm font-medium text-gray-700"
-              >Phone Number</label
-            >
-            <input
-              v-model="formData.phone"
-              type="tel"
-              id="phone"
-              required
+            <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+            <input v-model="formData.phone" type="tel" id="phone" required
               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-deepsaffron focus:ring-deepsaffron p-2 border"
-              placeholder="+2348156894789"
-            />
+              placeholder="+2348156894789" />
           </div>
           <div v-if="formMessage" :class="['text-center', formMessageClass]">
             {{ formMessage }}
           </div>
           <div class="text-center">
-            <button
-              type="submit"
-              :disabled="isSubmitting"
-              class="rounded-lg bg-deepsaffron px-6 py-2 font-medium text-white transition hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-deepsaffron focus:ring-offset-2 disabled:opacity-70"
-            >
+            <button type="submit" :disabled="isSubmitting"
+              class="rounded-lg bg-deepsaffron px-6 py-2 font-medium text-white transition hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-deepsaffron focus:ring-offset-2 disabled:opacity-70">
               <span v-if="isSubmitting">Submitting...</span>
               <span v-else>Notify Me</span>
             </button>
@@ -109,39 +71,25 @@
     <Header />
 
     <!-- Hero Section Full-Width Carousel -->
-    <section
-      class="relative py-16 text-white md:py-24 min-h-[70vh] animate__animated animate__fadeIn"
-    >
-      <div
-        class="flex transition-transform duration-500 ease-in-out min-h-[70vh]"
-        :style="{ transform: `translateX(-${currentHeroSlide * 100}%)` }"
-      >
-        <div
-          v-for="(slide, index) in heroSlides"
-          :key="index"
-          class="flex-shrink-0 w-full min-h-[70vh]"
-        >
-          <div
-            class="relative w-full h-full bg-cover bg-center"
-            :style="{ backgroundImage: `url(${slide.backgroundImage})` }"
-          >
+    <section class="relative py-16 text-white md:py-24 min-h-[70vh] animate__animated animate__fadeIn">
+      <div class="flex transition-transform duration-500 ease-in-out min-h-[70vh]"
+        :style="{ transform: `translateX(-${currentHeroSlide * 100}%)` }">
+        <div v-for="(slide, index) in heroSlides" :key="index" class="flex-shrink-0 w-full min-h-[70vh]">
+          <div class="relative w-full h-full bg-cover bg-center"
+            :style="{ backgroundImage: `url(${slide.backgroundImage})` }">
             <div class="absolute inset-0 bg-black bg-opacity-40"></div>
             <div class="container px-4 mx-auto relative z-10 min-h-[70vh]">
               <div class="flex flex-col items-center justify-center h-full md:flex-row">
                 <div class="mb-10 md:w-1/2 md:mb-0">
                   <h1 class="mb-4 text-4xl font-bold md:text-5xl">{{ slide.title }}</h1>
                   <p class="mb-8 text-xl opacity-90">{{ slide.description }}</p>
-                  <div
-                    class="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4"
-                  >
+                  <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
                     <button
-                      class="px-6 py-3 font-semibold transition bg-white rounded-full text-deepsaffron hover:bg-gray-100 duration-300 hover:scale-105 focus:ring-2 focus:ring-white/60"
-                    >
+                      class="px-6 py-3 font-semibold transition bg-white rounded-full text-deepsaffron hover:bg-gray-100 duration-300 hover:scale-105 focus:ring-2 focus:ring-white/60">
                       {{ slide.primaryCta }}
                     </button>
                     <button
-                      class="px-6 py-3 font-semibold text-white transition bg-transparent border-2 border-white rounded-full hover:bg-white hover:text-deepsaffron duration-300 hover:scale-105 focus:ring-2 focus:ring-white/60"
-                    >
+                      class="px-6 py-3 font-semibold text-white transition bg-transparent border-2 border-white rounded-full hover:bg-white hover:text-deepsaffron duration-300 hover:scale-105 focus:ring-2 focus:ring-white/60">
                       {{ slide.secondaryCta }}
                     </button>
                   </div>
@@ -149,25 +97,16 @@
                 <div class="flex justify-end md:w-1/2 pt-10">
                   <div class="relative">
                     <div
-                      class="flex items-center justify-center w-64 h-64 bg-white rounded-full md:w-80 md:h-80 bg-opacity-20 outer-ring"
-                    >
+                      class="flex items-center justify-center w-64 h-64 bg-white rounded-full md:w-80 md:h-80 bg-opacity-20 outer-ring">
                       <div
-                        class="flex items-center justify-center w-56 h-56 bg-white rounded-full md:w-72 md:h-72 bg-opacity-30 inner-ring"
-                      >
-                        <div
-                          class="relative w-48 h-48 overflow-hidden bg-white shadow-xl md:w-64 md:h-64 rounded-xl"
-                        >
-                          <img
-                            :src="slide.image.url"
-                            :alt="slide.image.alt"
-                            class="object-cover w-full h-full"
-                          />
+                        class="flex items-center justify-center w-56 h-56 bg-white rounded-full md:w-72 md:h-72 bg-opacity-30 inner-ring">
+                        <div class="relative w-48 h-48 overflow-hidden bg-white shadow-xl md:w-64 md:h-64 rounded-xl">
+                          <img :src="slide.image.url" :alt="slide.image.alt" class="object-cover w-full h-full" />
                         </div>
                       </div>
                     </div>
                     <div
-                      class="absolute px-4 py-2 font-bold text-gray-800 bg-yellow-400 rounded-full shadow-lg -top-4 -right-4"
-                    >
+                      class="absolute px-4 py-2 font-bold text-gray-800 bg-yellow-400 rounded-full shadow-lg -top-4 -right-4">
                       New Arrivals
                     </div>
                   </div>
@@ -177,50 +116,21 @@
           </div>
         </div>
       </div>
-      <button
-        @click="prevHeroSlide"
-        class="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75 z-20"
-      >
-        <svg
-          class="w-5 h-5 text-gray-800"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M15 19l-7-7 7-7"
-          ></path>
+      <button @click="prevHeroSlide"
+        class="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75 z-20">
+        <svg class="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
         </svg>
       </button>
-      <button
-        @click="nextHeroSlide"
-        class="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75 z-20"
-      >
-        <svg
-          class="w-5 h-5 text-gray-800"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M9 5l7 7-7 7"
-          ></path>
+      <button @click="nextHeroSlide"
+        class="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75 z-20">
+        <svg class="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
         </svg>
       </button>
       <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2 z-20">
-        <button
-          v-for="(_, i) in heroSlides"
-          :key="i"
-          @click="goToHeroSlide(i)"
-          class="w-3 h-3 rounded-full"
-          :class="currentHeroSlide === i ? 'bg-white' : 'bg-white/50'"
-        ></button>
+        <button v-for="(_, i) in heroSlides" :key="i" @click="goToHeroSlide(i)" class="w-3 h-3 rounded-full"
+          :class="currentHeroSlide === i ? 'bg-white' : 'bg-white/50'"></button>
       </div>
     </section>
 
@@ -230,121 +140,63 @@
         <div class="flex items-center justify-between mb-8">
           <h2 class="text-3xl font-bold text-gray-800">Trending Now</h2>
           <div class="flex space-x-2">
-            <button
-              @click="prevSlide"
-              class="p-2 bg-gray-200 rounded-full hover:bg-gray-300"
-            >
-              <svg
-                class="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M15 19l-7-7 7-7"
-                ></path>
+            <button @click="prevSlide" class="p-2 bg-gray-200 rounded-full hover:bg-gray-300">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
               </svg>
             </button>
-            <button
-              @click="nextSlide"
-              class="p-2 bg-gray-200 rounded-full hover:bg-gray-300"
-            >
-              <svg
-                class="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 5l7 7-7 7"
-                ></path>
+            <button @click="nextSlide" class="p-2 bg-gray-200 rounded-full hover:bg-gray-300">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
               </svg>
             </button>
           </div>
         </div>
 
         <div class="relative overflow-hidden">
-          <div
-            class="flex transition-transform duration-500 ease-in-out"
-            :style="{ transform: `translateX(-${currentSlide * 100}%)` }"
-          >
-            <div
-              v-for="product in carouselProducts"
-              :key="product.id"
-              class="flex-shrink-0 w-full"
-            >
-              <div
-                class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-              >
-                <div
-                  v-for="item in getSlideProducts(product.id)"
-                  :key="item.id"
-                  class="overflow-hidden transition-shadow bg-white shadow-md rounded-xl hover:shadow-xl"
-                  @click="viewProduct(product.id)"
-                >
+          <div class="flex transition-transform duration-500 ease-in-out"
+            :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
+            <div v-for="product in carouselProducts" :key="product.id" class="flex-shrink-0 w-full">
+              <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                <div v-for="item in getSlideProducts(product.id)" :key="item._id"
+                  class="overflow-hidden transition-shadow bg-white shadow-md rounded-xl hover:shadow-xl cursor-pointer"
+                  @click="viewProduct(item._id)">
                   <div class="relative">
-                    <img
-                      :src="item.image"
-                      alt="Product Image"
-                      class="object-cover w-full h-72"
-                    />
-                    <button
-                      class="absolute p-2 bg-white rounded-full shadow-md top-3 right-3 hover:bg-gray-100"
-                    >
-                      <svg
-                        class="w-5 h-5 text-gray-600"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                        ></path>
+                    <img :src="item.img?.[0]?.imgData || '/placeholder.png'" alt="Product Image"
+                      class="object-cover w-full h-72" />
+                    <button class="absolute p-2 bg-white rounded-full shadow-md top-3 right-3 hover:bg-gray-100">
+                      <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+                        </path>
                       </svg>
                     </button>
-                    <div
-                      v-if="item.isNew"
-                      class="absolute px-2 py-1 text-xs font-bold text-white rounded top-3 left-3 bg-deepsaffron"
-                    >
+                    <div v-if="item.isNew"
+                      class="absolute px-2 py-1 text-xs font-bold text-white rounded top-3 left-3 bg-deepsaffron">
                       NEW
                     </div>
                   </div>
                   <div class="p-5">
                     <h3 class="mb-1 text-lg font-semibold text-gray-800">
-                      {{ item.name }}
+                      {{ item.title }}
                     </h3>
-                    <p class="mb-3 text-sm text-gray-600">{{ item.description }}</p>
+                    <p class="mb-3 text-sm text-gray-600 line-clamp-2">{{ item.description }}</p>
                     <div class="flex items-center justify-between">
-                      <span class="font-bold text-deepsaffron">{{ item.price }}</span>
-                      <button
-                        @click="addToCart(item)"
-                        class="p-2 text-white transition-colors rounded-full bg-deepsaffron hover:bg-deepsaffron"
-                      >
-                        <svg
-                          class="w-5 h-5"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                          ></path>
+                      <div class="flex flex-col">
+                        <span v-if="item.discountPrice" class="text-xs text-gray-400 line-through">₦{{
+                          Number(item.price).toLocaleString() }}</span>
+                        <span class="font-bold text-deepsaffron">₦{{ Number(item.discountPrice ||
+                          item.price).toLocaleString() }}</span>
+                      </div>
+                      <button @click.stop="addToCart(item)"
+                        class="p-2 text-white transition-colors rounded-full bg-deepsaffron hover:bg-deepsaffron">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                         </svg>
                       </button>
                     </div>
@@ -356,13 +208,8 @@
 
           <!-- Carousel Indicators -->
           <div class="flex justify-center mt-6 space-x-2">
-            <button
-              v-for="(_, index) in carouselProducts"
-              :key="index"
-              @click="goToSlide(index)"
-              class="w-3 h-3 rounded-full"
-              :class="currentSlide === index ? 'bg-deepsaffron' : 'bg-gray-300'"
-            ></button>
+            <button v-for="(_, index) in carouselProducts" :key="index" @click="goToSlide(index)"
+              class="w-3 h-3 rounded-full" :class="currentSlide === index ? 'bg-deepsaffron' : 'bg-gray-300'"></button>
           </div>
         </div>
       </div>
@@ -373,149 +220,75 @@
       <div class="container px-4 mx-auto">
         <div class="flex items-center justify-between mb-12">
           <h2 class="text-3xl font-bold text-center text-gray-800">Shop by Category</h2>
-          <router-link
-            to="/categories"
-            class="flex items-center font-semibold text-deepsaffron hover:text-deepsaffron"
-          >
+          <router-link to="/categories" class="flex items-center font-semibold text-deepsaffron hover:text-deepsaffron">
             View All Categories
-            <svg
-              class="w-4 h-4 ml-1"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 5l7 7-7 7"
-              ></path>
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
             </svg>
           </router-link>
         </div>
 
         <div class="grid grid-cols-2 gap-6 md:grid-cols-5">
-          <div
-            class="p-6 text-center transition-shadow cursor-pointer bg-gray-50 rounded-xl hover:shadow-lg"
-            @click="$router.push({ name: 'electronics' })"
-          >
-            <div
-              class="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-deepsaffron/10"
-            >
-              <svg
-                class="w-8 h-8 text-deepsaffron"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
-                ></path>
+          <div class="p-6 text-center transition-shadow cursor-pointer bg-gray-50 rounded-xl hover:shadow-lg"
+            @click="$router.push({ name: 'electronics' })">
+            <div class="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-deepsaffron/10">
+              <svg class="w-8 h-8 text-deepsaffron" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
               </svg>
             </div>
             <h3 class="font-semibold text-gray-800">Electronics</h3>
           </div>
 
-          <div
-            class="p-6 text-center transition-shadow cursor-pointer bg-gray-50 rounded-xl hover:shadow-lg"
-            @click="$router.push({ name: 'fashion' })"
-          >
-            <div
-              class="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-deepsaffron/10"
-            >
-              <svg
-                class="w-8 h-8 text-deepsaffron"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"
-                ></path>
+          <div class="p-6 text-center transition-shadow cursor-pointer bg-gray-50 rounded-xl hover:shadow-lg"
+            @click="$router.push({ name: 'fashion' })">
+            <div class="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-deepsaffron/10">
+              <svg class="w-8 h-8 text-deepsaffron" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01">
+                </path>
               </svg>
             </div>
             <h3 class="font-semibold text-gray-800">Fashion</h3>
           </div>
 
-          <div
-            class="p-6 text-center transition-shadow cursor-pointer bg-gray-50 rounded-xl hover:shadow-lg"
-            @click="$router.push({ name: 'home-kitchen' })"
-          >
-            <div
-              class="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-deepsaffron/10"
-            >
-              <svg
-                class="w-8 h-8 text-deepsaffron"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z"
-                ></path>
+          <div class="p-6 text-center transition-shadow cursor-pointer bg-gray-50 rounded-xl hover:shadow-lg"
+            @click="$router.push({ name: 'home-kitchen' })">
+            <div class="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-deepsaffron/10">
+              <svg class="w-8 h-8 text-deepsaffron" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z">
+                </path>
               </svg>
             </div>
             <h3 class="font-semibold text-gray-800">Home & Kitchen</h3>
           </div>
 
-          <div
-            class="p-6 text-center transition-shadow cursor-pointer bg-gray-50 rounded-xl hover:shadow-lg"
-            @click="$router.push({ name: 'beauty' })"
-          >
-            <div
-              class="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-deepsaffron/10"
-            >
-              <svg
-                class="w-8 h-8 text-deepsaffron"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                ></path>
+          <div class="p-6 text-center transition-shadow cursor-pointer bg-gray-50 rounded-xl hover:shadow-lg"
+            @click="$router.push({ name: 'beauty' })">
+            <div class="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-deepsaffron/10">
+              <svg class="w-8 h-8 text-deepsaffron" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+                </path>
               </svg>
             </div>
             <h3 class="font-semibold text-gray-800">Beauty</h3>
           </div>
 
-          <div
-            class="p-6 text-center transition-shadow cursor-pointer bg-gray-50 rounded-xl hover:shadow-lg"
-            @click="$router.push({ name: 'grocery-drinks' })"
-          >
-            <div
-              class="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-deepsaffron/10"
-            >
-              <svg
-                class="w-8 h-8 text-deepsaffron"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                ></path>
+          <div class="p-6 text-center transition-shadow cursor-pointer bg-gray-50 rounded-xl hover:shadow-lg"
+            @click="$router.push({ name: 'grocery-drinks' })">
+            <div class="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-deepsaffron/10">
+              <svg class="w-8 h-8 text-deepsaffron" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+                </path>
               </svg>
             </div>
             <h3 class="font-semibold text-gray-800">Grocery & Drinks</h3>
@@ -529,110 +302,62 @@
       <div class="container px-4 mx-auto">
         <div class="flex items-center justify-between mb-12">
           <h2 class="text-3xl font-bold text-gray-800">Featured Products</h2>
-          <router-link
-            to="#"
-            class="flex items-center font-semibold text-deepsaffron hover:text-deepsaffron"
-          >
+          <router-link to="#" class="flex items-center font-semibold text-deepsaffron hover:text-deepsaffron">
             View All
-            <svg
-              class="w-4 h-4 ml-1"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 5l7 7-7 7"
-              ></path>
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
             </svg>
           </router-link>
         </div>
 
         <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           <!-- Product Card -->
-          <div
-            v-for="product in featuredProducts"
-            :key="product.id"
-            class="overflow-hidden transition-shadow bg-white shadow-md rounded-xl hover:shadow-xl"
-            @click="viewProduct(product.id)"
-          >
+          <div v-for="product in featuredProducts" :key="product._id"
+            class="overflow-hidden transition-shadow bg-white shadow-md rounded-xl hover:shadow-xl cursor-pointer"
+            @click="viewProduct(product._id)">
             <div class="relative">
-              <img
-                :src="product.image"
-                alt="Product Image"
-                class="object-cover w-full h-72"
-              />
-              <button
-                class="absolute p-2 bg-white rounded-full shadow-md top-3 right-3 hover:bg-gray-100"
-                @click.stop
-              >
-                <svg
-                  class="w-5 h-5 text-gray-600"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                  ></path>
+              <img :src="product.img?.[0]?.imgData || '/placeholder.png'" alt="Product Image"
+                class="object-cover w-full h-72" />
+              <button class="absolute p-2 bg-white rounded-full shadow-md top-3 right-3 hover:bg-gray-100" @click.stop>
+                <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+                  </path>
                 </svg>
               </button>
-              <div
-                v-if="product.isNew"
-                class="absolute px-2 py-1 text-xs font-bold text-white rounded top-3 left-3 bg-deepsaffron"
-              >
+              <div v-if="product.isNew"
+                class="absolute px-2 py-1 text-xs font-bold text-white rounded top-3 left-3 bg-deepsaffron">
                 NEW
               </div>
             </div>
             <div class="p-5">
-              <h3 class="mb-1 text-lg font-semibold text-gray-800">{{ product.name }}</h3>
-              <p class="mb-3 text-sm text-gray-600">{{ product.description }}</p>
+              <h3 class="mb-1 text-lg font-semibold text-gray-800">{{ product.title }}</h3>
+              <p class="mb-3 text-sm text-gray-600 line-clamp-2">{{ product.description }}</p>
               <div class="flex items-center justify-between">
-                <span class="font-bold text-deepsaffron">{{ product.price }}</span>
+                <div class="flex flex-col">
+                  <span v-if="product.discountPrice" class="text-xs text-gray-400 line-through">₦{{
+                    Number(product.price).toLocaleString() }}</span>
+                  <span class="font-bold text-deepsaffron">₦{{ Number(product.discountPrice ||
+                    product.price).toLocaleString() }}</span>
+                </div>
                 <div class="flex space-x-2">
-                  <button
-                    @click="addToCart(product)"
-                    class="p-2 text-white transition-colors rounded-full bg-deepsaffron hover:bg-deepsaffron"
-                  >
-                    <svg
-                      class="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                      ></path>
+                  <button @click.stop="addToCart(product)"
+                    class="p-2 text-white transition-colors rounded-full bg-deepsaffron hover:bg-deepsaffron">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                     </svg>
                   </button>
-                  <button
-                    @click="scheduleProduct(product.id)"
+                  <button @click.stop="scheduleProduct(product._id)"
                     class="p-2 text-white transition-colors rounded-full bg-blue-600 hover:bg-blue-700"
-                    title="Schedule Shopping"
-                  >
-                    <svg
-                      class="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                      ></path>
+                    title="Schedule Shopping">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                      </path>
                     </svg>
                   </button>
                 </div>
@@ -646,19 +371,11 @@
     <!-- Special Offer Section Full-Width Carousel -->
     <section class="py-16 text-white min-h-[60vh] animate__animated animate__fadeIn">
       <div class="container px-4 mx-auto relative overflow-hidden min-h-[60vh]">
-        <div
-          class="flex transition-transform duration-500 ease-in-out min-h-[60vh] p-3"
-          :style="{ transform: `translateX(-${currentSummerSlide * 100}%)` }"
-        >
-          <div
-            v-for="(slide, index) in summerSlides"
-            :key="index"
-            class="flex-shrink-0 w-full min-h-[60vh]"
-          >
-            <div
-              class="relative w-full min-h-[60vh] bg-cover bg-center"
-              :style="{ backgroundImage: `url(${slide.backgroundImage})` }"
-            >
+        <div class="flex transition-transform duration-500 ease-in-out min-h-[60vh] p-3"
+          :style="{ transform: `translateX(-${currentSummerSlide * 100}%)` }">
+          <div v-for="(slide, index) in summerSlides" :key="index" class="flex-shrink-0 w-full min-h-[60vh]">
+            <div class="relative w-full min-h-[60vh] bg-cover bg-center"
+              :style="{ backgroundImage: `url(${slide.backgroundImage})` }">
               <div class="absolute inset-0 bg-black bg-opacity-40"></div>
               <div class="container px-4 mx-auto relative z-10 h-full">
                 <div class="flex flex-col items-center justify-center h-full md:flex-row">
@@ -688,13 +405,11 @@
                     </div>
                     <div class="flex items-center space-x-4">
                       <button
-                        class="px-6 py-3 font-semibold transition-colors bg-white rounded-full text-deepsaffron hover:bg-gray-100"
-                      >
+                        class="px-6 py-3 font-semibold transition-colors bg-white rounded-full text-deepsaffron hover:bg-gray-100">
                         {{ slide.primaryCta }}
                       </button>
                       <button
-                        class="px-6 py-3 font-semibold transition bg-transparent border-2 border-white rounded-full hover:bg-white hover:text-deepsaffron"
-                      >
+                        class="px-6 py-3 font-semibold transition bg-transparent border-2 border-white rounded-full hover:bg-white hover:text-deepsaffron">
                         {{ slide.secondaryCta }}
                       </button>
                     </div>
@@ -702,25 +417,16 @@
                   <div class="flex justify-center md:w-1/3 pt-10">
                     <div class="relative">
                       <div
-                        class="flex items-center justify-center w-64 h-64 bg-white rounded-full md:w-80 md:h-80 bg-opacity-20 outer-ring"
-                      >
+                        class="flex items-center justify-center w-64 h-64 bg-white rounded-full md:w-80 md:h-80 bg-opacity-20 outer-ring">
                         <div
-                          class="flex items-center justify-center w-56 h-56 bg-white rounded-full md:w-72 md:h-72 bg-opacity-30 inner-ring"
-                        >
-                          <div
-                            class="relative w-48 h-48 overflow-hidden bg-white shadow-xl md:w-64 md:h-64 rounded-xl"
-                          >
-                            <img
-                              :src="slide.image.url"
-                              :alt="slide.image.alt"
-                              class="object-cover w-full h-full"
-                            />
+                          class="flex items-center justify-center w-56 h-56 bg-white rounded-full md:w-72 md:h-72 bg-opacity-30 inner-ring">
+                          <div class="relative w-48 h-48 overflow-hidden bg-white shadow-xl md:w-64 md:h-64 rounded-xl">
+                            <img :src="slide.image.url" :alt="slide.image.alt" class="object-cover w-full h-full" />
                           </div>
                         </div>
                       </div>
                       <div
-                        class="absolute px-3 py-1.5 font-bold text-gray-800 bg-yellow-400 rounded-full shadow-lg bottom-2 right-2 md:bottom-4 md:right-4 text-sm z-10"
-                      >
+                        class="absolute px-3 py-1.5 font-bold text-gray-800 bg-yellow-400 rounded-full shadow-lg bottom-2 right-2 md:bottom-4 md:right-4 text-sm z-10">
                         50% OFF
                       </div>
                     </div>
@@ -730,50 +436,21 @@
             </div>
           </div>
         </div>
-        <button
-          @click="prevSummerSlide"
-          class="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75 z-20"
-        >
-          <svg
-            class="w-5 h-5 text-gray-800"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M15 19l-7-7 7-7"
-            ></path>
+        <button @click="prevSummerSlide"
+          class="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75 z-20">
+          <svg class="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
           </svg>
         </button>
-        <button
-          @click="nextSummerSlide"
-          class="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75 z-20"
-        >
-          <svg
-            class="w-5 h-5 text-gray-800"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9 5l7 7-7 7"
-            ></path>
+        <button @click="nextSummerSlide"
+          class="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75 z-20">
+          <svg class="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
           </svg>
         </button>
         <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2 z-20">
-          <button
-            v-for="(_, i) in summerSlides"
-            :key="i"
-            @click="goToSummerSlide(i)"
-            class="w-3 h-3 rounded-full"
-            :class="currentSummerSlide === i ? 'bg-white' : 'bg-white/50'"
-          ></button>
+          <button v-for="(_, i) in summerSlides" :key="i" @click="goToSummerSlide(i)" class="w-3 h-3 rounded-full"
+            :class="currentSummerSlide === i ? 'bg-white' : 'bg-white/50'"></button>
         </div>
       </div>
     </section>
@@ -782,89 +459,52 @@
       <div class="container px-4 mx-auto">
         <div class="flex items-center justify-between mb-12">
           <h2 class="text-3xl font-bold text-gray-800">Hot Deals</h2>
-          <router-link
-            to="#"
-            class="flex items-center font-semibold text-transparent bg-clip-text brand-gradient"
-          >
+          <router-link to="#" class="flex items-center font-semibold text-transparent bg-clip-text brand-gradient">
             View All
-            <svg
-              class="w-4 h-4 ml-1"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 5l7 7-7 7"
-              ></path>
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
             </svg>
           </router-link>
         </div>
 
         <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           <!-- Product Card -->
-          <div
-            v-for="product in hotProducts"
-            :key="product.id"
-            class="overflow-hidden transition-shadow bg-white shadow-md rounded-xl hover:shadow-xl"
-            @click="viewProduct(product.id)"
-          >
+          <div v-for="product in hotProducts" :key="product._id"
+            class="overflow-hidden transition-shadow bg-white shadow-md rounded-xl hover:shadow-xl cursor-pointer"
+            @click="viewProduct(product._id)">
             <div class="relative">
-              <img
-                :src="product.image"
-                alt="Product Image"
-                class="object-cover w-full h-72"
-              />
-              <button
-                class="absolute p-2 bg-white rounded-full shadow-md top-3 right-3 hover:bg-gray-100"
-              >
-                <svg
-                  class="w-5 h-5 text-gray-600"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                  ></path>
+              <img :src="product.img?.[0]?.imgData || '/placeholder.png'" alt="Product Image"
+                class="object-cover w-full h-72" />
+              <button class="absolute p-2 bg-white rounded-full shadow-md top-3 right-3 hover:bg-gray-100">
+                <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+                  </path>
                 </svg>
               </button>
-              <div
-                v-if="product.isNew"
-                class="absolute px-2 py-1 text-xs font-bold text-white rounded top-3 left-3 bg-deepsaffron"
-              >
+              <div v-if="product.isNew"
+                class="absolute px-2 py-1 text-xs font-bold text-white rounded top-3 left-3 bg-deepsaffron">
                 NEW
               </div>
             </div>
             <div class="p-5">
-              <h3 class="mb-1 text-lg font-semibold text-gray-800">{{ product.name }}</h3>
-              <p class="mb-3 text-sm text-gray-600">{{ product.description }}</p>
+              <h3 class="mb-1 text-lg font-semibold text-gray-800">{{ product.title }}</h3>
+              <p class="mb-3 text-sm text-gray-600 line-clamp-2">{{ product.description }}</p>
               <div class="flex items-center justify-between">
-                <span class="font-bold text-deepsaffron">{{ product.price }}</span>
-                <button
-                  @click="addToCart(product)"
-                  class="p-2 text-white transition-colors rounded-full bg-deepsaffron hover:bg-deepsaffron"
-                >
-                  <svg
-                    class="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                    ></path>
+                <div class="flex flex-col">
+                  <span v-if="product.discountPrice" class="text-xs text-gray-400 line-through">₦{{
+                    Number(product.price).toLocaleString() }}</span>
+                  <span class="font-bold text-deepsaffron">₦{{ Number(product.discountPrice ||
+                    product.price).toLocaleString() }}</span>
+                </div>
+                <button @click.stop="addToCart(product)"
+                  class="p-2 text-white transition-colors rounded-full bg-deepsaffron hover:bg-deepsaffron">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                   </svg>
                 </button>
               </div>
@@ -885,57 +525,31 @@
           <div class="p-6 bg-gray-50 rounded-xl">
             <div class="flex items-center mb-4">
               <div
-                class="flex items-center justify-center w-12 h-12 mr-4 font-bold rounded-full bg-lime-200 text-lime-800"
-              >
+                class="flex items-center justify-center w-12 h-12 mr-4 font-bold rounded-full bg-lime-200 text-lime-800">
                 JD
               </div>
               <div>
                 <h3 class="font-semibold text-gray-800">John Doe</h3>
                 <div class="flex text-yellow-400">
-                  <svg
-                    class="w-4 h-4 fill-current"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path
-                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                    />
+                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                   </svg>
-                  <svg
-                    class="w-4 h-4 fill-current"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path
-                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                    />
+                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                   </svg>
-                  <svg
-                    class="w-4 h-4 fill-current"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path
-                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                    />
+                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                   </svg>
-                  <svg
-                    class="w-4 h-4 fill-current"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path
-                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                    />
+                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                   </svg>
-                  <svg
-                    class="w-4 h-4 fill-current"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path
-                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                    />
+                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                   </svg>
                 </div>
               </div>
@@ -949,57 +563,31 @@
           <div class="p-6 bg-gray-50 rounded-xl">
             <div class="flex items-center mb-4">
               <div
-                class="flex items-center justify-center w-12 h-12 mr-4 font-bold rounded-full bg-lime-200 text-lime-800"
-              >
+                class="flex items-center justify-center w-12 h-12 mr-4 font-bold rounded-full bg-lime-200 text-lime-800">
                 SM
               </div>
               <div>
                 <h3 class="font-semibold text-gray-800">Sarah Miller</h3>
                 <div class="flex text-yellow-400">
-                  <svg
-                    class="w-4 h-4 fill-current"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path
-                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                    />
+                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                   </svg>
-                  <svg
-                    class="w-4 h-4 fill-current"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path
-                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                    />
+                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                   </svg>
-                  <svg
-                    class="w-4 h-4 fill-current"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path
-                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                    />
+                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                   </svg>
-                  <svg
-                    class="w-4 h-4 fill-current"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path
-                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                    />
+                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                   </svg>
-                  <svg
-                    class="w-4 h-4 fill-current"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path
-                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                    />
+                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                   </svg>
                 </div>
               </div>
@@ -1013,57 +601,31 @@
           <div class="p-6 bg-gray-50 rounded-xl">
             <div class="flex items-center mb-4">
               <div
-                class="flex items-center justify-center w-12 h-12 mr-4 font-bold rounded-full bg-lime-200 text-lime-800"
-              >
+                class="flex items-center justify-center w-12 h-12 mr-4 font-bold rounded-full bg-lime-200 text-lime-800">
                 RJ
               </div>
               <div>
                 <h3 class="font-semibold text-gray-800">Robert Johnson</h3>
                 <div class="flex text-yellow-400">
-                  <svg
-                    class="w-4 h-4 fill-current"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path
-                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                    />
+                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                   </svg>
-                  <svg
-                    class="w-4 h-4 fill-current"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path
-                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                    />
+                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                   </svg>
-                  <svg
-                    class="w-4 h-4 fill-current"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path
-                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                    />
+                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                   </svg>
-                  <svg
-                    class="w-4 h-4 fill-current"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path
-                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                    />
+                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                   </svg>
-                  <svg
-                    class="w-4 h-4 text-gray-300"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg class="w-4 h-4 text-gray-300" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path
-                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                    />
+                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                   </svg>
                 </div>
               </div>
@@ -1087,10 +649,8 @@
             Plan your shopping in advance and have your items delivered when it's most
             convenient for you.
           </p>
-          <button
-            @click="goToScheduleShopping"
-            class="px-6 py-3 font-semibold text-white transition-colors bg-deepsaffron rounded-lg hover:bg-opacity-90"
-          >
+          <button @click="goToScheduleShopping"
+            class="px-6 py-3 font-semibold text-white transition-colors bg-deepsaffron rounded-lg hover:bg-opacity-90">
             Schedule Your Shopping
           </button>
         </div>
@@ -1107,19 +667,11 @@
               features.
             </p>
             <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
-              <a
-                href="#"
-                class="flex items-center px-4 py-3 text-white transition-colors bg-black rounded-lg hover:bg-gray-800"
-              >
-                <svg
-                  class="w-8 h-8 mr-2"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
+              <a href="#"
+                class="flex items-center px-4 py-3 text-white transition-colors bg-black rounded-lg hover:bg-gray-800">
+                <svg class="w-8 h-8 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path
-                    d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"
-                  />
+                    d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" />
                 </svg>
                 <div>
                   <div class="text-xs">Download on the</div>
@@ -1127,19 +679,11 @@
                 </div>
               </a>
 
-              <a
-                href="#"
-                class="flex items-center px-4 py-3 text-white transition-colors bg-black rounded-lg hover:bg-gray-800"
-              >
-                <svg
-                  class="w-8 h-8 mr-2"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
+              <a href="#"
+                class="flex items-center px-4 py-3 text-white transition-colors bg-black rounded-lg hover:bg-gray-800">
+                <svg class="w-8 h-8 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path
-                    d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"
-                  />
+                    d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
                 </svg>
                 <div>
                   <div class="text-xs">Get it on</div>
@@ -1150,22 +694,15 @@
           </div>
           <div class="flex justify-center md:w-1/2">
             <div class="relative">
-              <div
-                class="flex items-center justify-center w-64 h-64 overflow-hidden bg-gray-200 shadow-xl rounded-3xl"
-              >
+              <div class="flex items-center justify-center w-64 h-64 overflow-hidden bg-gray-200 shadow-xl rounded-3xl">
                 <img
                   src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
-                  alt="App Preview"
-                  class="object-cover w-full h-full"
-                />
+                  alt="App Preview" class="object-cover w-full h-full" />
               </div>
-              <div
-                class="absolute w-48 p-4 bg-white shadow-lg -bottom-6 -right-6 rounded-xl"
-              >
+              <div class="absolute w-48 p-4 bg-white shadow-lg -bottom-6 -right-6 rounded-xl">
                 <div class="flex items-center mb-2">
                   <div
-                    class="flex items-center justify-center w-8 h-8 mr-2 font-bold text-white rounded-full bg-deepsaffron"
-                  >
+                    class="flex items-center justify-center w-8 h-8 mr-2 font-bold text-white rounded-full bg-deepsaffron">
                     O
                   </div>
                   <div>
@@ -1175,14 +712,9 @@
                 </div>
                 <div class="flex">
                   <div class="mr-1 text-yellow-400">
-                    <svg
-                      class="w-4 h-4 fill-current"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path
-                        d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                      />
+                        d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                     </svg>
                   </div>
                   <div class="text-xs">4.8 (2.3K reviews)</div>
@@ -1204,8 +736,69 @@ import { ref, computed, onMounted, onUnmounted } from "vue";
 import { useRouter } from "vue-router";
 import Header from "@/components/molecules/Header/Header.vue";
 import Footer from "@/components/molecules/Footer/footer.vue";
+import { useCartStore } from "@/stores/cartStore.js";
+import { Products } from "@/classes/products.class";
+import { Categories } from "@/classes/categories.class";
 
 const router = useRouter();
+const cartStore = useCartStore();
+const productClass = new Products();
+const categoryClass = new Categories();
+
+// Carousel functionality
+const currentSlide = ref(0);
+const currentHeroSlide = ref(0);
+const currentSummerSlide = ref(0);
+
+// Dynamic Data
+const featuredProducts = ref([]);
+const hotProducts = ref([]);
+const allCarouselProducts = ref([]);
+const dynamicCategories = ref([]);
+const loading = ref(true);
+
+const categories = [
+  { id: 'electronics', name: 'Electronics', icon: 'M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z' },
+  { id: 'fashion', name: 'Fashion', icon: 'M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01' },
+  { id: 'home-kitchen', name: 'Home & Kitchen', icon: 'M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z' },
+  { id: 'beauty', name: 'Beauty', icon: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z' },
+  { id: 'grocery-drinks', name: 'Grocery & Drinks', icon: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z' }
+];
+
+const fetchDynamicData = async () => {
+  try {
+    loading.value = true;
+
+    // 1. Fetch Trending Now (Latest products)
+    const latestData = await productClass.getProducts({ limit: 8 });
+    allCarouselProducts.value = latestData.payload.docs;
+
+    // 2. Fetch Featured Products (using isFeatured flag)
+    const featuredData = await productClass.getProducts({ isFeatured: true, limit: 4 });
+    featuredProducts.value = featuredData.payload.docs;
+
+    // 3. Hot Deals - Automated logic (Products with discountPrice)
+    // For now, if no products have discountPrice, we'll fall back to a specific slice
+    // or just fetch all and filter client side if the API is simple.
+    const allProductsData = await productClass.getProducts({ limit: 20 });
+    const allProds = allProductsData.payload.docs;
+
+    const deals = allProds.filter(p => p.discountPrice && p.discountPrice < p.price);
+    hotProducts.value = deals.length > 0 ? deals.slice(0, 4) : allProds.slice(4, 8);
+
+    // Final Fallbacks
+    if (featuredProducts.value.length === 0) featuredProducts.value = allProds.slice(0, 4);
+
+    // Fetch dynamic categories for taxonomy if needed in future
+    const categoryData = await categoryClass.getTaxonomy();
+    dynamicCategories.value = categoryData.payload.categories;
+
+  } catch (error) {
+    console.error("Failed to fetch landing page data:", error);
+  } finally {
+    loading.value = false;
+  }
+};
 
 // Dropdown functionality
 const showDropdown = ref(false);
@@ -1249,23 +842,14 @@ const viewProduct = (productId) => {
 };
 
 const addToCart = (product) => {
-  cartItems.value.push(product);
-  console.log("Product added to cart:", product);
+  cartStore.addToCart(product._id);
 };
 
-const removeFromCart = (productId) => {
-  cartItems.value = cartItems.value.filter((item) => item.id !== productId);
+const scheduleProduct = (productId) => {
+  router.push(`/schedule-shopping?productId=${productId}`);
 };
 
-const cartTotal = computed(() => {
-  return cartItems.value
-    .reduce((total, item) => {
-      return total + parseFloat(item.price.replace("₦", "").replace(",", ""));
-    }, 0)
-    .toFixed(2);
-});
 
-const currentHeroSlide = ref(0);
 const heroSlides = ref([
   {
     title: "Discover Amazing Products",
@@ -1335,7 +919,6 @@ const goToHeroSlide = (index) => {
 };
 
 // Summer sale carousel functionality
-const currentSummerSlide = ref(0);
 const summerSlides = ref([
   {
     title: "Summer Sale is On!",
@@ -1397,8 +980,8 @@ const goToSummerSlide = (index) => {
 };
 
 // Product carousel functionality
-const currentSlide = ref(0);
 
+// Carousel helpers
 const nextSlide = () => {
   currentSlide.value = (currentSlide.value + 1) % carouselProducts.value.length;
 };
@@ -1413,166 +996,10 @@ const goToSlide = (index) => {
   currentSlide.value = index;
 };
 
-const getSlideProducts = (slideId) => {
-  const startIndex = (slideId - 1) * 4;
-  const endIndex = startIndex + 4;
-  return allCarouselProducts.value.slice(startIndex, endIndex);
-};
-
-// Product data
-const featuredProducts = ref([
-  {
-    id: 1,
-    name: "Wireless Headphones",
-    description: "Premium sound quality",
-    price: "₦79,000.00",
-    image:
-      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-    isNew: true,
-  },
-  {
-    id: 2,
-    name: "Smart Watch",
-    description: "Track your fitness",
-    price: "₦129,999.00",
-    image:
-      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-    isNew: false,
-  },
-  {
-    id: 3,
-    name: "Running Shoes",
-    description: "Comfortable and durable",
-    price: "₦18,999.00",
-    image:
-      "https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-    isNew: true,
-  },
-  {
-    id: 4,
-    name: "Backpack",
-    description: "Perfect for travel",
-    price: "₦19,900.00",
-    image:
-      "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-    isNew: false,
-  },
-]);
-
-const hotProducts = ref([
-  {
-    id: 1,
-    name: "Regal Wine",
-    description: "Premium brandy wine",
-    price: "₦79,000.00",
-    image: "/regal.jpg",
-    isNew: true,
-  },
-  {
-    id: 2,
-    name: "Gallantry",
-    description: "Premium cognac",
-    price: "₦129,999.00",
-    image: "/gallantry.jpg",
-    isNew: false,
-  },
-  {
-    id: 3,
-    name: "Camera Lens",
-    description: "Sharp and clear images",
-    price: "₦189,999.00",
-    image: "/lens-max.png",
-    isNew: true,
-  },
-  {
-    id: 4,
-    name: "Basket",
-    description: "Perfect for travel",
-    price: "₦19,900.00",
-    image:
-      "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-    isNew: false,
-  },
-]);
-
-// Carousel products
-const allCarouselProducts = ref([
-  {
-    id: 1,
-    name: "Wireless Headphones",
-    description: "Premium sound quality",
-    price: "₦79,000.00",
-    image:
-      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-    isNew: true,
-  },
-  {
-    id: 2,
-    name: "Smart Watch",
-    description: "Track your fitness",
-    price: "₦129,999.00",
-    image:
-      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-    isNew: false,
-  },
-  {
-    id: 3,
-    name: "Running Shoes",
-    description: "Comfortable and durable",
-    price: "₦18,999.00",
-    image:
-      "https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-    isNew: true,
-  },
-  {
-    id: 4,
-    name: "Backpack",
-    description: "Perfect for travel",
-    price: "₦19,900.00",
-    image:
-      "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-    isNew: false,
-  },
-  {
-    id: 5,
-    name: "Laptop",
-    description: "High performance",
-    price: "₦450,000.00",
-    image:
-      "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-    isNew: true,
-  },
-  {
-    id: 6,
-    name: "Sunglasses",
-    description: "Stylish protection",
-    price: "₦12,500.00",
-    image:
-      "https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-    isNew: false,
-  },
-  {
-    id: 7,
-    name: "Smartphone",
-    description: "Latest technology",
-    price: "₦250,000.00",
-    image:
-      "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-    isNew: true,
-  },
-  {
-    id: 8,
-    name: "Perfume",
-    description: "Luxury fragrance",
-    price: "₦35,000.00",
-    image: "/perfume.webp",
-    isNew: false,
-  },
-]);
-
 const carouselProducts = computed(() => {
   // Group products into slides of 4
   const slides = [];
+  if (!allCarouselProducts.value || allCarouselProducts.value.length === 0) return slides;
   for (let i = 0; i < allCarouselProducts.value.length; i += 4) {
     slides.push({
       id: Math.floor(i / 4) + 1,
@@ -1581,6 +1008,11 @@ const carouselProducts = computed(() => {
   }
   return slides;
 });
+
+const getSlideProducts = (slideId) => {
+  const slide = carouselProducts.value.find((s) => s.id === slideId);
+  return slide ? slide.products : [];
+};
 
 let heroAutoplay;
 let summerAutoplay;
@@ -1815,15 +1247,19 @@ onUnmounted(() => {
   0% {
     transform: scale(1) translateY(0);
   }
+
   25% {
     transform: scale(1.03) translateY(-2px);
   }
+
   50% {
     transform: scale(1.06) translateY(0);
   }
+
   75% {
     transform: scale(1.03) translateY(2px);
   }
+
   100% {
     transform: scale(1) translateY(0);
   }
@@ -1833,15 +1269,19 @@ onUnmounted(() => {
   0% {
     transform: scale(1) translateY(0);
   }
+
   25% {
     transform: scale(1.02) translateY(2px);
   }
+
   50% {
     transform: scale(1.04) translateY(0);
   }
+
   75% {
     transform: scale(1.02) translateY(-2px);
   }
+
   100% {
     transform: scale(1) translateY(0);
   }
