@@ -76,7 +76,7 @@
                       <h4 class="text-sm font-medium text-gray-800">{{ item.productId?.title }}</h4>
                       <p class="text-sm text-gray-600">₦ {{ item.productId?.price }} x {{ item.count }}</p>
                     </div>
-                    <button @click="cartStore.removeFromCart(item.productId?._id)"
+                    <button @click="deletefromcart(item.productId?._id)"
                       class="text-gray-400 hover:text-red-500">
                       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
@@ -257,84 +257,7 @@ const getSlideProducts = (slideId) => {
   return allCarouselProducts.value.slice(startIndex, endIndex);
 };
 
-// Product data
-const featuredProducts = ref([
-  {
-    id: 1,
-    name: "Wireless Headphones",
-    description: "Premium sound quality",
-    price: "₦79,000.00",
-    image:
-      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-    isNew: true,
-  },
-  {
-    id: 2,
-    name: "Smart Watch",
-    description: "Track your fitness",
-    price: "₦129,999.00",
-    image:
-      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-    isNew: false,
-  },
-  {
-    id: 3,
-    name: "Running Shoes",
-    description: "Comfortable and durable",
-    price: "₦18,999.00",
-    image:
-      "https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-    isNew: true,
-  },
-  {
-    id: 4,
-    name: "Backpack",
-    description: "Perfect for travel",
-    price: "₦19,900.00",
-    image:
-      "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-    isNew: false,
-  },
-]);
 
-const hotProducts = ref([
-  {
-    id: 1,
-    name: "Regal Wine",
-    description: "Premium brandy wine",
-    price: "₦79,000.00",
-    image:
-      "https://images.unsplash.com/photo-1560474847-929b9d1b4f41?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-    isNew: true,
-  },
-  {
-    id: 2,
-    name: "Hennesy",
-    description: "Premium cognac",
-    price: "₦129,999.00",
-    image:
-      "https://images.unsplash.com/photo-1607834837845-292c04910753?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-    isNew: false,
-  },
-  {
-    id: 3,
-    name: "Camera Lens",
-    description: "Sharp and clear images",
-    price: "₦189,999.00",
-    image:
-      "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-    isNew: true,
-  },
-  {
-    id: 4,
-    name: "Basket",
-    description: "Perfect for travel",
-    price: "₦19,900.00",
-    image:
-      "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-    isNew: false,
-  },
-]);
 
 // Carousel products
 const allCarouselProducts = ref([
@@ -458,7 +381,12 @@ onMounted(() => {
   // For carousel
   startAutoplay();
 });
-
+const deletefromcart = (productId) => {
+  cartStore.cartItems = cartStore.cartItems.filter(
+    (item) => item.productId._id !== productId
+  );
+  cartStore.removeFromCart(productId);
+};
 onUnmounted(() => {
   document.removeEventListener("click", closeDropdown);
   // document.removeEventListener("click", closeCart);

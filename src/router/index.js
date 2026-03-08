@@ -96,7 +96,7 @@ const router = createRouter({
       path: "/user-reg",
       name: "user-reg",
       component: () => import("../views/registration.vue"),
-      meta: { requiresAuth: true }
+      meta: { guestOnly: true }
     },
     {
       path: "/dispatch-reg",

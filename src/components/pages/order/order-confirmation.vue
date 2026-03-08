@@ -205,67 +205,38 @@
 import { ref, computed, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import AppLayout from '@/layouts/applayout.vue';
+import { Order } from '@/classes/order.class.js';
+import { useUserStore } from '@/stores/userStore.js';
 
 const route = useRoute();
 const router = useRouter();
+const orderService = new Order();
+const userStore = useUserStore();
 
 const orderIdParam = computed(() => route.query.id);
 
-// Generate a random order number
+// Order state
 const orderNumber = ref('');
 const orderDate = ref(new Date());
-
-// Mock order data - in a real app, this would come from an API
-const orderItems = ref([
-  {
-    id: 1,
-    name: 'Wireless Headphones',
-    price: '₦79,000.00',
-    quantity: 1,
-    image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'
-  },
-  {
-    id: 2,
-    name: 'Smart Watch',
-    price: '₦129,999.00',
-    quantity: 1,
-    image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'
-  }
-]);
-
+const orderItems = ref([]);
 const shippingAddress = ref({
-  name: 'John Doe',
-  address: '123 Main St',
-  city: 'Lagos',
-  state: 'Lagos',
-  zip: '100001',
+  name: '',
+  address: '',
+  city: '',
+  state: '',
+  zip: '',
   country: 'Nigeria',
-  phone: '+234 123 456 7890'
+  phone: ''
 });
-
 const paymentMethod = ref({
-  type: 'Credit Card',
-  last4: '1234'
+  type: 'Online Payment',
+  last4: ''
 });
-
-// Calculate order totals
-const subtotal = computed(() => {
-  return orderItems.value.reduce((total, item) => {
-    return total + parseFloat(item.price.replace('₦', '').replace(',', ''));
-  }, 0).toFixed(2);
-});
-
-const shipping = computed(() => {
-  return subtotal.value > 50000 ? '0.00' : '2000.00';
-});
-
-const tax = computed(() => {
-  return (parseFloat(subtotal.value) * 0.075).toFixed(2); // 7.5% VAT
-});
-
-const total = computed(() => {
-  return (parseFloat(subtotal.value) + parseFloat(shipping.value) + parseFloat(tax.value)).toFixed(2);
-});
+const loadingOrder = ref(false);
+const subtotal = ref('0.00');
+const shipping = ref('0.00');
+const tax = ref('0.00');
+const total = ref('0.00');
 
 // Estimated dates for order status
 const estimatedDates = ref({
@@ -283,15 +254,64 @@ const formatDate = (date) => {
   });
 };
 
-// Generate order number
 const generateOrderNumber = () => {
   const timestamp = Date.now().toString();
   const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
   orderNumber.value = `ORD-${timestamp.slice(-6)}${random}`;
 };
 
-onMounted(() => {
-  generateOrderNumber();
+// Fetch order details
+const fetchOrderDetails = async () => {
+  if (!orderIdParam.value) {
+    generateOrderNumber();
+    return;
+  }
 
+  loadingOrder.value = true;
+  try {
+    const res = await orderService.findOrder(orderIdParam.value);
+    if (res.status === 'OK') {
+      const order = res.payload;
+      orderNumber.value = order.orderNumber || order._id;
+      orderDate.value = new Date(order.createdAt);
+
+      orderItems.value = order.items.map(item => ({
+        id: item.productId?._id,
+        name: item.productId?.title,
+        price: `₦${parseFloat(item.productId?.price || 0).toLocaleString()}`,
+        quantity: item.count,
+        image: item.productId?.img?.[0]?.imgData || '/placeholder.png'
+      }));
+
+      shippingAddress.value = {
+        name: userStore.user?.names || 'Customer',
+        address: order.shippingAddress?.address,
+        city: order.shippingAddress?.city,
+        state: order.shippingAddress?.state,
+        zip: order.shippingAddress?.zipCode,
+        country: 'Nigeria',
+        phone: userStore.user?.phone || ''
+      };
+
+      // Recalculate totals based on order data if possible, or just use what's there
+      // For now, simple calculation
+      const itemTotal = order.items.reduce((acc, item) => acc + (parseFloat(item.productId?.price || 0) * item.count), 0);
+      subtotal.value = itemTotal.toFixed(2);
+      shipping.value = order.shippingFee ? order.shippingFee.toFixed(2) : (itemTotal > 50000 ? '0.00' : '2000.00');
+      tax.value = (itemTotal * 0.075).toFixed(2);
+      total.value = (parseFloat(subtotal.value) + parseFloat(shipping.value) + parseFloat(tax.value)).toFixed(2);
+
+      paymentMethod.value.type = order.paymentMethod || 'Online Payment';
+    }
+  } catch (err) {
+    console.error("Error fetching order details:", err);
+    generateOrderNumber(); // Fallback to random if fetch fails
+  } finally {
+    loadingOrder.value = false;
+  }
+};
+
+onMounted(() => {
+  fetchOrderDetails();
 });
 </script>

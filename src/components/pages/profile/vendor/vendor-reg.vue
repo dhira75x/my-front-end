@@ -268,7 +268,7 @@ const submitForm = async () => {
         showNotification('Success', 'Registration successful! Redirecting to dashboard...');
 
         setTimeout(() => {
-            window.location.href = 'https://vendor-dashboard-seven-coral.vercel.app/';
+            window.location.href = 'http://localhost:5178/';
         }, 2000);
 
     } catch (error) {

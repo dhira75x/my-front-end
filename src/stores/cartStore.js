@@ -108,17 +108,19 @@ export const useCartStore = defineStore('cart', {
     },
 
     async emptyCart() {
+      // Clear locally first for immediate UI update
+      this.cartItems = [];
+
       const userStore = useUserStore();
       if (!userStore.isAuthenticated) {
-        this.cartItems = [];
         return;
       }
 
       try {
-        await cartService.resetCart(userStore.user.id);
-        this.cartItems = [];
+        await cartService.resetCart(userStore.user._id);
+        console.log("Cart reset on backend for user:", userStore.user._id);
       } catch (error) {
-        console.error("Error resetting cart:", error);
+        console.error("Error resetting cart on backend:", error);
       }
     }
   },
