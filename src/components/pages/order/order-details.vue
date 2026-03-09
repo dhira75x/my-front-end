@@ -31,17 +31,47 @@
               <div class="p-6 bg-white rounded-lg shadow-md">
                 <h2 class="mb-4 text-lg font-semibold text-gray-800">Order Items</h2>
 
-                <div class="space-y-4">
-                  <div v-for="item in orderItems" :key="item.id" class="flex">
-                    <div class="flex-shrink-0 w-16 h-16 overflow-hidden bg-gray-200 rounded-md">
-                      <img :src="item.image" alt="" class="object-cover w-full h-full">
+                <div class="space-y-6">
+                  <div v-for="item in orderItems" :key="item.id"
+                    class="flex flex-col border-b border-gray-100 pb-4 last:border-0 last:pb-0">
+                    <div class="flex">
+                      <div class="flex-shrink-0 w-20 h-20 overflow-hidden bg-gray-200 rounded-lg">
+                        <img :src="item.image" alt="" class="object-cover w-full h-full">
+                      </div>
+                      <div class="flex-1 ml-4">
+                        <h3 class="text-base font-semibold text-gray-800">{{ item.name }}</h3>
+                        <p class="text-sm text-gray-500">Qty: {{ item.quantity }}</p>
+                        <p class="text-sm text-gray-500 font-mono">SKU: {{ item.sku }}</p>
+                      </div>
+                      <div class="text-base font-bold text-gray-800">₦{{ Number(item.price).toLocaleString() }}</div>
                     </div>
-                    <div class="flex-1 ml-4">
-                      <h3 class="text-sm font-medium text-gray-800">{{ item.name }}</h3>
-                      <p class="text-sm text-gray-500">Qty: {{ item.quantity }}</p>
-                      <p class="text-sm text-gray-500">SKU: {{ item.sku }}</p>
+
+                    <!-- Rating Section (Only for completed orders) -->
+                    <div v-if="orderStatus.toLowerCase() === 'completed'"
+                      class="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-100">
+                      <div class="flex items-center justify-between mb-3">
+                        <span class="text-sm font-bold text-gray-700 uppercase tracking-wider">Rate this product</span>
+                        <div class="flex space-x-1">
+                          <button v-for="star in 5" :key="star" @click="setRating(item.productId, star)"
+                            class="transition-colors duration-200">
+                            <svg class="w-6 h-6"
+                              :class="getRating(item.productId) >= star ? 'text-yellow-400' : 'text-gray-300'"
+                              fill="currentColor" viewBox="0 0 20 20">
+                              <path
+                                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                      <textarea v-model="reviews[item.productId]"
+                        placeholder="Share your experience with this product..."
+                        class="w-full p-3 text-sm border border-gray-200 rounded-md focus:ring-2 focus:ring-deepsaffron focus:border-transparent outline-none transition-all"
+                        rows="2"></textarea>
+                      <button @click="submitReview(item.productId)" :disabled="submittingReview === item.productId"
+                        class="mt-3 px-4 py-2 text-xs font-bold text-white uppercase tracking-widest bg-gray-800 rounded-md hover:bg-black transition-colors disabled:opacity-50">
+                        {{ submittingReview === item.productId ? 'Submitting...' : 'Submit Review' }}
+                      </button>
                     </div>
-                    <div class="text-sm font-medium text-gray-800">{{ item.price }}</div>
                   </div>
                 </div>
 
@@ -164,113 +194,112 @@
 import { ref, computed, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import AppLayout from '@/layouts/applayout.vue';
+import { formatDate } from '@/helpers/utils';
+import { Order } from '@/classes/order.class';
+import { Rating } from '@/classes/rating.class';
+import { useUserStore } from '@/stores/userStore';
 
 const route = useRoute();
 const router = useRouter();
+const userStore = useUserStore();
+const orderService = new Order();
+const ratingService = new Rating();
 
-// Order data - in a real app, this would come from an API based on route.params.id
-const orderNumber = ref('ORD-230815123');
-const orderDate = ref(new Date('2023-08-15'));
-const paymentDate = ref(new Date('2023-08-15'));
-const orderStatus = ref('Shipped'); // Possible values: Confirmed, Processing, Shipped, Delivered, Cancelled
+const loading = ref(true);
+const orderNumber = ref('');
+const orderDate = ref(null);
+const paymentDate = ref(null);
+const orderStatus = ref('');
+const orderItems = ref([]);
+const shippingAddress = ref({ name: '', address: '', city: '', state: '', zip: '', country: '', phone: '' });
+const paymentMethod = ref({ type: '', last4: '' });
+const subtotalVal = ref(0);
+const taxVal = ref(0);
+const totalVal = ref(0);
 
-// Mock order items
-const orderItems = ref([
-  {
-    id: 1,
-    name: 'Wireless Headphones',
-    price: '₦79,000.00',
-    quantity: 1,
-    sku: 'WH-1000XM4',
-    image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'
-  },
-  {
-    id: 2,
-    name: 'Smart Watch',
-    price: '₦129,999.00',
-    quantity: 1,
-    sku: 'SW-SE42',
-    image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'
+// Rating state
+const ratings = ref({}); // { productId: starCount }
+const reviews = ref({}); // { productId: reviewText }
+const submittingReview = ref(null);
+
+const setRating = (productId, count) => {
+  ratings.value[productId] = count;
+};
+
+const getRating = (productId) => ratings.value[productId] || 0;
+
+const submitReview = async (productId) => {
+  const ratingCount = ratings.value[productId];
+  const reviewText = reviews.value[productId];
+
+  if (!ratingCount) {
+    alert('Please select a star rating.');
+    return;
   }
-]);
 
-const shippingAddress = ref({
-  name: 'John Doe',
-  address: '123 Main St',
-  city: 'Lagos',
-  state: 'Lagos',
-  zip: '100001',
-  country: 'Nigeria',
-  phone: '+234 123 456 7890'
-});
-
-const paymentMethod = ref({
-  type: 'Credit Card',
-  last4: '1234'
-});
-
-// Calculate order totals
-const subtotal = computed(() => {
-  return orderItems.value.reduce((total, item) => {
-    return total + parseFloat(item.price.replace('₦', '').replace(',', ''));
-  }, 0).toFixed(2);
-});
-
-const shipping = computed(() => {
-  return subtotal.value > 50000 ? '0.00' : '2000.00';
-});
-
-const tax = computed(() => {
-  return (parseFloat(subtotal.value) * 0.075).toFixed(2); // 7.5% VAT
-});
-
-const total = computed(() => {
-  return (parseFloat(subtotal.value) + parseFloat(shipping.value) + parseFloat(tax.value)).toFixed(2);
-});
-
-// Status styling
-const statusClass = computed(() => {
-  switch (orderStatus.value) {
-    case 'Confirmed':
-      return 'bg-blue-100 text-blue-800';
-    case 'Processing':
-      return 'bg-yellow-100 text-yellow-800';
-    case 'Shipped':
-      return 'bg-purple-100 text-purple-800';
-    case 'Delivered':
-      return 'bg-green-100 text-green-800';
-    case 'Cancelled':
-      return 'bg-red-100 text-red-800';
-    default:
-      return 'bg-gray-100 text-gray-800';
+  try {
+    submittingReview.value = productId;
+    await ratingService.addProductRating(
+      productId,
+      ratingCount,
+      reviewText,
+      userStore.user._id
+    );
+    alert('Thank you for your review!');
+    // Optional: Refresh or hide rating UI
+  } catch (error) {
+    console.error('Failed to submit review:', error);
+    alert('Failed to submit review. Please try again.');
+  } finally {
+    submittingReview.value = null;
   }
-});
+};
 
-// Order statuses with completion status
-const orderStatuses = computed(() => {
-  const statuses = [
-    { name: 'Order Placed', completed: true, date: orderDate.value },
-    { name: 'Processing', completed: orderStatus.value !== 'Confirmed', date: orderStatus.value !== 'Confirmed' ? new Date('2023-08-16') : null },
-    { name: 'Shipped', completed: ['Shipped', 'Delivered'].includes(orderStatus.value), date: ['Shipped', 'Delivered'].includes(orderStatus.value) ? new Date('2023-08-17') : null },
-    { name: 'Delivered', completed: orderStatus.value === 'Delivered', date: orderStatus.value === 'Delivered' ? new Date('2023-08-20') : null }
-  ];
+const fetchOrderDetails = async () => {
+  try {
+    loading.value = true;
+    const response = await orderService.findOrder(route.params.id);
+    const data = response.payload;
 
-  return statuses;
-});
+    orderNumber.value = data.orderNumber || data._id.slice(-8).toUpperCase();
+    orderDate.value = new Date(data.createdAt);
+    paymentDate.value = new Date(data.createdAt); // Assumption
+    orderStatus.value = data.status;
 
-// Progress bar width
-const progressWidth = computed(() => {
-  const completedCount = orderStatuses.value.filter(status => status.completed).length;
-  return (completedCount / orderStatuses.value.length) * 100;
-});
+    orderItems.value = data.items.map(item => ({
+      id: item._id,
+      productId: item.productId?._id || item.productId,
+      name: item.title,
+      price: item.price,
+      quantity: item.count,
+      sku: 'N/A', // SKU might not be directly in order items nested
+      image: item.productId?.img?.[0]?.imgData || '/placeholder.png'
+    }));
 
-// Format date function
-const formatDate = (date) => {
-  return new Date(date).toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric'
-  });
+    shippingAddress.value = {
+      name: data.createdBy.firstname + ' ' + data.createdBy.lastname,
+      address: data.shippingAddress.address,
+      city: data.shippingAddress.city,
+      state: data.shippingAddress.state,
+      zip: data.shippingAddress.zipCode,
+      country: 'Nigeria', // Assuming Nigeria for now or add to model
+      phone: data.createdBy.phone
+    };
+
+    paymentMethod.value = {
+      type: data.paymentMethod.toUpperCase(),
+      last4: '****' // No last4 in current modal
+    };
+
+    subtotalVal.value = data.total;
+    taxVal.value = data.tax || 0;
+    totalVal.value = data.total + (data.tax || 0);
+
+  } catch (error) {
+    console.error('Failed to fetch order details:', error);
+  } finally {
+    loading.value = false;
+  }
 };
 
 // Print order
@@ -279,18 +308,22 @@ const printOrder = () => {
 };
 
 // Cancel order
-const cancelOrder = () => {
+const cancelOrder = async () => {
   if (confirm('Are you sure you want to cancel this order? This action cannot be undone.')) {
-    // In a real app, this would call an API to cancel the order
-    orderStatus.value = 'Cancelled';
-    alert('Order has been cancelled successfully.');
+    try {
+      await http.patch(`/orders/${route.params.id}`, { status: 'cancelled' });
+      orderStatus.value = 'Cancelled';
+      alert('Order has been cancelled successfully.');
+    } catch (error) {
+      console.error('Failed to cancel order:', error);
+      alert('Failed to cancel order. Please try again.');
+    }
   }
 };
 
 // Fetch order data on mount
 onMounted(() => {
-  // In a real app, you would fetch the order data based on route.params.id
-  // fetchOrderDetails(route.params.id);
+  fetchOrderDetails();
 });
 </script>
 

@@ -90,7 +90,7 @@ const router = createRouter({
       name: "vendor-reg",
       component: () =>
         import("../components/pages/profile/vendor/vendor-reg.vue"),
-      
+
     },
     {
       path: "/user-reg",
@@ -121,6 +121,12 @@ const router = createRouter({
       name: "order-confirmation",
       component: () =>
         import("../components/pages/order/order-confirmation.vue"),
+      meta: { requiresAuth: true }
+    },
+    {
+      path: "/account/orders",
+      name: "orders",
+      component: () => import("../views/Orders.vue"),
       meta: { requiresAuth: true }
     },
     {

@@ -29,9 +29,9 @@ export class Order {
      * Complete order process (after payment)
      * @param {string} orderId 
      */
-    async completeOrder(orderId,reference) {
+    async completeOrder(orderId, reference) {
         try {
-            const response = await http.post("/orders/complete", { orderId,reference });
+            const response = await http.post("/orders/complete", { orderId, reference });
             return response.data;
         } catch (error) {
             console.error("Error completing order:", error);
@@ -48,6 +48,20 @@ export class Order {
             return response.data;
         } catch (error) {
             console.error("Error fetching orders:", error);
+            throw error;
+        }
+    }
+
+    /**
+     * Fetch orders for a specific user
+     * @param {string} userId
+     */
+    async getUserOrders(userId) {
+        try {
+            const response = await http.get(`/orders/user/${userId}`);
+            return response.data;
+        } catch (error) {
+            console.error("Error fetching user orders:", error);
             throw error;
         }
     }

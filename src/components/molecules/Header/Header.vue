@@ -76,8 +76,7 @@
                       <h4 class="text-sm font-medium text-gray-800">{{ item.productId?.title }}</h4>
                       <p class="text-sm text-gray-600">₦ {{ item.productId?.price }} x {{ item.count }}</p>
                     </div>
-                    <button @click="deletefromcart(item.productId?._id)"
-                      class="text-gray-400 hover:text-red-500">
+                    <button @click="deletefromcart(item.productId?._id)" class="text-gray-400 hover:text-red-500">
                       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -112,6 +111,10 @@
                 <div class="px-4 py-2 text-sm text-gray-700">
                   Signed in as
                   <span class="font-semibold">{{ userStore.user?.names }}</span>
+                </div>
+                <div class="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                  @click="$router.push({ name: 'orders' }); showDropdown = false">
+                  My Orders
                 </div>
                 <button @click="logout"
                   class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
