@@ -80,6 +80,28 @@ export const useUserStore = defineStore('userStore', {
       }
     },
 
+    async verifyOTP(email, otp) {
+      try {
+        this.loading = true;
+        const response = await auth.verifyOTP(email, otp);
+        if (response.status === 'OK') {
+          // You might want to auto-login or just return success
+        }
+        return response;
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    async resendOTP(email) {
+      try {
+        this.loading = true;
+        return await auth.resendOTP(email);
+      } finally {
+        this.loading = false;
+      }
+    },
+
     async logout() {
       try {
         await auth.logout();

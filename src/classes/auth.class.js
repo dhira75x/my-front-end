@@ -28,6 +28,26 @@ export class Auth {
         }
     }
 
+    async verifyOTP(email, otp) {
+        try {
+            const response = await http.post('/verification/verify-otp', { email, otp }, { withCredentials: true });
+            return response.data;
+        } catch (error) {
+            console.error("Error during OTP verification:", error);
+            throw error;
+        }
+    }
+
+    async resendOTP(email) {
+        try {
+            const response = await http.post('/verification/resend-otp', { email }, { withCredentials: true });
+            return response.data;
+        } catch (error) {
+            console.error("Error resending OTP:", error);
+            throw error;
+        }
+    }
+
     async whoami() {
         try {
             const response = await http.get("/auth/whoami", { withCredentials: true });

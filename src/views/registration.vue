@@ -7,7 +7,23 @@
         </div>
         <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
           <form @submit.prevent="register">
-            <div class="w-full">
+            <div v-if="registrationSuccess" class="text-center py-10">
+              <div class="mb-4 flex justify-center text-lime-600">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24"
+                  stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h2 class="text-2xl font-bold text-gray-900 mb-2">Registration Successful!</h2>
+              <p class="text-gray-600 mb-6">A 6-digit verification code has been sent to <span
+                  class="font-medium text-deepsaffron">{{ registerForm.email }}</span>.</p>
+              <router-link :to="{ name: 'VerifyEmail' }"
+                class="inline-block bg-deepsaffron text-white px-8 py-3 rounded-lg font-medium hover:bg-orange-600 transition-colors">
+                Continue to Verification
+              </router-link>
+            </div>
+            <div v-else class="w-full">
               <div class="flex justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
                   <path fill="#40826D"
@@ -43,33 +59,6 @@
                 <input type="email"
                   class="w-full rounded-md border px-4 py-2 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
                   v-model="registerForm.email" placeholder="Email Address" autocomplete="username" required />
-              </div>
-              <div class="mt-4">
-                <label class="block text-sm"> Country </label>
-                <input type="text"
-                  class="w-full rounded-md border px-4 py-2 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
-                  v-model="registerForm.country" placeholder="Nigeria" required />
-              </div>
-
-              <div class="mt-4">
-                <label class="block text-sm"> Home Address </label>
-                <textarea
-                  class="w-full rounded-md border px-4 py-2 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
-                  v-model="registerForm.homeAddress" placeholder="Street address, City, State" required></textarea>
-              </div>
-
-              <div class="mt-4 text-center">
-                <button type="button" @click="registerForm.shippingAddress = registerForm.homeAddress"
-                  class="text-xs text-blue-600 hover:underline">
-                  Same as home address
-                </button>
-              </div>
-
-              <div class="mt-2">
-                <label class="block text-sm"> Shipping Address </label>
-                <textarea
-                  class="w-full rounded-md border px-4 py-2 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
-                  v-model="registerForm.shippingAddress" placeholder="Delivery address" required></textarea>
               </div>
 
               <div class="mt-4">
@@ -148,26 +137,26 @@
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Notification Alert -->
-    <div v-if="showAlert"
-      class="fixed top-4 right-4 z-50 flex w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-md animate__animated animate__fadeInRight dark:bg-gray-800">
-      <div :class="['flex items-center justify-center w-12', isError ? 'bg-red-600' : 'bg-lime-600']">
-        <svg v-if="!isError" class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40"
-          xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z" />
-        </svg>
-        <svg v-else class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM20.6667 26.6666H19.3334V25.3333H20.6667V26.6666ZM20.6667 23.3333H19.3334V13.3333H20.6667V23.3333Z" />
-        </svg>
-      </div>
-      <div class="px-4 py-2 -mx-3">
-        <div class="mx-3">
-          <span :class="['font-semibold', isError ? 'text-red-600' : 'text-lime-600']">{{ alertTitle }}</span>
-          <p class="text-sm text-gray-600 dark:text-gray-200">{{ alertMessage }}</p>
-        </div>
+  <!-- Notification Alert -->
+  <div v-if="showAlert"
+    class="fixed top-4 right-4 z-50 flex w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-md animate__animated animate__fadeInRight dark:bg-gray-800">
+    <div :class="['flex items-center justify-center w-12', isError ? 'bg-red-600' : 'bg-lime-600']">
+      <svg v-if="!isError" class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z" />
+      </svg>
+      <svg v-else class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM20.6667 26.6666H19.3334V25.3333H20.6667V26.6666ZM20.6667 23.3333H19.3334V13.3333H20.6667V23.3333Z" />
+      </svg>
+    </div>
+    <div class="px-4 py-2 -mx-3">
+      <div class="mx-3">
+        <span :class="['font-semibold', isError ? 'text-red-600' : 'text-lime-600']">{{ alertTitle }}</span>
+        <p class="text-sm text-gray-600 dark:text-gray-200">{{ alertMessage }}</p>
       </div>
     </div>
   </div>
@@ -178,6 +167,7 @@ import { ref, reactive } from "vue";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/userStore.js";
 
+
 const registerForm = reactive({
   firstname: "",
   lastname: "",
@@ -185,12 +175,13 @@ const registerForm = reactive({
   email: "",
   password: "",
   confirmPassword: "",
-  country: "Nigeria",
-  homeAddress: "",
-  shippingAddress: "",
   terms: false,
   processing: false,
 });
+
+const registrationSuccess = ref(false);
+
+
 
 const showAlert = ref(false);
 const isError = ref(false);
@@ -220,10 +211,6 @@ const register = async () => {
     return;
   }
 
-  // if (!registerForm.terms) {
-  //   showNotification("Validation Error", "Please agree to the Terms of Service and Privacy Policy", true);
-  //   return;
-  // }
 
   registerForm.processing = true;
   try {
@@ -231,10 +218,13 @@ const register = async () => {
     const response = await userStore.register(userData, 'users');
 
     if (response.status === "OK") {
-      showNotification("Success", "Registration successful! Please log in.");
+      localStorage.setItem('registeredEmail', registerForm.email);
+      registrationSuccess.value = true;
+      showNotification("Success", "Registration successful! Proceed to verify your email.");
+      // Auto-redirect after a delay, but the link is now visible too
       setTimeout(() => {
-        router.push({ name: "user-login" });
-      }, 2000);
+        router.push({ name: "VerifyEmail" });
+      }, 5000);
     } else {
       showNotification("Error", response.msg || "Registration failed", true);
     }

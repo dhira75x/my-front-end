@@ -1,4 +1,15 @@
-<script setup></script>
+<script setup>
+import { ref, computed, reactive } from "vue";
+import { NIGERIA_LOCATIONS } from "@/helpers/nigeria-locations.js";
+
+const form = reactive({
+  state: "",
+  city: "",
+});
+
+const states = computed(() => Object.keys(NIGERIA_LOCATIONS).sort());
+const cities = computed(() => form.state ? NIGERIA_LOCATIONS[form.state] || [] : []);
+</script>
 <template>
   <div class="container mx-auto p-12">
     <div class="mx-auto flex w-full flex-col px-0 md:flex-row">
@@ -10,122 +21,65 @@
           <div class="">
             <div class="space-x-0 lg:flex lg:space-x-4">
               <div class="w-full lg:w-1/2">
-                <label
-                  for="firstName"
-                  class="mb-3 block text-sm font-semibold text-deepsaffron"
-                  >First Name</label
-                >
-                <input
-                  name="firstName"
-                  type="text"
-                  placeholder="First Name"
-                  class="w-full rounded border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-blue-600 lg:text-sm"
-                />
+                <label for="firstName" class="mb-3 block text-sm font-semibold text-deepsaffron">First Name</label>
+                <input name="firstName" type="text" placeholder="First Name"
+                  class="w-full rounded border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-blue-600 lg:text-sm" />
               </div>
               <div class="w-full lg:w-1/2">
-                <label
-                  for="firstName"
-                  class="mb-3 block text-sm font-semibold text-deepsaffron"
-                  >Last Name</label
-                >
-                <input
-                  name="Last Name"
-                  type="text"
-                  placeholder="Last Name"
-                  class="w-full rounded border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-blue-600 lg:text-sm"
-                />
+                <label for="firstName" class="mb-3 block text-sm font-semibold text-deepsaffron">Last Name</label>
+                <input name="Last Name" type="text" placeholder="Last Name"
+                  class="w-full rounded border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-blue-600 lg:text-sm" />
               </div>
             </div>
             <div class="mt-4">
               <div class="w-full">
-                <label
-                  for="Email"
-                  class="mb-3 block text-sm font-semibold text-deepsaffron"
-                  >Email</label
-                >
-                <input
-                  name="Last Name"
-                  type="text"
-                  placeholder="Email"
-                  class="w-full rounded border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-blue-600 lg:text-sm"
-                />
+                <label for="Email" class="mb-3 block text-sm font-semibold text-deepsaffron">Email</label>
+                <input name="Last Name" type="text" placeholder="Email"
+                  class="w-full rounded border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-blue-600 lg:text-sm" />
               </div>
             </div>
             <div class="mt-4">
               <div class="w-full">
-                <label
-                  for="Address"
-                  class="mb-3 block text-sm font-semibold text-deepsaffron"
-                  >Address</label
-                >
+                <label for="Address" class="mb-3 block text-sm font-semibold text-deepsaffron">Address</label>
                 <textarea
                   class="w-full rounded border border-gray-300 px-4 py-3 text-xs focus:outline-none focus:ring-1 focus:ring-blue-600 lg:text-sm"
-                  name="Address"
-                  cols="20"
-                  rows="4"
-                  placeholder="Address"
-                ></textarea>
+                  name="Address" cols="20" rows="4" placeholder="Address"></textarea>
               </div>
             </div>
             <div class="space-x-0 lg:flex lg:space-x-4">
               <div class="w-full lg:w-1/2">
-                <label
-                  for="city"
-                  class="mb-3 block text-sm font-semibold text-lime-700"
-                  >City</label
-                >
-                <input
-                  name="city"
-                  type="text"
-                  placeholder="City"
-                  class="w-full rounded border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-blue-600 lg:text-sm"
-                />
+                <label for="state" class="mb-3 block text-sm font-semibold text-deepsaffron">State</label>
+                <select name="state" v-model="form.state"
+                  class="w-full rounded border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-blue-600 lg:text-sm">
+                  <option value="">Select State</option>
+                  <option v-for="state in states" :key="state" :value="state">{{ state }}</option>
+                </select>
               </div>
-              <div class="w-full lg:w-1/2">
-                <label
-                  for="postcode"
-                  class="mb-3 block text-sm font-semibold text-lime-700"
-                >
-                  Postcode</label
-                >
-                <input
-                  name="postcode"
-                  type="text"
-                  placeholder="Post Code"
-                  class="w-full rounded border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-blue-600 lg:text-sm"
-                />
+              <div class="w-full lg:w-1/2 mt-4 lg:mt-0">
+                <label for="city" class="mb-3 block text-sm font-semibold text-deepsaffron">City</label>
+                <select name="city" v-model="form.city"
+                  class="w-full rounded border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-blue-600 lg:text-sm">
+                  <option value="">Select City</option>
+                  <option v-for="city in cities" :key="city" :value="city">{{ city }}</option>
+                </select>
               </div>
             </div>
             <div class="mt-4 flex items-center">
               <label class="text-heading group flex items-center text-sm">
-                <input
-                  type="checkbox"
-                  class="h-5 w-5 rounded border border-gray-300 text-deepsaffron focus:outline-none focus:ring-1"
-                />
-                <span class="ml-2"
-                  >Save this information for next time</span
-                ></label
-              >
+                <input type="checkbox"
+                  class="h-5 w-5 rounded border border-gray-300 text-deepsaffron focus:outline-none focus:ring-1" />
+                <span class="ml-2">Save this information for next time</span></label>
             </div>
             <div class="relative pt-3 xl:pt-6">
-              <label
-                for="note"
-                class="mb-3 block text-sm font-semibold text-deepsaffron"
-              >
-                Notes (Optional)</label
-              ><textarea
-                name="note"
+              <label for="note" class="mb-3 block text-sm font-semibold text-deepsaffron">
+                Notes (Optional)</label><textarea name="note"
                 class="flex w-full items-center rounded border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
-                rows="4"
-                placeholder="Notes for delivery"
-              ></textarea>
+                rows="4" placeholder="Notes for delivery"></textarea>
             </div>
 
             <div class="mt-4">
               <router-link to="/transaction">
-                <button
-                  class="w-full bg-deepsaffron px-6 py-2 text-white hover:bg-deepsaffron"
-                >
+                <button class="w-full bg-deepsaffron px-6 py-2 text-white hover:bg-deepsaffron">
                   Process
                 </button>
               </router-link>
@@ -140,11 +94,7 @@
             <div class="flex flex-col space-y-4">
               <div class="flex space-x-4">
                 <div>
-                  <img
-                    src="https://source.unsplash.com/user/erondu/1600x900"
-                    alt="image"
-                    class="w-60"
-                  />
+                  <img src="https://source.unsplash.com/user/erondu/1600x900" alt="image" class="w-60" />
                 </div>
                 <div>
                   <h2 class="text-xl font-bold text-deepsaffron">Title</h2>
@@ -154,29 +104,15 @@
                   <span class="text-red-600">Price</span> $20
                 </div>
                 <div class="cursor-pointer">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M6 18L18 6M6 6l12 12"
-                    />
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </div>
               </div>
               <div class="flex space-x-4">
                 <div>
-                  <img
-                    src="https://source.unsplash.com/collection/190727/1600x900"
-                    alt="image"
-                    class="w-60"
-                  />
+                  <img src="https://source.unsplash.com/collection/190727/1600x900" alt="image" class="w-60" />
                 </div>
                 <div>
                   <h2 class="text-xl font-bold text-deepsaffron">Title</h2>
@@ -186,19 +122,9 @@
                   <span class="text-red-600">Price</span> $20
                 </div>
                 <div class="cursor-pointer">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M6 18L18 6M6 6l12 12"
-                    />
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </div>
               </div>
@@ -208,18 +134,15 @@
             <h2 class="text-xl font-bold text-deepsaffron">ITEMS 2</h2>
           </div>
           <div
-            class="text-heading flex w-full items-center border-b border-gray-300 py-4 text-sm font-semibold text-deepsaffron last:border-b-0 last:pb-0 last:text-base lg:px-3 lg:py-5"
-          >
+            class="text-heading flex w-full items-center border-b border-gray-300 py-4 text-sm font-semibold text-deepsaffron last:border-b-0 last:pb-0 last:text-base lg:px-3 lg:py-5">
             Subtotal<span class="ml-2">$40.00</span>
           </div>
           <div
-            class="text-heading flex w-full items-center border-b border-gray-300 py-4 text-sm font-semibold text-deepsaffron last:border-b-0 last:pb-0 last:text-base lg:px-3 lg:py-5"
-          >
+            class="text-heading flex w-full items-center border-b border-gray-300 py-4 text-sm font-semibold text-deepsaffron last:border-b-0 last:pb-0 last:text-base lg:px-3 lg:py-5">
             Shipping Tax<span class="ml-2">$10</span>
           </div>
           <div
-            class="text-heading flex w-full items-center border-b border-gray-300 py-4 text-sm font-semibold text-deepsaffron last:border-b-0 last:pb-0 last:text-base lg:px-3 lg:py-5"
-          >
+            class="text-heading flex w-full items-center border-b border-gray-300 py-4 text-sm font-semibold text-deepsaffron last:border-b-0 last:pb-0 last:text-base lg:px-3 lg:py-5">
             Total<span class="ml-2">$50.00</span>
           </div>
         </div>

@@ -99,6 +99,12 @@ const router = createRouter({
       meta: { guestOnly: true }
     },
     {
+      path: "/verify-email",
+      name: "VerifyEmail",
+      component: () => import("../views/Authentication/VerifyEmail.vue"),
+      meta: { guestOnly: true }
+    },
+    {
       path: "/dispatch-reg",
       name: "dispatch-reg",
       component: () => import("../components/pages/dispatch/register.vue"),

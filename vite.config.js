@@ -6,7 +6,7 @@ import vercel from "vite-plugin-vercel";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), nightwatchPlugin(), vercel()],
+  plugins: [vue() /*, nightwatchPlugin(), vercel()*/],
   server: {
     port: 5178,
   },
