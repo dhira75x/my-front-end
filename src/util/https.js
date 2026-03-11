@@ -23,7 +23,6 @@ http.interceptors.response.use(
 
             originalRequest._retry = true;
             try {
-                console.log('[http] Access token expired, attempting refresh...');
                 const response = await axios.post(
                     `${import.meta.env.VITE_API_BASE_URL}/auth/refresh`,
                     {},
@@ -34,16 +33,15 @@ http.interceptors.response.use(
                 const newToken = data?.token || data?.accessToken || data?.access_token || data?.payload?.accessToken || data?.payload?.key;
 
                 if (newToken) {
-                    console.log('[http] Refresh successful, retrying original request.');
                     http.defaults.headers.common['Authorization'] = `Bearer ${newToken}`;
                     originalRequest.headers['Authorization'] = `Bearer ${newToken}`;
                     return http(originalRequest);
                 }
             } catch (refreshError) {
-                console.warn('[http] Refresh failed, user session expired.');
                 return Promise.reject(refreshError);
             }
         }
         return Promise.reject(error);
     }
 );
+

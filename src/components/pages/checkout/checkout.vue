@@ -436,9 +436,6 @@ const applyPromoCode = () => {
 
 // Place order
 const placeOrder = async () => {
-  console.log('placeOrder function called');
-  console.log('Customer Info:', customerInfo.value);
-  console.log('Cart Items:', cartStore.cartItems);
   // Validate form
   if (!customerInfo.value.email || !customerInfo.value.firstName || !customerInfo.value.lastName ||
     !customerInfo.value.address || !customerInfo.value.city || !customerInfo.value.state ||
@@ -458,7 +455,6 @@ const placeOrder = async () => {
     // 0. Update user profile if Save Address is checked
     const saveAddressCheckbox = document.getElementById('saveAddress');
     if (saveAddressCheckbox && saveAddressCheckbox.checked) {
-      console.log('Saving address to profile...');
       await userStore.updateProfile({
         firstname: customerInfo.value.firstName,
         lastname: customerInfo.value.lastName,
@@ -498,13 +494,18 @@ const placeOrder = async () => {
     const orderId = orderRes.payload._id;
     activeOrderId.value = orderId;
 
-    // 2. Process payment
+    // 2. Clear the cart immediately after order is created
+    await cartStore.emptyCart();
+
+    // 3. Process payment
     if (selectedPayment.value === 'paystack') {
       payWithPaystack(orderId);
     } else if (selectedPayment.value === 'flutterwave') {
       initializeFlutterwave(orderId);
     } else if (selectedPayment.value === 'cash') {
-      completeOrder(orderId, 'cash');
+      // Cash on delivery — no payment to verify, go straight to confirmation
+      isProcessing.value = false;
+      router.push({ path: '/order-confirmation', query: { id: orderId } });
     }
   } catch (err) {
     console.error('Order placement error:', err);

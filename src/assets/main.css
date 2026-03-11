@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body {
+  @apply overflow-x-hidden w-full;
+}
+
 .brand-gradient {
   @apply bg-gradient-to-r from-deepsaffron to-deepforest;
 }
