@@ -48,7 +48,6 @@ const submit = async () => {
   verifyForm.processing = true;
   try {
     const emailToVerify = localStorage.getItem('registeredEmail') || verifyForm.email;
-    console.log(emailToVerify, verifyForm.otp);
     const response = await userStore.verifyOTP(emailToVerify, verifyForm.otp);
     if (response.status === "OK") {
       showNotification("Success", "Email verified successfully!");

@@ -1,8 +1,8 @@
 a<template>
   <section class="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
     <!-- Enhanced Header -->
-    <Header/>
-   
+    <Header />
+
 
     <!-- Hero Section with Image Carousel -->
     <section class="relative py-16 text-white md:py-24 bg-gradient-to-r from-deepsaffron to-deepforest">
@@ -31,46 +31,33 @@ a<template>
                   <div class="relative w-48 h-48 overflow-hidden bg-white shadow-xl md:w-64 md:h-64 rounded-xl">
                     <!-- Image Carousel -->
                     <div class="relative w-full h-full overflow-hidden">
-                      <div 
-                        class="flex transition-transform duration-500 ease-in-out h-full"
-                        :style="{ transform: `translateX(-${currentHeroSlide * 100}%)` }"
-                      >
+                      <div class="flex transition-transform duration-500 ease-in-out h-full"
+                        :style="{ transform: `translateX(-${currentHeroSlide * 100}%)` }">
                         <div v-for="(image, index) in heroImages" :key="index" class="flex-shrink-0 w-full h-full">
-                          <img
-                            :src="image.url"
-                            :alt="image.alt"
-                            class="object-cover w-full h-full"
-                          />
+                          <img :src="image.url" :alt="image.alt" class="object-cover w-full h-full" />
                         </div>
                       </div>
-                      
+
                       <!-- Carousel Navigation -->
-                      <button 
-                        @click="prevHeroSlide"
-                        class="absolute left-2 top-1/2 transform -translate-y-1/2 p-2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75 transition-all"
-                      >
+                      <button @click="prevHeroSlide"
+                        class="absolute left-2 top-1/2 transform -translate-y-1/2 p-2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75 transition-all">
                         <svg class="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
+                          </path>
                         </svg>
                       </button>
-                      <button 
-                        @click="nextHeroSlide"
-                        class="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75 transition-all"
-                      >
+                      <button @click="nextHeroSlide"
+                        class="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75 transition-all">
                         <svg class="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                         </svg>
                       </button>
-                      
+
                       <!-- Carousel Indicators -->
                       <div class="absolute bottom-3 left-0 right-0 flex justify-center space-x-2">
-                        <button 
-                          v-for="(_, index) in heroImages" 
-                          :key="index" 
-                          @click="goToHeroSlide(index)"
+                        <button v-for="(_, index) in heroImages" :key="index" @click="goToHeroSlide(index)"
                           class="w-2 h-2 rounded-full transition-all"
-                          :class="currentHeroSlide === index ? 'bg-white w-6' : 'bg-white bg-opacity-50'"
-                        ></button>
+                          :class="currentHeroSlide === index ? 'bg-white w-6' : 'bg-white bg-opacity-50'"></button>
                       </div>
                     </div>
                   </div>
@@ -168,7 +155,8 @@ a<template>
 
         <div class="flex items-center justify-between mb-12">
           <h2 class="text-3xl font-bold text-center text-gray-800">Shop by Category</h2>
-          <router-link to="/categories" class="flex items-center font-semibold text-transparent bg-clip-text brand-gradient">
+          <router-link to="/categories"
+            class="flex items-center font-semibold text-transparent bg-clip-text brand-gradient">
             View All Categories
             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg">
@@ -339,46 +327,33 @@ a<template>
                   <div class="relative w-32 h-32 overflow-hidden bg-white shadow-xl rounded-xl">
                     <!-- Summer Sale Image Carousel -->
                     <div class="relative w-full h-full overflow-hidden">
-                      <div 
-                        class="flex transition-transform duration-500 ease-in-out h-full"
-                        :style="{ transform: `translateX(-${currentSummerSlide * 100}%)` }"
-                      >
+                      <div class="flex transition-transform duration-500 ease-in-out h-full"
+                        :style="{ transform: `translateX(-${currentSummerSlide * 100}%)` }">
                         <div v-for="(image, index) in summerImages" :key="index" class="flex-shrink-0 w-full h-full">
-                          <img
-                            :src="image.url"
-                            :alt="image.alt"
-                            class="object-cover w-full h-full"
-                          />
+                          <img :src="image.url" :alt="image.alt" class="object-cover w-full h-full" />
                         </div>
                       </div>
-                      
+
                       <!-- Carousel Navigation -->
-                      <button 
-                        @click="prevSummerSlide"
-                        class="absolute left-1 top-1/2 transform -translate-y-1/2 p-1.5 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75 transition-all"
-                      >
+                      <button @click="prevSummerSlide"
+                        class="absolute left-1 top-1/2 transform -translate-y-1/2 p-1.5 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75 transition-all">
                         <svg class="w-4 h-4 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
+                          </path>
                         </svg>
                       </button>
-                      <button 
-                        @click="nextSummerSlide"
-                        class="absolute right-1 top-1/2 transform -translate-y-1/2 p-1.5 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75 transition-all"
-                      >
+                      <button @click="nextSummerSlide"
+                        class="absolute right-1 top-1/2 transform -translate-y-1/2 p-1.5 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75 transition-all">
                         <svg class="w-4 h-4 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                         </svg>
                       </button>
-                      
+
                       <!-- Carousel Indicators -->
                       <div class="absolute bottom-2 left-0 right-0 flex justify-center space-x-1">
-                        <button 
-                          v-for="(_, index) in summerImages" 
-                          :key="index" 
-                          @click="goToSummerSlide(index)"
+                        <button v-for="(_, index) in summerImages" :key="index" @click="goToSummerSlide(index)"
                           class="w-1.5 h-1.5 rounded-full transition-all"
-                          :class="currentSummerSlide === index ? 'bg-white w-4' : 'bg-white bg-opacity-50'"
-                        ></button>
+                          :class="currentSummerSlide === index ? 'bg-white w-4' : 'bg-white bg-opacity-50'"></button>
                       </div>
                     </div>
                   </div>
@@ -633,7 +608,7 @@ a<template>
     </section>
 
     <!-- Footer -->
-    <Footer/>
+    <Footer />
   </section>
 </template>
 
@@ -680,7 +655,6 @@ const viewProduct = (productId) => {
 
 const addToCart = (product) => {
   cartItems.value.push(product);
-  console.log("Product added to cart:", product);
 };
 
 const removeFromCart = (productId) => {

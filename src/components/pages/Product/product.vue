@@ -19,7 +19,7 @@
               <li class="text-gray-800">{{ product.name }}</li>
             </ol>
           </nav>
-    
+
           <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
             <!-- Product Images -->
             <div class="space-y-4">
@@ -34,7 +34,7 @@
                 </div>
               </div>
             </div>
-    
+
             <!-- Product Details -->
             <div class="bg-white p-6 rounded-lg shadow-md animate__animated animate__fadeIn">
               <div class="flex items-center justify-between mb-4">
@@ -48,37 +48,43 @@
                   </svg>
                 </button>
               </div>
-    
+
               <div class="flex items-center mb-4">
                 <div class="flex text-yellow-400">
                   <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                    <path
+                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                   </svg>
                   <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                    <path
+                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                   </svg>
                   <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                    <path
+                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                   </svg>
                   <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                    <path
+                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                   </svg>
                   <svg class="w-5 h-5 text-gray-300" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                    <path
+                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                   </svg>
                 </div>
                 <span class="ml-2 text-sm text-gray-600">(24 reviews)</span>
               </div>
-    
+
               <div class="mb-6">
                 <p class="text-2xl font-bold text-lime-600">{{ product.price }}</p>
-                <p class="text-sm text-gray-500 line-through" v-if="product.originalPrice">{{ product.originalPrice }}</p>
+                <p class="text-sm text-gray-500 line-through" v-if="product.originalPrice">{{ product.originalPrice }}
+                </p>
               </div>
-    
+
               <div class="mb-6">
                 <p class="text-gray-600">{{ product.description }}</p>
               </div>
-    
+
               <div class="mb-6">
                 <h3 class="mb-2 font-semibold text-gray-800">Key Features</h3>
                 <ul class="space-y-1 text-gray-600">
@@ -105,7 +111,7 @@
                   </li>
                 </ul>
               </div>
-    
+
               <div class="mb-6">
                 <h3 class="mb-2 font-semibold text-gray-800">Quantity</h3>
                 <div class="flex items-center w-32 border border-gray-300 rounded">
@@ -119,30 +125,38 @@
                   <button @click="increaseQuantity" class="px-3 py-2 text-gray-600 hover:bg-gray-100">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                       xmlns="http://www.w3.org/2000/svg">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 6v6m0 0v6m0-6h6m-6 0H6">
                       </path>
                     </svg>
                   </button>
                 </div>
               </div>
-    
+
               <div class="flex flex-col space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
-                <button @click="addToCart"
-                  class="flex items-center justify-center px-6 py-3 font-semibold text-white transition bg-lime-600 rounded-lg hover:bg-lime-700 duration-300 hover:scale-105 focus:ring-2 focus:ring-lime-500">
-                  <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                <button @click="addToCart" :disabled="isAddingToCart"
+                  class="flex items-center justify-center px-6 py-3 font-semibold text-white transition bg-lime-600 rounded-lg hover:bg-lime-700 duration-300 hover:scale-105 focus:ring-2 focus:ring-lime-500 disabled:opacity-50 disabled:cursor-not-allowed">
+                  <svg v-if="isAddingToCart" class="w-5 h-5 mr-2 animate-spin" viewBox="0 0 24 24" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                    </path>
+                  </svg>
+                  <svg v-else class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                       d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
                     </path>
                   </svg>
-                  Add to Cart
+                  {{ isAddingToCart ? 'Adding...' : 'Add to Cart' }}
                 </button>
                 <button @click="buyNow"
                   class="flex items-center justify-center px-6 py-3 font-semibold text-white transition bg-gray-800 rounded-lg hover:bg-gray-900 duration-300 hover:scale-105 focus:ring-2 focus:ring-gray-700">
                   Buy Now
                 </button>
               </div>
-    
+
               <div class="mt-6 pt-6 border-t border-gray-200">
                 <div class="flex items-center mb-4">
                   <svg class="w-6 h-6 mr-2 text-lime-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -162,7 +176,7 @@
               </div>
             </div>
           </div>
-    
+
           <!-- Product Details Tabs -->
           <div class="mt-12 bg-white rounded-lg shadow-md animate__animated animate__fadeIn">
             <div class="border-b border-gray-200">
@@ -181,7 +195,7 @@
                 </button>
               </nav>
             </div>
-    
+
             <div class="p-6">
               <Transition mode="out-in" enter-active-class="animate__animated animate__fadeIn"
                 leave-active-class="animate__animated animate__fadeOut">
@@ -192,7 +206,7 @@
                       {{ product.fullDescription }}
                     </p>
                   </div>
-    
+
                   <div v-else-if="activeTab === 'specifications'">
                     <h3 class="mb-4 text-lg font-semibold">Product Specifications</h3>
                     <div class="overflow-hidden border border-gray-200 rounded-lg">
@@ -206,11 +220,12 @@
                       </table>
                     </div>
                   </div>
-    
+
                   <div v-else>
                     <h3 class="mb-4 text-lg font-semibold">Customer Reviews</h3>
                     <div class="space-y-6">
-                      <div v-for="(review, index) in product.reviews" :key="index" class="pb-6 border-b border-gray-200">
+                      <div v-for="(review, index) in product.reviews" :key="index"
+                        class="pb-6 border-b border-gray-200">
                         <div class="flex items-center mb-2">
                           <div class="flex text-yellow-400">
                             <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -245,7 +260,7 @@
               </Transition>
             </div>
           </div>
-    
+
           <!-- Related Products -->
           <div class="mt-12">
             <h2 class="mb-6 text-2xl font-bold text-gray-800">Related Products</h2>
@@ -300,6 +315,7 @@ const quantity = ref(1);
 const product = ref({});
 const relatedProducts = ref([]);
 const isLoading = ref(true);
+const isAddingToCart = ref(false);
 
 /** Convert the API product shape to what the template uses */
 function mapProduct(p) {
@@ -328,8 +344,13 @@ function mapProduct(p) {
 const increaseQuantity = () => quantity.value++;
 const decreaseQuantity = () => { if (quantity.value > 1) quantity.value--; };
 
-const addToCart = () => {
-  cartStore.addToCart(product.value.id, quantity.value, product.value);
+const addToCart = async () => {
+  isAddingToCart.value = true;
+  try {
+    await cartStore.addToCart(product.value.id, quantity.value, product.value);
+  } finally {
+    isAddingToCart.value = false;
+  }
 };
 
 const buyNow = () => router.push('/checkout');

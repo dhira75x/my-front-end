@@ -1,31 +1,32 @@
 
-import axios from 'axios';
+import { http } from '@/util/https';
 
-const API_URL = 'http://localhost:3000/api/withdrawals';
+const ENDPOINT = '/withdrawals';
 
 export default {
   async getWithdrawals(paginationOptions) {
-    const response = await axios.get(API_URL, { params: paginationOptions });
+    const response = await http.get(ENDPOINT, { params: paginationOptions });
     return response.data;
   },
-  
+
   async findWithdrawal(id) {
-    const response = await axios.get(`${API_URL}/${id}`);
+    const response = await http.get(`${ENDPOINT}/${id}`);
     return response.data;
   },
-  
+
   async registerWithdrawal(withdrawalData) {
-    const response = await axios.post(API_URL, withdrawalData);
+    const response = await http.post(ENDPOINT, withdrawalData);
     return response.data;
   },
-  
+
   async deleteWithdrawal(id) {
-    const response = await axios.delete(`${API_URL}/${id}`);
-    return response.data; // Might not return data if there's nothing to return upon deletion
+    const response = await http.delete(`${ENDPOINT}/${id}`);
+    return response.data;
   },
-  
+
   async updateWithdrawalStatusUsingId(id, updates) {
-    const response = await axios.patch(`${API_URL}/${id}`, updates);
+    const response = await http.patch(`${ENDPOINT}/${id}`, updates);
     return response.data;
   },
 };
+

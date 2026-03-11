@@ -10,6 +10,7 @@ export const useCartStore = defineStore('cart', {
   state: () => ({
     cartItems: [],
     loading: false,
+    loadingItems: {}, // Track loading state for individual items: { productId: boolean }
     error: null,
   }),
   getters: {
@@ -20,6 +21,25 @@ export const useCartStore = defineStore('cart', {
     }, 0),
   },
   actions: {
+    async updateCartItems(newItems) {
+      if (!newItems) return;
+
+      // Smart Merge: Map over new items and preserve existing metadata (like images) if IDs match
+      this.cartItems = newItems.map(newItem => {
+        const existingItem = this.cartItems.find(i => i.productId?._id === newItem.productId?._id);
+        if (existingItem) {
+          return {
+            ...newItem,
+            productId: {
+              ...newItem.productId,
+              img: existingItem.productId?.img // Keep the images we already have
+            }
+          };
+        }
+        return newItem;
+      });
+    },
+
     async initializeCart() {
       const userStore = useUserStore();
       if (!userStore.isAuthenticated || !userStore.cartId) {
@@ -70,8 +90,12 @@ export const useCartStore = defineStore('cart', {
 
       try {
         this.loading = true;
-        await cartService.addToCart(userStore.user._id, productId, quantity);
-        await this.initializeCart(); // Refresh cart from backend
+        const response = await cartService.addToCart(userStore.user._id, productId, quantity);
+        if (response.status === 'OK') {
+          await this.updateCartItems(response.payload.items);
+        } else {
+          await this.initializeCart();
+        }
 
         Swal.fire({
           icon: 'success',
@@ -99,11 +123,66 @@ export const useCartStore = defineStore('cart', {
       const userStore = useUserStore();
       if (!userStore.isAuthenticated) return;
 
+      this.loadingItems[productId] = true;
+      // Optimistic UI update — decrement or remove immediately
+      const itemIndex = this.cartItems.findIndex(i => i.productId?._id === productId);
+      const previousItems = JSON.parse(JSON.stringify(this.cartItems)); // snapshot for rollback
+      if (itemIndex !== -1) {
+        const item = this.cartItems[itemIndex];
+        if (item.count <= 1) {
+          this.cartItems.splice(itemIndex, 1); // remove entirely
+        } else {
+          item.count--; // just decrement
+        }
+      }
+
       try {
-        await cartService.removeFromCart(userStore.user._id, [productId]);
-        await this.initializeCart();
+        const response = await cartService.removeFromCart(userStore.user._id, [productId]);
+        if (response.status === 'OK') {
+          await this.updateCartItems(response.payload.items);
+        }
       } catch (error) {
         console.error("Error removing from cart:", error);
+        this.cartItems = previousItems; // revert on failure
+      } finally {
+        delete this.loadingItems[productId];
+      }
+    },
+
+    // Remove ALL items of a specific product (delete from cart entirely)
+    async removeAllOfProduct(productId) {
+      // Optimistically remove from UI immediately
+      this.cartItems = this.cartItems.filter(item => item.productId?._id !== productId);
+      const userStore = useUserStore();
+      if (!userStore.isAuthenticated) return;
+      try {
+        await cartService.removeFromCart(userStore.user._id, [productId]);
+      } catch (error) {
+        console.error("Error removing all of product from cart:", error);
+        await this.initializeCart(); // re-sync on error
+      }
+    },
+
+    // Add one more of an item already in cart
+    async addOneToCart(productId) {
+      const userStore = useUserStore();
+      if (!userStore.isAuthenticated) return;
+
+      this.loadingItems[productId] = true;
+      // Optimistic UI update
+      const item = this.cartItems.find(i => i.productId?._id === productId);
+      if (item) item.count++;
+
+      try {
+        const response = await cartService.addToCart(userStore.user._id, productId, 1);
+        if (response.status === 'OK') {
+          await this.updateCartItems(response.payload.items);
+        }
+      } catch (error) {
+        console.error("Error adding one to cart:", error);
+        if (item) item.count--; // revert optimistic update
+      } finally {
+        delete this.loadingItems[productId];
       }
     },
 
@@ -118,7 +197,6 @@ export const useCartStore = defineStore('cart', {
 
       try {
         await cartService.resetCart(userStore.user._id);
-        console.log("Cart reset on backend for user:", userStore.user._id);
       } catch (error) {
         console.error("Error resetting cart on backend:", error);
       }

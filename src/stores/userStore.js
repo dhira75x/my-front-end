@@ -119,14 +119,12 @@ export const useUserStore = defineStore('userStore', {
 
     // Simplified whoami (checkAuth is the preferred vendor pattern)
     async whoami() {
-      console.log("userStore?.user", this.user);
       return await this.checkAuth();
     },
 
     async updateProfile(userData) {
       if (!this.user?._id) return;
       try {
-        console.log("userStore?.user", this.user._id);
         this.loading = true;
         const response = await auth.updateProfile(this.user._id, userData);
         if (response.status === 'OK') {

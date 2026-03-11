@@ -16,15 +16,19 @@ const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);
 app.use(pinia);
 
-const userStore = useUserStore();
-try {
-    await userStore.checkAuth();
-} catch (error) {
-    console.error("Failed to check auth during initialization:", error);
-}
+const init = async () => {
+    const userStore = useUserStore();
+    try {
+        await userStore.checkAuth();
+    } catch (error) {
+        console.error("Failed to check auth during initialization:", error);
+    }
 
-app.use(router);
+    app.use(router);
+    app.mount("#app");
 
-app.mount("#app");
-const loader = document.getElementById("loading");
-if (loader) loader.remove();
+    const loader = document.getElementById("loading");
+    if (loader) loader.remove();
+};
+
+init();

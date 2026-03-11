@@ -60,37 +60,92 @@
             </button>
 
             <!-- Cart Dropdown -->
-            <div v-if="showCart" class="absolute right-0 z-50 mt-2 bg-white rounded-md shadow-lg w-80">
-              <div class="p-4 border-b">
-                <h3 class="font-semibold text-gray-800">Your Cart</h3>
+            <div v-if="showCart"
+              class="absolute right-0 z-50 mt-2 bg-white rounded-lg shadow-xl w-96 border border-gray-100">
+              <div class="flex items-center justify-between p-4 border-b">
+                <h3 class="font-semibold text-gray-800">Your Cart ({{ cartStore.totalItems }})</h3>
+                <button @click="showCart = false" class="text-gray-400 hover:text-gray-600">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
               </div>
-              <div class="overflow-y-auto max-h-60">
-                <div v-if="cartStore.cartItems?.length === 0" class="p-4 text-center text-gray-500">
-                  Your cart is empty
+              <div class="overflow-y-auto max-h-72">
+                <div v-if="cartStore.cartItems?.length === 0" class="p-8 text-center text-gray-400">
+                  <svg class="w-12 h-12 mx-auto mb-3 text-gray-300" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                  <p class="text-sm">Your cart is empty</p>
                 </div>
                 <div v-else>
-                  <div v-for="item in cartStore.cartItems" :key="item._id" class="flex items-center p-4 border-b">
-                    <img :src="item.productId?.img[0].imgData || '/placeholder.png'" alt=""
-                      class="object-cover w-16 h-16 rounded" />
-                    <div class="flex-1 ml-3">
-                      <h4 class="text-sm font-medium text-gray-800">{{ item.productId?.title }}</h4>
-                      <p class="text-sm text-gray-600">₦ {{ item.productId?.price }} x {{ item.count }}</p>
+                  <div v-for="item in cartStore.cartItems" :key="item._id"
+                    class="flex items-start gap-3 p-3 border-b hover:bg-gray-50 transition-colors">
+                    <!-- Product Image -->
+                    <img :src="item.productId?.img?.[0]?.imgData || '/placeholder.png'" alt=""
+                      class="object-cover w-14 h-14 rounded-md flex-shrink-0 bg-gray-100" />
+                    <!-- Product Info -->
+                    <div class="flex-1 min-w-0">
+                      <h4 class="text-sm font-medium text-gray-800 truncate">{{ item.productId?.title }}</h4>
+                      <p class="text-xs text-gray-500 mt-0.5">
+                        ₦{{ Number(item.productId?.price).toLocaleString() }} each
+                      </p>
+                      <!-- Quantity Controls -->
+                      <div class="flex items-center gap-2 mt-2">
+                        <button @click="cartStore.removeFromCart(item.productId?._id)"
+                          class="w-6 h-6 rounded-full border border-gray-300 flex items-center justify-center text-gray-600 hover:border-lime-500 hover:text-lime-600 transition-colors text-sm font-bold"
+                          title="Remove one">−</button>
+
+                        <!-- Spinner OR Count Container -->
+                        <div class="flex items-center justify-center min-w-[32px]">
+                          <svg v-if="cartStore.loadingItems[item.productId?._id]"
+                            class="w-4 h-4 text-lime-600 animate-spin flex-shrink-0" viewBox="0 0 24 24" fill="none">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3">
+                            </circle>
+                            <path class="opacity-75" fill="currentColor"
+                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                            </path>
+                          </svg>
+                          <span v-else class="text-sm font-semibold text-gray-800">{{ item.count }}</span>
+                        </div>
+
+                        <button @click="cartStore.addOneToCart(item.productId?._id)"
+                          class="w-6 h-6 rounded-full border border-gray-300 flex items-center justify-center text-gray-600 hover:border-lime-500 hover:text-lime-600 transition-colors text-sm font-bold"
+                          title="Add one">+</button>
+                        <span class="ml-auto text-sm font-semibold text-lime-700">
+                          ₦{{ Number((item.productId?.price || 0) * item.count).toLocaleString() }}
+                        </span>
+                      </div>
                     </div>
-                    <button @click="deletefromcart(item.productId?._id)" class="text-gray-400 hover:text-red-500">
-                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
+                    <!-- Delete All of This Product -->
+                    <button @click="cartStore.removeAllOfProduct(item.productId?._id)"
+                      class="text-gray-300 hover:text-red-500 transition-colors flex-shrink-0 mt-1" title="Remove all">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
-                        </path>
+                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                       </svg>
                     </button>
                   </div>
                 </div>
               </div>
-              <button @click="$router.push({ name: 'checkout' }); showCart = false"
-                class="w-full py-2 font-medium text-white transition-colors rounded-lg bg-lime-500 hover:bg-lime-600">
-                Checkout
-              </button>
+              <!-- Footer -->
+              <div v-if="cartStore.cartItems?.length > 0" class="p-4 border-t bg-gray-50 rounded-b-lg">
+                <div class="flex justify-between items-center mb-3">
+                  <span class="text-sm text-gray-600">Total</span>
+                  <span class="font-bold text-gray-800">₦{{ Number(cartStore.cartTotal).toLocaleString() }}</span>
+                </div>
+                <div class="flex gap-2">
+                  <button @click="$router.push({ name: 'cart' }); showCart = false"
+                    class="flex-1 py-2 text-sm font-medium text-lime-700 border border-lime-500 rounded-lg hover:bg-lime-50 transition-colors">
+                    View Cart
+                  </button>
+                  <button @click="$router.push({ name: 'checkout' }); showCart = false"
+                    class="flex-1 py-2 text-sm font-medium text-white bg-lime-600 rounded-lg hover:bg-lime-700 transition-colors">
+                    Checkout
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -364,7 +419,6 @@ const stopAutoplay = () => {
 };
 
 onMounted(() => {
-  console.log("cartStore?.cartItems", cartStore?.cartItems);
   // For dropdown
   document.addEventListener("click", closeDropdown);
   // For cart
@@ -384,12 +438,7 @@ onMounted(() => {
   // For carousel
   startAutoplay();
 });
-const deletefromcart = (productId) => {
-  cartStore.cartItems = cartStore.cartItems.filter(
-    (item) => item.productId._id !== productId
-  );
-  cartStore.removeFromCart(productId);
-};
+
 onUnmounted(() => {
   document.removeEventListener("click", closeDropdown);
   // document.removeEventListener("click", closeCart);

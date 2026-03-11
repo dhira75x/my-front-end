@@ -111,7 +111,7 @@ const fetchOrders = async () => {
         }
 
         const userId = userStore.user?._id;
-       
+
         if (!userId) {
             console.error('No user ID found, redirecting to login');
             router.push({ name: 'user-login' });
@@ -119,7 +119,6 @@ const fetchOrders = async () => {
         }
 
         const response = await orderService.getUserOrders(userId);
-        console.log(response,"response");
         orders.value = response.payload || [];
     } catch (error) {
         console.error('Failed to fetch orders:', error);

@@ -268,7 +268,7 @@ const submitForm = async () => {
         showNotification('Success', 'Registration successful! Redirecting to dashboard...');
 
         setTimeout(() => {
-            window.location.href = 'http://localhost:5178/';
+            window.location.href = window.location.origin;
         }, 2000);
 
     } catch (error) {
