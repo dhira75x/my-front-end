@@ -152,13 +152,20 @@ export const useCartStore = defineStore('cart', {
     // Remove ALL items of a specific product (delete from cart entirely)
     async removeAllOfProduct(productId) {
       // Optimistically remove from UI immediately
+      const previousItems = JSON.parse(JSON.stringify(this.cartItems));
       this.cartItems = this.cartItems.filter(item => item.productId?._id !== productId);
+
       const userStore = useUserStore();
       if (!userStore.isAuthenticated) return;
+
       try {
-        await cartService.removeFromCart(userStore.user._id, [productId]);
+        const response = await cartService.removeAllFromCart(userStore.user._id, [productId]);
+        if (response.status === 'OK') {
+          await this.updateCartItems(response.payload.items);
+        }
       } catch (error) {
         console.error("Error removing all of product from cart:", error);
+        this.cartItems = previousItems; // revert on failure
         await this.initializeCart(); // re-sync on error
       }
     },

@@ -51,6 +51,21 @@ export class Cart {
     }
 
     /**
+     * Completely remove product(s) from the user's cart (all quantities)
+     * @param {string} userId 
+     * @param {string[]} productIds 
+     */
+    async removeAllFromCart(userId, productIds) {
+        try {
+            const response = await http.patch(`/carts/${userId}/remove-all`, { productIds });
+            return response.data;
+        } catch (error) {
+            console.error("Error removing all from cart:", error);
+            throw error;
+        }
+    }
+
+    /**
      * Reset/Empty the user's cart
      * @param {string} userId 
      */
